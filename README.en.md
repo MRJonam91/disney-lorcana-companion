@@ -2,6 +2,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Disney Lorcana](https://img.shields.io/badge/TCG-Disney%20Lorcana-blueviolet.svg)](https://www.disneylorcana.com/)
+[![GitHub Discussions](https://img.shields.io/badge/Community-GitHub%20Discussions-brightgreen.svg)](https://github.com/MRJonam91/disney-lorcana-companion/discussions)
+[![Sponsor](https://img.shields.io/badge/Sponsor-Ko--fi%20|%20PayPal-ff69b4.svg)](https://ko-fi.com/mrjonam)
 [![Languages](https://img.shields.io/badge/Languages-IT%20|%20EN%20|%20FR%20|%20DE%20|%20ES-gold.svg)](index.html)
 [![Meta: Set 13](https://img.shields.io/badge/Meta-Attack%20of%20the%20Vine!%20(Set%2013)-emerald.svg)](docs/sets/set-history.en.md)
 [![Upcoming: Set 14](https://img.shields.io/badge/Upcoming-Hyperia%20City%20(Oct%202026)-orange.svg)](docs/sets/set-history.en.md)
@@ -79,10 +81,17 @@ See full decklist and matchup guides in [`docs/decks/starter-emerald-sapphire.en
 
 ---
 
-## 🤝 Community & Resources
+## 🤝 Community, Discussions & Support
 
-- [Official Disney Lorcana Site](https://www.disneylorcana.com/)
-- [inkDecks Tournament Database](https://inkdecks.com/)
-- [Lorcana TCG Subreddit](https://reddit.com/r/Lorcana)
+- 💬 **[Join GitHub Discussions](https://github.com/MRJonam91/disney-lorcana-companion/discussions)**: Share decklists, tournament reports, ask rules questions, and discuss upcoming sets!
+- 💖 **Support the Project**:
+  - [Sponsor on GitHub](https://github.com/sponsors/MRJonam91)
+  - [Ko-fi](https://ko-fi.com/mrjonam)
+  - [Buy Me a Coffee](https://buymeacoffee.com/mrjonam)
+  - [PayPal](https://paypal.me/manorollo)
+- 🌐 **Useful External Resources**:
+  - [Official Disney Lorcana Site](https://www.disneylorcana.com/)
+  - [inkDecks Tournament Database](https://inkdecks.com/)
+  - [Lorcana TCG Subreddit](https://reddit.com/r/Lorcana)
 
 *Disclaimer: Disney Lorcana is copyright © Disney and Ravensburger. This project is an unofficial community resource created under fair use for educational and gaming purposes.*

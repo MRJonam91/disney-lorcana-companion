@@ -19,3 +19,14 @@ Benvenuto nella risorsa open-source più completa e virale per gli Illumineer it
 - **[Matematica del Mulligan (Simulazioni 100k)](docs/strategy/mulligan-and-math.it.md)**
 - **[Mazzo Novizio Topolino & Minnie (Emerald/Sapphire)](docs/decks/starter-emerald-sapphire.it.md)**
 - **[Glossario Multilingua Comparativo](docs/glossary/glossary.it.md)**
+
+---
+
+## 🤝 Community, Discussioni e Supporto
+
+- 💬 **[Partecipa alle GitHub Discussions](https://github.com/MRJonam91/disney-lorcana-companion/discussions)**: Condividi le tue liste, report di tornei e ruling!
+- 💖 **Supporta il Progetto**:
+  - [Sponsor su GitHub](https://github.com/sponsors/MRJonam91)
+  - [Ko-fi](https://ko-fi.com/mrjonam)
+  - [Buy Me a Coffee](https://buymeacoffee.com/mrjonam)
+  - [PayPal](https://paypal.me/manorollo)
