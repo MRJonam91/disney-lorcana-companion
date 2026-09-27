@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Disney Lorcana · Guía Interactiva Completa: Reglas, Estrategias y Meta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink-night:#0B0A1A;
+    --ink-deep:#100E24;
+    --surface:#16132F;
+    --surface-2:#1D1940;
+    --line:rgba(227,178,60,.16);
+    --line-soft:rgba(236,231,218,.10);
+    --parch:#ECE7DA;
+    --muted:#A39FB8;
+    --muted-2:#736E8C;
+    --gold:#E3B23C;
+    --gold-soft:#f0cd78;
+
+    --amber:#E0A53A;
+    --amethyst:#9B6FC9;
+    --emerald:#36A86A;
+    --ruby:#D9485C;
+    --sapphire:#3E8FD4;
+    --steel:#9AA6B8;
+
+    --display:"Marcellus", serif;
+    --body:"Spectral", Georgia, serif;
+    --ui:"Inter", system-ui, sans-serif;
+
+    --maxw:1080px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ink-night);
+    color:var(--parch);
+    font-family:var(--body);
+    font-weight:300;
+    font-size:18px;
+    line-height:1.72;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;}
+  h1,h2,h3,h4{font-family:var(--display);font-weight:400;line-height:1.12;margin:0;}
+  p{margin:0 0 1.1em;}
+
+  /* ---------- ambient ink ---------- */
+  .ambient{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+  .blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:.32;mix-blend-mode:screen;}
+  .blob.b1{width:540px;height:540px;top:-160px;left:-120px;background:radial-gradient(circle,#5a2f8f,transparent 68%);animation:drift1 26s ease-in-out infinite;}
+  .blob.b2{width:460px;height:460px;top:32%;right:-140px;background:radial-gradient(circle,#1c5fa0,transparent 68%);animation:drift2 32s ease-in-out infinite;}
+  .blob.b3{width:520px;height:520px;bottom:-200px;left:30%;background:radial-gradient(circle,#7a4d1c,transparent 70%);animation:drift1 38s ease-in-out infinite reverse;}
+  @keyframes drift1{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(60px,-40px) scale(1.12);}}
+  @keyframes drift2{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(-50px,50px) scale(1.08);}}
+
+  .wrap{position:relative;z-index:1;}
+  .container{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+
+  /* ---------- nav ---------- */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(11,10,26,.78);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line-soft);
+  }
+  .nav-inner{max-width:var(--maxw);margin:0 auto;padding:13px 28px;display:flex;align-items:center;gap:22px;}
+  .brand{font-family:var(--display);font-size:1.18rem;letter-spacing:.14em;color:var(--gold);text-decoration:none;white-space:nowrap;}
+  .brand span{color:var(--parch);}
+  .nav-links{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap;}
+  .nav-links a{
+    font-family:var(--ui);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--muted);text-decoration:none;padding:7px 11px;border-radius:7px;transition:.2s;white-space:nowrap;
+  }
+  .nav-links a:hover{color:var(--parch);background:rgba(236,231,218,.06);}
+  .nav-links a.active{color:var(--gold);}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;min-height:90vh;display:flex;flex-direction:column;justify-content:center;padding:120px 0 80px;}
+  .hero .eyebrow{font-family:var(--ui);font-size:.78rem;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);margin-bottom:26px;}
+  .hero h1{font-size:clamp(3.6rem,13vw,9rem);letter-spacing:.04em;line-height:.92;margin-bottom:8px;
+    background:linear-gradient(180deg,#fff 0%,var(--gold-soft) 55%,var(--gold) 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    text-shadow:0 0 60px rgba(227,178,60,.18);}
+  .hero .lede{max-width:620px;font-size:1.28rem;font-weight:300;color:var(--parch);font-style:italic;margin-bottom:42px;}
+  .hero .lede b{font-style:normal;font-weight:500;color:var(--gold-soft);}
+
+  .facts{display:flex;gap:14px;flex-wrap:wrap;}
+  .fact{
+    border:1px solid var(--line);border-radius:14px;padding:16px 22px;background:rgba(22,19,47,.5);
+    min-width:140px;
+  }
+  .fact .n{font-family:var(--display);font-size:2rem;color:var(--gold-soft);line-height:1;}
+  .fact .l{font-family:var(--ui);font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-top:8px;}
+  .scrollcue{margin-top:56px;font-family:var(--ui);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted-2);display:flex;align-items:center;gap:12px;}
+  .scrollcue::before{content:"";width:34px;height:1px;background:var(--muted-2);}
+
+  /* ---------- sections ---------- */
+  .section{padding:84px 0;border-top:1px solid var(--line-soft);}
+  .sec-head{margin-bottom:44px;max-width:760px;}
+  .sec-num{font-family:var(--ui);font-size:.74rem;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:16px;}
+  .sec-head h2{font-size:clamp(2rem,5vw,3.1rem);margin-bottom:18px;}
+  .sec-head p{color:var(--muted);font-size:1.12rem;}
+  .lede-q{font-style:italic;color:var(--gold-soft);}
+
+  .prose p{margin-bottom:1.2em;}
+  .prose strong{color:var(--parch);font-weight:600;}
+  .term{color:var(--gold-soft);font-weight:500;}
+
+  /* ---------- lore track (signature) ---------- */
+  .track{margin:40px 0 8px;}
+  .track-bar{position:relative;height:14px;border-radius:20px;background:var(--surface-2);overflow:hidden;border:1px solid var(--line-soft);}
+  .track-fill{position:absolute;inset:0;width:100%;background:linear-gradient(90deg,#3E8FD4,#9B6FC9 45%,#E0A53A 100%);opacity:.9;}
+  .track-marks{display:flex;justify-content:space-between;margin-top:12px;font-family:var(--ui);font-size:.72rem;color:var(--muted);letter-spacing:.08em;}
+  .track-marks span:last-child{color:var(--gold-soft);font-weight:600;}
+
+  /* ---------- ink grid ---------- */
+  .ink-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;}
+  .ink-card{border-radius:16px;padding:24px 22px;background:var(--surface);border:1px solid var(--line-soft);position:relative;overflow:hidden;transition:transform .25s,border-color .25s;}
+  .ink-card:hover{transform:translateY(-4px);}
+  .ink-card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--c);}
+  .ink-card .glow{position:absolute;top:-40px;right:-40px;width:120px;height:120px;border-radius:50%;background:var(--c);filter:blur(46px);opacity:.34;}
+  .ink-card h3{font-size:1.45rem;color:var(--c);margin-bottom:4px;position:relative;}
+  .ink-card .it{font-family:var(--ui);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;}
+  .ink-card p{font-size:.95rem;color:var(--parch);margin:0;position:relative;line-height:1.55;}
+
+  /* ---------- steps ---------- */
+  .steps{counter-reset:step;display:grid;gap:18px;}
+  .step{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:start;border:1px solid var(--line-soft);border-radius:16px;padding:24px 26px;background:var(--surface);}
+  .step::before{counter-increment:step;content:counter(step,decimal-leading-zero);font-family:var(--display);font-size:1.7rem;color:var(--gold);min-width:48px;}
+  .step h4{font-size:1.25rem;margin-bottom:6px;}
+  .step p{margin:0;color:var(--muted);font-size:1rem;}
+  .step p b{color:var(--parch);font-weight:500;}
+
+  /* ---------- phase blocks ---------- */
+  .phases{display:grid;gap:16px;}
+  .phase{border:1px solid var(--line-soft);border-radius:16px;background:var(--surface);overflow:hidden;}
+  .phase-top{padding:18px 24px;display:flex;align-items:baseline;gap:14px;border-bottom:1px solid var(--line-soft);}
+  .phase-top .tag{font-family:var(--ui);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-night);background:var(--gold);padding:4px 9px;border-radius:6px;font-weight:600;}
+  .phase-top h4{font-size:1.3rem;}
+  .phase-body{padding:18px 24px;}
+  .phase-body ul{margin:0;padding-left:20px;}
+  .phase-body li{margin-bottom:8px;color:var(--parch);font-size:1rem;}
+  .phase-body li b{color:var(--gold-soft);font-weight:500;}
+
+  /* ---------- action cards ---------- */
+  .actions{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;}
+  .act{border:1px solid var(--line-soft);border-radius:16px;padding:24px;background:linear-gradient(160deg,var(--surface),var(--ink-deep));}
+  .act .sym{font-family:var(--display);font-size:1.6rem;color:var(--gold);margin-bottom:10px;}
+  .act h4{font-size:1.2rem;margin-bottom:8px;}
+  .act p{margin:0;font-size:.96rem;color:var(--muted);}
+
+  /* ---------- keyword grid ---------- */
+  .kw-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:14px;}
+  .kw{border:1px solid var(--line-soft);border-radius:13px;padding:18px 20px;background:var(--surface);transition:border-color .2s;}
+  .kw:hover{border-color:var(--line);}
+  .kw h4{font-family:var(--ui);font-weight:600;font-size:.92rem;letter-spacing:.04em;color:var(--gold-soft);margin-bottom:6px;}
+  .kw p{margin:0;font-size:.9rem;color:var(--muted);line-height:1.5;}
+
+  /* ---------- tip cards ---------- */
+  .tips{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;}
+  .tip{border-left:3px solid var(--gold);border-radius:0 13px 13px 0;padding:18px 22px;background:var(--surface);}
+  .tip h4{font-size:1.12rem;margin-bottom:8px;}
+  .tip p{margin:0;color:var(--muted);font-size:.96rem;}
+
+  /* ---------- archetypes ---------- */
+  .arch{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;}
+  .arch-card{border:1px solid var(--line-soft);border-radius:16px;padding:24px;background:var(--surface);}
+  .arch-card .lab{font-family:var(--ui);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+  .arch-card h4{font-size:1.35rem;margin-bottom:10px;}
+  .arch-card p{margin:0;font-size:.96rem;color:var(--muted);}
+
+  /* ---------- meta table ---------- */
+  .meta-note{font-family:var(--ui);font-size:.82rem;color:var(--muted-2);border:1px dashed var(--line);border-radius:12px;padding:14px 18px;margin-bottom:28px;}
+  .meta-list{display:grid;gap:14px;}
+  .deck{
+    display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center;
+    border:1px solid var(--line-soft);border-radius:16px;padding:20px 24px;background:var(--surface);
+  }
+  .deck .rank{font-family:var(--display);font-size:1.9rem;color:var(--gold);min-width:40px;}
+  .deck .body h4{font-size:1.22rem;margin-bottom:4px;}
+  .deck .body .inks{display:flex;gap:6px;margin:8px 0 10px;}
+  .pip{width:13px;height:13px;border-radius:50%;display:inline-block;}
+  .deck .body p{margin:0;font-size:.95rem;color:var(--muted);}
+  .deck .share{text-align:right;min-width:96px;}
+  .deck .share .big{font-family:var(--display);font-size:1.7rem;color:var(--gold-soft);line-height:1;}
+  .deck .share .sm{font-family:var(--ui);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:6px;}
+  .sharebar{height:6px;border-radius:6px;background:var(--surface-2);margin-top:10px;overflow:hidden;}
+  .sharebar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-soft));}
+  .tierflag{font-family:var(--ui);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:5px;border:1px solid var(--line);color:var(--gold-soft);margin-left:8px;}
+
+  .banned{border:1px solid rgba(217,72,92,.4);background:rgba(217,72,92,.08);border-radius:14px;padding:20px 24px;margin-top:26px;}
+  .banned h4{color:var(--ruby);font-family:var(--ui);font-weight:600;font-size:.9rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;}
+  .banned p{margin:0;color:var(--parch);font-size:.98rem;}
+
+  /* ---------- deckbuild rules ---------- */
+  .rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;}
+  .rule{text-align:center;border:1px solid var(--line-soft);border-radius:16px;padding:28px 20px;background:var(--surface);}
+  .rule .n{font-family:var(--display);font-size:2.6rem;color:var(--gold-soft);line-height:1;}
+  .rule .t{font-family:var(--ui);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:12px;line-height:1.5;}
+
+  /* ---------- closing ---------- */
+  .close{padding:96px 0 70px;text-align:center;border-top:1px solid var(--line-soft);}
+  .close h2{font-size:clamp(2rem,5vw,3rem);margin-bottom:18px;}
+  .close p{max-width:580px;margin:0 auto 8px;color:var(--muted);}
+  .sources{margin-top:40px;font-family:var(--ui);font-size:.76rem;color:var(--muted-2);letter-spacing:.04em;}
+  footer{padding:40px 0;text-align:center;font-family:var(--ui);font-size:.72rem;color:var(--muted-2);border-top:1px solid var(--line-soft);}
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.in{opacity:1;transform:none;}
+
+  @media (max-width:640px){
+    body{font-size:17px;}
+    .nav-links{display:none;}
+    .deck{grid-template-columns:auto 1fr;}
+    .deck .share{grid-column:1/-1;text-align:left;display:flex;align-items:center;gap:14px;}
+    .deck .share .big{font-size:1.4rem;}
+    .step{grid-template-columns:1fr;}
+    .step::before{font-size:1.4rem;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;}
+    html{scroll-behavior:auto;}
+    .reveal{opacity:1;transform:none;transition:none;}
+  }
+
+  /* ---------- primo mazzo ---------- */
+  .combo{display:grid;grid-template-columns:1fr auto 1fr auto 1.25fr;gap:14px;align-items:center;margin:8px 0 36px;}
+  .combo .cc{border:1px solid var(--line-soft);border-radius:14px;padding:18px 18px;background:var(--surface);text-align:center;}
+  .combo .cc.pay{border-color:var(--line);background:linear-gradient(160deg,rgba(227,178,60,.10),var(--surface));}
+  .combo .cc .cst{font-family:var(--display);font-size:1.5rem;color:var(--gold-soft);line-height:1;}
+  .combo .cc .nm{font-family:var(--body);font-weight:500;font-size:1rem;margin-top:8px;color:var(--parch);}
+  .combo .cc .sb{font-family:var(--ui);font-size:.68rem;letter-spacing:.06em;color:var(--muted);margin-top:6px;line-height:1.45;}
+  .combo .op{font-family:var(--display);font-size:1.6rem;color:var(--gold);text-align:center;}
+  .dl-wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;}
+  .dl-group{border:1px solid var(--line-soft);border-radius:16px;background:var(--surface);overflow:hidden;}
+  .dl-group h4{font-family:var(--ui);font-weight:600;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);padding:14px 18px;border-bottom:1px solid var(--line-soft);margin:0;display:flex;justify-content:space-between;}
+  .dl-group h4 span{color:var(--muted-2);font-weight:500;}
+  .dl-row{display:grid;grid-template-columns:28px 30px 1fr;gap:10px;padding:11px 18px;border-bottom:1px solid var(--line-soft);align-items:start;}
+  .dl-row:last-child{border-bottom:none;}
+  .dl-row .q{font-family:var(--display);font-size:1.1rem;color:var(--gold-soft);}
+  .dl-row .c{font-family:var(--ui);font-size:.72rem;font-weight:600;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--ink);color:var(--parch);}
+  .dl-row .c.nx{border-style:dashed;}
+  .dl-row .t b{display:block;font-weight:500;color:var(--parch);font-size:.97rem;line-height:1.3;}
+  .dl-row .t i{font-style:normal;font-size:.86rem;color:var(--muted);line-height:1.45;display:block;margin-top:3px;}
+  .legend-mini{font-family:var(--ui);font-size:.74rem;color:var(--muted);display:flex;gap:18px;flex-wrap:wrap;margin:0 0 18px;}
+  .legend-mini span{display:inline-flex;align-items:center;gap:7px;}
+  .legend-mini .c{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--muted);display:inline-block;}
+  .legend-mini .c.nx{border-style:dashed;}
+  .curve{display:flex;align-items:flex-end;gap:10px;height:150px;margin:18px 0 8px;padding:0 4px;border-bottom:1px solid var(--line-soft);}
+  .curve .bar{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;}
+  .curve .bar i{display:block;width:100%;max-width:56px;border-radius:7px 7px 0 0;background:linear-gradient(180deg,var(--gold-soft),var(--gold));}
+  .curve .bar .n{font-family:var(--ui);font-size:.74rem;color:var(--parch);margin-bottom:6px;}
+  .curve-l{display:flex;gap:10px;padding:0 4px;}
+  .curve-l span{flex:1;text-align:center;font-family:var(--ui);font-size:.7rem;color:var(--muted);}
+  @media (max-width:640px){
+    .combo{grid-template-columns:1fr;}
+    .combo .op{transform:rotate(90deg);}
+  }
+
+  /* ---------- glossario ---------- */
+  .gloss-group{margin-bottom:40px;}
+
+  /* ---------- Glossario Interattivo ---------- */
+  .gloss-search-box {
+    margin: 20px 0 30px;
+    display: flex;
+    gap: 12px;
+  }
+  .gloss-search-box input {
+    flex: 1;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 18px;
+    color: var(--parch);
+    font-size: 1rem;
+    font-family: var(--ui);
+    outline: none;
+    transition: border-color .2s;
+  }
+  .gloss-search-box input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 12px rgba(227, 178, 60, .2);
+  }
+  .gloss-group {
+    margin-bottom: 40px;
+  }
+  .gloss-group h3 {
+    font-family: var(--ui);
+    font-size: 1.15rem;
+    color: var(--gold-soft);
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--line-soft);
+    padding-bottom: 8px;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+  }
+  .gloss-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .gloss-item {
+    background: var(--surface);
+    border: 1px solid var(--line-soft);
+    border-radius: 12px;
+    padding: 16px 20px;
+    transition: transform .2s, border-color .2s;
+  }
+  .gloss-item:hover {
+    border-color: var(--gold);
+    transform: translateY(-2px);
+  }
+  .gloss-item dt {
+    font-family: var(--display);
+    font-size: 1.15rem;
+    color: var(--gold);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .gloss-item dd {
+    font-size: .92rem;
+    color: var(--muted);
+    line-height: 1.5;
+    margin: 0;
+  }
+  .gloss-item dd b {
+    color: var(--parch);
+  }
+
+  /* ---------- Tool Interattivi (Lore Tracker & Mulligan Calc) ---------- */
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    margin-top: 24px;
+  }
+  .tool-card {
+    background: var(--surface);
+    border: 1px solid var(--line-soft);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 8px 30px rgba(0,0,0,.3);
+  }
+  .tool-card h3 {
+    font-family: var(--display);
+    color: var(--gold);
+    font-size: 1.35rem;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .tool-card p {
+    font-size: .9rem;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+  .lore-tracker-wrap {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+  }
+  .lore-box {
+    flex: 1;
+    background: rgba(0,0,0,.3);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px 12px;
+    text-align: center;
+  }
+  .lore-title {
+    font-family: var(--ui);
+    font-size: .8rem;
+    text-transform: uppercase;
+    color: var(--gold-soft);
+    letter-spacing: .08em;
+  }
+  .lore-score {
+    font-family: var(--display);
+    font-size: 3.5rem;
+    line-height: 1.1;
+    color: var(--parch);
+    margin: 10px 0;
+    transition: color .2s;
+  }
+  .lore-score.winner {
+    color: #4ade80;
+    text-shadow: 0 0 20px rgba(74,222,128,.5);
+  }
+  .lore-ctrls {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+  }
+  .btn-lore {
+    background: var(--surface-2);
+    border: 1px solid var(--line-soft);
+    color: var(--parch);
+    font-family: var(--ui);
+    font-size: .95rem;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .btn-lore:hover {
+    background: var(--gold);
+    color: #121016;
+    border-color: var(--gold);
+  }
+  .mulligan-calc-box {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .calc-field {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .calc-field label {
+    font-size: .88rem;
+    color: var(--parch);
+  }
+  .calc-field select, .calc-field input {
+    background: rgba(0,0,0,.4);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 6px 10px;
+    color: var(--parch);
+    font-family: var(--ui);
+    width: 110px;
+  }
+  .calc-results {
+    margin-top: 14px;
+    padding: 14px;
+    background: rgba(0,0,0,.3);
+    border-radius: 10px;
+    border: 1px solid var(--line-soft);
+  }
+  .calc-res-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: .88rem;
+    padding: 5px 0;
+    border-bottom: 1px dashed rgba(255,255,255,.08);
+  }
+  .calc-res-item:last-child { border-bottom: none; }
+  .calc-res-val {
+    font-weight: bold;
+    color: var(--gold-soft);
+  }
+
+  /* Top Language Bar */
+  .lang-bar {
+    background: rgba(14, 11, 20, 0.95);
+    border-bottom: 1px solid var(--line-soft);
+    padding: 8px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--ui);
+    font-size: .8rem;
+    color: var(--muted);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  .lang-links {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+  .lang-links a {
+    color: var(--muted);
+    text-decoration: none;
+    padding: 3px 8px;
+    border-radius: 6px;
+    transition: all .2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .lang-links a:hover, .lang-links a.active {
+    color: var(--gold);
+    background: rgba(227, 178, 60, .12);
+  }
+</style>
+</head>
+<body>
+<div class="lang-bar">
+  <span>Disney Lorcana · Guía Interactiva Completa</span>
+  <div class="lang-links">
+    <a href="../index.html">🌐 Hub</a>
+    <a href="guida-lorcana-it.html" >🇮🇹 Italiano</a>
+    <a href="lorcana-guide-en.html">🇬🇧 English</a>
+    <a href="lorcana-guide-fr.html">🇫🇷 Français</a>
+    <a href="lorcana-guide-de.html">🇩🇪 Deutsch</a>
+    <a href="lorcana-guide-es.html" class="active">🇪🇸 Español</a>
+  </div>
+</div>
+
+
+<div class="ambient" aria-hidden="true">
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
+</div>
+
+<div class="wrap">
+
+  <nav>
+    <div class="nav-inner">
+      <a href="#top" class="brand">LOR<span>·</span>CANA</a>
+      <div class="nav-links">
+        <a href="#basi">Bases</a>
+        <a href="#inchiostri">Tintas</a>
+        <a href="#carta">La carta</a>
+        <a href="#turno">El turno</a>
+        <a href="#azioni">Acciones</a>
+        <a href="#keyword">Palabras clave</a>
+        <a href="#strategia">Estrategia</a>
+        <a href="#deck">Deck</a>
+        <a href="#meta">Meta</a>
+        <a href="#prossimo">Próximo set</a>
+        <a href="#primo-mazzo">Primer mazo</a>
+        <a href="#glossario">Glosario</a>
+        <a href="#strumenti">Herramientas</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero container" id="top">
+    <div class="eyebrow">La Guida dell'Illumineer</div>
+    <h1>LORCANA</h1>
+    <p class="lede">Sei un <b>Illumineer</b>: evochi personaggi Disney dall'inchiostro magico e li mandi all'avventura per raccogliere <b>lore</b>. Il primo che ne accumula <b>20</b> vince. Questa è tutta la strada per arrivarci.</p>
+    <div class="facts">
+      <div class="fact"><div class="n">2</div><div class="l">Giocatori</div></div>
+      <div class="fact"><div class="n">20 ◊</div><div class="l">Lore per vincere</div></div>
+      <div class="fact"><div class="n">60</div><div class="l">Carte nel mazzo</div></div>
+      <div class="fact"><div class="n">6</div><div class="l">Tintas</div></div>
+    </div>
+    <div class="scrollcue">Scorri per imparare</div>
+  </header>
+
+  <!-- 1 · BASI -->
+  <section class="section" id="basi">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="sec-num">01 — Le basi</span>
+        <h2>Qué es Lorcana y cómo ganar</h2>
+        <p>Un gioco di carte collezionabili di Ravensburger e Disney. Due Illumineer si sfidano per essere il primo a raccogliere <span class="lede-q">20 punti lore</span>.</p>
+      </div>
+      <div class="prose reveal" style="max-width:760px">
+        <p>Ogni partita è una corsa. Il <span class="term">lore</span> è il punteggio: lo guadagni soprattutto mandando i tuoi personaggi <strong>in missione (quest)</strong>. Ma il tuo avversario fa lo stesso, quindi non basta correre — devi anche <strong>rallentare lui</strong>, sfidando i suoi personaggi e gestendo il tempo.</p>
+        <p>Per giocare le carte ti serve <span class="term">inchiostro</span>: la tua risorsa. Ogni turno puoi mettere una carta dalla mano nel tuo <strong>calamaio (inkwell)</strong>, coperta, per avere più inchiostro disponibile. Più inchiostro = carte più potenti.</p>
+        <p>Il cuore del gioco è una scelta continua: ogni carta in mano può diventare <strong>inchiostro</strong> (risorsa) <em>oppure</em> essere <strong>giocata</strong> (effetto). Vinci chi sa bilanciare meglio le due cose.</p>
+      </div>
+      <div class="track reveal" aria-label="La corsa verso 20 lore">
+        <div class="track-bar"><div class="track-fill"></div></div>
+        <div class="track-marks"><span>0 ◊ — Inizio</span><span>10 ◊ — Metà partita</span><span>20 ◊ — Vittoria</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · COSA SERVE / SETUP -->
+  <section class="section" id="setup">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="sec-num">02 — Preparazione</span>
+        <h2>Di cosa hai bisogno e come si imposta la partita</h2>
+        <p>Ti servono solo due mazzi e qualcosa per segnare i danni e il lore (segnalini, dadi o l'app ufficiale).</p>
+      </div>
+      <div class="steps reveal">
+        <div class="step"><div><h4>Mescola e pesca 7 carte</h4><p>Ogni giocatore mescola il proprio mazzo e pesca la mano iniziale.</p></div></div>
+        <div class="step"><div><h4>Mulligan (una volta)</h4><p>Puoi rimettere sotto al mazzo quante carte vuoi e ripescarne altrettante. Cerca una mano con <b>inchiostro inkable</b> e personaggi a basso costo.</p></div></div>
+        <div class="step"><div><h4>Decidete chi inizia</h4><p>A caso o d'accordo. Importante: <b>chi gioca per primo salta la pescata del primo turno</b> (per compensare il vantaggio di iniziare).</p></div></div>
+        <div class="step"><div><h4>Lore a 0</h4><p>Entrambi partite da zero. Tenete pronto il segnapunti: si corre fino a 20.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · INCHIOSTRI -->
+  <section class="section" id="inchiostri">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="sec-num">03 — I sei inchiostri</span>
+        <h2>Le sei anime del gioco</h2>
+        <p>Ogni carta appartiene a uno (o più) dei sei inchiostri. Un mazzo può contenere al massimo <span class="lede-q">due inchiostri</span>: la scelta della coppia definisce la tua identità.</p>
+      </div>
+      <div class="ink-grid reveal">
+        <div class="ink-card" style="--c:var(--amber)"><div class="glow"></div><h3>Amber</h3><div class="it">Ambra</div><p>Supporto e generazione di lore. Cantanti, cura, sciami di personaggi a basso costo che restano in campo.</p></div>
+        <div class="ink-card" style="--c:var(--amethyst)"><div class="glow"></div><h3>Amethyst</h3><div class="it">Ametista</div><p>Magia e pescata. Manipola la mano, ripesca, e ospita molti personaggi Evasive aggressivi.</p></div>
+        <div class="ink-card" style="--c:var(--emerald)"><div class="glow"></div><h3>Emerald</h3><div class="it">Smeraldo</div><p>Inganno e disturbo. Costringe l'avversario a scartare, ruba tempo, fa rimbalzare i personaggi in mano.</p></div>
+        <div class="ink-card" style="--c:var(--ruby)"><div class="glow"></div><h3>Ruby</h3><div class="it">Rubino</div><p>Aggressione e velocità. Tanta forza, Rush e Challenger: nato per attaccare e fare a pezzi il campo nemico.</p></div>
+        <div class="ink-card" style="--c:var(--sapphire)"><div class="glow"></div><h3>Sapphire</h3><div class="it">Zaffiro</div><p>Risorse e oggetti. Riduce i costi, accelera l'inchiostro (ramp) e costruisce motori di carte e item.</p></div>
+        <div class="ink-card" style="--c:var(--steel)"><div class="glow"></div><h3>Steel</h3><div class="it">Acciaio</div><p>Controllo e rimozione. Personaggi resistenti, danno diretto e gli strumenti migliori per ripulire il tavolo.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · ANATOMIA CARTA -->
+  <section class="section" id="carta">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="sec-num">04 — Anatomia di una carta</span>
+        <h2>Leggere un personaggio</h2>
+        <p>Quattro numeri raccontano tutto quello che una carta sa fare. Impara a leggerli al volo.</p>
+      </div>
+      <div class="actions reveal">
+        <div class="act"><div class="sym">⬡</div><h4>Costo</h4><p>In alto a sinistra: quanto inchiostro serve per giocarla. Se attorno al costo c'è una <strong>cornice ondulata</strong>, la carta è <span class="term">inkable</span> e può finire nel calamaio.</p></div>
+        <div class="act"><div class="sym">⚔</div><h4>Forza (Strength)</h4><p>Quanti danni infligge quando sfida o viene sfidato.</p></div>
+        <div class="act"><div class="sym">❤</div><h4>Volontà (Willpower)</h4><p>Quanti danni regge prima di essere bandito (mandato negli scarti).</p></div>
+        <div class="act"><div class="sym">◊</div><h4>Lore</h4><p>Quanto lore guadagni quando questo personaggio va in missione. Il numero che fa vincere la partita.</p></div>
+      </div>
+      <div class="prose reveal" style="max-width:760px;margin-top:30px">
+        <p>Sotto i numeri trovi le <span class="term">classificazioni</span> (Eroe, Cattivo, Principessa, Floodborn, Dreamborn…) che alcune carte richiamano, e poi le <strong>abilità</strong> e le <strong>keyword</strong> (le vediamo più avanti). Esistono quattro tipi di carta: <strong>Personaggi</strong>, <strong>Oggetti (Item)</strong>, <strong>Luoghi (Location)</strong> e <strong>Acciones</strong> — di cui le <strong>Canzoni (Song)</strong> sono un sottotipo speciale.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · IL TURNO -->
+  <section class="section" id="turno">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="sec-num">05 — Il turno, passo per passo</span>
+        <h2>Come scorre un turno</h2>
+        <p>Ogni turno ha tre fasi. La parte centrale — la <span class="lede-q">fase principale</span> — è dove succede tutto e dove le azioni si possono fare nell'ordine che vuoi.</p>
+      </div>
+      <div class="phases reveal">
+        <div class="phase">
+          <div class="phase-top"><span class="tag">Inizio</span><h4>Fase iniziale</h4></div>
+          <div class="phase-body"><ul>
+            <li><b>Raddrizza (Ready):</b> raddrizzi tutte le tue carte esauste — personaggi e inchiostro tornano disponibili.</li>
+            <li><b>Imposta (Set):</b> si attivano gli effetti "all'inizio del tuo turno". I personaggi giocati nel turno precedente <b>sono ora asciutti</b> e possono finalmente agire.</li>
+            <li><b>Pesca (Draw):</b> peschi una carta. (Chi inizia la partita salta solo la sua primissima pescata.)</li>
+          </ul></div>
+        </div>
+        <div class="phase">
+          <div class="phase-top"><span class="tag">Principale</span><h4>Fase principale — in qualsiasi ordine</h4></div>
+          <div class="phase-body"><ul>
+            <li><b>Metti inchiostro:</b> una volta per turno, una carta inkable dalla mano va coperta nel calamaio.</li>
+            <li><b>Gioca carte:</b> paga il costo in inchiostro per giocare personaggi, oggetti, luoghi o azioni.</li>
+            <li><b>Vai in missione (Quest):</b> esaurisci un personaggio asciutto per guadagnare lore pari al suo ◊.</li>
+            <li><b>Sfida (Challenge):</b> esaurisci un personaggio per attaccare un bersaglio nemico esausto (o un luogo).</li>
+            <li><b>Usa abilità e canta canzoni:</b> attiva le abilità e usa i personaggi per cantare le Song.</li>
+          </ul></div>
+        </div>
+        <div class="phase">
+          <div class="phase-top"><span class="tag">Fine</span><h4>Fase finale</h4></div>
+          <div class="phase-body"><ul>
+            <li>Svaniscono gli effetti "fino alla fine del turno" e si risolvono i trigger di fine turno.</li>
+            <li>Il turno passa all'avversario. I danni sui personaggi <b>restano</b>: non si curano da soli.</li>
+          </ul></div>
+        </div>
+      </div>
+      <div class="prose reveal" style="max-width:760px;margin-top:28px">
+        <p><strong>La regola dell'inchiostro bagnato.</strong> Un personaggio appena giocato ha "l'inchiostro ancora umido": <em>non</em> può andare in missione, sfidare o usare abilità con il simbolo di esaurimento, fino al tuo turno successivo. L'eccezione è la keyword <span class="term">Rush</span>, che permette di sfidare subito.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · AZIONI -->
+  <section class="section" id="azioni">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="sec-num">06 — Le azioni chiave</span>
+        <h2>Quest, Challenge, Inchiostro, Canto</h2>
+        <p>Quattro gesti che ripeti partita dopo partita. Capire <span class="lede-q">quando</span> fare ciascuno è il 90% della bravura.</p>
+      </div>
+      <div class="actions reveal">
+        <div class="act"><div class="sym">◊</div><h4>Andare in missione</h4><p>Esaurisci un personaggio asciutto e guadagni lore pari al suo valore ◊. È il modo principale per vincere — ma un personaggio in missione è esausto e <strong>vulnerabile</strong> alle sfide.</p></div>
+        <div class="act"><div class="sym">⚔</div><h4>Sfidare</h4><p>Esaurisci un personaggio per attaccarne uno nemico <strong>esausto</strong>. Entrambi infliggono danni pari alla loro Forza. Chi accumula danni ≥ Volontà viene bandito. I <strong>luoghi</strong> si possono sfidare sempre.</p></div>
+        <div class="act"><div class="sym">⬡</div><h4>Mettere inchiostro</h4><p>Una volta per turno metti una carta inkable nel calamaio. Investi sul futuro: più inchiostro ora significa carte più grosse dopo, ma è una carta in meno da giocare.</p></div>
+        <div class="act"><div class="sym">♪</div><h4>Cantare una canzone</h4><p>Invece di pagarla con l'inchiostro, esaurisci un personaggio con costo ≥ a quello della canzone per cantarla <strong>gratis</strong>. Un enorme risparmio di risorse.</p></div>
+      </div>
+      <div class="prose reveal" style="max-width:760px;margin-top:30px">
+        <p><strong>Il dilemma fondamentale di ogni turno:</strong> mando questo personaggio in missione per fare lore, oppure lo tengo pronto per sfidare la minaccia avversaria? Si può fare solo una delle due cose con lo stesso personaggio. Leggere bene il tavolo e decidere è ciò che separa chi vince da chi perde.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · KEYWORD -->
+  <section class="section" id="keyword">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="sec-num">07 — Le parole chiave</span>
+        <h2>Le keyword che devi conoscere</h2>
+        <p>Abilità ricorrenti riassunte in una parola. Riconoscerle a colpo d'occhio cambia il modo in cui pianifichi gli attacchi.</p>
+      </div>
+      <div class="kw-grid reveal">
+        <div class="kw"><h4>Rush</h4><p>Può sfidare nel turno stesso in cui viene giocato, ignorando l'inchiostro umido.</p></div>
+        <div class="kw"><h4>Evasive</h4><p>Può essere sfidato <strong>solo</strong> da personaggi che hanno a loro volta Evasive. Ottimo per andare in missione indisturbati.</p></div>
+        <div class="kw"><h4>Bodyguard</h4><p>Può entrare in campo già esausto. Se è presente, l'avversario <strong>deve</strong> sfidare lui prima degli altri.</p></div>
+        <div class="kw"><h4>Ward</h4><p>Non può essere scelto dagli effetti avversari (può comunque essere sfidato). Protegge i pezzi più preziosi.</p></div>
+        <div class="kw"><h4>Resist +N</h4><p>Riduce di N tutti i danni che subisce. Rende i personaggi molto più difficili da rimuovere.</p></div>
+        <div class="kw"><h4>Challenger +N</h4><p>Guadagna +N Forza <strong>solo quando sfida</strong>. Un attaccante temibile che in difesa resta gestibile.</p></div>
+        <div class="kw"><h4>Reckless</h4><p>Non può andare in missione e <strong>deve</strong> sfidare se può. Tanta potenza, ma nessun lore diretto.</p></div>
+        <div class="kw"><h4>Support</h4><p>Quando va in missione, aggiunge la sua Forza a quella di un altro tuo personaggio per il turno.</p></div>
+        <div class="kw"><h4>Singer N</h4><p>Conta come costo N per cantare le canzoni, pur costando meno da giocare.</p></div>
+        <div class="kw"><h4>Shift N</h4><p>Puoi giocarlo "sopra" un personaggio con lo stesso nome pagando solo N: evoluzioni più economiche (meccanica Floodborn).</p></div>
+        <div class="kw"><h4>Sing Together N</h4><p>Più personaggi pronti possono unirsi per cantare insieme una canzone se la somma dei loro costi raggiunge N.</p></div>
+        <div class="kw"><h4>Vanish</h4><p>Se l'avversario lo sceglie con un'azione, viene immediatamente bandito. Una trappola difensiva.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 · STRATEGIA -->
+  <section class="section" id="strategia">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="sec-num">08 — Strategia</span>
+        <h2>Consigli per vincere di più</h2>
+        <p>Le regole le impari in un'ora. Questi principi ti faranno vincere le partite combattute.</p>
+      </div>
+      <div class="tips reveal">
+        <div class="tip"><h4>Inchia con criterio nei primi turni</h4><p>Quasi sempre conviene mettere inchiostro nei turni 1–3 anche se hai gioco. Restare indietro di inchiostro è la sconfitta più comune dei principianti.</p></div>
+        <div class="tip"><h4>Tieni le carte non-inkable da giocare</h4><p>Le carte senza cornice ondulata non possono diventare risorsa: mettile da parte come gioco, e usa quelle inkable per il calamaio.</p></div>
+        <div class="tip"><h4>Conta i danni, non solo la Forza</h4><p>Una sfida conviene quando bandisci il loro pezzo <strong>senza</strong> perdere il tuo. Cerca scambi favorevoli: 2 di Forza che uccide un 1 di Volontà è oro.</p></div>
+        <div class="tip"><h4>Missione vs. difesa</h4><p>Se sei in vantaggio di lore, corri: vai in missione e ignora il loro campo. Se sei indietro, frena: sfida e ripulisci prima di accelerare.</p></div>
+        <div class="tip"><h4>Il "race math"</h4><p>Calcola quanti turni servono a te per arrivare a 20 e quanti a lui. Se vinci la corsa, non perdere tempo a sfidare. Se la perdi, devi cambiare il ritmo.</p></div>
+        <div class="tip"><h4>Non sprawl-are senza piano</h4><p>Riempire il tavolo è inutile se nessuno fa abbastanza lore o pressione. Ogni personaggio deve avere un lavoro: punti, difesa o disturbo.</p></div>
+        <div class="tip"><h4>Sfrutta Evasive per il lore</h4><p>I personaggi Evasive vanno in missione quasi indisturbati: sono il motore di lore più affidabile contro mazzi senza risposte.</p></div>
+        <div class="tip"><h4>Gioca tante partite con lo stesso mazzo</h4><p>Conoscere i propri matchup batte avere "l'ultimo mazzo del meta". La pratica ripetuta vale più della novità.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 · COSTRUIRE UN DECK -->
+  <section class="section" id="deck">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="sec-num">09 — Costruire un mazzo</span>
+        <h2>Le regole e la filosofia del deckbuilding</h2>
+        <p>Tre vincoli semplici, infinite possibilità. Parti dalle regole, poi pensa alla <span class="lede-q">curva</span> e all'identità.</p>
+      </div>
+      <div class="rules reveal">
+        <div class="rule"><div class="n">60+</div><div class="t">Carte minime nel mazzo (puoi giocarne di più, ma 60 è lo standard)</div></div>
+        <div class="rule"><div class="n">2</div><div class="t">Inchiostri massimi per mazzo</div></div>
+        <div class="rule"><div class="n">×4</div><div class="t">Copie massime della stessa carta (per nome completo)</div></div>
+      </div>
+      <div class="prose reveal" style="max-width:760px;margin-top:36px">
+        <h3 style="font-size:1.4rem;margin-bottom:14px;color:var(--gold-soft)">La curva di inchiostro</h3>
+        <p>La cosa più importante dopo le regole è la <strong>curva dei costi</strong>: quante carte da 1, da 2, da 3… Vuoi cose da fare ogni turno. Una base solida ha molte carte da 1–3 costi, un buon blocco da 4–5, e poche bombe da 6+.</p>
+        <p>Punta a circa <strong>la metà del mazzo inkable</strong>: ti serve materiale da mettere nel calamaio in modo affidabile. Un mazzo bellissimo che non sale di inchiostro non gioca nulla.</p>
+        <h3 style="font-size:1.4rem;margin:26px 0 14px;color:var(--gold-soft)">Gli archetipi</h3>
+      </div>
+      <div class="arch reveal">
+        <div class="arch-card"><div class="lab">Veloce</div><h4>Aggro</h4><p>Tanti personaggi economici che vanno in missione ogni turno e chiudono la partita prima che l'avversario si stabilizzi. Semplice e perfetto per iniziare.</p></div>
+        <div class="arch-card"><div class="lab">Tempo</div><h4>Evasive / Tempo</h4><p>Personaggi elusivi che fanno lore indisturbati, supportati da carte che gestiscono il ritmo. Premia chi sa pilotare bene gli scambi.</p></div>
+        <div class="arch-card"><div class="lab">Lento</div><h4>Control</h4><p>Sopravvive, rimuove ogni minaccia, pesca carte e vince nel lungo periodo con finisher pesanti. Richiede pazienza e conoscenza dei matchup.</p></div>
+        <div class="arch-card"><div class="lab">Misto</div><h4>Midrange</h4><p>Una via di mezzo: personaggi solidi a costo medio, abbastanza pressione per correre e abbastanza forza per difendersi. Il più flessibile.</p></div>
+        <div class="arch-card"><div class="lab">Combo</div><h4>Combo</h4><p>Costruisce una combinazione di carte che vince di colpo o genera un vantaggio enorme. Potente ma fragile: lascialo dopo aver fatto esperienza.</p></div>
+        <div class="arch-card"><div class="lab">Ramp</div><h4>Ramp</h4><p>Accelera l'inchiostro per giocare le carte più grosse del gioco molti turni prima del previsto. Domina se sopravvive ai primi turni.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 · META -->
+  <section class="section" id="meta">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="sec-num">10 — Il meta attuale</span>
+        <h2>I migliori deck in circolazione</h2>
+        <p>Formato <span class="lede-q">Core Constructed</span>, set attivo <span class="lede-q">Attack of the Vine! (Set 13)</span> — dati aggiornati al 19 settembre 2026, su 111 tornei e 14.240 partite.</p>
+      </div>
+
+      <div class="shift reveal">
+        <h4>◆ Cos'è cambiato dall'ultima versione di questa guida</h4>
+        <p>Set 13 ha <b>ribaltato il formato</b>. Il vecchio re <b>Amethyst/Sapphire Evasive</b> (19% a giugno) è praticamente sparito: oggi è Tier R con metashare vicino allo zero e nessun Top 8 recente. Anche <b>Amber/Emerald Aggro</b>, che era il secondo deck più giocato, non esiste più come archetipo rilevante.</p>
+        <p>Al loro posto comanda il <b>midrange</b>: Amber/Amethyst è il nuovo punto di riferimento. È la dimostrazione pratica di quanto scritto sopra — un set nuovo può cancellare i Tier 1 precedenti nel giro di poche settimane.</p>
+      </div>
+
+      <div class="meta-note reveal">Come leggere i numeri · <b>Metashare</b> = quanto è giocato. <b>Win rate</b> = partite vinte. <b>Conversion</b> = quanto spesso entra nel 25% alto della classifica rispetto a quanto è giocato: sopra 1.00 sovra-performa, sotto 1.00 delude. Un deck molto giocato con conversion bassa è una trappola. Fonte: inkDecks.com.</div>
+
+      <div class="meta-list reveal">
+
+        <div class="deck deck-full">
+          <div class="head"><span class="rank">1</span><h4>Amber / Amethyst Midrange</h4><span class="tierflag">Tier 1</span></div>
+          <div class="inks"><span class="pip" style="background:var(--amber)"></span><span class="pip" style="background:var(--amethyst)"></span></div>
+          <p>Il miglior deck del formato e anche il più giocato: 716 liste censite e 204 Top 8. Personaggi solidi a costo medio, lore costante e abbastanza interazione da non farsi travolgere. Non eccelle in niente, non è debole a niente.</p>
+          <div class="stats">
+            <div><div class="v">19%</div><div class="k">Metashare</div></div>
+            <div><div class="v">56%</div><div class="k">Win rate</div></div>
+            <div><div class="v">1.17x</div><div class="k">Conversion</div></div>
+            <div><div class="v">22%</div><div class="k">Quota Top 8</div></div>
+            <div><div class="v">~$426</div><div class="k">Costo</div></div>
+          </div>
+          <div class="swot">
+            <div class="up"><span class="lbl">Punti di forza</span>Nessun matchup davvero disastroso. Piano di gioco flessibile: può correre o difendere. Il più premiato dai risultati reali.</div>
+            <div class="dn"><span class="lbl">Punti deboli</span>Costoso da costruire. Richiede buone decisioni turno per turno: perdona poco gli errori di sequenza. È il deck che tutti si preparano a battere.</div>
+          </div>
+          <div class="mu">
+            <span class="good">vs Sapphire/Steel 82%</span><span class="good">vs Amber/Steel 66%</span><span class="good">vs Amethyst/Steel 61%</span><span class="good">vs Amethyst/Ruby 59%</span><span class="bad">vs Amber/Emerald 48%</span><span class="bad">vs Amethyst/Emerald 49%</span>
+          </div>
+        </div>
+
+        <div class="deck deck-full">
+          <div class="head"><span class="rank">2</span><h4>Amber / Emerald Elinor</h4><span class="tierflag">Tier 1</span></div>
+          <div class="inks"><span class="pip" style="background:var(--amber)"></span><span class="pip" style="background:var(--emerald)"></span></div>
+          <p>Il principale sfidante, costruito attorno a Elinor. Unisce la generazione di lore dell'Ambra al disturbo dello Smeraldo, e ha il pregio raro di battere il deck numero uno nello scontro diretto.</p>
+          <div class="stats">
+            <div><div class="v">14%</div><div class="k">Metashare</div></div>
+            <div><div class="v">53%</div><div class="k">Win rate</div></div>
+            <div><div class="v">1.16x</div><div class="k">Conversion</div></div>
+            <div><div class="v">12%</div><div class="k">Quota Top 8</div></div>
+            <div><div class="v">~$228</div><div class="k">Costo</div></div>
+          </div>
+          <div class="swot">
+            <div class="up"><span class="lbl">Punti di forza</span>Favorito contro Amber/Amethyst (52–48). Distrugge Amber/Ruby (65%). Metà del prezzo del deck numero uno.</div>
+            <div class="dn"><span class="lbl">Punti deboli</span>Soffre parecchio i deck Steel/Emerald (43%) e Amethyst/Emerald (40%): due matchup pessimi che pesano in un torneo lungo.</div>
+          </div>
+          <div class="mu">
+            <span class="good">vs Amber/Ruby 65%</span><span class="good">vs Emerald/Sapphire 58%</span><span class="good">vs Amber/Amethyst 52%</span><span class="bad">vs Steel/Emerald 43%</span><span class="bad">vs Amethyst/Emerald 40%</span>
+          </div>
+        </div>
+
+        <div class="deck deck-full">
+          <div class="head"><span class="rank">3</span><h4>Amethyst / Emerald Retro</h4><span class="tierflag">Tier 2 · il più sottovalutato</span></div>
+          <div class="inks"><span class="pip" style="background:var(--amethyst)"></span><span class="pip" style="background:var(--emerald)"></span></div>
+          <p>Poco giocato ma con i numeri migliori di tutto il formato: <strong>60% di win rate e 1.45x di conversion</strong>, la coppia di inchiostri con il secondo miglior rendimento complessivo. Se cerchi il deck che rende più di quanto costa in attenzione, è questo.</p>
+          <div class="stats">
+            <div><div class="v">4%</div><div class="k">Metashare</div></div>
+            <div><div class="v">60%</div><div class="k">Win rate</div></div>
+            <div><div class="v">1.45x</div><div class="k">Conversion</div></div>
+            <div><div class="v">5,7%</div><div class="k">Quota Top 8</div></div>
+            <div><div class="v">~$242</div><div class="k">Costo</div></div>
+          </div>
+          <div class="swot">
+            <div class="up"><span class="lbl">Punti di forza</span>Il miglior rendimento del formato. Batte nettamente Amber/Emerald (60%) e Amber/Ruby (69%), quindi punisce due dei deck più diffusi. Effetto sorpresa: pochi si preparano a giocarci contro.</div>
+            <div class="dn"><span class="lbl">Punti deboli</span>Campione statistico più piccolo (159 liste): i numeri sono meno stabili. Matchup sfavorevoli contro Steel/Emerald (44%) ed Emerald/Sapphire (43%).</div>
+          </div>
+          <div class="mu">
+            <span class="good">vs Amethyst/Steel 71%</span><span class="good">vs Amber/Ruby 69%</span><span class="good">vs Amethyst/Ruby 67%</span><span class="good">vs Amber/Emerald 60%</span><span class="bad">vs Steel/Emerald 44%</span><span class="bad">vs Emerald/Sapphire 43%</span>
+          </div>
+        </div>
+
+        <div class="deck deck-full">
+          <div class="head"><span class="rank">4</span><h4>Amber / Emerald Songs</h4><span class="tierflag">Tier 1</span></div>
+          <div class="inks"><span class="pip" style="background:var(--amber)"></span><span class="pip" style="background:var(--emerald)"></span></div>
+          <p>Il deck Canzoni: usa i cantanti per giocare gratis azioni costose e generare un vantaggio di risorse enorme. Ottima conversion (1.25x) a fronte di un metashare contenuto.</p>
+          <div class="stats">
+            <div><div class="v">7%</div><div class="k">Metashare</div></div>
+            <div><div class="v">54%</div><div class="k">Win rate</div></div>
+            <div><div class="v">1.25x</div><div class="k">Conversion</div></div>
+            <div><div class="v">8,3%</div><div class="k">Quota Top 8</div></div>
+            <div><div class="v">~$230</div><div class="k">Costo</div></div>
+          </div>
+          <div class="swot">
+            <div class="up"><span class="lbl">Punti di forza</span>Risparmia una quantità enorme di inchiostro. Converte bene i risultati. Condivide gli inchiostri con Elinor, quindi molte carte sono riutilizzabili tra i due mazzi.</div>
+            <div class="dn"><span class="lbl">Punti deboli</span>Dipende dal trovare i cantanti giusti al momento giusto: le mani sbilanciate fanno male. Eredita le debolezze di Amber/Emerald contro Steel/Emerald.</div>
+          </div>
+          <div class="mu">
+            <span class="good">vs Amber/Ruby 65%</span><span class="good">vs Emerald/Sapphire 58%</span><span class="bad">vs Steel/Emerald 43%</span><span class="bad">vs Amethyst/Emerald 40%</span>
+          </div>
+        </div>
+
+        <div class="deck deck-full">
+          <div class="head"><span class="rank">5</span><h4>Emerald / Steel Detectives</h4><span class="tierflag">Tier 1 · anti-meta</span></div>
+          <div class="inks"><span class="pip" style="background:var(--emerald)"></span><span class="pip" style="background:var(--steel)"></span></div>
+          <p>Il deck di controllo del formato. Non ha i numeri grezzi dei primi, ma è l'unico Tier 1 che batte contemporaneamente entrambi i mazzi Amber/Emerald e Amethyst/Emerald — cioè tre dei sei archetipi più giocati.</p>
+          <div class="stats">
+            <div><div class="v">6%</div><div class="k">Metashare</div></div>
+            <div><div class="v">53%</div><div class="k">Win rate</div></div>
+            <div><div class="v">1.07x</div><div class="k">Conversion</div></div>
+            <div><div class="v">6,2%</div><div class="k">Quota Top 8</div></div>
+            <div><div class="v">~$242</div><div class="k">Costo</div></div>
+          </div>
+          <div class="swot">
+            <div class="up"><span class="lbl">Punti di forza</span>La scelta giusta se ti aspetti un torneo pieno di Amber/Emerald. Batte Emerald/Sapphire (63%), Amber/Ruby (58%), Amber/Emerald (57%) e Amethyst/Emerald (56%).</div>
+            <div class="dn"><span class="lbl">Punti deboli</span>Perde contro il deck numero uno: solo 44% contro Amber/Amethyst, e 39% contro Amber/Steel. Partite lunghe, rischio di pareggio a tempo nei tornei.</div>
+          </div>
+          <div class="mu">
+            <span class="good">vs Emerald/Sapphire 63%</span><span class="good">vs Amber/Ruby 58%</span><span class="good">vs Amber/Emerald 57%</span><span class="good">vs Amethyst/Emerald 56%</span><span class="bad">vs Amber/Amethyst 44%</span><span class="bad">vs Amber/Steel 39%</span>
+          </div>
+        </div>
+
+        <div class="deck deck-full">
+          <div class="head"><span class="rank">6</span><h4>Emerald / Sapphire Mickey &amp; Minnie</h4><span class="tierflag">Tier 2 · miglior rapporto qualità-prezzo</span></div>
+          <div class="inks"><span class="pip" style="background:var(--emerald)"></span><span class="pip" style="background:var(--sapphire)"></span></div>
+          <p>Conversion alta (1.23x) a circa un quarto del prezzo del deck numero uno. Il miglior punto d'ingresso competitivo se non vuoi spendere una fortuna.</p>
+          <div class="stats">
+            <div><div class="v">4%</div><div class="k">Metashare</div></div>
+            <div><div class="v">52%</div><div class="k">Win rate</div></div>
+            <div><div class="v">1.23x</div><div class="k">Conversion</div></div>
+            <div><div class="v">5,8%</div><div class="k">Quota Top 8</div></div>
+            <div><div class="v">~$124</div><div class="k">Costo</div></div>
+          </div>
+          <div class="swot">
+            <div class="up"><span class="lbl">Punti di forza</span>Economico e converte bene. Buono contro Amber/Ruby (61%). Ottimo per entrare nel competitivo senza svuotare il portafoglio.</div>
+            <div class="dn"><span class="lbl">Punti deboli</span>Sfavorito contro tre dei primi cinque: Amber/Emerald (42%), Steel/Emerald (37%), Amber/Amethyst (46%). È un deck che va pilotato bene per compensare.</div>
+          </div>
+          <div class="mu">
+            <span class="good">vs Amber/Ruby 61%</span><span class="good">vs Amethyst/Emerald 57%</span><span class="bad">vs Amber/Amethyst 46%</span><span class="bad">vs Amber/Emerald 42%</span><span class="bad">vs Steel/Emerald 37%</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="verdict reveal">
+        <h4>Quale scegliere, in base a cosa cerchi</h4>
+        <ul>
+          <li><b>Il più forte in assoluto →</b> Amber/Amethyst Midrange. Metashare e conversion più alti, nessun matchup rovinoso. Se hai budget e vuoi la scelta più sicura, è questa.</li>
+          <li><b>Il miglior rendimento nascosto →</b> Amethyst/Emerald Retro. 60% di win rate e 1.45x di conversion: nessuno fa meglio, e pochi lo aspettano.</li>
+          <li><b>Se il tuo torneo è pieno di Amber/Emerald →</b> Emerald/Steel Detectives o Amethyst/Emerald Retro: entrambi li battono nettamente.</li>
+          <li><b>Se il tuo torneo è pieno di Amber/Amethyst →</b> Amber/Emerald Elinor, l'unico tra i top che è favorito nello scontro diretto.</li>
+          <li><b>Con poco budget →</b> Emerald/Sapphire Mickey &amp; Minnie (~$124), oppure Amber/Emerald Actions (~$42, 52% win rate e 1.17x di conversion) per spendere pochissimo restando sensato.</li>
+          <li><b>Da evitare ora →</b> Amber/Ruby in tutte le sue varianti: 45% di win rate complessivo e conversion sotto 1.00. Anche <b>Amber/Steel Steelsong</b> è una trappola: molto giocato (6%) ma converte solo 0.85x.</li>
+        </ul>
+      </div>
+
+      <div class="banned reveal">
+        <h4>⛔ Carte attualmente bandite (Core Constructed)</h4>
+        <p>Restano vietate <strong>Hiram Flaversham – Toymaker</strong> e <strong>Fortisphere</strong>. La lista può cambiare: controlla sempre i ruling ufficiali aggiornati.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 · PROSSIMO SET -->
+  <section class="section" id="prossimo">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="sec-num">11 — Cosa sta per arrivare</span>
+        <h2>Hyperia City e la prossima rotazione</h2>
+        <p>Il Set 14 è alle porte: cambierà di nuovo tutto quello che hai appena letto nella sezione precedente.</p>
+      </div>
+
+      <div class="timeline reveal">
+        <div class="tl"><div class="when">16 ott 2026</div><div class="what"><b>Prerelease di Hyperia City</b> nei negozi specializzati e in alcuni store Disney.</div></div>
+        <div class="tl"><div class="when">23 ott 2026</div><div class="what"><b>Uscita ufficiale del Set 14 — Hyperia City</b>, 204 carte nuove, disponibile anche in Italia.</div></div>
+        <div class="tl"><div class="when">Q1 2027</div><div class="what"><b>Into the Inkdark</b> — Set 15, finestra annunciata ma non ancora datata.</div></div>
+        <div class="tl"><div class="when">Primavera 2027</div><div class="what"><b>Cosmic Quest</b> — confermato, dettagli non ancora annunciati.</div></div>
+      </div>
+
+      <div class="prose reveal" style="max-width:760px;margin-top:34px">
+        <h3 style="font-size:1.35rem;margin-bottom:14px;color:var(--gold-soft)">Cosa sappiamo di Hyperia City</h3>
+        <p>Si lascia alle spalle la natura selvaggia di Attack of the Vine per un'ambientazione urbana: una metropoli dove, nelle parole di Ravensburger, <em>"il metrò incontra il fantasy"</em>, tra musica, arte e qualcosa di misterioso nei vicoli e lungo i canali. Lo slogan è <span class="term">"Feel the Rhythm"</span>.</p>
+        <p>La novità più grossa è l'ingresso di <strong>Coco</strong>, alla sua prima apparizione in Lorcana. Sono già state rivelate <strong>Miguel Rivera</strong> e <strong>Héctor Rivera</strong> (entrambi come <em>Street Musician</em>), <strong>Pepita</strong>, la canzone <strong>Un Poco Loco</strong> e il luogo <strong>Land of the Dead – Marigold Bridge</strong>.</p>
+        <p>Il tema musicale e le prime carte fanno pensare a una <strong>forte spinta sulle Canzoni</strong> e, secondo diversi rivenditori, a meccaniche legate ai "pericoli nascosti" della città — quest'ultimo punto però non è ancora confermato ufficialmente, quindi trattalo come indiscrezione.</p>
+
+        <h3 style="font-size:1.35rem;margin:28px 0 14px;color:var(--gold-soft)">Cosa aspettarsi per il meta</h3>
+        <p><strong>Se la spinta sulle Canzoni è reale</strong>, l'archetipo meglio posizionato è <span class="term">Amber/Emerald Songs</span>: già Tier 1 con 1.25x di conversion, e riceverebbe carte nuove direttamente nel suo piano di gioco. È la scommessa più logica in vista di ottobre.</p>
+        <p><strong>I luoghi tornano protagonisti</strong> da Set 12–13: con una nuova location di rilievo già rivelata, i mazzi che sfruttano le Location potrebbero passare da curiosità a scelta seria.</p>
+        <p><strong>Come comportarsi con gli acquisti.</strong> Le prime due o tre settimane dopo l'uscita di un set sono le più instabili: i prezzi delle singole sono gonfiati e le tier list non valgono nulla finché non ci sono tornei veri. Se stai costruendo adesso, conviene privilegiare le carte che restano buone anche dopo (gli staple del tuo inchiostro) e aspettare i primi risultati ufficiali prima di inseguire il nuovo archetipo di moda.</p>
+      </div>
+    </div>
+  </section>
+
+<!-- 12 · PRIMO MAZZO -->
+  <section class="section" id="primo-mazzo">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="sec-num">12 — Il tuo primo mazzo</span>
+        <h2>Topolino &amp; Minnie: il mazzo per imparare</h2>
+        <p>Emerald / Sapphire, 60 carte, formato Core di settembre 2026. Un piano di gioco semplice, <span class="lede-q">costa poco</span> ed è abbastanza forte da vincere tornei veri.</p>
+      </div>
+
+      <div class="tips reveal" style="margin-bottom:40px">
+        <div class="tip"><h4>Il piano si spiega in una riga</h4><p>Metti in campo un Topolino e una Minnie, poi mettici sopra il Duo senza pagare inchiostro. Il resto del mazzo ti aiuta a farlo o ti protegge mentre lo fai.</p></div>
+        <div class="tip"><h4>Non ti blocchi sull'inchiostro</h4><p>54 carte su 60 sono inkable: nei primi turni hai quasi sempre qualcosa da mettere nel calamaio.</p></div>
+        <div class="tip"><h4>Economico</h4><p>Circa $105 (prezzi TCGplayer). Più di metà delle carte costa pochi centesimi l'una.</p></div>
+        <div class="tip"><h4>Competitivo</h4><p>L'archetipo ha il 52% di win rate e 1.23x di conversion. Una sua lista ha vinto un torneo da 102 giocatori il 20 settembre (6 vittorie, 1 pareggio).</p></div>
+      </div>
+
+      <div class="prose reveal" style="max-width:760px">
+        <h3 style="font-size:1.4rem;margin-bottom:14px;color:var(--gold-soft)">La combo, a colpo d'occhio</h3>
+      </div>
+      <div class="combo reveal" aria-label="Topolino più Minnie, con Duo Shift a costo zero, diventano Mickey Mouse e Minnie Mouse Adventuring Duo">
+        <div class="cc"><div class="cst">2–3</div><div class="nm">Un Topolino</div><div class="sb">Bob Cratchit o Detective</div></div>
+        <div class="op">+</div>
+        <div class="cc"><div class="cst">1–2</div><div class="nm">Una Minnie</div><div class="sb">una qualsiasi delle tre</div></div>
+        <div class="op">→</div>
+        <div class="cc pay"><div class="cst">0 ⬡</div><div class="nm">Mickey &amp; Minnie – Adventuring Duo</div><div class="sb">5 forza · 5 volontà · <b style="color:var(--gold-soft)">5 lore</b> a ogni missione</div></div>
+      </div>
+      <div class="prose reveal" style="max-width:760px">
+        <p>Il Duo costerebbe 7, ma ha <span class="term">Duo Shift 0</span>: puoi giocarlo <strong>gratis</strong> mettendolo sopra un tuo personaggio che si chiama Topolino e uno che si chiama Minnie. Se i due erano in campo già dal turno prima, il Duo prende il loro stato "asciutto" e può andare in missione subito: 5 lore in un colpo, già al turno 3 o 4.</p>
+        <p>In più, se il Duo verrebbe bandito, <strong>finisce nel tuo calamaio</strong> come inchiostro extra invece che negli scarti. Anche quando te lo tolgono, ci guadagni qualcosa.</p>
+      </div>
+
+      <div class="prose reveal" style="max-width:760px;margin-top:34px">
+        <h3 style="font-size:1.4rem;margin-bottom:14px;color:var(--gold-soft)">La lista completa</h3>
+      </div>
+      <div class="legend-mini reveal">
+        <span><i class="c" style="border-color:var(--emerald)"></i>Emerald</span>
+        <span><i class="c" style="border-color:var(--sapphire)"></i>Sapphire</span>
+        <span><i class="c nx"></i>Bordo tratteggiato = non inkable</span>
+        <span>Numero nel cerchio = costo</span>
+      </div>
+
+      <div class="dl-wrap reveal">
+        <div class="dl-group">
+          <h4>Il motore: Topolino e Minnie <span>24</span></h4>
+          <div class="dl-row" style="--ink:var(--emerald)"><span class="q">4</span><span class="c">1</span><span class="t"><b>Minnie Mouse – Curious Adventurer</b><i>2/2 senza abilità. Esiste solo per essere una Minnie a 1 costo.</i></span></div>
+          <div class="dl-row" style="--ink:var(--sapphire)"><span class="q">4</span><span class="c">1</span><span class="t"><b>Minnie Mouse – Practical Traveler</b><i>Quando va in missione, se in questo turno hai giocato un altro personaggio, guadagni 1 lore in più.</i></span></div>
+          <div class="dl-row" style="--ink:var(--emerald)"><span class="q">4</span><span class="c">2</span><span class="t"><b>Minnie Mouse – Spinning Skater</b><i>3/3 senza abilità: la Minnie più robusta, difficile da eliminare subito.</i></span></div>
+          <div class="dl-row" style="--ink:var(--sapphire)"><span class="q">4</span><span class="c">2</span><span class="t"><b>Mickey Mouse – Bob Cratchit</b><i>Quando va in missione mette la prima carta del mazzo sotto di sé. Il Topolino da giocare al turno 2.</i></span></div>
+          <div class="dl-row" style="--ink:var(--sapphire)"><span class="q">4</span><span class="c nx">3</span><span class="t"><b>Mickey Mouse – Detective</b><i>Quando lo giochi, puoi mettere la prima carta del mazzo nel calamaio: un inchiostro in più. Non inkable, quindi giocalo.</i></span></div>
+          <div class="dl-row" style="--ink:var(--sapphire)"><span class="q">4</span><span class="c">7</span><span class="t"><b>Mickey Mouse &amp; Minnie Mouse – Adventuring Duo</b><i>Duo Shift 0. 5/5 con 5 lore. Se verrebbe bandito, va nel tuo calamaio. La tua carta vincente.</i></span></div>
+        </div>
+
+        <div class="dl-group">
+          <h4>Pesca e selezione <span>15</span></h4>
+          <div class="dl-row" style="--ink:var(--sapphire)"><span class="q">4</span><span class="c">1</span><span class="t"><b>Develop Your Brain</b><i>Azione. Guardi le prime 2 carte, una in mano e l'altra in fondo al mazzo. Serve a trovare il pezzo che ti manca.</i></span></div>
+          <div class="dl-row" style="--ink:var(--emerald)"><span class="q">4</span><span class="c">2</span><span class="t"><b>Strike a Good Match</b><i>Canzone. Peschi 2 carte e ne scarti 1. Qualunque personaggio da 2+ può cantarla gratis.</i></span></div>
+          <div class="dl-row" style="--ink:var(--emerald)"><span class="q">4</span><span class="c">3</span><span class="t"><b>Tod – Clever Fox</b><i>Quando lo giochi: peschi 2 carte e ne scarti 1. Un personaggio che fa anche da selezione.</i></span></div>
+          <div class="dl-row" style="--ink:var(--emerald)"><span class="q">3</span><span class="c">3</span><span class="t"><b>Mushu – Stealthy Dragon</b><i>Evasive. Quando va in missione, se l'avversario ha più carte in mano di te, puoi pescarne una.</i></span></div>
+        </div>
+
+        <div class="dl-group">
+          <h4>I muri con Ward: centro partita <span>15</span></h4>
+          <div class="dl-row" style="--ink:var(--emerald)"><span class="q">3</span><span class="c">5</span><span class="t"><b>Dr. Bushroot – Evil Botanist</b><i>Ward, 3 lore. Ogni volta che viene sfidato, l'avversario deve scartare una carta.</i></span></div>
+          <div class="dl-row" style="--ink:var(--sapphire)"><span class="q">4</span><span class="c">5</span><span class="t"><b>Scuttle – Birdbrained</b><i>Ward, 5/5. Un corpo grosso e protetto a 5 costi.</i></span></div>
+          <div class="dl-row" style="--ink:var(--emerald)"><span class="q">4</span><span class="c">6</span><span class="t"><b>Winifred – Exasperated Elephant</b><i>Ward, 6/6. Il muro più difficile da abbattere in sfida.</i></span></div>
+          <div class="dl-row" style="--ink:var(--sapphire)"><span class="q">4</span><span class="c">6</span><span class="t"><b>Hades – Meticulous Schemer</b><i>Ward, 5/5 con 3 lore. Protetto e fa anche tanti punti.</i></span></div>
+        </div>
+
+        <div class="dl-group">
+          <h4>Le chiusure <span>6</span></h4>
+          <div class="dl-row" style="--ink:var(--emerald)"><span class="q">4</span><span class="c">7</span><span class="t"><b>Milo Thatch – Getting His Hands Dirty</b><i>Ward, 3 lore. Quando lo giochi puoi scartare una carta per rimandare in mano un personaggio. Se in questo turno sono finite 2+ carte negli scarti, a fine turno peschi.</i></span></div>
+          <div class="dl-row" style="--ink:var(--sapphire)"><span class="q">2</span><span class="c nx">7</span><span class="t"><b>Hades – Infernal Schemer</b><i>Quando lo giochi, puoi mettere un personaggio avversario nel suo calamaio: sparisce dal campo per sempre. La tua rimozione più pesante.</i></span></div>
+        </div>
+      </div>
+
+      <div class="prose reveal" style="max-width:760px;margin-top:34px">
+        <h3 style="font-size:1.4rem;margin-bottom:6px;color:var(--gold-soft)">La curva</h3>
+        <p style="color:var(--muted);font-size:1rem">Quante carte per costo. Il buco a 4 non è un errore: al turno 4 di solito giochi il Duo gratis e spendi l'inchiostro in altro.</p>
+      </div>
+      <div class="reveal" style="max-width:560px" aria-label="Curva dei costi: 12 carte a 1, 12 a 2, 11 a 3, 0 a 4, 7 a 5, 8 a 6, 10 a 7">
+        <div class="curve">
+          <div class="bar"><span class="n">12</span><i style="height:100%"></i></div>
+          <div class="bar"><span class="n">12</span><i style="height:100%"></i></div>
+          <div class="bar"><span class="n">11</span><i style="height:92%"></i></div>
+          <div class="bar"><span class="n">0</span><i style="height:0"></i></div>
+          <div class="bar"><span class="n">7</span><i style="height:58%"></i></div>
+          <div class="bar"><span class="n">8</span><i style="height:67%"></i></div>
+          <div class="bar"><span class="n">10</span><i style="height:83%"></i></div>
+        </div>
+        <div class="curve-l"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span></div>
+      </div>
+
+      <div class="prose reveal" style="max-width:760px;margin-top:40px">
+        <h3 style="font-size:1.4rem;margin-bottom:14px;color:var(--gold-soft)">Cómo Jugar, Turno por Turno</h3>
+      </div>
+      <div class="steps reveal">
+        <div class="step"><div><h4>Mulligan: cerca la coppia</h4><p>Tieni la mano se ha <b>almeno un Topolino e una Minnie</b>, oppure uno dei due più una carta di pesca (Tod, Strike a Good Match, Develop Your Brain). Rimetti nel mazzo le carte da 6 e 7: all'inizio non ti servono.</p></div></div>
+        <div class="step"><div><h4>Turno 1</h4><p>Metti in inchiostro una carta alta (un doppione da 6–7) e gioca una <b>Minnie da 1</b>.</p></div></div>
+        <div class="step"><div><h4>Turno 2</h4><p>Gioca <b>Mickey – Bob Cratchit</b>, o una seconda Minnie se non hai Topolini. Manda in missione la Minnie del turno prima.</p></div></div>
+        <div class="step"><div><h4>Turno 3</h4><p>Se Topolino e Minnie sono in campo da almeno un turno, <b>Duo Shift</b>: il Duo va in missione subito per 5 lore, e ti avanzano 3 inchiostri per Tod o Mickey Detective. Se ti manca un pezzo, usa Tod o Strike a Good Match per trovarlo.</p></div></div>
+        <div class="step"><div><h4>Turni 4–6</h4><p>Gioca i <b>muri con Ward</b> (Scuttle, Bushroot, Winifred, Hades Meticulous Schemer). L'avversario non può toglierli con le sue carte, può solo sfidarli, e sono grossi. Continua ad andare in missione con il Duo.</p></div></div>
+        <div class="step"><div><h4>Turno 7 in poi</h4><p>Usa <b>Milo Thatch</b> o <b>Hades – Infernal Schemer</b> per togliere di mezzo la minaccia più grossa dell'avversario, poi arriva a 20 lore.</p></div></div>
+      </div>
+
+      <div class="prose reveal" style="max-width:760px;margin-top:40px">
+        <h3 style="font-size:1.4rem;margin-bottom:14px;color:var(--gold-soft)">Gli errori tipici di chi comincia con questo mazzo</h3>
+      </div>
+      <div class="tips reveal">
+        <div class="tip"><h4>Non mettere in inchiostro i tuoi Topolino e Minnie</h4><p>Sono i pezzi della combo. Nei primi turni metti in inchiostro i doppioni da 5, 6 e 7 costi: non li giocheresti comunque subito.</p></div>
+        <div class="tip"><h4>Gioca Mickey Detective, non tenerlo in mano</h4><p>Non è inkable, e appena entra ti dà un inchiostro extra. Giocarlo presto accelera tutto il mazzo.</p></div>
+        <div class="tip"><h4>Tieni una coppia di riserva</h4><p>Se l'avversario elimina la tua Minnie prima del Duo, perdi il turno di vantaggio. Con un secondo Topolino o una seconda Minnie in mano ricostruisci subito.</p></div>
+        <div class="tip"><h4>Usa Practical Traveler al momento giusto</h4><p>Il lore extra arriva solo se hai già giocato un altro personaggio in quel turno. Prima giochi il personaggio, poi mandi Minnie in missione.</p></div>
+        <div class="tip"><h4>Non avere paura di perdere il Duo</h4><p>Se viene bandito finisce nel tuo calamaio, quindi anche uno scambio alla pari ti fa guadagnare un inchiostro.</p></div>
+        <div class="tip"><h4>Scarta con criterio</h4><p>Tod e Strike a Good Match ti fanno scartare. Butta le carte alte che hai già in doppio, mai il pezzo che ti manca per la combo.</p></div>
+      </div>
+
+      <div class="deck deck-full reveal" style="margin-top:36px">
+        <div class="head"><h4>Contro chi va bene, contro chi soffre</h4></div>
+        <p>Dati della matrice matchup Emerald/Sapphire di inkDecks. È un mazzo per imparare con risultati onesti, non il più forte del formato: contro i primi due o tre archetipi parti sfavorito.</p>
+        <div class="mu">
+          <span class="good">vs Amber/Ruby 61%</span><span class="good">vs Amethyst/Emerald 57%</span><span class="bad">vs Amber/Amethyst 46%</span><span class="bad">vs Amber/Emerald 42%</span><span class="bad">vs Emerald/Steel 37%</span>
+        </div>
+      </div>
+
+      <div class="verdict reveal">
+        <h4>Costi e come migliorarlo</h4>
+        <ul>
+          <li><b>Le carte più care</b> (prezzi TCGplayer in dollari, su Cardmarket in euro possono cambiare): Hades – Infernal Schemer circa $9 l'una, Mushu circa $7, Milo Thatch circa $6, il Duo circa $5, Mickey – Bob Cratchit circa $4. Tutto il resto costa da pochi centesimi a un dollaro.</li>
+          <li><b>Versione ancora più economica (~$88):</b> togli i 2 Hades – Infernal Schemer e metti 2 <b>Donald Duck – Perfect Gentleman</b> (4 costi, 2/5, 2 lore; a inizio del tuo turno ogni giocatore può pescare una carta). Perdi rimozione, ma tappa il buco a 4.</li>
+          <li><b>Quando ti senti pronto:</b> le liste da torneo aggiungono 1 copia di <b>Under the Sea</b> e <b>Chernabog – Unnatural Force</b> per gestire i campi pieni. Sono carte più difficili da usare al momento giusto: aggiungile dopo una ventina di partite.</li>
+          <li><b>Da dove viene questa lista:</b> è un mio adattamento della lista media dei 210 mazzi di questo archetipo registrati su inkDecks. Ho tolto le carte in copia singola più complicate e portato a 4 copie quelle semplici, così peschi più spesso le stesse carte e impari più in fretta.</li>
+          <li><b>Attenzione a Hyperia City:</b> la lista è pensata per il formato di settembre. Dopo il 23 ottobre ricontrolla i risultati dei tornei prima di comprare le carte più care.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+<!-- 13 · GLOSSARIO -->
+  <section class="section" id="glossario">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="sec-num">13 · Glosario y Leyenda</span>
+        <h2>Todos los Términos de Juego y Jerga TCG Explicados</h2>
+        <p>El diccionario oficial de la comunidad de Lorcana y del TCG competitivo con búsqueda en directo.</p>
+      </div>
+
+      <div class="gloss-search-box reveal">
+        <input type="search" id="glossSearch" placeholder="🔍 Buscar término (ej. Shift, Tintero, Bodyguard, Evasive, Mulligan)... (es. Shift, Inkwell, Bodyguard, Bounce, Mulligan, Ramp)..." oninput="filterGlossary()">
+      </div>
+
+      <div class="gloss-group reveal">
+        <h3>1. Termini Base di Gioco</h3>
+        <div class="gloss-grid">
+          <div class="gloss-item" data-term="lore leggenda">
+            <dt>Lore (Leggenda)</dt>
+            <dd>L'obiettivo primario della partita. Non si azzera la vita dell'avversario: vince il primo Illumineer che accumula <b>20 lore</b> tramite missioni o abilità.</dd>
+          </div>
+          <div class="gloss-item" data-term="calamaio inkwell inchiostro">
+            <dt>Calamaio (Inkwell)</dt>
+            <dd>La tua riserva di energia. Una volta a turno puoi piazzare una carta valida coperta nel calamaio per trasformarla in inchiostro permanente.</dd>
+          </div>
+          <div class="gloss-item" data-term="inkable non-inkable inchiostrabile">
+            <dt>Inchiostrabile (Inkable)</dt>
+            <dd>Carte con un <b>cerchio ornamentale dorato</b> attorno al costo in alto a sinistra. Possono essere messe nel calamaio. Se il cerchio manca, è <i>Non-Inkable</i>.</dd>
+          </div>
+          <div class="gloss-item" data-term="pronto preparato ready raddrizzare">
+            <dt>Pronto (Ready)</dt>
+            <dd>Stato verticale di una carta. Una carta pronta può intraprendere missioni, sfidare o cantare canzoni.</dd>
+          </div>
+          <div class="gloss-item" data-term="esercitato impegnato exert piegare">
+            <dt>Esercitato (Exerted)</dt>
+            <dd>Carta ruotata di 90° in orizzontale per aver compiuto un'azione (missione, sfida, inchiostro o attivazione). Solo le carte esercitate possono essere sfidate dall'avversario.</dd>
+          </div>
+          <div class="gloss-item" data-term="asciutto asciugare dry asciugatura">
+            <dt>Asciutto (Dry) / Bagnato</dt>
+            <dd>Una carta appena giocata è "bagnata d'inchiostro": non può andare in missione o sfidare nel turno in cui entra in campo (a meno che non abbia <b>Rush</b>). Si asciuga all'inizio del tuo prossimo turno.</dd>
+          </div>
+          <div class="gloss-item" data-term="forza strength">
+            <dt>Forza (Strength)</dt>
+            <dd>Il numero all'interno del simbolo circolare della spada. Indica quanto danno infligge il personaggio durante una sfida.</dd>
+          </div>
+          <div class="gloss-item" data-term="volonta willpower salute difesa">
+            <dt>Volontà (Willpower)</dt>
+            <dd>Il numero nello scudo. È la resistenza del personaggio: se i segnalini danno accumulati eguagliano o superano la sua volontà, il personaggio viene esiliato.</dd>
+          </div>
+          <div class="gloss-item" data-term="mulligan mano iniziale cambio carte">
+            <dt>Mulligan</dt>
+            <dd>La procedura d'inizio partita: peschi 7 carte, scegli quante rimetterne in fondo al mazzo, ne peschi altrettante e infine rimischi il mazzo. Fondamentale per trovare la curva 1-2-3.</dd>
+          </div>
+        </div>
+      </div>
+
+      <div class="gloss-group reveal">
+        <h3>2. Azioni e Meccaniche di Partita</h3>
+        <div class="gloss-grid">
+          <div class="gloss-item" data-term="missione quest andare in missione">
+            <dt>Missione (Quest)</dt>
+            <dd>Eserciti un tuo personaggio asciutto per guadagnare punti lore pari al suo valore di lore (simboli di diamante). È l'azione principale per vincere.</dd>
+          </div>
+          <div class="gloss-item" data-term="sfida challenge sfidare combattimento">
+            <dt>Sfida (Challenge)</dt>
+            <dd>Eserciti un personaggio asciutto per attaccare un personaggio avversario <b>già esercitato</b>. Entrambi si infliggono danno simultaneamente pari alla rispettiva forza.</dd>
+          </div>
+          <div class="gloss-item" data-term="cantare canzoni sing song cantante">
+            <dt>Cantare (Sing / Song)</dt>
+            <dd>Una carta Azione con sottotipo "Song" può essere giocata gratis esercitando un tuo personaggio con costo uguale o superiore al costo della canzone.</dd>
+          </div>
+          <div class="gloss-item" data-term="esiliare banish cimitero scarto">
+            <dt>Esiliare (Banish)</dt>
+            <dd>Rimuovere una carta dal campo e metterla negli scarti (per aver subito danno letale o a causa di un effetto diretto come <i>Dragon Fire</i> o <i>Let It Go</i>).</dd>
+          </div>
+          <div class="gloss-item" data-term="luogo location movimento costo di viaggio">
+            <dt>Luogo (Location)</dt>
+            <dd>Carte permanenti orizzontali con volontà, punti lore passivi a inizio turno e un costo di movimento per posizionarvi i tuoi personaggi e proteggerli o potenziarli.</dd>
+          </div>
+          <div class="gloss-item" data-term="bagno di inchiostro calamaio gestione risorse">
+            <dt>Bagno d'Inchiostro</dt>
+            <dd>La regola per cui ogni turno puoi convertire una carta dalla tua mano in inchiostro permanente nel calamaio. Una volta posizionata, non torna più in mano.</dd>
+          </div>
+        </div>
+      </div>
+
+      <div class="gloss-group reveal">
+        <h3>3. Parole Chiave Ufficiali (Keywords)</h3>
+        <div class="gloss-grid">
+          <div class="gloss-item" data-term="bodyguard guardia del corpo protezione">
+            <dt>Bodyguard</dt>
+            <dd>Può entrare in campo già esercitato. Se è esercitato, gli avversari <b>devono</b> sfidare questo personaggio prima di poter sfidare qualsiasi altro tuo personaggio.</dd>
+          </div>
+          <div class="gloss-item" data-term="evasive elusivo intoccabile">
+            <dt>Evasive (Elusivo)</dt>
+            <dd>Può essere sfidato esclusivamente da altri personaggi che possiedono a loro volta la keyword <b>Evasive</b>.</dd>
+          </div>
+          <div class="gloss-item" data-term="rush rapidita attacco immediato">
+            <dt>Rush</dt>
+            <dd>Può sfidare nello stesso turno in cui viene giocato (ignora l'inchiostro bagnato per le sfide, ma non può andare in missione).</dd>
+          </div>
+          <div class="gloss-item" data-term="ward protetto immunità magie">
+            <dt>Ward</dt>
+            <dd>Gli avversari non possono scegliere questo personaggio come bersaglio di azioni o abilità (ma subisce comunque gli effetti globali di massa come <i>Be Prepared</i>).</dd>
+          </div>
+          <div class="gloss-item" data-term="support supporto potenziamento forza">
+            <dt>Support</dt>
+            <dd>Quando questo personaggio va in missione, puoi sommare la sua forza a quella di un altro personaggio a tua scelta per il resto del turno.</dd>
+          </div>
+          <div class="gloss-item" data-term="shift trasformazione floodborn metamorfosi">
+            <dt>Shift (Trasformazione)</dt>
+            <dd>Puoi giocare questa carta Floodborn sopra un personaggio con lo stesso nome già in campo pagando il costo ridotto di Shift. Eredita lo stato (se era asciutto resta asciutto) e l'eventuale danno.</dd>
+          </div>
+          <div class="gloss-item" data-term="duo shift trasformazione doppia sinergia">
+            <dt>Duo Shift</dt>
+            <dd>Variante avanzata di Shift (Set 13+): giochi la carta sopra <b>due</b> tuoi personaggi con i nomi indicati (es. un Topolino e una Minnie) pagando il costo di Duo Shift, anche 0!</dd>
+          </div>
+          <div class="gloss-item" data-term="resist resistenza riduzione danno armatura">
+            <dt>Resist +X</dt>
+            <dd>Riduce di X qualsiasi danno subito dal personaggio (da sfide o abilità) ogni singola volta che gli viene inflitto danno.</dd>
+          </div>
+          <div class="gloss-item" data-term="challenger sfidante bonus attacco">
+            <dt>Challenger +X</dt>
+            <dd>Il personaggio ottiene +X forza esclusivamente mentre sta conducendo una sfida (non quando viene sfidato).</dd>
+          </div>
+          <div class="gloss-item" data-term="reckless spericolato obbligo di sfida">
+            <dt>Reckless</dt>
+            <dd>Non può andare in missione e deve obbligatoriamente sfidare ogni turno, se c'è un bersaglio valido disponibile.</dd>
+          </div>
+          <div class="gloss-item" data-term="singer cantante costo canzoni">
+            <dt>Singer X</dt>
+            <dd>Questo personaggio conta come se avesse costo X quando canta una canzone, permettendoti di cantare canzoni costosissime molto prima del previsto.</dd>
+          </div>
+        </div>
+      </div>
+
+      <div class="gloss-group reveal">
+        <h3>4. Gergo Tecnico TCG &amp; Competitivo</h3>
+        <div class="gloss-grid">
+          <div class="gloss-item" data-term="aggro aggressivo corsa lore velocita">
+            <dt>Aggro</dt>
+            <dd>Archetipo incentrato sulla velocità pura: gioca personaggi a costo 1 e 2 per andare subito in missione e chiudere a 20 lore prima che l'avversario stabilizzi il tavolo.</dd>
+          </div>
+          <div class="gloss-item" data-term="control controllo rimozione board wipe late game">
+            <dt>Control</dt>
+            <dd>Archetipo lento e difensivo: controlla il tavolo con rimozioni e reset di massa (<i>Be Prepared</i>), accumula vantaggio carte e chiude la partita nei turni avanzati.</dd>
+          </div>
+          <div class="gloss-item" data-term="midrange equilibrio flessibilita tempo">
+            <dt>Midrange</dt>
+            <dd>Mazzo bilanciato con personaggi solidi e versatili: gioca come controllo contro Aggro e come aggressore contro Control.</dd>
+          </div>
+          <div class="gloss-item" data-term="ramp accelerazione inchiostro extra mana">
+            <dt>Ramp</dt>
+            <dd>Strategia che inserisce carte extra nel calamaio oltre la regola di 1 a turno (es. <i>One Jump Ahead</i>, <i>Gramma Tala</i>, <i>Mickey Mouse Detective</i>) per giocare prima le bombe ad alto costo.</dd>
+          </div>
+          <div class="gloss-item" data-term="bounce rimbalzo ritorno in mano">
+            <dt>Bounce</dt>
+            <dd>Effetto che fa tornare una carta dal campo alla mano del proprietario (tipico di Ametista con Madam Mim e Merlin), generando valore o togliendo minacce nemiche.</dd>
+          </div>
+          <div class="gloss-item" data-term="board wipe pulizia tavolo rimozione di massa">
+            <dt>Board Wipe (Reset)</dt>
+            <dd>Carta che rimuove tutti o quasi tutti i personaggi in campo in un colpo solo (es. <i>Be Prepared</i>, <i>Grab Your Sword</i>).</dd>
+          </div>
+          <div class="gloss-item" data-term="curva mana curva inchiostro distribuzione costi">
+            <dt>Curva d'Inchiostro (Mana Curve)</dt>
+            <dd>La proporzione di carte nei diversi scaglioni di costo (1, 2, 3, 4, 5+). Avere una curva solida assicura di non sprecare inchiostro a ogni turno.</dd>
+          </div>
+          <div class="gloss-item" data-term="card advantage vantaggio carte pescata">
+            <dt>Card Advantage</dt>
+            <dd>Avere più carte in mano e in gioco rispetto all'avversario. Chi ha più risorse ha molte più opzioni strategiche per vincere la partita.</dd>
+          </div>
+          <div class="gloss-item" data-term="topdeck pescata fortunata mano vuota">
+            <dt>Topdeck</dt>
+            <dd>Giocare con la mano vuota affidandosi solo alla singola carta pescata all'inizio del turno. I mazzi con motori di pescata evitano questo rischio.</dd>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 14 · STRUMENTI DELLA COMMUNITY -->
+  <section class="section" id="strumenti">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="sec-num">14 · Herramientas Interactivas</span>
+        <h2>Compañero de Mesa Esencial</h2>
+        <p>Contador de Lore para 2 jugadores y Calculadora de probabilidades de Mulligan (100.000 simulaciones reales).</p>
+      </div>
+
+      <div class="tools-grid reveal">
+        <!-- Lore Tracker -->
+        <div class="tool-card">
+          <h3>🏆 Contador de Lore (2 Jugadores)</h3>
+          <p>Seguimiento rápido en vivo. ¡El primero en alcanzar 20 de Lore gana!</p>
+          <div class="lore-tracker-wrap">
+            <div class="lore-box">
+              <div class="lore-title">Jugador 1</div>
+              <div class="lore-score" id="p1Score">0</div>
+              <div class="lore-ctrls">
+                <button class="btn-lore" onclick="modLore(1, -2)">-2</button>
+                <button class="btn-lore" onclick="modLore(1, -1)">-1</button>
+                <button class="btn-lore" onclick="modLore(1, 1)">+1</button>
+                <button class="btn-lore" onclick="modLore(1, 2)">+2</button>
+              </div>
+            </div>
+            <div class="lore-box">
+              <div class="lore-title">Jugador 2</div>
+              <div class="lore-score" id="p2Score">0</div>
+              <div class="lore-ctrls">
+                <button class="btn-lore" onclick="modLore(2, -2)">-2</button>
+                <button class="btn-lore" onclick="modLore(2, -1)">-1</button>
+                <button class="btn-lore" onclick="modLore(2, 1)">+1</button>
+                <button class="btn-lore" onclick="modLore(2, 2)">+2</button>
+              </div>
+            </div>
+          </div>
+          <div style="text-align:center;margin-top:16px;">
+            <button class="btn-lore" style="font-size:.78rem;padding:6px 12px;" onclick="resetLore()">🔄 Reiniciar Partida</button>
+          </div>
+        </div>
+
+        <!-- Mulligan Calculator -->
+        <div class="tool-card">
+          <h3>🎲 Calculadora de Mulligan y Probabilidades</h3>
+          <p>Análisis hipergeométrico y Monte Carlo: calcula tus probabilidades de encontrar cartas clave.</p>
+          <div class="mulligan-calc-box">
+            <div class="calc-field">
+              <label>Tamaño del mazo:</label>
+              <input type="number" id="calcDeckSize" value="60" min="40" max="100">
+            </div>
+            <div class="calc-field">
+              <label>Copias en el mazo:</label>
+              <select id="calcCopies">
+                <option value="4" selected>4 copias (Playset completo)</option>
+                <option value="8">8 copias (ej. 4 Mickey + 4 Minnie)</option>
+                <option value="12">12 copias (ej. cartas de coste 1)</option>
+                <option value="2">2 copias</option>
+                <option value="1">1 copia</option>
+              </select>
+            </div>
+            <div class="calc-field">
+              <label>Cartas cambiadas con Mulligan:</label>
+              <select id="calcMulligan">
+                <option value="0">0 (Sin mulligan)</option>
+                <option value="3">3 cartas cambiadas</option>
+                <option value="4" selected>4 cartas cambiadas (Promedio)</option>
+                <option value="7">7 cartas (Mulligan completo)</option>
+              </select>
+            </div>
+            <div class="calc-results">
+              <div class="calc-res-item">
+                <span>En la mano inicial de 7:</span>
+                <span class="calc-res-val" id="resOpening">39.9%</span>
+              </div>
+              <div class="calc-res-item">
+                <span>Tras el Mulligan elegido:</span>
+                <span class="calc-res-val" id="resMulligan">57.6%</span>
+              </div>
+              <div class="calc-res-item">
+                <span>En el Turno 3 (jugando primero):</span>
+                <span class="calc-res-val" id="resTurn3">66.2%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- CLOSING -->
+  <section class="close">
+    <div class="container reveal">
+      <h2>Ahora te Toca a Ti, Iluminador</h2>
+      <p>Empieza con un mazo intuitivo, juega muchas partidas y domina una palabra clave a la vez. El verdadero dominio en Lorcana es elegir bien en cada turno entre ir de misión o desafiar.</p>
+      <p style="color:var(--gold-soft);font-style:italic;margin-top:16px">El primero en conseguir 20 de Lore gana. ¡Buena partida!</p>
+      <div class="sources">Dati meta: inkDecks.com e lorcana.gg · Fotografia di fine giugno 2026 (Set 12, Wilds Unknown). Lorcana è un marchio Disney / Ravensburger.</div>
+    </div>
+  </section>
+
+  <footer>
+    Guía comunitaria no oficial con fines educativos · Disney Lorcana TCG
+  </footer>
+
+</div>
+
+<script>
+  // Filter Glossary terms
+  function filterGlossary() {
+    const q = document.getElementById('glossSearch').value.toLowerCase().trim();
+    const items = document.querySelectorAll('.gloss-item');
+    items.forEach(el => {
+      const term = (el.getAttribute('data-term') || '') + ' ' + el.innerText.toLowerCase();
+      if(!q || term.includes(q)) {
+        el.style.display = '';
+      } else {
+        el.style.display = 'none';
+      }
+    });
+    document.querySelectorAll('.gloss-group').forEach(grp => {
+      const visible = grp.querySelectorAll('.gloss-item:not([style*="display: none"])').length;
+      grp.style.display = visible > 0 ? '' : 'none';
+    });
+  }
+
+  // Lore Tracker
+  let p1 = 0, p2 = 0;
+  function modLore(player, delta) {
+    if(player === 1) {
+      p1 = Math.max(0, Math.min(25, p1 + delta));
+      const el = document.getElementById('p1Score');
+      el.innerText = p1;
+      el.classList.toggle('winner', p1 >= 20);
+    } else {
+      p2 = Math.max(0, Math.min(25, p2 + delta));
+      const el = document.getElementById('p2Score');
+      el.innerText = p2;
+      el.classList.toggle('winner', p2 >= 20);
+    }
+  }
+  function resetLore() {
+    p1 = 0; p2 = 0;
+    const el1 = document.getElementById('p1Score');
+    const el2 = document.getElementById('p2Score');
+    el1.innerText = 0; el1.classList.remove('winner');
+    el2.innerText = 0; el2.classList.remove('winner');
+  }
+
+  // Mulligan Calculator
+  function hypergeom(N, K, n) {
+    if (K <= 0) return 0;
+    let prob0 = 1.0;
+    for(let i=0; i<n; i++) {
+      prob0 *= (N - K - i) / (N - i);
+    }
+    return Math.max(0, Math.min(1, 1 - prob0));
+  }
+  function updateCalc() {
+    const N = parseInt(document.getElementById('calcDeckSize').value) || 60;
+    const K = parseInt(document.getElementById('calcCopies').value) || 4;
+    const m = parseInt(document.getElementById('calcMulligan').value) || 0;
+
+    const pOpen = hypergeom(N, K, 7);
+    const pMull = hypergeom(N, K, 7 + m);
+    const pT3 = hypergeom(N, K, 7 + m + 2);
+
+    document.getElementById('resOpening').innerText = (pOpen * 100).toFixed(1) + '%';
+    document.getElementById('resMulligan').innerText = (pMull * 100).toFixed(1) + '%';
+    document.getElementById('resTurn3').innerText = (pT3 * 100).toFixed(1) + '%';
+  }
+  document.getElementById('calcDeckSize').addEventListener('input', updateCalc);
+  document.getElementById('calcCopies').addEventListener('change', updateCalc);
+  document.getElementById('calcMulligan').addEventListener('change', updateCalc);
+  updateCalc();
+
+  // active nav on scroll
+  const links = [...document.querySelectorAll('.nav-links a')];
+  const map = {};
+  links.forEach(l=>{const id=l.getAttribute('href').slice(1);const el=document.getElementById(id);if(el)map[id]=l;});
+  const ids = Object.keys(map);
+  const spy = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        links.forEach(l=>l.classList.remove('active'));
+        if(map[e.target.id]) map[e.target.id].classList.add('active');
+      }
+    });
+  },{rootMargin:'-45% 0px -50% 0px'});
+  ids.forEach(id=>{const el=document.getElementById(id);if(el)spy.observe(el);});
+
+  // reveal on scroll
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduce){
+    const rv = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); rv.unobserve(e.target);} });
+    },{rootMargin:'0px 0px -8% 0px',threshold:0.08});
+    document.querySelectorAll('.reveal').forEach(el=>rv.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
+  }
+</script>
+</body>
+</html>
