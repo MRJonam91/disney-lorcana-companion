@@ -1,0 +1,9 @@
+# Disney Lorcana Community Repository
+# Temporary inspection scripts and cache
+*.pyc
+__pycache__/
+claude_snapshot.json
+tools/build/
+*.tmp
+.DS_Store
+Thumbs.db
