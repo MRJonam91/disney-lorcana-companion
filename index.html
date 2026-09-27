@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disney Lorcana · Complete Community Portal &amp; Strategy Hub</title>
+  <meta name="description" content="The ultimate viral community portal and comprehensive guide for Disney Lorcana TCG. Interactive standalone guides in 5 languages (Italian, English, French, German, Spanish), rules, set analysis, cards & rarities, decklists, and tabletop companion tools.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0c0a12;
+      --bg-card: #151120;
+      --bg-card-hover: #1c162c;
+      --parch: #f5edd6;
+      --parch-muted: #b9b0cb;
+      --gold: #e5b95c;
+      --gold-bright: #ffd700;
+      --line: rgba(229, 185, 92, 0.25);
+      --line-strong: rgba(229, 185, 92, 0.6);
+      --amber: #e5933a;
+      --amethyst: #9851b5;
+      --emerald: #3fa364;
+      --ruby: #c83d47;
+      --sapphire: #3b7ec2;
+      --steel: #7f8a9a;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: radial-gradient(circle at 50% 0%, #201738 0%, var(--bg) 60%);
+      color: var(--parch);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* Container */
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header & Hero */
+    header {
+      padding: 60px 0 30px;
+      text-align: center;
+      position: relative;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 18px;
+      border-radius: 99px;
+      background: rgba(229, 185, 92, 0.12);
+      border: 1px solid var(--line);
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2.5rem, 6vw, 4.2rem);
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      line-height: 1.15;
+      background: linear-gradient(180deg, #fff7df 0%, #e5b95c 60%, #b2862d 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 16px;
+    }
+    .subtitle {
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      color: var(--parch-muted);
+      max-width: 780px;
+      margin: 0 auto 36px;
+    }
+
+    /* Ink Orbs Bar */
+    .ink-orbs {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 50px;
+    }
+    .orb {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      box-shadow: 0 0 12px currentColor;
+    }
+    .orb.amber { color: var(--amber); background: var(--amber); }
+    .orb.amethyst { color: var(--amethyst); background: var(--amethyst); }
+    .orb.emerald { color: var(--emerald); background: var(--emerald); }
+    .orb.ruby { color: var(--ruby); background: var(--ruby); }
+    .orb.sapphire { color: var(--sapphire); background: var(--sapphire); }
+    .orb.steel { color: var(--steel); background: var(--steel); }
+
+    /* Language Selection Grid */
+    .lang-section {
+      margin-bottom: 70px;
+    }
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.8rem;
+      text-align: center;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .section-desc {
+      text-align: center;
+      color: var(--parch-muted);
+      margin-bottom: 36px;
+      font-size: 0.95rem;
+    }
+    .lang-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .lang-card {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 26px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .lang-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--gold);
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(229, 185, 92, 0.18);
+    }
+    .lang-flag {
+      font-size: 2.8rem;
+      margin-bottom: 12px;
+    }
+    .lang-name {
+      font-family: 'Cinzel', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--parch);
+      margin-bottom: 6px;
+    }
+    .lang-meta {
+      font-size: 0.85rem;
+      color: var(--parch-muted);
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+    .btn-open {
+      display: inline-block;
+      padding: 10px 18px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(229, 185, 92, 0.2), rgba(229, 185, 92, 0.05));
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+    .lang-card:hover .btn-open {
+      background: var(--gold);
+      color: #0c0a12;
+    }
+
+    /* Core Features Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 24px;
+      margin-bottom: 70px;
+    }
+    .feat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 28px;
+      position: relative;
+    }
+    .feat-icon {
+      font-size: 2.2rem;
+      margin-bottom: 16px;
+    }
+    .feat-card h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.3rem;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .feat-card p {
+      color: var(--parch-muted);
+      font-size: 0.92rem;
+      margin-bottom: 18px;
+    }
+    .feat-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .feat-tag {
+      font-size: 0.78rem;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 4px 10px;
+      border-radius: 6px;
+      color: var(--parch);
+    }
+    .feat-tag:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* Sets Timeline Strip */
+    .timeline-wrap {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 32px 28px;
+      margin-bottom: 70px;
+    }
+    .sets-scroller {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      padding: 14px 4px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--gold) var(--bg-card);
+    }
+    .set-pill {
+      flex: 0 0 160px;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .set-pill:hover {
+      border-color: var(--gold);
+      transform: translateY(-3px);
+    }
+    .set-num {
+      font-size: 0.75rem;
+      color: var(--gold);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .set-name {
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin: 4px 0 6px;
+      color: var(--parch);
+    }
+    .set-date {
+      font-size: 0.75rem;
+      color: var(--parch-muted);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 40px 0;
+      text-align: center;
+      color: var(--parch-muted);
+      font-size: 0.85rem;
+    }
+    footer a {
+      color: var(--gold);
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="wrap">
+      <div class="badge">✦ The Ultimate Illumineer Portal ✦</div>
+      <h1>Disney Lorcana</h1>
+      <p class="subtitle">Complete community repository, interactive strategy guides in 5 languages, full set history from Chapter 1 to Set 14, card rarities &amp; collecting, tournament meta analytics, and tabletop tools.</p>
+      
+      <div class="ink-orbs">
+        <div class="orb amber" title="Amber"></div>
+        <div class="orb amethyst" title="Amethyst"></div>
+        <div class="orb emerald" title="Emerald"></div>
+        <div class="orb ruby" title="Ruby"></div>
+        <div class="orb sapphire" title="Sapphire"></div>
+        <div class="orb steel" title="Steel"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <!-- Language Selector Section -->
+    <section class="lang-section">
+      <h2 class="section-title">Select Your Language / Scegli la tua Lingua</h2>
+      <p class="section-desc">Experience the complete standalone interactive web guide with lore tracker, card breakdown, and mulligan simulator.</p>
+      
+      <div class="lang-grid">
+        <!-- Italian -->
+        <a href="guide/guida-lorcana-it.html" class="lang-card">
+          <div>
+            <div class="lang-flag">🇮🇹</div>
+            <div class="lang-name">Italiano</div>
+            <div class="lang-meta">Guida completa ufficiale per la community italiana: regole, 6 inchiostri, Set 13 &amp; 14, mazzo novizio Topolino &amp; Minnie e glossario.</div>
+          </div>
+          <span class="btn-open">Apri la Guida ➔</span>
+        </a>
+
+        <!-- English -->
+        <a href="guide/lorcana-guide-en.html" class="lang-card">
+          <div>
+            <div class="lang-flag">🇬🇧</div>
+            <div class="lang-name">English</div>
+            <div class="lang-meta">Complete official English edition: core rules, card anatomy, tournament meta, Mickey &amp; Minnie starter deck, and keyword glossary.</div>
+          </div>
+          <span class="btn-open">Open Guide ➔</span>
+        </a>
+
+        <!-- French -->
+        <a href="guide/lorcana-guide-fr.html" class="lang-card">
+          <div>
+            <div class="lang-flag">🇫🇷</div>
+            <div class="lang-name">Français</div>
+            <div class="lang-meta">Guide officiel en français : réservoir d'encre, phases de jeu, méta compétitif, deck débutant Mickey &amp; Minnie et dictionnaire.</div>
+          </div>
+          <span class="btn-open">Ouvrir le Guide ➔</span>
+        </a>
+
+        <!-- German -->
+        <a href="guide/lorcana-guide-de.html" class="lang-card">
+          <div>
+            <div class="lang-flag">🇩🇪</div>
+            <div class="lang-name">Deutsch</div>
+            <div class="lang-meta">Offizieller Leitfaden auf Deutsch: Tintenvorrat, Zugphasen, Set 13 Turnier-Meta, Micky &amp; Minnie Einsteigerdeck und Glossar.</div>
+          </div>
+          <span class="btn-open">Leitfaden Öffnen ➔</span>
+        </a>
+
+        <!-- Spanish -->
+        <a href="guide/lorcana-guide-es.html" class="lang-card">
+          <div>
+            <div class="lang-flag">🇪🇸</div>
+            <div class="lang-name">Español</div>
+            <div class="lang-meta">Guía completa en español: gestión del tintero, turnos, metajuego competitivo, mazo novato Mickey y Minnie y glosario oficial.</div>
+          </div>
+          <span class="btn-open">Abrir Guía ➔</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Core Features & Documentation -->
+    <section>
+      <h2 class="section-title">Repository Knowledge Base</h2>
+      <p class="section-desc">Comprehensive markdown documentation and data files available in the <code>docs/</code> directory.</p>
+
+      <div class="features-grid">
+        <div class="feat-card">
+          <div class="feat-icon">📜</div>
+          <h3>Set History &amp; Analysis</h3>
+          <p>Exhaustive breakdown of all 14 sets: release calendar, narrative lore, mechanics introduced (Resist, Locations, Sing Together, Duo Shift), staples, and competitive impact.</p>
+          <div class="feat-links">
+            <a href="docs/sets/set-history.it.md" class="feat-tag">IT Docs</a>
+            <a href="docs/sets/set-history.en.md" class="feat-tag">EN Docs</a>
+            <a href="docs/sets/set-history.fr.md" class="feat-tag">FR Docs</a>
+            <a href="docs/sets/set-history.de.md" class="feat-tag">DE Docs</a>
+            <a href="docs/sets/set-history.es.md" class="feat-tag">ES Docs</a>
+          </div>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon">💎</div>
+          <h3>Cards &amp; Rarities Guide</h3>
+          <p>Detailed guide on card rarity tiers: Common to Enchanted, cold foil vs rainbow foil, pull rates per booster box, D23 promos, and grading/authentication tips.</p>
+          <div class="feat-links">
+            <a href="docs/cards-and-rarities/rarities-guide.it.md" class="feat-tag">IT Docs</a>
+            <a href="docs/cards-and-rarities/rarities-guide.en.md" class="feat-tag">EN Docs</a>
+            <a href="docs/cards-and-rarities/rarities-guide.fr.md" class="feat-tag">FR Docs</a>
+            <a href="docs/cards-and-rarities/rarities-guide.de.md" class="feat-tag">DE Docs</a>
+            <a href="docs/cards-and-rarities/rarities-guide.es.md" class="feat-tag">ES Docs</a>
+          </div>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon">⚔️</div>
+          <h3>Rules &amp; Quick Sheet</h3>
+          <p>Complete tournament and casual rules: Beginning Phase, Main Phase, Inking rules, Quests, Challenges, Locations, simultaneous triggers, and printable cheat-sheet.</p>
+          <div class="feat-links">
+            <a href="docs/rules/complete-rules.it.md" class="feat-tag">IT Rules</a>
+            <a href="docs/rules/complete-rules.en.md" class="feat-tag">EN Rules</a>
+            <a href="docs/rules/complete-rules.fr.md" class="feat-tag">FR Rules</a>
+            <a href="docs/rules/complete-rules.de.md" class="feat-tag">DE Rules</a>
+            <a href="docs/rules/complete-rules.es.md" class="feat-tag">ES Rules</a>
+          </div>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon">🧠</div>
+          <h3>Strategy &amp; Mulligan Math</h3>
+          <p>Advanced competitive theory: 100,000 Monte Carlo simulation results, hypergeometric mulligan tables, non-inkable threshold, mana curve optimization, and tempo.</p>
+          <div class="feat-links">
+            <a href="docs/strategy/mulligan-and-math.it.md" class="feat-tag">IT Strategy</a>
+            <a href="docs/strategy/mulligan-and-math.en.md" class="feat-tag">EN Strategy</a>
+            <a href="docs/strategy/mulligan-and-math.fr.md" class="feat-tag">FR Strategy</a>
+            <a href="docs/strategy/mulligan-and-math.de.md" class="feat-tag">DE Strategy</a>
+            <a href="docs/strategy/mulligan-and-math.es.md" class="feat-tag">ES Strategy</a>
+          </div>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon">🃏</div>
+          <h3>Starter &amp; Meta Decks</h3>
+          <p>Full 60-card lists: Emerald/Sapphire Mickey &amp; Minnie Duo Shift starter deck with turn-by-turn lines, plus Tier 1 tournament decklists (Set 13 data: 14,240 games).</p>
+          <div class="feat-links">
+            <a href="docs/decks/starter-emerald-sapphire.it.md" class="feat-tag">IT Decks</a>
+            <a href="docs/decks/starter-emerald-sapphire.en.md" class="feat-tag">EN Decks</a>
+            <a href="docs/decks/starter-emerald-sapphire.fr.md" class="feat-tag">FR Decks</a>
+            <a href="docs/decks/starter-emerald-sapphire.de.md" class="feat-tag">DE Decks</a>
+            <a href="docs/decks/starter-emerald-sapphire.es.md" class="feat-tag">ES Decks</a>
+          </div>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon">📖</div>
+          <h3>Multi-lingual Glossary</h3>
+          <p>Exhaustive dictionary mapping official card game terminology across Italian, English, French, German, and Spanish alongside competitive TCG slang.</p>
+          <div class="feat-links">
+            <a href="docs/glossary/glossary.it.md" class="feat-tag">IT Dictionary</a>
+            <a href="docs/glossary/glossary.en.md" class="feat-tag">EN Dictionary</a>
+            <a href="docs/glossary/glossary.fr.md" class="feat-tag">FR Dictionary</a>
+            <a href="docs/glossary/glossary.de.md" class="feat-tag">DE Dictionary</a>
+            <a href="docs/glossary/glossary.es.md" class="feat-tag">ES Dictionary</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sets Timeline Carousel -->
+    <section class="timeline-wrap">
+      <h2 style="font-family:'Cinzel',serif;font-size:1.4rem;color:var(--gold);margin-bottom:6px;">Lorcana Release Timeline</h2>
+      <p style="color:var(--parch-muted);font-size:0.88rem;margin-bottom:20px;">Scroll through the complete history from Chapter 1 to upcoming Hyperia City.</p>
+      
+      <div class="sets-scroller">
+        <div class="set-pill">
+          <div class="set-num">Set 1</div>
+          <div class="set-name">The First Chapter</div>
+          <div class="set-date">Aug 2023</div>
+        </div>
+        <div class="set-pill">
+          <div class="set-num">Set 2</div>
+          <div class="set-name">Rise of the Floodborn</div>
+          <div class="set-date">Nov 2023</div>
+        </div>
+        <div class="set-pill">
+          <div class="set-num">Set 3</div>
+          <div class="set-name">Into the Inklands</div>
+          <div class="set-date">Feb 2024</div>
+        </div>
+        <div class="set-pill">
+          <div class="set-num">Set 4</div>
+          <div class="set-name">Ursula's Return</div>
+          <div class="set-date">May 2024</div>
+        </div>
+        <div class="set-pill">
+          <div class="set-num">Set 5</div>
+          <div class="set-name">Shimmering Skies</div>
+          <div class="set-date">Aug 2024</div>
+        </div>
+        <div class="set-pill">
+          <div class="set-num">Set 6</div>
+          <div class="set-name">Azurite Sea</div>
+          <div class="set-date">Nov 2024</div>
+        </div>
+        <div class="set-pill">
+          <div class="set-num">Set 7</div>
+          <div class="set-name">Archazia's Island</div>
+          <div class="set-date">Feb 2025</div>
+        </div>
+        <div class="set-pill">
+          <div class="set-num">Set 8</div>
+          <div class="set-name">Reign of Chaos</div>
+          <div class="set-date">May 2025</div>
+        </div>
+        <div class="set-pill">
+          <div class="set-num">Set 9</div>
+          <div class="set-name">Fables of Light</div>
+          <div class="set-date">Aug 2025</div>
+        </div>
+        <div class="set-pill">
+          <div class="set-num">Set 10</div>
+          <div class="set-name">Whispers of Deep</div>
+          <div class="set-date">Nov 2025</div>
+        </div>
+        <div class="set-pill">
+          <div class="set-num">Set 11</div>
+          <div class="set-name">Sunken Realms</div>
+          <div class="set-date">Feb 2026</div>
+        </div>
+        <div class="set-pill">
+          <div class="set-num">Set 12</div>
+          <div class="set-name">Wilds Unknown</div>
+          <div class="set-date">May 2026</div>
+        </div>
+        <div class="set-pill" style="border-color:var(--emerald);background:rgba(63,163,100,0.1);">
+          <div class="set-num" style="color:#4ade80;">Set 13 · Current</div>
+          <div class="set-name">Attack of the Vine!</div>
+          <div class="set-date">July 2026</div>
+        </div>
+        <div class="set-pill" style="border-color:var(--gold);background:rgba(229,185,92,0.1);">
+          <div class="set-num" style="color:var(--gold);">Set 14 · Upcoming</div>
+          <div class="set-name">Hyperia City</div>
+          <div class="set-date">Oct 2026</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>Disney Lorcana is &copy; Disney / Ravensburger. This project is an open-source community companion created for players, collectors, and competitive Illumineers worldwide.</p>
+      <p style="margin-top:8px;">Made with ❤️ for the Lorcana Community · Available on GitHub</p>
+    </div>
+  </footer>
+
+</body>
+</html>
