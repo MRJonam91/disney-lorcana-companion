@@ -714,20 +714,20 @@
           <div class="sim-set-group">
             <label for="selectSimSet" style="font-size:.86rem;color:var(--gold-soft);font-weight:700;white-space:nowrap;" data-i18n="lbl_set_select">Set Espansione:</label>
             <select class="select-set" id="selectSimSet" onchange="changeSet()">
-              <option value="set14">Set 14: Hyperia City (New · 🟣 Epic &amp; 👑 Iconic)</option>
-              <option value="set13" selected>Set 13: Attack of the Vine! (🟣 Epic &amp; 👑 Iconic)</option>
-              <option value="set12">Set 12: Wilds Unknown (🟣 Epic &amp; 👑 Iconic)</option>
-              <option value="set11">Set 11: Winterspell / Celestial Twilight (🟣 Epic)</option>
-              <option value="set10">Set 10: Whispers in the Well (🟣 Epic)</option>
-              <option value="set9">Set 9: Fables of Light / Fabled (🟣 Epic &amp; 👑 Iconic Debut)</option>
-              <option value="set8">Set 8: Reign of Jafar / Reign of Chaos</option>
-              <option value="set7">Set 7: Archazia's Island</option>
-              <option value="set6">Set 6: Azurite Sea</option>
-              <option value="set5">Set 5: Shimmering Skies</option>
-              <option value="set4">Set 4: Ursula's Return</option>
-              <option value="set3">Set 3: Into the Inklands</option>
-              <option value="set2">Set 2: Rise of the Floodborn</option>
-              <option value="set1">Set 1: The First Chapter</option>
+              <option value="set14">Set 14: Hyperia City (242 Cards · 🟣 18 Epic &amp; 👑 2 Iconic)</option>
+              <option value="set13" selected>Set 13: Attack of the Vine! (247 Cards · 🟣 18 Epic &amp; 👑 2 Iconic)</option>
+              <option value="set12">Set 12: Wilds Unknown (243 Cards · 🟣 18 Epic &amp; 👑 2 Iconic)</option>
+              <option value="set11">Set 11: Winterspell (243 Cards · 🟣 18 Epic &amp; 👑 2 Iconic)</option>
+              <option value="set10">Set 10: Whispers in the Well (242 Cards · 🟣 18 Epic &amp; 👑 2 Iconic)</option>
+              <option value="set9">Set 9: Fabled (243 Cards · 🟣 18 Epic &amp; 👑 2 Iconic)</option>
+              <option value="set8">Set 8: Reign of Jafar (229 Cards · ✨ 18 Enchanted)</option>
+              <option value="set7">Set 7: Archazia's Island (224 Cards · ✨ 18 Enchanted)</option>
+              <option value="set6">Set 6: Azurite Sea (222 Cards · ✨ 18 Enchanted)</option>
+              <option value="set5">Set 5: Shimmering Skies (223 Cards · ✨ 18 Enchanted)</option>
+              <option value="set4">Set 4: Ursula's Return (225 Cards · ✨ 18 Enchanted)</option>
+              <option value="set3">Set 3: Into the Inklands (227 Cards · ✨ 18 Enchanted)</option>
+              <option value="set2">Set 2: Rise of the Floodborn (216 Cards · ✨ 12 Enchanted)</option>
+              <option value="set1">Set 1: The First Chapter (216 Cards · ✨ 12 Enchanted)</option>
             </select>
           </div>
 
@@ -737,6 +737,19 @@
             <input type="number" id="customPackCount" min="1" max="10000" value="10" class="custom-pack-input" style="width:92px;padding:6px 8px;" placeholder="36">
             <button type="button" class="pack-step-btn" onclick="stepCustomPacks(10)">+10</button>
             <button type="button" class="btn-pack primary" onclick="openCustomPacks()" data-i18n="btn_open_custom" style="padding:8px 14px;font-size:.83rem;">🚀 Apri Bustine</button>
+          </div>
+        </div>
+
+        <!-- Active Set Info & Chase Summary Bar -->
+        <div class="set-meta-banner" id="setMetaBanner">
+          <div id="setMetaDetails">
+            <strong style="color:var(--gold-bright);">Set 13: Attack of the Vine!</strong> · 247 Carte Ufficiali · 👑 <strong>Iconiche:</strong> #244 Lilo &amp; Stitch, #245 Belle &amp; Beast
+          </div>
+          <div class="set-meta-downloads" id="setMetaDownloads">
+            <a href="docs/sets/cards/set-13-attack-of-the-vine.md" target="_blank" class="set-dl-pill">📖 Card List MD</a>
+            <a href="data/sets/json/set-13-attack-of-the-vine.json" target="_blank" class="set-dl-pill">📦 JSON</a>
+            <a href="data/sets/csv/set-13-attack-of-the-vine.csv" target="_blank" class="set-dl-pill">📊 CSV</a>
+            <a href="data/sets/db/set-13-attack-of-the-vine.db" target="_blank" class="set-dl-pill">🗄️ SQLite DB</a>
           </div>
         </div>
 
@@ -1406,11 +1419,17 @@
         div.className = `pulled-card ${rarityClass} ${foilClass}`;
         div.innerHTML = `
           <div class="pulled-card-inner">
-            ${c.rarity === 'Iconic' ? '<span class="pulled-iconic-badge">👑 ICONIC CHASE</span>' : ''}
-            ${c.foil ? '<span class="pulled-foil-badge">✨ HOLO FOIL</span>' : ''}
-            <div style="font-size:1.55rem;margin:6px 0;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.45));">${getRarityIcon(c.rarity)}</div>
-            <div style="font-weight:700;font-size:.86rem;color:var(--parch);line-height:1.25;">${c.name}</div>
-            <div style="font-size:.71rem;color:var(--gold-soft);margin-top:4px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;">${c.rarity}</div>
+            <div class="pulled-badge-row">
+              ${c.num ? `<span style="font-size:.64rem;color:var(--muted);font-weight:700;">#${c.num}</span>` : ''}
+              ${c.rarity === 'Iconic' ? '<span class="pulled-iconic-badge">👑 ICONIC</span>' : ''}
+              ${c.foil ? '<span class="pulled-foil-badge">✨ FOIL</span>' : ''}
+            </div>
+            <div style="font-size:1.5rem;margin:4px 0;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.45));">${getRarityIcon(c.rarity)}</div>
+            <div style="font-weight:700;font-size:.84rem;color:var(--parch);line-height:1.25;">${c.name}</div>
+            <div style="display:flex;justify-content:center;align-items:center;gap:6px;margin-top:4px;flex-wrap:wrap;">
+              <span style="font-size:.69rem;color:var(--gold-soft);font-weight:700;letter-spacing:.04em;text-transform:uppercase;">${c.rarity}</span>
+              ${c.price ? `<span style="font-size:.68rem;background:rgba(34,197,94,0.18);color:#86efac;border:1px solid rgba(34,197,94,0.4);padding:1px 5px;border-radius:4px;font-weight:700;">$${Number(c.price).toFixed(2)}</span>` : ''}
+            </div>
           </div>
         `;
         grid.appendChild(div);
@@ -1421,10 +1440,20 @@
       const inSet = (setMeta.cards || []).filter(c => c.rarity === rarity);
       if (inSet.length > 0) {
         const picked = inSet[Math.floor(Math.random() * inSet.length)];
-        return { name: `${picked.name} - ${picked.sub}`, rarity: rarity, foil: isFoil };
+        const fullName = picked.sub ? `${picked.name} - ${picked.sub}` : picked.name;
+        const price = isFoil ? (picked.foil_usd || picked.usd || null) : (picked.usd || picked.foil_usd || null);
+        return {
+          num: picked.num || '',
+          name: fullName,
+          rarity: rarity,
+          foil: isFoil,
+          ink: picked.ink || '',
+          cost: picked.cost || 0,
+          price: price
+        };
       }
       const generic = (CARD_SAMPLES[rarity] || CARD_SAMPLES.Common);
-      return { name: generic[Math.floor(Math.random() * generic.length)], rarity: rarity, foil: isFoil };
+      return { num: '', name: generic[Math.floor(Math.random() * generic.length)], rarity: rarity, foil: isFoil, price: null };
     }
 
     function getRarityIcon(rarity) {
@@ -1464,9 +1493,51 @@
       `;
     }
 
+    const SET_SLUGS = {
+      set1: 'set-01-the-first-chapter',
+      set2: 'set-02-rise-of-the-floodborn',
+      set3: 'set-03-into-the-inklands',
+      set4: 'set-04-ursula-s-return',
+      set5: 'set-05-shimmering-skies',
+      set6: 'set-06-azurite-sea',
+      set7: 'set-07-archazia-s-island',
+      set8: 'set-08-reign-of-jafar',
+      set9: 'set-09-fabled',
+      set10: 'set-10-whispers-in-the-well',
+      set11: 'set-11-winterspell',
+      set12: 'set-12-wilds-unknown',
+      set13: 'set-13-attack-of-the-vine',
+      set14: 'set-14-hyperia-city'
+    };
+
+    function updateSetMetaBanner() {
+      const currentSetId = document.getElementById('selectSimSet').value;
+      const setMeta = (window.LORCANA_SETS_DB || []).find(s => s.id === currentSetId);
+      if (!setMeta) return;
+      const slug = SET_SLUGS[currentSetId] || 'set-13-attack-of-the-vine';
+      const detailsEl = document.getElementById('setMetaDetails');
+      const dlEl = document.getElementById('setMetaDownloads');
+      if (detailsEl) {
+        const iconicInfo = (setMeta.iconic_cards && setMeta.iconic_cards.length > 0)
+          ? ` · 👑 <strong>Iconiche (2):</strong> ${setMeta.iconic_cards.join(' &amp; ')}`
+          : ` · ✨ <strong>Enchanted:</strong> ${(setMeta.rarity_counts && setMeta.rarity_counts.Enchanted) || 18} Carte`;
+        detailsEl.innerHTML = `<strong style="color:var(--gold-bright);">Set ${setMeta.num}: ${setMeta.name}</strong> (${setMeta.date}) · <strong>${setMeta.total} Carte Ufficiali</strong>${iconicInfo}`;
+      }
+      if (dlEl) {
+        dlEl.innerHTML = `
+          <a href="docs/sets/cards/${slug}.md" target="_blank" class="set-dl-pill">📖 Card List MD</a>
+          <a href="data/sets/json/${slug}.json" target="_blank" class="set-dl-pill">📦 JSON</a>
+          <a href="data/sets/csv/${slug}.csv" target="_blank" class="set-dl-pill">📊 CSV</a>
+          <a href="data/sets/db/${slug}.db" target="_blank" class="set-dl-pill">🗄️ SQLite DB</a>
+        `;
+      }
+    }
+
     function changeSet() {
+      updateSetMetaBanner();
       resetPullStats();
     }
+    window.addEventListener('DOMContentLoaded', updateSetMetaBanner);
 
     // PROBABILITY CALCULATOR
     function updateProbabilityCalc(n) {

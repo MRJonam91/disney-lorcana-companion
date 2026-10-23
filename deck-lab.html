@@ -682,21 +682,21 @@
 
         <div class="cat-filter-row">
           <select id="catSetSelect" class="catalog-set-select" onchange="renderCatalog()">
-            <option value="all">🌐 Tutti i Set (Set 1 - 14)</option>
-            <option value="set1">Set 1: The First Chapter</option>
-            <option value="set2">Set 2: Rise of the Floodborn</option>
-            <option value="set3">Set 3: Into the Inklands</option>
-            <option value="set4">Set 4: Ursula's Return</option>
-            <option value="set5">Set 5: Shimmering Skies</option>
-            <option value="set6">Set 6: Azurite Sea</option>
-            <option value="set7">Set 7: Whispers in the Well</option>
-            <option value="set8">Set 8: Reign of Beasts</option>
-            <option value="set9">Set 9: Fables of Light (🟣 Epic)</option>
-            <option value="set10">Set 10: Glacial Crown (🟣 Epic)</option>
-            <option value="set11">Set 11: Celestial Twilight (🟣 Epic)</option>
-            <option value="set12">Set 12: Chronicles of the Deep (🟣 Epic)</option>
-            <option value="set13">Set 13: Tales of the Inklands (👑 Iconic)</option>
-            <option value="set14">Set 14: Hyperia City (👑 Iconic)</option>
+            <option value="all">🌐 Tutti i 14 Set (3.242 Carte Ufficiali)</option>
+            <option value="set14">Set 14: Hyperia City (242 Carte)</option>
+            <option value="set13">Set 13: Attack of the Vine! (247 Carte)</option>
+            <option value="set12">Set 12: Wilds Unknown (243 Carte)</option>
+            <option value="set11">Set 11: Winterspell (243 Carte)</option>
+            <option value="set10">Set 10: Whispers in the Well (242 Carte)</option>
+            <option value="set9">Set 9: Fabled (243 Carte)</option>
+            <option value="set8">Set 8: Reign of Jafar (229 Carte)</option>
+            <option value="set7">Set 7: Archazia's Island (224 Carte)</option>
+            <option value="set6">Set 6: Azurite Sea (222 Carte)</option>
+            <option value="set5">Set 5: Shimmering Skies (223 Carte)</option>
+            <option value="set4">Set 4: Ursula's Return (225 Carte)</option>
+            <option value="set3">Set 3: Into the Inklands (227 Carte)</option>
+            <option value="set2">Set 2: Rise of the Floodborn (216 Carte)</option>
+            <option value="set1">Set 1: The First Chapter (216 Carte)</option>
           </select>
           <input type="text" class="catalog-search" id="catSearch" data-i18n-placeholder="dl_search_ph" style="margin-bottom:0;flex:2;min-width:220px;" placeholder="🔍 Cerca per nome, rarità o testo (es. Mickey, Epic, Shift)..." oninput="renderCatalog()">
         </div>
@@ -967,7 +967,14 @@
         return text.includes(q);
       });
 
-      filtered.forEach(c => {
+      const shown = filtered.slice(0, 100);
+      if (filtered.length > 100) {
+        const infoDiv = document.createElement('div');
+        infoDiv.style.cssText = 'font-size:.76rem;color:var(--gold-soft);padding:6px 10px;background:rgba(229,185,92,0.08);border:1px dashed var(--line);border-radius:8px;margin-bottom:8px;text-align:center;';
+        infoDiv.innerText = `Mostrando le prime 100 di ${filtered.length} carte corrispondenti. Filtra per Set, Inchiostro o nome per affinare.`;
+        cont.appendChild(infoDiv);
+      }
+      shown.forEach(c => {
         const inDeck = currentDeck[c.id] || 0;
         const div = document.createElement('div');
         div.className = 'card-item';

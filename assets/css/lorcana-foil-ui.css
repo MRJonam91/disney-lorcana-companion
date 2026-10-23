@@ -266,14 +266,15 @@
 /* 5-Column Preset Product Action Grid */
 .pack-presets-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 12px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
   margin-bottom: 20px;
+  width: 100%;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1150px) {
   .pack-presets-grid {
-    grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
   }
 }
 
@@ -562,4 +563,67 @@
 .card-item:hover {
   transform: translateX(3px);
   box-shadow: 0 4px 16px rgba(229, 185, 92, 0.14);
+}
+
+/* Fix Badge Overlap & Horizontal Panel Overflow */
+.panel {
+  overflow-x: hidden;
+}
+
+.pulled-badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  margin-bottom: 4px;
+}
+
+.pulled-foil-badge,
+.pulled-iconic-badge {
+  position: static !important;
+  display: inline-block !important;
+  font-size: 0.6rem !important;
+  font-weight: 900 !important;
+  padding: 2px 6px !important;
+  border-radius: 99px !important;
+  line-height: 1.2 !important;
+  white-space: nowrap !important;
+}
+
+.set-meta-banner {
+  background: rgba(15, 11, 26, 0.78);
+  border: 1px solid rgba(229, 185, 92, 0.28);
+  border-radius: 11px;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 0.81rem;
+}
+
+.set-meta-downloads {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.set-dl-pill {
+  background: rgba(229, 185, 92, 0.12);
+  border: 1px solid rgba(229, 185, 92, 0.35);
+  color: var(--gold-bright);
+  padding: 3px 9px;
+  border-radius: 6px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  transition: all 0.15s;
+}
+
+.set-dl-pill:hover {
+  background: rgba(229, 185, 92, 0.28);
+  transform: translateY(-1px);
 }

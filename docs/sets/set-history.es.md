@@ -47,3 +47,26 @@ Comprehensive guide detailing the evolution of Disney Lorcana from The First Cha
 
 ## 7. Set 14: Hyperia City (Releasing October 23, 2026)
 - Futuristic urban city setting, new modular cards and anti-discard mechanics.
+
+---
+
+## 🗄️ Database Completo Carte per Ogni Set (3.242 Carte Ufficiali — JSON, CSV, SQLite DB & Markdown)
+
+Tutti i dati ufficiali delle carte (inclusi numeri di collezione, rarità esatte, carte **Iconiche 👑**, **Incantate ✨**, **Epiche 🟣** e prezzi di mercato) sono disponibili per ogni singolo set:
+
+| Set | Nome Ufficiale | Data Uscita | Carte Totali | Carte Iconiche (👑) | Lista MD | JSON | CSV | SQLite DB |
+| :---: | :--- | :---: | :---: | :--- | :---: | :---: | :---: | :---: |
+| **1** | **The First Chapter** | `2023-08-18` | 216 | — | [MD](cards/set-01-the-first-chapter.md) | [JSON](../../data/sets/json/set-01-the-first-chapter.json) | [CSV](../../data/sets/csv/set-01-the-first-chapter.csv) | [DB](../../data/sets/db/set-01-the-first-chapter.db) |
+| **2** | **Rise of the Floodborn** | `2023-11-17` | 216 | — | [MD](cards/set-02-rise-of-the-floodborn.md) | [JSON](../../data/sets/json/set-02-rise-of-the-floodborn.json) | [CSV](../../data/sets/csv/set-02-rise-of-the-floodborn.csv) | [DB](../../data/sets/db/set-02-rise-of-the-floodborn.db) |
+| **3** | **Into the Inklands** | `2024-02-23` | 227 | — | [MD](cards/set-03-into-the-inklands.md) | [JSON](../../data/sets/json/set-03-into-the-inklands.json) | [CSV](../../data/sets/csv/set-03-into-the-inklands.csv) | [DB](../../data/sets/db/set-03-into-the-inklands.db) |
+| **4** | **Ursula's Return** | `2024-05-17` | 225 | — | [MD](cards/set-04-ursula-s-return.md) | [JSON](../../data/sets/json/set-04-ursula-s-return.json) | [CSV](../../data/sets/csv/set-04-ursula-s-return.csv) | [DB](../../data/sets/db/set-04-ursula-s-return.db) |
+| **5** | **Shimmering Skies** | `2024-08-09` | 223 | — | [MD](cards/set-05-shimmering-skies.md) | [JSON](../../data/sets/json/set-05-shimmering-skies.json) | [CSV](../../data/sets/csv/set-05-shimmering-skies.csv) | [DB](../../data/sets/db/set-05-shimmering-skies.db) |
+| **6** | **Azurite Sea** | `2024-11-15` | 222 | — | [MD](cards/set-06-azurite-sea.md) | [JSON](../../data/sets/json/set-06-azurite-sea.json) | [CSV](../../data/sets/csv/set-06-azurite-sea.csv) | [DB](../../data/sets/db/set-06-azurite-sea.db) |
+| **7** | **Archazia's Island** | `2025-03-07` | 224 | — | [MD](cards/set-07-archazia-s-island.md) | [JSON](../../data/sets/json/set-07-archazia-s-island.json) | [CSV](../../data/sets/csv/set-07-archazia-s-island.csv) | [DB](../../data/sets/db/set-07-archazia-s-island.db) |
+| **8** | **Reign of Jafar** | `2025-05-30` | 229 | — | [MD](cards/set-08-reign-of-jafar.md) | [JSON](../../data/sets/json/set-08-reign-of-jafar.json) | [CSV](../../data/sets/csv/set-08-reign-of-jafar.csv) | [DB](../../data/sets/db/set-08-reign-of-jafar.db) |
+| **9** | **Fabled** | `2025-08-29` | 243 | `#241` Minnie Mouse, `#242` Mickey Mouse | [MD](cards/set-09-fabled.md) | [JSON](../../data/sets/json/set-09-fabled.json) | [CSV](../../data/sets/csv/set-09-fabled.csv) | [DB](../../data/sets/db/set-09-fabled.db) |
+| **10** | **Whispers in the Well** | `2025-11-07` | 242 | `#241` Ariel, `#242` Hades | [MD](cards/set-10-whispers-in-the-well.md) | [JSON](../../data/sets/json/set-10-whispers-in-the-well.json) | [CSV](../../data/sets/csv/set-10-whispers-in-the-well.csv) | [DB](../../data/sets/db/set-10-whispers-in-the-well.db) |
+| **11** | **Winterspell** | `2026-02-13` | 243 | `#241` Pocahontas, `#242` Moana | [MD](cards/set-11-winterspell.md) | [JSON](../../data/sets/json/set-11-winterspell.json) | [CSV](../../data/sets/csv/set-11-winterspell.csv) | [DB](../../data/sets/db/set-11-winterspell.db) |
+| **12** | **Wilds Unknown** | `2026-05-08` | 243 | `#241` Buzz Lightyear, `#242` Merida | [MD](cards/set-12-wilds-unknown.md) | [JSON](../../data/sets/json/set-12-wilds-unknown.json) | [CSV](../../data/sets/csv/set-12-wilds-unknown.csv) | [DB](../../data/sets/db/set-12-wilds-unknown.db) |
+| **13** | **Attack of the Vine!** | `2026-07-17` | 247 | `#244` Lilo & Stitch, `#245` Belle & Beast | [MD](cards/set-13-attack-of-the-vine.md) | [JSON](../../data/sets/json/set-13-attack-of-the-vine.json) | [CSV](../../data/sets/csv/set-13-attack-of-the-vine.csv) | [DB](../../data/sets/db/set-13-attack-of-the-vine.db) |
+| **14** | **Hyperia City** | `2026-10-16` | 242 | `#241` Mickey Mouse, `#242` Cinderella | [MD](cards/set-14-hyperia-city.md) | [JSON](../../data/sets/json/set-14-hyperia-city.json) | [CSV](../../data/sets/csv/set-14-hyperia-city.csv) | [DB](../../data/sets/db/set-14-hyperia-city.db) |
