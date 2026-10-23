@@ -371,6 +371,7 @@
       text-decoration: underline;
     }
   </style>
+  <link rel="stylesheet" href="assets/css/lorcana-foil-ui.css">
 </head>
 <body>
 
@@ -381,28 +382,27 @@
       <span style="color:var(--parch-muted);font-weight:400;font-size:.85rem;">| Community Portal</span>
     </a>
     <div class="top-links">
-      <a href="index.html" class="active">🌐 Hub Home</a>
-      <a href="deck-lab.html" class="highlight">🃏 Deck Lab &amp; Test</a>
-      <a href="collector-vault.html" class="highlight" style="border-color:#f472b6;color:#ff80bf;">💎 Collezionismo &amp; Pulls</a>
-      <a href="guide/guida-lorcana-it.html">📖 Guida IT</a>
-      <a href="guide/lorcana-guide-en.html">🇬🇧 Guide EN</a>
-      <a href="#official-app">📱 App Ufficiale</a>
-      <a href="https://github.com/MRJonam91/disney-lorcana-companion/discussions" target="_blank">💬 Forum</a>
+      <a href="index.html" class="active" data-i18n="nav_hub">🌐 Hub</a>
+      <a href="deck-lab.html" class="highlight" data-i18n="nav_decklab">🃏 Deck Lab</a>
+      <a href="collector-vault.html" class="highlight" style="border-color:#f472b6;color:#ff80bf;" data-i18n="nav_vault">💎 Collezionismo &amp; Pulls</a>
+      <a href="guide/guida-lorcana-it.html" data-i18n="nav_guide" data-i18n-guide-link="1">📖 Guida</a>
+      <a href="#official-app" data-i18n="nav_app">📱 App Ufficiale</a>
+      <a href="https://github.com/MRJonam91/disney-lorcana-companion/discussions" target="_blank" data-i18n="nav_forum">💬 Forum</a>
     </div>
   </div>
 
 
   <header>
     <div class="wrap">
-      <div class="badge">✦ The Ultimate Illumineer Portal ✦</div>
+      <div class="badge" data-i18n="idx_badge">✦ Il Portale Definitivo per gli Illumineer ✦</div>
       <h1>Disney Lorcana</h1>
-      <p class="subtitle">Complete community repository, interactive strategy guides in 5 languages, full set history from Chapter 1 to Set 14, card rarities &amp; collecting, tournament meta analytics, and tabletop tools.</p>
+      <p class="subtitle" data-i18n="idx_subtitle">Repository completo della community, guide strategiche interattive in 5 lingue, storico dei 14 Set, rarità e collezionismo, simulatore spacchettamento foil e laboratorio mazzi da torneo.</p>
       <!-- Hero Quick Launch Buttons -->
       <div class="hero-actions">
-        <a href="deck-lab.html" class="btn-hero gold">🃏 Apri Deck Lab &amp; Playtester</a>
-        <a href="collector-vault.html" class="btn-hero pink">💎 Apri Collector's Vault &amp; Pulls</a>
-        <a href="guide/guida-lorcana-it.html" class="btn-hero dark">📖 Leggi Guida Ufficiale (IT)</a>
-        <a href="#official-app" class="btn-hero dark">📱 App Ufficiale Ravensburger</a>
+        <a href="deck-lab.html" class="btn-hero gold foil-shimmer" data-i18n="idx_cta_deck">🃏 Apri Deck Lab &amp; Playtester</a>
+        <a href="collector-vault.html" class="btn-hero pink foil-shimmer" data-i18n="idx_cta_vault">💎 Apri Collector's Vault &amp; Pulls</a>
+        <a href="guide/guida-lorcana-it.html" class="btn-hero dark" data-i18n="idx_cta_guide" data-i18n-guide-link="1">📖 Leggi Guida Interattiva</a>
+        <a href="#official-app" class="btn-hero dark" data-i18n="idx_cta_app">📱 App Ufficiale Ravensburger</a>
       </div>
 
       
@@ -421,8 +421,8 @@
 
     <!-- Language Selector Section -->
     <section class="lang-section">
-      <h2 class="section-title">Select Your Language / Scegli la tua Lingua</h2>
-      <p class="section-desc">Experience the complete standalone interactive web guide with lore tracker, card breakdown, and mulligan simulator.</p>
+      <h2 class="section-title" data-i18n="idx_lang_title">Scegli la Tua Lingua · 5 Edizioni Ufficiali</h2>
+      <p class="section-desc" data-i18n="idx_lang_desc">Guide interattive standalone, regole complete, segnapunti Lore e simulatore matematico del mulligan.</p>
       
       <div class="lang-grid">
         <!-- Italian -->
@@ -479,15 +479,15 @@
 
     <!-- NEW: Interactive Apps Showcase (Deck Lab & Collector's Vault) -->
     <section style="margin-bottom:70px;">
-      <h2 class="section-title">✨ Community Web Apps &amp; Tabletop Simulators</h2>
-      <p class="section-desc">Interactive tools built for deck building, goldfish playtesting, booster pack opening, and collecting.</p>
+      <h2 class="section-title" data-i18n="idx_apps_title">✨ Web App Interattive &amp; Simulatori da Tavolo</h2>
+      <p class="section-desc" data-i18n="idx_apps_desc">Strumenti avanzati con effetti Foil olografici CSS per creazione mazzi, goldfish playtesting e calcolo pull rate.</p>
 
       <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(360px, 1fr));gap:24px;">
         <!-- Deck Lab Card -->
         <div style="background:linear-gradient(145deg, rgba(229,185,92,0.12), var(--bg-card));border:1.5px solid var(--gold);border-radius:18px;padding:30px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 10px 30px rgba(0,0,0,0.4);">
           <div>
             <div style="font-size:2.6rem;margin-bottom:12px;">🃏</div>
-            <h3 style="font-family:'Cinzel',serif;font-size:1.6rem;color:var(--gold);margin-bottom:10px;">Deck Lab &amp; Playtester</h3>
+            <h3 style="font-family:'Cinzel',serif;font-size:1.6rem;color:var(--gold);margin-bottom:10px;" data-i18n="idx_deck_title">Deck Lab &amp; Playtester</h3>
             <p style="color:var(--parch-muted);font-size:0.95rem;margin-bottom:18px;">
               Costruisci e perfeziona il tuo mazzo da 60 carte con catalogo carte integrato, visualizzatore della curva d'inchiostro, test della mano iniziale con mulligan realistico e simulatore goldfish dei primi turni. Esporta con 1 click per <strong>duels.ink</strong>, <strong>inktable.net</strong> e <strong>dreamborn.ink</strong>!
             </p>
@@ -498,14 +498,14 @@
               <span class="feat-tag">📤 Export Duels.ink</span>
             </div>
           </div>
-          <a href="deck-lab.html" class="btn-open" style="text-align:center;font-size:1.05rem;padding:12px 20px;">Lancia Deck Lab &amp; Playtester ➔</a>
+          <a href="deck-lab.html" class="btn-open" style="text-align:center;font-size:1.05rem;padding:12px 20px;" data-i18n="idx_deck_btn">Lancia Deck Lab &amp; Playtester ➔</a>
         </div>
 
         <!-- Collector's Vault Card -->
         <div style="background:linear-gradient(145deg, rgba(244,114,182,0.12), var(--bg-card));border:1.5px solid #f472b6;border-radius:18px;padding:30px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 10px 30px rgba(0,0,0,0.4);">
           <div>
             <div style="font-size:2.6rem;margin-bottom:12px;">💎</div>
-            <h3 style="font-family:'Cinzel',serif;font-size:1.6rem;color:var(--gold);margin-bottom:10px;">Collector's Vault &amp; Pulls</h3>
+            <h3 style="font-family:'Cinzel',serif;font-size:1.6rem;color:var(--gold);margin-bottom:10px;" data-i18n="idx_vault_title">Collector's Vault &amp; Pulls</h3>
             <p style="color:var(--parch-muted);font-size:0.95rem;margin-bottom:18px;">
               Simula l'apertura realistica con qualsiasi quantità di bustine a scelta (1, 8, 10, Box da 24, Case da 96 o numero personalizzato). Include le rarità Epiche e Iconiche, la guida ai simboli ufficiali e all'evoluzione delle 3 Ere, calcolatore binomiale e collegamento a r/Lorcana Educational.
             </p>
@@ -517,18 +517,18 @@
               <span class="feat-tag">🤖 Reddit Educational</span>
             </div>
           </div>
-          <a href="collector-vault.html" class="btn-open" style="text-align:center;font-size:1.05rem;padding:12px 20px;border-color:#f472b6;color:#ff80bf;">Apri Collector's Vault ➔</a>
+          <a href="collector-vault.html" class="btn-open" style="text-align:center;font-size:1.05rem;padding:12px 20px;border-color:#f472b6;color:#ff80bf;" data-i18n="idx_vault_btn">Apri Collector's Vault ➔</a>
         </div>
       </div>
     </section>
 
     <!-- Core Features & Documentation -->
     <section>
-      <h2 class="section-title">Repository Knowledge Base</h2>
+      <h2 class="section-title" data-i18n="idx_kb_title">Knowledge Base &amp; Documentazione</h2>
       <p class="section-desc">Comprehensive markdown documentation and data files available in the <code>docs/</code> directory.</p>
 
       <div class="features-grid">
-        <div class="feat-card">
+        <div class="feat-card foil-card-fx">
           <div class="feat-icon">📜</div>
           <h3>Set History &amp; Analysis</h3>
           <p>Exhaustive breakdown of all 14 sets: release calendar, narrative lore, mechanics introduced (Resist, Locations, Sing Together, Duo Shift), staples, and competitive impact.</p>
@@ -541,7 +541,7 @@
           </div>
         </div>
 
-        <div class="feat-card">
+        <div class="feat-card foil-card-fx">
           <div class="feat-icon">💎</div>
           <h3>Cards &amp; Rarities Guide</h3>
           <p>Detailed guide on card rarity tiers: Common to Enchanted, cold foil vs rainbow foil, pull rates per booster box, D23 promos, and grading/authentication tips.</p>
@@ -554,7 +554,7 @@
           </div>
         </div>
 
-        <div class="feat-card">
+        <div class="feat-card foil-card-fx">
           <div class="feat-icon">⚔️</div>
           <h3>Rules &amp; Quick Sheet</h3>
           <p>Complete tournament and casual rules: Beginning Phase, Main Phase, Inking rules, Quests, Challenges, Locations, simultaneous triggers, and printable cheat-sheet.</p>
@@ -567,7 +567,7 @@
           </div>
         </div>
 
-        <div class="feat-card">
+        <div class="feat-card foil-card-fx">
           <div class="feat-icon">🧠</div>
           <h3>Strategy &amp; Mulligan Math</h3>
           <p>Advanced competitive theory: 100,000 Monte Carlo simulation results, hypergeometric mulligan tables, non-inkable threshold, mana curve optimization, and tempo.</p>
@@ -580,7 +580,7 @@
           </div>
         </div>
 
-        <div class="feat-card">
+        <div class="feat-card foil-card-fx">
           <div class="feat-icon">🃏</div>
           <h3>Starter &amp; Meta Decks</h3>
           <p>Full 60-card lists: Emerald/Sapphire Mickey &amp; Minnie Duo Shift starter deck with turn-by-turn lines, plus Tier 1 tournament decklists (Set 13 data: 14,240 games).</p>
@@ -593,7 +593,7 @@
           </div>
         </div>
 
-        <div class="feat-card">
+        <div class="feat-card foil-card-fx">
           <div class="feat-icon">📖</div>
           <h3>Multi-lingual Glossary</h3>
           <p>Exhaustive dictionary mapping official card game terminology across Italian, English, French, German, and Spanish alongside competitive TCG slang.</p>
@@ -603,6 +603,32 @@
             <a href="docs/glossary/glossary.fr.md" class="feat-tag">FR Dictionary</a>
             <a href="docs/glossary/glossary.de.md" class="feat-tag">DE Dictionary</a>
             <a href="docs/glossary/glossary.es.md" class="feat-tag">ES Dictionary</a>
+          </div>
+        </div>
+
+        <div class="feat-card foil-card-fx">
+          <div class="feat-icon">📊</div>
+          <h3>Pull Rates, 3 Eras &amp; Products</h3>
+          <p>Experimental community pull rates (Classic, Expansion &amp; Modern Eras), Epic &amp; Iconic odds, God Pack hierarchy, and sealed product guide across all 5 languages.</p>
+          <div class="feat-links">
+            <a href="docs/cards-and-rarities/pull-rates-and-products.it.md" class="feat-tag">IT Pulls</a>
+            <a href="docs/cards-and-rarities/pull-rates-and-products.en.md" class="feat-tag">EN Pulls</a>
+            <a href="docs/cards-and-rarities/pull-rates-and-products.fr.md" class="feat-tag">FR Pulls</a>
+            <a href="docs/cards-and-rarities/pull-rates-and-products.de.md" class="feat-tag">DE Pulls</a>
+            <a href="docs/cards-and-rarities/pull-rates-and-products.es.md" class="feat-tag">ES Pulls</a>
+          </div>
+        </div>
+
+        <div class="feat-card foil-card-fx">
+          <div class="feat-icon">🛠️</div>
+          <h3>Deck Building &amp; Simulators</h3>
+          <p>60-card construction rules, uninkable count thresholds, ink curve geometry, goldfish playtesting methodology, and export guides for duels.ink &amp; inktable.</p>
+          <div class="feat-links">
+            <a href="docs/decks/deck-building-and-testing.it.md" class="feat-tag">IT Builder</a>
+            <a href="docs/decks/deck-building-and-testing.en.md" class="feat-tag">EN Builder</a>
+            <a href="docs/decks/deck-building-and-testing.fr.md" class="feat-tag">FR Builder</a>
+            <a href="docs/decks/deck-building-and-testing.de.md" class="feat-tag">DE Builder</a>
+            <a href="docs/decks/deck-building-and-testing.es.md" class="feat-tag">ES Builder</a>
           </div>
         </div>
       </div>
@@ -692,7 +718,7 @@
     <section id="official-app" style="margin-bottom:70px;background:linear-gradient(145deg, rgba(59,126,194,0.15), var(--bg-card));border:1.5px solid var(--sapphire);border-radius:18px;padding:36px;box-shadow:0 12px 40px rgba(0,0,0,0.5);">
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;">
         <div style="max-width:700px;">
-          <div style="font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;color:#93c5fd;font-weight:700;margin-bottom:8px;">App Ufficiale Ravensburger per il Collezionismo</div>
+          <div style="font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;color:#93c5fd;font-weight:700;margin-bottom:8px;" data-i18n="idx_app_badge">App Ufficiale Ravensburger per il Collezionismo</div>
           <h2 style="font-family:'Cinzel',serif;font-size:1.8rem;color:var(--gold);margin-bottom:12px;">Disney Lorcana TCG Companion App</h2>
           <p style="color:var(--parch-muted);font-size:0.95rem;line-height:1.6;margin-bottom:18px;">
             L'applicazione ufficiale gratuita per iOS e Android sviluppata da Ravensburger: catalogo completo di tutte le carte da sfogliare in 3D con effetto foil reattivo al giroscopio dello smartphone, gestione del raccoglitore personale (carte possedute e wishlist), segnapunti Lore ufficiale e avvisi sulle nuove espansioni.
@@ -724,5 +750,6 @@
     </div>
   </footer>
 
+  <script src="data/lorcana-i18n.js"></script>
 </body>
 </html>

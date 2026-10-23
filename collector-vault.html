@@ -656,6 +656,7 @@
     }
 
   </style>
+  <link rel="stylesheet" href="assets/css/lorcana-foil-ui.css">
 </head>
 <body>
 
@@ -666,136 +667,161 @@
       <span style="color:var(--muted);font-weight:400;font-size:.85rem;">| Collector's Vault</span>
     </a>
     <div class="top-links">
-      <a href="index.html">🌐 Portale</a>
-      <a href="guide/guida-lorcana-it.html">📖 Guida IT</a>
-      <a href="deck-lab.html">🃏 Deck Lab</a>
-      <a href="collector-vault.html" class="active">💎 Collezionismo &amp; Pulls</a>
-      <a href="https://github.com/MRJonam91/disney-lorcana-companion/discussions" target="_blank">💬 Discussions</a>
+      <a href="index.html" data-i18n="nav_hub">🌐 Hub</a>
+      <a href="deck-lab.html" data-i18n="nav_decklab">🃏 Deck Lab</a>
+      <a href="collector-vault.html" class="active" data-i18n="nav_vault">💎 Collezionismo &amp; Pulls</a>
+      <a href="guide/guida-lorcana-it.html" data-i18n="nav_guide" data-i18n-guide-link="1">📖 Guida</a>
+      <a href="https://www.disneylorcana.com/it-IT/app" target="_blank" data-i18n="nav_app">📱 App Ufficiale</a>
+      <a href="https://github.com/MRJonam91/disney-lorcana-companion/discussions" target="_blank" data-i18n="nav_forum">💬 Discussions</a>
     </div>
   </div>
 
   <div class="wrap">
 
     <div class="vault-header">
-      <div class="vault-badge">Collector Hub, Pack Simulator &amp; Probability</div>
-      <h1>Disney Lorcana · Collector's Vault</h1>
-      <p class="vault-desc">Simula l'apertura realistica di bustine e box, calcola le probabilità matematiche di trovare carte Incantate e Leggendarie per ogni set, esplora il catalogo prodotti e metti alla prova le tue abilità con le sfide Illumineer.</p>
+      <div class="vault-badge" data-i18n="vault_badge">Simulatore Collezionismo, Effetti Foil &amp; Pull Rate</div>
+      <h1 data-i18n="vault_title">Disney Lorcana · Collector's Vault</h1>
+      <p class="vault-desc" data-i18n="vault_desc">Simula l'apertura di bustine, Trove, Booster Box e Case con effetti Foil olografici. Calcola le probabilità matematiche per tutti i 14 Set (incluse Epiche e Iconiche) ed esplora il catalogo prodotti.</p>
     </div>
 
-    <!-- Navigation Tabs -->
-    <!-- Disclaimer Banner Globale -->
+    <!-- Compact Glassmorphic Disclaimer Banner -->
     <div class="disclaimer-banner">
       <div class="disclaimer-icon">⚠️</div>
-      <div class="disclaimer-text">
-        <strong>NOTA INFORMATIVA &amp; STATISTICHE SPERIMENTALI:</strong><br>
-        Disney Lorcana™ e tutti i marchi collegati sono proprietà di Disney e Ravensburger. 
-        <strong>Ravensburger non pubblica probabilità o percentuali ufficiali di estrazione delle carte nei booster pack.</strong>
-        Tutti i tassi, le probabilità e le simulazioni presenti in questa piattaforma sono stime sperimentali calcolate dalla community internazionale 
-        (tramite tracking empirico su migliaia di box, casi studio su oltre 44 booster box documentati da <em>The Gamers Lodge</em> e discussioni didattiche su <em>Reddit r/Lorcana</em>) 
-        e modelli matematici di distribuzione binomiale. Le aperture reali in negozio o blister singoli sono soggette alla naturale varianza statistica del caso.
+      <div class="disclaimer-text" data-i18n-html="disclaimer_html">
+        <strong>NOTA INFORMATIVA &amp; STATISTICHE SPERIMENTALI:</strong> Disney Lorcana™ è un marchio registrato di Disney e Ravensburger. <strong>Ravensburger non pubblica percentuali ufficiali di estrazione.</strong> Tutti i tassi e i simulatori qui presenti sono stime sperimentali della community internazionale (casi studio su 44+ box di <em>The Gamers Lodge</em> e <em>Reddit r/Lorcana</em>) e modelli di distribuzione binomiale.
       </div>
     </div>
 
+    <!-- Segmented Glassmorphic Tab Dock -->
     <div class="vault-tabs">
-      <button class="tab-btn active" onclick="switchVaultTab('simulator')">🎴 Simulatore Spacchettamento</button>
-      <button class="tab-btn" onclick="switchVaultTab('probability')">📊 Calcolatore Probabilità &amp; Pull Rate</button>
-      <button class="tab-btn" onclick="switchVaultTab('guide')">📖 Guida Ritratti, Ere &amp; God Packs</button>
-      <button class="tab-btn" onclick="switchVaultTab('products')">📦 Catalogo Completo Prodotti</button>
-      <button class="tab-btn" onclick="switchVaultTab('challenges')">🏆 Sfide &amp; Chi Inizia?</button>
+      <button class="tab-btn active" onclick="switchVaultTab('simulator')" data-i18n="tab_sim">🎴 Simulatore Pull</button>
+      <button class="tab-btn" onclick="switchVaultTab('probability')" data-i18n="tab_prob">📊 Calcolatore Probabilità</button>
+      <button class="tab-btn" onclick="switchVaultTab('guide')" data-i18n="tab_guide">📖 Ere, Simboli &amp; God Packs</button>
+      <button class="tab-btn" onclick="switchVaultTab('products')" data-i18n="tab_prod">📦 Catalogo Prodotti</button>
+      <button class="tab-btn" onclick="switchVaultTab('challenges')" data-i18n="tab_chal">🏆 Sfide &amp; Moneta 3D</button>
     </div>
 
     <!-- 1. SIMULATOR VIEW -->
     <div id="view-simulator">
       <div class="panel">
         <div class="panel-head">
-          <div class="panel-title">🎴 Simulatore Spacchettamento Realistico</div>
-          <button class="btn-pack" onclick="resetPullStats()">🔄 Azzera Collezione</button>
+          <div class="panel-title" data-i18n="sim_panel_title">🎴 Simulatore Spacchettamento Olografico</div>
+          <button class="btn-pack" onclick="resetPullStats()" data-i18n="btn_reset_col">🔄 Azzera Collezione</button>
         </div>
 
-        <!-- Controls -->
-        <div class="sim-controls">
-          <label style="font-size:.85rem;color:var(--muted);">Set Espansione:</label>
-                    <select class="select-set" id="selectSimSet" onchange="changeSet()">
-            <option value="set14">Set 14: Hyperia City (New Release · Epic &amp; Iconic)</option>
-            <option value="set13" selected>Set 13: Attack of the Vine! (Current · Epic &amp; Iconic)</option>
-            <option value="set12">Set 12: Wilds Unknown (Epic &amp; Iconic)</option>
-            <option value="set11">Set 11: Sunken Realms (Epic &amp; Iconic)</option>
-            <option value="set10">Set 10: Whispers of the Deep (Epic &amp; Iconic)</option>
-            <option value="set9">Set 9: Fables of Light (Epic &amp; Iconic Debut)</option>
-            <option value="set8">Set 8: Reign of Chaos</option>
-            <option value="set7">Set 7: Archazia's Island</option>
-            <option value="set6">Set 6: Azurite Sea</option>
-            <option value="set5">Set 5: Shimmering Skies</option>
-            <option value="set4">Set 4: Ursula's Return</option>
-            <option value="set3">Set 3: Into the Inklands</option>
-            <option value="set2">Set 2: Rise of the Floodborn</option>
-            <option value="set1">Set 1: The First Chapter</option>
-          </select>
+        <!-- Row 1: Command Bar (Set Selector + Custom Pack Opener) -->
+        <div class="sim-command-bar">
+          <div class="sim-set-group">
+            <label for="selectSimSet" style="font-size:.86rem;color:var(--gold-soft);font-weight:700;white-space:nowrap;" data-i18n="lbl_set_select">Set Espansione:</label>
+            <select class="select-set" id="selectSimSet" onchange="changeSet()">
+              <option value="set14">Set 14: Hyperia City (New · 🟣 Epic &amp; 👑 Iconic)</option>
+              <option value="set13" selected>Set 13: Attack of the Vine! (🟣 Epic &amp; 👑 Iconic)</option>
+              <option value="set12">Set 12: Wilds Unknown (🟣 Epic &amp; 👑 Iconic)</option>
+              <option value="set11">Set 11: Winterspell / Celestial Twilight (🟣 Epic)</option>
+              <option value="set10">Set 10: Whispers in the Well (🟣 Epic)</option>
+              <option value="set9">Set 9: Fables of Light / Fabled (🟣 Epic &amp; 👑 Iconic Debut)</option>
+              <option value="set8">Set 8: Reign of Jafar / Reign of Chaos</option>
+              <option value="set7">Set 7: Archazia's Island</option>
+              <option value="set6">Set 6: Azurite Sea</option>
+              <option value="set5">Set 5: Shimmering Skies</option>
+              <option value="set4">Set 4: Ursula's Return</option>
+              <option value="set3">Set 3: Into the Inklands</option>
+              <option value="set2">Set 2: Rise of the Floodborn</option>
+              <option value="set1">Set 1: The First Chapter</option>
+            </select>
+          </div>
 
-          <button class="btn-pack primary" onclick="openPacks(1)">✨ Apri 1 Bustina (12 Carte)</button>
-          <button class="btn-pack" onclick="openPacks(8)">🎁 Apri Trove (8 Bustine)</button>
-          <button class="btn-pack" onclick="openPacks(10)">📦 Apri 10 Bustine</button>
-          <button class="btn-pack primary" onclick="openPacks(24)">🏆 Apri 1 Booster Box (24 Bustine)</button>
-          <button class="btn-pack" onclick="openPacks(96)">🚢 Apri 1 Case (96 Bustine)</button>
+          <div class="sim-custom-group">
+            <label for="customPackCount" style="font-size:.82rem;color:var(--gold-soft);font-weight:700;" data-i18n="lbl_custom_packs">🔢 Quantità libera:</label>
+            <button type="button" class="pack-step-btn" onclick="stepCustomPacks(-10)">-10</button>
+            <input type="number" id="customPackCount" min="1" max="10000" value="36" class="custom-pack-input" style="width:92px;padding:6px 8px;" placeholder="36">
+            <button type="button" class="pack-step-btn" onclick="stepCustomPacks(10)">+10</button>
+            <button type="button" class="btn-pack primary" onclick="openCustomPacks()" data-i18n="btn_open_custom" style="padding:8px 14px;font-size:.83rem;">🚀 Apri Bustine</button>
+          </div>
         </div>
 
-        <!-- Custom Pack Input Bar -->
-        <div class="custom-pack-row">
-          <label for="customPackCount" style="font-size:.88rem;color:var(--gold-soft);font-weight:700;">🔢 Oppure inserisci quante bustine vuoi aprire:</label>
-          <input type="number" id="customPackCount" min="1" max="10000" value="36" class="custom-pack-input" placeholder="Es. 36">
-          <button class="btn-pack primary" onclick="openCustomPacks()">🚀 Apri Bustine Personalizzate</button>
-          <span style="font-size:.78rem;color:var(--muted);">(Puoi inserire qualsiasi quantità, da 1 a 10.000 bustine per testare grandi campioni!)</span>
+        <!-- Row 2: 5-Column Product Preset Action Cards -->
+        <div class="pack-presets-grid">
+          <button type="button" class="pack-action-card" onclick="openPacks(1)">
+            <span class="pack-action-icon">✨</span>
+            <span class="pack-action-title" data-i18n="act_1_title">1 Bustina</span>
+            <span class="pack-action-sub" data-i18n="act_1_sub">12 Carte · 1 Foil Garantita</span>
+          </button>
+
+          <button type="button" class="pack-action-card" onclick="openPacks(8)">
+            <span class="pack-action-icon">🎁</span>
+            <span class="pack-action-title" data-i18n="act_8_title">Illumineer's Trove</span>
+            <span class="pack-action-sub" data-i18n="act_8_sub">8 Bustine · 96 Carte</span>
+          </button>
+
+          <button type="button" class="pack-action-card" onclick="openPacks(10)">
+            <span class="pack-action-icon">📦</span>
+            <span class="pack-action-title" data-i18n="act_10_title">Bundle 10 Pack</span>
+            <span class="pack-action-sub" data-i18n="act_10_sub">10 Bustine · 120 Carte</span>
+          </button>
+
+          <button type="button" class="pack-action-card featured-box foil-shimmer" onclick="openPacks(24)">
+            <span class="pack-action-icon">🏆</span>
+            <span class="pack-action-title" data-i18n="act_24_title">1 Booster Box</span>
+            <span class="pack-action-sub" data-i18n="act_24_sub">24 Bustine · 288 Carte</span>
+          </button>
+
+          <button type="button" class="pack-action-card featured-case foil-shimmer" onclick="openPacks(96)">
+            <span class="pack-action-icon">🚢</span>
+            <span class="pack-action-title" data-i18n="act_96_title">1 Master Case</span>
+            <span class="pack-action-sub" data-i18n="act_96_sub">96 Bustine · 4 Box Sigillati</span>
+          </button>
         </div>
 
-                <!-- Pull Summary Bar -->
+        <!-- Row 3: 10-Item Balanced Telemetry Stats Grid (5x2 or 10x1) -->
         <div class="pull-stats-grid">
           <div class="pull-stat-box">
             <div class="pull-stat-val" id="cntPacks" style="color:var(--parch);">0</div>
-            <div class="pull-stat-lbl">Bustine</div>
+            <div class="pull-stat-lbl" data-i18n="stat_packs">Bustine</div>
           </div>
           <div class="pull-stat-box">
             <div class="pull-stat-val" id="cntCommon" style="color:var(--common);">0</div>
-            <div class="pull-stat-lbl">Comuni</div>
+            <div class="pull-stat-lbl" data-i18n="stat_common">Comuni ⚪</div>
           </div>
           <div class="pull-stat-box">
             <div class="pull-stat-val" id="cntUncommon" style="color:var(--uncommon);">0</div>
-            <div class="pull-stat-lbl">Non Comuni</div>
+            <div class="pull-stat-lbl" data-i18n="stat_uncommon">Non Comuni 📖</div>
           </div>
           <div class="pull-stat-box">
             <div class="pull-stat-val" id="cntRare" style="color:var(--rare);">0</div>
-            <div class="pull-stat-lbl">Rare</div>
+            <div class="pull-stat-lbl" data-i18n="stat_rare">Rare 🔺</div>
           </div>
           <div class="pull-stat-box">
             <div class="pull-stat-val" id="cntSuperRare" style="color:var(--super-rare);">0</div>
-            <div class="pull-stat-lbl">Super Rare</div>
+            <div class="pull-stat-lbl" data-i18n="stat_super">Super Rare 🔷</div>
           </div>
           <div class="pull-stat-box">
             <div class="pull-stat-val" id="cntLegendary" style="color:var(--legendary);">0</div>
-            <div class="pull-stat-lbl">Leggendarie</div>
+            <div class="pull-stat-lbl" data-i18n="stat_legendary">Leggendarie 🟡</div>
           </div>
-          <div class="pull-stat-box" style="border-color:var(--epic);background:rgba(168,85,247,0.12);">
+          <div class="pull-stat-box" style="border-color:rgba(168,85,247,0.45)!important;background:rgba(168,85,247,0.12)!important;">
             <div class="pull-stat-val" id="cntEpic" style="color:var(--epic);">0</div>
-            <div class="pull-stat-lbl">Epiche 🟣</div>
+            <div class="pull-stat-lbl" data-i18n="stat_epic">Epiche 🟣</div>
           </div>
-          <div class="pull-stat-box" style="border-color:var(--enchanted);background:rgba(244,114,182,0.12);">
+          <div class="pull-stat-box" style="border-color:rgba(244,114,182,0.45)!important;background:rgba(244,114,182,0.12)!important;">
             <div class="pull-stat-val" id="cntEnchanted" style="color:var(--enchanted);">0</div>
-            <div class="pull-stat-lbl">Incantate ✨</div>
+            <div class="pull-stat-lbl" data-i18n="stat_enchanted">Incantate ✨</div>
           </div>
-          <div class="pull-stat-box" style="border-color:#38bdf8;background:rgba(56,189,248,0.14);">
-            <div class="pull-stat-val" id="cntIconic" style="color:#38bdf8;">0</div>
-            <div class="pull-stat-lbl">Iconiche 👑</div>
+          <div class="pull-stat-box" style="border-color:rgba(250,204,21,0.55)!important;background:rgba(250,204,21,0.12)!important;">
+            <div class="pull-stat-val" id="cntIconic" style="color:#fde047;">0</div>
+            <div class="pull-stat-lbl" data-i18n="stat_iconic">Iconiche 👑</div>
           </div>
-          <div class="pull-stat-box">
+          <div class="pull-stat-box" style="border-color:rgba(56,189,248,0.4)!important;background:rgba(56,189,248,0.1)!important;">
             <div class="pull-stat-val" id="cntFoils" style="color:var(--gold-soft);">0</div>
-            <div class="pull-stat-lbl">Foil Totali</div>
+            <div class="pull-stat-lbl" data-i18n="stat_foils">Foil Totali 🌟</div>
           </div>
         </div>
 
-        <!-- Cards Container -->
-        <div style="font-family:'Cinzel',serif;font-size:1.1rem;color:var(--gold);margin-bottom:8px;">Ultime Carte Sbustate:</div>
+        <!-- Pulled Cards Showcase -->
+        <div style="font-family:'Cinzel',serif;font-size:1.05rem;color:var(--gold);margin-bottom:10px;" data-i18n="lbl_last_pulled">✨ Ultime Carte Sbustate (Passa il mouse per l'effetto Foil 3D):</div>
         <div class="cards-grid" id="pulledCardsGrid">
-          <div style="grid-column: 1 / -1; text-align:center; padding: 40px; color:var(--muted);">
-            Clicca su uno dei pulsanti sopra per aprire le tue prime bustine di Disney Lorcana!
+          <div style="grid-column: 1 / -1; text-align:center; padding: 40px; color:var(--muted);" data-i18n="empty_pull_msg">
+            Seleziona un prodotto qui sopra o inserisci un numero di bustine per iniziare lo spacchettamento con effetti Foil!
           </div>
         </div>
       </div>
@@ -805,7 +831,7 @@
     <div id="view-probability" style="display:none;">
       <div class="panel">
         <div class="panel-head">
-          <div class="panel-title">📊 Calcolatore Probabilità Matematiche &amp; Pull Rate</div>
+          <div class="panel-title" data-i18n="prob_title">📊 Calcolatore Probabilità Matematiche &amp; Pull Rate</div>
         </div>
         <p style="font-size:.9rem;color:var(--muted);margin-bottom:16px;">
           Muovi lo slider per calcolare esattamente cosa aspettarti in base al numero di bustine o prodotti che desideri acquistare.
@@ -820,35 +846,47 @@
           </div>
           <div class="slider-row">
             <span style="font-size:.8rem;color:var(--muted);">1 (Singola)</span>
-            <input type="range" class="slider-input" id="packSlider" min="1" max="100" value="24" oninput="updateProbabilityCalc(this.value)">
-            <span style="font-size:.8rem;color:var(--muted);">100 (Più di un Case)</span>
+            <input type="range" class="slider-input" id="packSlider" min="1" max="240" value="24" oninput="updateProbabilityCalc(this.value)">
+            <span style="font-size:.8rem;color:var(--muted);">240 (10 Booster Box)</span>
           </div>
         </div>
 
-        <!-- Expected Values Grid -->
-        <div class="expectancy-grid">
-          <div class="exp-card">
-            <div class="exp-title">Probabilità Incantata (Enchanted)</div>
-            <div class="exp-value" id="expEnchantedProb" style="color:var(--enchanted);">26.1%</div>
-            <div class="exp-sub">Chance di trovare <b>almeno 1</b> carta Incantata su <span class="exp-pack-n">24</span> bustine (tasso 1:80).</div>
+        <!-- Expected Values Grid (6-Card Telemetry incl. Epic & Iconic) -->
+        <div class="expectancy-grid" style="grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));">
+          <div class="exp-card foil-card-fx" style="border-color:rgba(244,114,182,0.5);">
+            <div class="exp-title">✨ Probabilità Incantata (Enchanted)</div>
+            <div class="exp-value" id="expEnchantedProb" style="color:var(--enchanted);">22.2%</div>
+            <div class="exp-sub">Chance di trovare <b>almeno 1</b> Incantata su <span class="exp-pack-n">24</span> bustine (tasso 1:96).</div>
           </div>
 
-          <div class="exp-card">
-            <div class="exp-title">Leggendarie Attese (Media)</div>
-            <div class="exp-value" id="expLegendary" style="color:var(--legendary);">3.6 - 4.2</div>
-            <div class="exp-sub">Circa 1 Leggendaria ogni 6-7 bustine aperte.</div>
+          <div class="exp-card foil-card-fx" style="border-color:rgba(250,204,21,0.55);">
+            <div class="exp-title">👑 Probabilità Iconica (Iconic Set 9+)</div>
+            <div class="exp-value" id="expIconicProb" style="color:#fde047;">6.1%</div>
+            <div class="exp-sub">Chance di trovare <b>almeno 1</b> Iconica su <span class="exp-pack-n">24</span> bustine (tasso ~1:384).</div>
           </div>
 
-          <div class="exp-card">
-            <div class="exp-title">Super Rare Attese (Media)</div>
-            <div class="exp-value" id="expSuperRare" style="color:var(--super-rare);">12.0 - 14.5</div>
-            <div class="exp-sub">Circa 1 Super Rara ogni 3-4 bustine.</div>
+          <div class="exp-card foil-card-fx" style="border-color:rgba(168,85,247,0.5);">
+            <div class="exp-title">🟣 Epiche Attese (Set 9+)</div>
+            <div class="exp-value" id="expEpic" style="color:var(--epic);">1.2 - 1.8</div>
+            <div class="exp-sub">Circa 1 carta Epica ogni 16 bustine (~1.5 - 2.5 per box).</div>
           </div>
 
-          <div class="exp-card">
-            <div class="exp-title">Carte Foil Garantite</div>
+          <div class="exp-card foil-card-fx">
+            <div class="exp-title">🟡 Leggendarie Attese (Media)</div>
+            <div class="exp-value" id="expLegendary" style="color:var(--legendary);">4.0 - 5.2</div>
+            <div class="exp-sub">Circa 1 Leggendaria ogni 5-6 bustine aperte.</div>
+          </div>
+
+          <div class="exp-card foil-card-fx">
+            <div class="exp-title">🔷 Super Rare Attese (Media)</div>
+            <div class="exp-value" id="expSuperRare" style="color:var(--super-rare);">11.5 - 14.0</div>
+            <div class="exp-sub">Circa 1 Super Rara ogni 2-3 bustine.</div>
+          </div>
+
+          <div class="exp-card foil-card-fx">
+            <div class="exp-title">🌟 Carte Foil Garantite</div>
             <div class="exp-value" id="expFoils" style="color:var(--gold-soft);">24</div>
-            <div class="exp-sub">1 carta foil garantita al 100% in ogni bustina.</div>
+            <div class="exp-sub">1 carta foil garantita al 100% in ogni bustina (Slot 12).</div>
           </div>
         </div>
 
@@ -865,7 +903,7 @@
     <div id="view-guide" style="display:none;">
       <div class="panel">
         <div class="panel-head">
-          <div class="panel-title">📖 Guida ai Simboli, Rarità, Evoluzione delle Ere &amp; God Packs</div>
+          <div class="panel-title" data-i18n="guide_title">📖 Guida ai Simboli, Rarità, Evoluzione delle Ere &amp; God Packs</div>
         </div>
 
         <p style="font-size:.9rem;color:var(--parch-muted);margin-bottom:20px;line-height:1.6;">
@@ -1077,7 +1115,7 @@
     <div id="view-products" style="display:none;">
       <div class="panel">
         <div class="panel-head">
-          <div class="panel-title">📦 Catalogo Completo dei Prodotti Disney Lorcana</div>
+          <div class="panel-title" data-i18n="prod_title">📦 Catalogo Completo dei Prodotti Disney Lorcana</div>
         </div>
         <p style="font-size:.9rem;color:var(--muted);margin-bottom:20px;">
           Tutti i tipi di prodotto ufficiali pubblicati da Ravensburger, con il contenuto esatto e consigli per gli acquisti.
@@ -1180,7 +1218,7 @@
       
       <!-- Random Challenge Generator -->
       <div class="quest-card">
-        <div class="quest-title">🎲 Sfida della Serata (Community Quest Generator)</div>
+        <div class="quest-title" data-i18n="chal_quest_title">🎲 Sfida della Serata (Community Quest Generator)</div>
         <div class="quest-body" id="questText">
           "Vinci una partita senza mai sfidare un personaggio avversario (vittoria puramente pacifista)."
         </div>
@@ -1190,7 +1228,7 @@
       <!-- Coin Flipper -->
       <div class="panel">
         <div class="panel-head">
-          <div class="panel-title">🪙 Chi Inizia il Turno 1? (Illumineer Coin Flip)</div>
+          <div class="panel-title" data-i18n="chal_coin_title">🪙 Chi Inizia il Turno 1? (Illumineer Coin Flip)</div>
         </div>
         <div class="coin-wrap">
           <div class="coin" id="coinDecider" onclick="flipCoin()">✦</div>
@@ -1214,6 +1252,7 @@
   </div>
 
   <script src="data/lorcana-cards.js"></script>
+  <script src="data/lorcana-i18n.js"></script>
   <script>
     // SIMULATOR SETTINGS & CARD POOL
     const SET_NAMES = {
@@ -1250,6 +1289,13 @@
       Iconic: 0,
       foils: 0
     };
+
+    function stepCustomPacks(delta) {
+      const inp = document.getElementById('customPackCount');
+      let v = parseInt(inp.value, 10) || 1;
+      v = Math.max(1, Math.min(10000, v + delta));
+      inp.value = v;
+    }
 
     function openCustomPacks() {
       const inp = document.getElementById('customPackCount');
@@ -1347,18 +1393,25 @@
 
       updateStatsUI();
 
-      // Display up to 48 cards to keep DOM snappy
-      const displayCards = pulled.slice(-48);
+      // Sort hits to the front when opening multiple packs so Iconic/Enchanted/Epic/Legendary/Foil are showcased first!
+      const rarityRank = { 'Iconic': 8, 'Enchanted': 7, 'Epic': 6, 'Legendary': 5, 'Super Rare': 4, 'Rare': 3, 'Uncommon': 2, 'Common': 1 };
+      const sortedPulled = (n > 2)
+        ? [...pulled].sort((a, b) => ((rarityRank[b.rarity] || 0) + (b.foil ? 0.5 : 0)) - ((rarityRank[a.rarity] || 0) + (a.foil ? 0.5 : 0)))
+        : pulled;
+      const displayCards = sortedPulled.slice(0, 48);
       displayCards.forEach(c => {
         const div = document.createElement('div');
         const rarityClass = `rarity-${c.rarity.replace(/\s+/g, '-')}`;
-        div.className = `pulled-card ${rarityClass}`;
+        const foilClass = (c.foil || ['Epic', 'Enchanted', 'Iconic'].includes(c.rarity)) ? 'is-foil' : '';
+        div.className = `pulled-card ${rarityClass} ${foilClass}`;
         div.innerHTML = `
-          ${c.rarity === 'Iconic' ? '<span class="pulled-iconic-badge">👑 ICONIC CHASE</span>' : ''}
-          ${c.foil ? '<span class="pulled-foil-badge">FOIL</span>' : ''}
-          <div style="font-size:1.4rem;margin:8px 0;">${getRarityIcon(c.rarity)}</div>
-          <div style="font-weight:700;font-size:.85rem;color:var(--parch);line-height:1.2;">${c.name}</div>
-          <div style="font-size:.72rem;color:var(--muted);margin-top:6px;">${c.rarity}</div>
+          <div class="pulled-card-inner">
+            ${c.rarity === 'Iconic' ? '<span class="pulled-iconic-badge">👑 ICONIC CHASE</span>' : ''}
+            ${c.foil ? '<span class="pulled-foil-badge">✨ HOLO FOIL</span>' : ''}
+            <div style="font-size:1.55rem;margin:6px 0;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.45));">${getRarityIcon(c.rarity)}</div>
+            <div style="font-weight:700;font-size:.86rem;color:var(--parch);line-height:1.25;">${c.name}</div>
+            <div style="font-size:.71rem;color:var(--gold-soft);margin-top:4px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;">${c.rarity}</div>
+          </div>
         `;
         grid.appendChild(div);
       });
@@ -1465,7 +1518,9 @@
     ];
 
     function generateNewQuest() {
-      const q = QUESTS[Math.floor(Math.random() * QUESTS.length)];
+      const lang = window.currentLorcanaLang || 'it';
+      const pool = (window.LORCANA_QUESTS_I18N && window.LORCANA_QUESTS_I18N[lang]) ? window.LORCANA_QUESTS_I18N[lang] : QUESTS;
+      const q = pool[Math.floor(Math.random() * pool.length)];
       document.getElementById('questText').innerText = `"${q}"`;
     }
 

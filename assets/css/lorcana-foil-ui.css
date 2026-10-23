@@ -1,0 +1,565 @@
+/* ==========================================================================
+   DISNEY LORCANA · NEXT-GEN UI & LIGHTWEIGHT CSS FOIL / HOLO ENGINE
+   Inspired by modern TCG showcases (Dreamborn, Poke-Holo, Linear/Raycast UI)
+   ========================================================================== */
+
+:root {
+  --bg-deep: #09070e;
+  --bg-surface: rgba(21, 16, 34, 0.82);
+  --bg-elevated: rgba(31, 24, 48, 0.9);
+  --bg-glass: rgba(16, 12, 26, 0.78);
+  --border-subtle: rgba(229, 185, 92, 0.18);
+  --border-gold: rgba(229, 185, 92, 0.55);
+  --gold-primary: #e5b95c;
+  --gold-bright: #ffe28a;
+  --text-main: #f6efe0;
+  --text-dim: #a89ec0;
+  --holo-1: #ff0080;
+  --holo-2: #ff8c00;
+  --holo-3: #40e0d0;
+  --holo-4: #8a2be2;
+  --holo-5: #38bdf8;
+}
+
+/* --------------------------------------------------------------------------
+   1. UNIFIED GLASSMORPHIC TOP NAVBAR & 5-LANGUAGE SWITCHER
+   -------------------------------------------------------------------------- */
+.top-bar {
+  background: rgba(11, 8, 18, 0.92) !important;
+  border-bottom: 1px solid var(--border-subtle) !important;
+  padding: 10px 24px !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 14px !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 2000 !important;
+  backdrop-filter: blur(16px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(160%) !important;
+  flex-wrap: wrap !important;
+}
+
+.top-brand {
+  font-family: 'Cinzel', serif !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.08em !important;
+  color: var(--gold-primary) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  font-size: 1.05rem !important;
+  text-shadow: 0 0 18px rgba(229, 185, 92, 0.35);
+  white-space: nowrap;
+}
+
+.top-links {
+  display: flex !important;
+  gap: 8px !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+}
+
+.top-links a {
+  color: var(--text-dim) !important;
+  padding: 6px 12px !important;
+  border-radius: 9px !important;
+  font-size: 0.83rem !important;
+  font-weight: 600 !important;
+  border: 1px solid transparent !important;
+  transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  white-space: nowrap;
+}
+
+.top-links a:hover,
+.top-links a.active {
+  color: var(--gold-bright) !important;
+  background: rgba(229, 185, 92, 0.14) !important;
+  border-color: rgba(229, 185, 92, 0.32) !important;
+  transform: translateY(-1px);
+}
+
+/* Global 5-Language Switcher Dock */
+.lang-switcher-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(229, 185, 92, 0.24);
+  padding: 3px;
+  border-radius: 10px;
+}
+
+.lang-pill-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-dim);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  line-height: 1;
+}
+
+.lang-pill-btn:hover {
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.lang-pill-btn.active {
+  background: linear-gradient(135deg, rgba(229, 185, 92, 0.32), rgba(229, 185, 92, 0.12));
+  border-color: var(--gold-primary);
+  color: var(--gold-bright);
+  box-shadow: 0 0 10px rgba(229, 185, 92, 0.25);
+}
+
+/* --------------------------------------------------------------------------
+   2. SLEEK COMPACT DISCLAIMER BANNER
+   -------------------------------------------------------------------------- */
+.disclaimer-banner {
+  background: linear-gradient(90deg, rgba(234, 179, 8, 0.1), rgba(21, 16, 34, 0.88), rgba(59, 126, 194, 0.08)) !important;
+  border: 1px solid rgba(229, 185, 92, 0.3) !important;
+  border-left: 4px solid var(--gold-primary) !important;
+  border-radius: 12px !important;
+  padding: 12px 18px !important;
+  margin-bottom: 20px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  font-size: 0.81rem !important;
+  color: var(--text-dim) !important;
+  line-height: 1.45 !important;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+}
+
+.disclaimer-banner strong {
+  color: var(--gold-bright);
+}
+
+/* --------------------------------------------------------------------------
+   3. SEGMENTED GLASSMORPHIC TAB DOCK (Single balanced line on desktop)
+   -------------------------------------------------------------------------- */
+.vault-tabs,
+.lab-tabs {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin: 0 auto 24px !important;
+  padding: 6px !important;
+  background: rgba(15, 11, 24, 0.85) !important;
+  border: 1px solid rgba(229, 185, 92, 0.22) !important;
+  border-radius: 14px !important;
+  width: fit-content !important;
+  max-width: 100% !important;
+  flex-wrap: wrap !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.vault-tabs .tab-btn,
+.lab-tabs .tab-btn {
+  padding: 9px 16px !important;
+  border-radius: 10px !important;
+  border: 1px solid transparent !important;
+  background: transparent !important;
+  color: var(--text-dim) !important;
+  font-family: 'Cinzel', serif !important;
+  font-size: 0.84rem !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  transition: all 0.22s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  white-space: nowrap !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+}
+
+.vault-tabs .tab-btn:hover,
+.lab-tabs .tab-btn:hover {
+  color: var(--text-main) !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.vault-tabs .tab-btn.active,
+.lab-tabs .tab-btn.active {
+  background: linear-gradient(135deg, rgba(229, 185, 92, 0.26), rgba(152, 81, 181, 0.2)) !important;
+  border-color: var(--gold-primary) !important;
+  color: var(--gold-bright) !important;
+  box-shadow: 0 4px 16px rgba(229, 185, 92, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+}
+
+/* --------------------------------------------------------------------------
+   4. SIMULATOR COMMAND CENTER LAYOUT (Structured Box & Button Grid)
+   -------------------------------------------------------------------------- */
+.sim-command-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  background: rgba(12, 9, 20, 0.65);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.sim-set-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 280px;
+}
+
+.select-set {
+  flex: 1;
+  max-width: 420px;
+  background: var(--bg-elevated) !important;
+  border: 1px solid var(--border-gold) !important;
+  color: var(--text-main) !important;
+  padding: 10px 14px !important;
+  border-radius: 10px !important;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+  cursor: pointer;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.sim-custom-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(229, 185, 92, 0.24);
+  padding: 6px 10px;
+  border-radius: 10px;
+  flex-wrap: wrap;
+}
+
+.pack-step-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(229, 185, 92, 0.25);
+  color: var(--gold-bright);
+  border-radius: 6px;
+  padding: 5px 9px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.pack-step-btn:hover {
+  background: rgba(229, 185, 92, 0.2);
+  border-color: var(--gold-primary);
+}
+
+/* 5-Column Preset Product Action Grid */
+.pack-presets-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 1100px) {
+  .pack-presets-grid {
+    grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+  }
+}
+
+.pack-action-card {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(160deg, rgba(35, 27, 54, 0.92), rgba(18, 14, 29, 0.95));
+  border: 1px solid rgba(229, 185, 92, 0.25);
+  border-radius: 12px;
+  padding: 14px 12px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: var(--text-main);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+.pack-action-card:hover {
+  transform: translateY(-4px) scale(1.015);
+  border-color: var(--gold-bright);
+  box-shadow: 0 10px 26px rgba(229, 185, 92, 0.22);
+}
+
+.pack-action-card.featured-box {
+  background: linear-gradient(160deg, rgba(229, 185, 92, 0.22), rgba(26, 20, 42, 0.95));
+  border-color: var(--gold-primary);
+}
+
+.pack-action-card.featured-case {
+  background: linear-gradient(160deg, rgba(168, 85, 247, 0.22), rgba(56, 189, 248, 0.14), rgba(20, 15, 34, 0.95));
+  border-color: #c084fc;
+}
+
+.pack-action-icon {
+  font-size: 1.55rem;
+  margin-bottom: 2px;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5));
+}
+
+.pack-action-title {
+  font-family: 'Cinzel', serif;
+  font-weight: 800;
+  font-size: 0.88rem;
+  color: var(--gold-bright);
+  letter-spacing: 0.03em;
+}
+
+.pack-action-sub {
+  font-size: 0.73rem;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+
+/* 10-Item Telemetry Stats Grid (Balanced 10x1 or 5x2 — Never 9+1!) */
+.pull-stats-grid {
+  display: grid !important;
+  grid-template-columns: repeat(5, 1fr) !important;
+  gap: 10px !important;
+  margin-bottom: 24px !important;
+}
+
+@media (min-width: 1280px) {
+  .pull-stats-grid {
+    grid-template-columns: repeat(10, 1fr) !important;
+  }
+}
+
+@media (max-width: 680px) {
+  .pull-stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+.pull-stat-box {
+  position: relative;
+  overflow: hidden;
+  background: rgba(20, 15, 32, 0.88) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 11px !important;
+  padding: 12px 8px !important;
+  text-align: center !important;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.pull-stat-box:hover {
+  transform: translateY(-2px);
+  border-color: rgba(229, 185, 92, 0.4) !important;
+}
+
+.pull-stat-val {
+  font-family: 'Cinzel', serif !important;
+  font-size: 1.35rem !important;
+  font-weight: 900 !important;
+  line-height: 1.15 !important;
+}
+
+.pull-stat-lbl {
+  font-size: 0.69rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  color: var(--text-dim) !important;
+  margin-top: 5px !important;
+  font-weight: 700 !important;
+}
+
+/* --------------------------------------------------------------------------
+   5. LIGHTWEIGHT CSS FOIL & HOLOGRAPHIC SHIMMER ENGINE
+   -------------------------------------------------------------------------- */
+@keyframes foilSweep {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes holoSparkle {
+  0%, 100% { opacity: 0.32; filter: hue-rotate(0deg); }
+  50% { opacity: 0.68; filter: hue-rotate(35deg); }
+}
+
+@keyframes floatChase {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-4px); }
+}
+
+/* Base Card Frame with 3D Interactive Tilt Support */
+.pulled-card,
+.play-card,
+.foil-card-fx {
+  --rx: 0deg;
+  --ry: 0deg;
+  --gx: 50%;
+  --gy: 50%;
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: 13px !important;
+  transform: perspective(700px) rotateX(var(--rx)) rotateY(var(--ry));
+  transition: transform 0.16s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.22s ease, border-color 0.22s ease !important;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Dynamic Specular Pointer Glare Layer */
+.pulled-card::before,
+.play-card::before,
+.foil-card-fx::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background: radial-gradient(
+    circle at var(--gx) var(--gy),
+    rgba(255, 255, 255, 0.22) 0%,
+    rgba(255, 255, 255, 0.06) 35%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.pulled-card:hover::before,
+.play-card:hover::before,
+.foil-card-fx:hover::before {
+  opacity: 1;
+}
+
+/* Cold Foil Overlay (Triggered when a card is Foil or Higher Rarity) */
+.pulled-card.is-foil::after,
+.pulled-card.rarity-Super-Rare::after,
+.pulled-card.rarity-Legendary::after,
+.pulled-card.rarity-Epic::after,
+.pulled-card.rarity-Enchanted::after,
+.pulled-card.rarity-Iconic::after,
+.foil-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  pointer-events: none;
+  z-index: 1;
+  background: linear-gradient(
+    115deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.08) 36%,
+    rgba(147, 197, 253, 0.26) 45%,
+    rgba(253, 224, 71, 0.22) 50%,
+    rgba(244, 114, 182, 0.26) 55%,
+    rgba(255, 255, 255, 0.08) 64%,
+    transparent 80%
+  );
+  background-size: 260% 260%;
+  mix-blend-mode: screen;
+  animation: foilSweep 5.5s ease-in-out infinite;
+}
+
+/* Rarity-Specific Foil Aesthetics */
+.pulled-card.rarity-Common {
+  background: linear-gradient(160deg, #1b1726, #120f1a) !important;
+  border: 1px solid rgba(148, 163, 184, 0.28) !important;
+}
+
+.pulled-card.rarity-Uncommon {
+  background: linear-gradient(160deg, #172030, #111622) !important;
+  border: 1px solid rgba(125, 211, 252, 0.38) !important;
+}
+
+.pulled-card.rarity-Rare {
+  background: linear-gradient(160deg, #271d18, #161118) !important;
+  border: 1px solid rgba(217, 119, 6, 0.55) !important;
+}
+
+.pulled-card.rarity-Super-Rare {
+  background: linear-gradient(155deg, rgba(56, 189, 248, 0.16), rgba(30, 24, 48, 0.95)) !important;
+  border: 1.5px solid #7dd3fc !important;
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.18);
+}
+
+.pulled-card.rarity-Legendary {
+  background: linear-gradient(150deg, rgba(250, 204, 21, 0.22), rgba(180, 83, 9, 0.18), rgba(20, 15, 32, 0.96)) !important;
+  border: 1.5px solid #facc15 !important;
+  box-shadow: 0 0 20px rgba(250, 204, 21, 0.28);
+}
+
+.pulled-card.rarity-Epic {
+  background: linear-gradient(135deg, rgba(217, 70, 239, 0.28), rgba(124, 58, 237, 0.24), rgba(17, 12, 28, 0.96)) !important;
+  border: 1.5px solid #e879f9 !important;
+  box-shadow: 0 0 22px rgba(217, 70, 239, 0.35);
+}
+
+/* Enchanted Full-Art Rainbow Holo */
+.pulled-card.rarity-Enchanted {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.18) 1px, transparent 2px),
+    radial-gradient(circle at 80% 70%, rgba(255, 226, 138, 0.22) 1px, transparent 2px),
+    linear-gradient(135deg, rgba(244, 114, 182, 0.34), rgba(168, 85, 247, 0.32), rgba(56, 189, 248, 0.32), rgba(234, 179, 8, 0.28)) !important;
+  background-size: 28px 28px, 36px 36px, 240% 240% !important;
+  border: 2px solid #f472b6 !important;
+  box-shadow: 0 0 28px rgba(244, 114, 182, 0.45), inset 0 0 15px rgba(255, 255, 255, 0.18) !important;
+  animation: foilSweep 4s ease infinite, floatChase 3.2s ease-in-out infinite;
+}
+
+/* Iconic 3D Gold-Cosmos Chase Foil */
+.pulled-card.rarity-Iconic {
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255, 215, 0, 0.28) 1.5px, transparent 2.5px),
+    linear-gradient(135deg, rgba(250, 204, 21, 0.42), rgba(244, 63, 94, 0.32), rgba(56, 189, 248, 0.34), rgba(234, 179, 8, 0.42)) !important;
+  background-size: 24px 24px, 260% 260% !important;
+  border: 2px solid #fde047 !important;
+  box-shadow: 0 0 34px rgba(250, 204, 21, 0.6), 0 0 14px rgba(244, 63, 94, 0.4), inset 0 0 18px rgba(254, 240, 138, 0.28) !important;
+  animation: foilSweep 3.2s ease infinite, floatChase 2.8s ease-in-out infinite;
+}
+
+.pulled-card-inner {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  gap: 6px;
+}
+
+.pulled-foil-badge {
+  background: linear-gradient(90deg, #38bdf8, #e879f9, #facc15) !important;
+  color: #09070e !important;
+  font-weight: 900 !important;
+  font-size: 0.62rem !important;
+  letter-spacing: 0.08em !important;
+  padding: 2px 7px !important;
+  border-radius: 99px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+}
+
+/* Deck Lab Catalog & Playtester Card Foil Polish */
+.card-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-item:hover {
+  transform: translateX(3px);
+  box-shadow: 0 4px 16px rgba(229, 185, 92, 0.14);
+}

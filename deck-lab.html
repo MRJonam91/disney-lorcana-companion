@@ -615,6 +615,7 @@
     }
 
   </style>
+  <link rel="stylesheet" href="assets/css/lorcana-foil-ui.css">
 </head>
 <body>
 
@@ -625,28 +626,28 @@
       <span style="color:var(--muted);font-weight:400;font-size:.85rem;">| Deck Lab</span>
     </a>
     <div class="top-links">
-      <a href="index.html">🌐 Portale</a>
-      <a href="guide/guida-lorcana-it.html">📖 Guida IT</a>
-      <a href="collector-vault.html">💎 Collezionismo &amp; Pulls</a>
-      <a href="deck-lab.html" class="active">🃏 Deck Lab</a>
-      <a href="https://www.disneylorcana.com/it-IT/app" target="_blank" style="color:var(--gold);">📱 App Ufficiale</a>
-      <a href="https://github.com/MRJonam91/disney-lorcana-companion/discussions" target="_blank">💬 Discussions</a>
+      <a href="index.html" data-i18n="nav_hub">🌐 Hub</a>
+      <a href="deck-lab.html" class="active" data-i18n="nav_decklab">🃏 Deck Lab</a>
+      <a href="collector-vault.html" data-i18n="nav_vault">💎 Collezionismo &amp; Pulls</a>
+      <a href="guide/guida-lorcana-it.html" data-i18n="nav_guide" data-i18n-guide-link="1">📖 Guida</a>
+      <a href="https://www.disneylorcana.com/it-IT/app" target="_blank" style="color:var(--gold);" data-i18n="nav_app">📱 App Ufficiale</a>
+      <a href="https://github.com/MRJonam91/disney-lorcana-companion/discussions" target="_blank" data-i18n="nav_forum">💬 Discussions</a>
     </div>
   </div>
 
   <div class="wrap">
 
     <div class="lab-header">
-      <div class="lab-badge">Tournament Deck Builder &amp; Playtester</div>
-      <h1>Disney Lorcana · Deck Lab</h1>
-      <p class="lab-desc">Costruisci il tuo mazzo da 60 carte, analizza la curva d'inchiostro, testa la mano iniziale con mulligan realistico e simula i primi turni. Esporta per <strong>duels.ink</strong>, <strong>inktable</strong> o <strong>dreamborn</strong>.</p>
+      <div class="lab-badge" data-i18n="dl_badge">Tournament Deck Builder &amp; Playtester</div>
+      <h1 data-i18n="dl_title">Disney Lorcana · Deck Lab</h1>
+      <p class="lab-desc" data-i18n="dl_desc">Costruisci il tuo mazzo da 60 carte, analizza la curva d'inchiostro, testa la mano iniziale con mulligan realistico e simula i primi turni. Esporta per duels.ink, inktable o dreamborn.</p>
     </div>
 
     <!-- Mode Tabs -->
     <div class="lab-tabs">
-      <button class="tab-btn active" onclick="switchLabTab('builder')">🛠️ Deck Builder &amp; Curva</button>
-      <button class="tab-btn" onclick="switchLabTab('goldfish')">🎲 Simulatore Mano &amp; Goldfish Playtester</button>
-      <button class="tab-btn" onclick="openSimulatorLinks()">⚡ Gioca Online (Duels.ink &amp; Inktable)</button>
+      <button class="tab-btn active" onclick="switchLabTab('builder')" data-i18n="dl_tab_builder">🛠️ Deck Builder &amp; Curva</button>
+      <button class="tab-btn" onclick="switchLabTab('goldfish')" data-i18n="dl_tab_goldfish">🎲 Simulatore Mano &amp; Goldfish</button>
+      <button class="tab-btn" onclick="openSimulatorLinks()" data-i18n="dl_tab_online">⚡ Gioca Online (Duels.ink &amp; Inktable)</button>
     </div>
 
     <!-- BUILDER VIEW -->
@@ -655,7 +656,7 @@
       <!-- LEFT: CARD CATALOG & FILTERS -->
       <div class="panel">
         <div class="panel-head">
-          <div class="panel-title">📚 Catalogo Carte &amp; Sinergie</div>
+          <div class="panel-title" data-i18n="dl_cat_title">📚 Catalogo Carte (Set 1 – 14)</div>
           <span style="font-size:.8rem;color:var(--muted);">Filtra per inchiostri attivi</span>
         </div>
 
@@ -697,7 +698,7 @@
             <option value="set13">Set 13: Tales of the Inklands (👑 Iconic)</option>
             <option value="set14">Set 14: Hyperia City (👑 Iconic)</option>
           </select>
-          <input type="text" class="catalog-search" id="catSearch" style="margin-bottom:0;flex:2;min-width:220px;" placeholder="🔍 Cerca per nome, rarità o testo (es. Mickey, Epic, Shift)..." oninput="renderCatalog()">
+          <input type="text" class="catalog-search" id="catSearch" data-i18n-placeholder="dl_search_ph" style="margin-bottom:0;flex:2;min-width:220px;" placeholder="🔍 Cerca per nome, rarità o testo (es. Mickey, Epic, Shift)..." oninput="renderCatalog()">
         </div>
 
         <!-- Card List -->
@@ -717,19 +718,19 @@
         <div class="deck-stats-bar">
           <div class="stat-box">
             <div class="stat-val" id="statCards">0</div>
-            <div class="stat-lbl">Carte Totali</div>
+            <div class="stat-lbl" data-i18n="dl_stat_total">Carte Totali</div>
           </div>
           <div class="stat-box">
             <div class="stat-val" id="statInkable">0</div>
-            <div class="stat-lbl">Inchiostrabili</div>
+            <div class="stat-lbl" data-i18n="dl_stat_ink">Inchiostrabili</div>
           </div>
           <div class="stat-box">
             <div class="stat-val" id="statNonInkable">0</div>
-            <div class="stat-lbl">Non-Inkable</div>
+            <div class="stat-lbl" data-i18n="dl_stat_noink">Non-Inkable</div>
           </div>
           <div class="stat-box">
             <div class="stat-val" id="statAvgCost">0.0</div>
-            <div class="stat-lbl">Costo Medio</div>
+            <div class="stat-lbl" data-i18n="dl_stat_avg">Costo Medio</div>
           </div>
         </div>
 
@@ -861,6 +862,7 @@
   </div>
 
   <script src="data/lorcana-cards.js"></script>
+  <script src="data/lorcana-i18n.js"></script>
   <script>
     // CARD DATABASE (Curated selection of staples and Set 13 cards)
     const CARDS_DB = [

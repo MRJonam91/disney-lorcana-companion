@@ -497,8 +497,23 @@
     background: rgba(227, 178, 60, .12);
   }
 </style>
+  <link rel="stylesheet" href="../assets/css/lorcana-foil-ui.css">
 </head>
 <body>
+  <!-- Global Top Navigation Bar -->
+  <div class="top-bar">
+    <a href="../index.html" class="top-brand">
+      <span>✦ DISNEY LORCANA</span>
+    </a>
+    <div class="top-links">
+      <a href="../index.html" data-i18n="nav_hub">🌐 Hub</a>
+      <a href="../deck-lab.html" data-i18n="nav_decklab">🃏 Deck Lab</a>
+      <a href="../collector-vault.html" data-i18n="nav_vault">💎 Collector Vault</a>
+      <a href="#" class="active" data-i18n="nav_guide">📖 Guide</a>
+      <a href="https://www.disneylorcana.com/it-IT/app" target="_blank" data-i18n="nav_app">📱 App</a>
+    </div>
+  </div>
+
 <div class="lang-bar">
   <span>Disney Lorcana · Guía Interactiva Completa</span>
   <div class="lang-links">
@@ -1473,5 +1488,7 @@
     document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
   }
 </script>
+  <script>localStorage.setItem("lorcana_lang", "es");</script>
+  <script src="../data/lorcana-i18n.js"></script>
 </body>
 </html>
