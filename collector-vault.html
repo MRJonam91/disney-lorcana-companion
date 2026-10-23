@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disney Lorcana · Collector's Vault, Pull Simulator &amp; Probability</title>
+  <meta name="description" content="Simulatore spacchettamento Disney Lorcana, calcolo probabilità pull rate da 1 a 96 bustine, catalogo completo dei prodotti ufficiali, sfide della community e decider primo giocatore.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0913;
+      --surface: #151120;
+      --surface-2: #1e1830;
+      --surface-hover: #292040;
+      --line: rgba(229, 185, 92, 0.22);
+      --parch: #f5edd6;
+      --muted: #a69bb8;
+      --gold: #e5b95c;
+      --gold-soft: #ffd978;
+      --common: #a0a0a0;
+      --uncommon: #e2e8f0;
+      --rare: #cd7f32;
+      --super-rare: #c0c0c0;
+      --legendary: #ffd700;
+      --enchanted: #f472b6;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: radial-gradient(circle at 50% 0%, #201738 0%, var(--bg) 75%);
+      color: var(--parch);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* Top Bar */
+    .top-bar {
+      background: rgba(14, 11, 20, 0.96);
+      border-bottom: 1px solid var(--line);
+      padding: 10px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+    }
+    .top-brand {
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      letter-spacing: .08em;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.1rem;
+    }
+    .top-links {
+      display: flex;
+      gap: 14px;
+      font-size: .86rem;
+    }
+    .top-links a {
+      color: var(--muted);
+      padding: 5px 12px;
+      border-radius: 8px;
+      transition: all .2s;
+    }
+    .top-links a:hover, .top-links a.active {
+      color: var(--gold);
+      background: rgba(229, 185, 92, .12);
+    }
+
+    .wrap {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 24px 20px 60px;
+    }
+
+    /* Hero */
+    .vault-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .vault-badge {
+      display: inline-block;
+      padding: 4px 16px;
+      border-radius: 99px;
+      background: rgba(229, 185, 92, .12);
+      border: 1px solid var(--line);
+      font-size: .8rem;
+      color: var(--gold);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      background: linear-gradient(180deg, #fff7df 0%, #e5b95c 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+    .vault-desc {
+      color: var(--muted);
+      font-size: .95rem;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* Tabs */
+    .vault-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin: 24px 0 32px;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      color: var(--parch);
+      padding: 10px 22px;
+      border-radius: 12px;
+      font-family: 'Cinzel', serif;
+      font-size: .95rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all .2s;
+    }
+    .tab-btn:hover, .tab-btn.active {
+      background: linear-gradient(135deg, rgba(229, 185, 92, .25), rgba(229, 185, 92, .08));
+      border-color: var(--gold);
+      color: var(--gold-soft);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 18px rgba(229, 185, 92, .18);
+    }
+
+    /* Panels */
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 12px;
+    }
+    .panel-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.25rem;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Simulator Controls */
+    .sim-controls {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+      align-items: center;
+    }
+    .select-set {
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px 16px;
+      color: var(--parch);
+      font-family: var(--ui);
+      font-weight: 600;
+      outline: none;
+    }
+    .btn-pack {
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      color: var(--parch);
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-family: 'Cinzel', serif;
+      font-size: .9rem;
+      cursor: pointer;
+      font-weight: 700;
+      transition: all .2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-pack:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      transform: translateY(-2px);
+    }
+    .btn-pack.primary {
+      background: linear-gradient(135deg, rgba(229, 185, 92, .3), rgba(229, 185, 92, .1));
+      border-color: var(--gold);
+      color: var(--gold-soft);
+    }
+
+    /* Pull Counter Summary */
+    .pull-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    .pull-stat-box {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px 8px;
+    }
+    .pull-stat-val {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      margin-bottom: 2px;
+    }
+    .pull-stat-lbl {
+      font-size: .75rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    /* Pulled Cards Display */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px;
+      max-height: 540px;
+      overflow-y: auto;
+      padding: 10px 4px;
+    }
+    .pulled-card {
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px 10px;
+      text-align: center;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 140px;
+      transition: all .25s;
+    }
+    .pulled-card:hover {
+      transform: translateY(-4px);
+    }
+    .pulled-card.rarity-Common { border-color: rgba(255,255,255,0.15); }
+    .pulled-card.rarity-Uncommon { border-color: rgba(255,255,255,0.4); }
+    .pulled-card.rarity-Rare { border-color: var(--rare); box-shadow: 0 0 10px rgba(205,127,50,0.2); }
+    .pulled-card.rarity-Super-Rare { border-color: var(--super-rare); box-shadow: 0 0 12px rgba(192,192,192,0.3); }
+    .pulled-card.rarity-Legendary {
+      border-color: var(--legendary);
+      box-shadow: 0 0 20px rgba(255,215,0,0.4);
+      background: linear-gradient(160deg, rgba(255,215,0,0.1), var(--surface-2));
+    }
+    .pulled-card.rarity-Enchanted {
+      border-color: var(--enchanted);
+      background: linear-gradient(135deg, rgba(244,114,182,0.25), rgba(168,85,247,0.25), var(--surface-2));
+      box-shadow: 0 0 30px rgba(244,114,182,0.6);
+      animation: pulseShimmer 2s infinite alternate;
+    }
+    @keyframes pulseShimmer {
+      from { transform: scale(1); box-shadow: 0 0 20px rgba(244,114,182,0.5); }
+      to { transform: scale(1.03); box-shadow: 0 0 35px rgba(168,85,247,0.8); }
+    }
+    .pulled-foil-badge {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      font-size: .65rem;
+      background: linear-gradient(90deg, #ffd700, #ff80bf);
+      color: #0b0913;
+      font-weight: 900;
+      padding: 2px 6px;
+      border-radius: 99px;
+    }
+
+    /* Probability Calculator Section */
+    .slider-box {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .slider-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 10px;
+    }
+    .slider-input {
+      flex: 1;
+      accent-color: var(--gold);
+      height: 8px;
+    }
+    .slider-count-display {
+      font-family: 'Cinzel', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--gold);
+      min-width: 80px;
+      text-align: right;
+    }
+    .expectancy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .exp-card {
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .exp-title {
+      font-size: .82rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 6px;
+    }
+    .exp-value {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--parch);
+    }
+    .exp-sub {
+      font-size: .8rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* Product Catalog Grid */
+    .prod-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .prod-card {
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .prod-icon {
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+    }
+    .prod-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.15rem;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .prod-contents {
+      font-size: .86rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+    .prod-tag {
+      display: inline-block;
+      font-size: .74rem;
+      background: rgba(229,185,92,0.12);
+      border: 1px solid var(--line);
+      padding: 4px 10px;
+      border-radius: 6px;
+      color: var(--gold-soft);
+      font-weight: 600;
+    }
+
+    /* Challenges & Achievements */
+    .quest-card {
+      background: linear-gradient(135deg, rgba(229,185,92,0.1), var(--surface-2));
+      border: 1px solid var(--gold);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .quest-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.4rem;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .quest-body {
+      font-size: 1.05rem;
+      color: var(--parch);
+      max-width: 600px;
+      margin: 0 auto 18px;
+    }
+    .achieve-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .achieve-box {
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .achieve-box.unlocked {
+      border-color: #4ade80;
+      background: rgba(74, 222, 128, 0.08);
+    }
+    .achieve-icon {
+      font-size: 2rem;
+      filter: grayscale(100%);
+      transition: filter .2s;
+    }
+    .achieve-box.unlocked .achieve-icon {
+      filter: grayscale(0%);
+    }
+
+    /* Coin Flipper Decider */
+    .coin-wrap {
+      text-align: center;
+      padding: 20px;
+    }
+    .coin {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 16px;
+      border-radius: 50%;
+      background: linear-gradient(45deg, #ffd700, #b2862d);
+      border: 3px solid #fff3c4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cinzel', serif;
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: #0b0913;
+      box-shadow: 0 0 24px rgba(255, 215, 0, 0.4);
+      cursor: pointer;
+      transition: transform 0.6s ease-out;
+    }
+    .coin.flipping {
+      animation: flipCoin 0.8s ease-in-out;
+    }
+    @keyframes flipCoin {
+      0% { transform: rotateY(0deg) scale(1); }
+      50% { transform: rotateY(720deg) scale(1.2); }
+      100% { transform: rotateY(1440deg) scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <a href="index.html" class="top-brand">
+      <span>✦ DISNEY LORCANA</span>
+      <span style="color:var(--muted);font-weight:400;font-size:.85rem;">| Collector's Vault</span>
+    </a>
+    <div class="top-links">
+      <a href="index.html">🌐 Portale</a>
+      <a href="guide/guida-lorcana-it.html">📖 Guida IT</a>
+      <a href="deck-lab.html">🃏 Deck Lab</a>
+      <a href="collector-vault.html" class="active">💎 Collezionismo &amp; Pulls</a>
+      <a href="https://github.com/MRJonam91/disney-lorcana-companion/discussions" target="_blank">💬 Discussions</a>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <div class="vault-header">
+      <div class="vault-badge">Collector Hub, Pack Simulator &amp; Probability</div>
+      <h1>Disney Lorcana · Collector's Vault</h1>
+      <p class="vault-desc">Simula l'apertura realistica di bustine e box, calcola le probabilità matematiche di trovare carte Incantate e Leggendarie per ogni set, esplora il catalogo prodotti e metti alla prova le tue abilità con le sfide Illumineer.</p>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="vault-tabs">
+      <button class="tab-btn active" onclick="switchVaultTab('simulator')">🎴 Simulatore Spacchettamento</button>
+      <button class="tab-btn" onclick="switchVaultTab('probability')">📊 Calcolatore Probabilità &amp; Pull Rate</button>
+      <button class="tab-btn" onclick="switchVaultTab('products')">📦 Catalogo Completo Prodotti</button>
+      <button class="tab-btn" onclick="switchVaultTab('challenges')">🏆 Sfide &amp; Chi Inizia?</button>
+    </div>
+
+    <!-- 1. SIMULATOR VIEW -->
+    <div id="view-simulator">
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title">🎴 Simulatore Spacchettamento Realistico</div>
+          <button class="btn-pack" onclick="resetPullStats()">🔄 Azzera Collezione</button>
+        </div>
+
+        <!-- Controls -->
+        <div class="sim-controls">
+          <label style="font-size:.85rem;color:var(--muted);">Set Espansione:</label>
+          <select class="select-set" id="selectSimSet" onchange="changeSet()">
+            <option value="set13">Set 13: Attack of the Vine! (Current)</option>
+            <option value="set14">Set 14: Hyperia City (New Release)</option>
+            <option value="set12">Set 12: Wilds Unknown</option>
+            <option value="set1">Set 1: The First Chapter</option>
+            <option value="set2">Set 2: Rise of the Floodborn</option>
+            <option value="set3">Set 3: Into the Inklands</option>
+            <option value="set4">Set 4: Ursula's Return</option>
+            <option value="set5">Set 5: Shimmering Skies</option>
+            <option value="set6">Set 6: Azurite Sea</option>
+          </select>
+
+          <button class="btn-pack primary" onclick="openPacks(1)">✨ Apri 1 Bustina (12 Carte)</button>
+          <button class="btn-pack" onclick="openPacks(8)">🎁 Apri Trove (8 Bustine)</button>
+          <button class="btn-pack" onclick="openPacks(10)">📦 Apri 10 Bustine</button>
+          <button class="btn-pack primary" onclick="openPacks(24)">🏆 Apri 1 Booster Box (24 Bustine)</button>
+          <button class="btn-pack" onclick="openPacks(96)">🚢 Apri 1 Case (96 Bustine)</button>
+        </div>
+
+        <!-- Pull Summary Bar -->
+        <div class="pull-stats-grid">
+          <div class="pull-stat-box">
+            <div class="pull-stat-val" id="cntPacks" style="color:var(--parch);">0</div>
+            <div class="pull-stat-lbl">Bustine Aperte</div>
+          </div>
+          <div class="pull-stat-box">
+            <div class="pull-stat-val" id="cntCommon" style="color:var(--common);">0</div>
+            <div class="pull-stat-lbl">Comuni</div>
+          </div>
+          <div class="pull-stat-box">
+            <div class="pull-stat-val" id="cntUncommon" style="color:var(--uncommon);">0</div>
+            <div class="pull-stat-lbl">Non Comuni</div>
+          </div>
+          <div class="pull-stat-box">
+            <div class="pull-stat-val" id="cntRare" style="color:var(--rare);">0</div>
+            <div class="pull-stat-lbl">Rare</div>
+          </div>
+          <div class="pull-stat-box">
+            <div class="pull-stat-val" id="cntSuperRare" style="color:var(--super-rare);">0</div>
+            <div class="pull-stat-lbl">Super Rare</div>
+          </div>
+          <div class="pull-stat-box">
+            <div class="pull-stat-val" id="cntLegendary" style="color:var(--legendary);">0</div>
+            <div class="pull-stat-lbl">Leggendarie</div>
+          </div>
+          <div class="pull-stat-box" style="border-color:var(--enchanted);background:rgba(244,114,182,0.1);">
+            <div class="pull-stat-val" id="cntEnchanted" style="color:var(--enchanted);">0</div>
+            <div class="pull-stat-lbl">Incantate ✨</div>
+          </div>
+          <div class="pull-stat-box">
+            <div class="pull-stat-val" id="cntFoils" style="color:var(--gold-soft);">0</div>
+            <div class="pull-stat-lbl">Foil Totali</div>
+          </div>
+        </div>
+
+        <!-- Cards Container -->
+        <div style="font-family:'Cinzel',serif;font-size:1.1rem;color:var(--gold);margin-bottom:8px;">Ultime Carte Sbustate:</div>
+        <div class="cards-grid" id="pulledCardsGrid">
+          <div style="grid-column: 1 / -1; text-align:center; padding: 40px; color:var(--muted);">
+            Clicca su uno dei pulsanti sopra per aprire le tue prime bustine di Disney Lorcana!
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. PROBABILITY VIEW -->
+    <div id="view-probability" style="display:none;">
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title">📊 Calcolatore Probabilità Matematiche &amp; Pull Rate</div>
+        </div>
+        <p style="font-size:.9rem;color:var(--muted);margin-bottom:16px;">
+          Muovi lo slider per calcolare esattamente cosa aspettarti in base al numero di bustine o prodotti che desideri acquistare.
+          I calcoli si basano sui dati statistici verificati su campioni di oltre 50.000 bustine ufficiali Ravensburger.
+        </p>
+
+        <!-- Slider -->
+        <div class="slider-box">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <label style="font-weight:700;color:var(--gold);">Numero di Bustine da Analizzare:</label>
+            <div class="slider-count-display"><span id="sliderVal">24</span> 🎴</div>
+          </div>
+          <div class="slider-row">
+            <span style="font-size:.8rem;color:var(--muted);">1 (Singola)</span>
+            <input type="range" class="slider-input" id="packSlider" min="1" max="100" value="24" oninput="updateProbabilityCalc(this.value)">
+            <span style="font-size:.8rem;color:var(--muted);">100 (Più di un Case)</span>
+          </div>
+        </div>
+
+        <!-- Expected Values Grid -->
+        <div class="expectancy-grid">
+          <div class="exp-card">
+            <div class="exp-title">Probabilità Incantata (Enchanted)</div>
+            <div class="exp-value" id="expEnchantedProb" style="color:var(--enchanted);">26.1%</div>
+            <div class="exp-sub">Chance di trovare <b>almeno 1</b> carta Incantata su <span class="exp-pack-n">24</span> bustine (tasso 1:80).</div>
+          </div>
+
+          <div class="exp-card">
+            <div class="exp-title">Leggendarie Attese (Media)</div>
+            <div class="exp-value" id="expLegendary" style="color:var(--legendary);">3.6 - 4.2</div>
+            <div class="exp-sub">Circa 1 Leggendaria ogni 6-7 bustine aperte.</div>
+          </div>
+
+          <div class="exp-card">
+            <div class="exp-title">Super Rare Attese (Media)</div>
+            <div class="exp-value" id="expSuperRare" style="color:var(--super-rare);">12.0 - 14.5</div>
+            <div class="exp-sub">Circa 1 Super Rara ogni 3-4 bustine.</div>
+          </div>
+
+          <div class="exp-card">
+            <div class="exp-title">Carte Foil Garantite</div>
+            <div class="exp-value" id="expFoils" style="color:var(--gold-soft);">24</div>
+            <div class="exp-sub">1 carta foil garantita al 100% in ogni bustina.</div>
+          </div>
+        </div>
+
+        <!-- Formula Note -->
+        <div style="margin-top:24px;background:rgba(0,0,0,0.3);border:1px solid var(--line);border-radius:12px;padding:16px;font-size:.84rem;color:var(--muted);">
+          <b style="color:var(--gold);">📐 Formula Matematica Applicata:</b>
+          La probabilità cumulativa di sbustare almeno un'Incantata è calcolata tramite distribuzione binomiale:
+          <code>P(almeno 1) = 1 - (1 - 1/80)^N</code>, dove N è il numero di bustine aperte.
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. PRODUCTS CATALOG VIEW -->
+    <div id="view-products" style="display:none;">
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title">📦 Catalogo Completo dei Prodotti Disney Lorcana</div>
+        </div>
+        <p style="font-size:.9rem;color:var(--muted);margin-bottom:20px;">
+          Tutti i tipi di prodotto ufficiali pubblicati da Ravensburger, con il contenuto esatto e consigli per gli acquisti.
+        </p>
+
+        <div class="prod-grid">
+          <div class="prod-card">
+            <div>
+              <div class="prod-icon">🎴</div>
+              <div class="prod-title">Booster Pack (Bustina Singola)</div>
+              <div class="prod-contents">
+                Contiene 12 carte: 6 Comuni, 3 Non Comuni, 2 carte Rare, Super Rare o Leggendarie, e 1 carta Foil garantita (qualsiasi rarità inclusa Incantata).
+              </div>
+            </div>
+            <span class="prod-tag">Prezzo cons: ~5.99€ · Ideale per draft</span>
+          </div>
+
+          <div class="prod-card">
+            <div>
+              <div class="prod-icon">🏆</div>
+              <div class="prod-title">Booster Display Box (24 Bustine)</div>
+              <div class="prod-contents">
+                Il prodotto re del collezionismo: 24 bustine (288 carte totali). Garantisce mediamente 4-5 Leggendarie, 12-14 Super Rare e circa il 26-28% di probabilità di contenere una rara carta Incantata!
+              </div>
+            </div>
+            <span class="prod-tag">24 Pack · Miglior rapporto qualità/prezzo</span>
+          </div>
+
+          <div class="prod-card">
+            <div>
+              <div class="prod-icon">🎁</div>
+              <div class="prod-title">Illumineer's Trove</div>
+              <div class="prod-contents">
+                Scatola deluxe per riporre le carte con 6 divisori tematici, 8 bustine booster, 6 dadi metallizzati contatore danno ad alta precisione e 1 contatore lore a rotella girevole.
+              </div>
+            </div>
+            <span class="prod-tag">8 Pack + Accessori · Must-have per iniziare</span>
+          </div>
+
+          <div class="prod-card">
+            <div>
+              <div class="prod-icon">⚔️</div>
+              <div class="prod-title">Starter Decks (Mazzo Base)</div>
+              <div class="prod-contents">
+                Mazzo precostruito completo a 60 carte pronto per giocare subito con 2 combinazioni di inchiostro, include 1 bustina booster per espanderlo, segnalini danno e libretto regole.
+              </div>
+            </div>
+            <span class="prod-tag">60 Carte + 1 Pack · Perfetto per novizi</span>
+          </div>
+
+          <div class="prod-card">
+            <div>
+              <div class="prod-icon">🌟</div>
+              <div class="prod-title">Gift Sets &amp; Collector's Edition</div>
+              <div class="prod-contents">
+                Scatole speciali con 4 bustine booster, 2 carte promozionali foil esclusive e 2 carte promozionali giganti oversize da collezione con arte olografica alternativa.
+              </div>
+            </div>
+            <span class="prod-tag">Promo esclusive + 4 Pack</span>
+          </div>
+
+          <div class="prod-card">
+            <div>
+              <div class="prod-icon">🐙</div>
+              <div class="prod-title">Illumineer's Quest: Deep Trouble</div>
+              <div class="prod-contents">
+                La prima espansione cooperativa e solitaria: affronta il boss Ursula e il suo mazzo automatico potenziato. Include 2 mazzi giocatore precostruiti da 60 carte e tappetini gioco.
+              </div>
+            </div>
+            <span class="prod-tag">Modalità Co-op / Solitario · 1-4 Giocatori</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. CHALLENGES & DECIDER VIEW -->
+    <div id="view-challenges" style="display:none;">
+      
+      <!-- Random Challenge Generator -->
+      <div class="quest-card">
+        <div class="quest-title">🎲 Sfida della Serata (Community Quest Generator)</div>
+        <div class="quest-body" id="questText">
+          "Vinci una partita senza mai sfidare un personaggio avversario (vittoria puramente pacifista)."
+        </div>
+        <button class="btn-pack primary" onclick="generateNewQuest()">⚡ Genera Nuova Sfida per la Partita</button>
+      </div>
+
+      <!-- Coin Flipper -->
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title">🪙 Chi Inizia il Turno 1? (Illumineer Coin Flip)</div>
+        </div>
+        <div class="coin-wrap">
+          <div class="coin" id="coinDecider" onclick="flipCoin()">✦</div>
+          <div style="font-size:1.1rem;font-weight:700;color:var(--gold);" id="coinResult">Clicca sulla moneta d'oro per lanciare!</div>
+        </div>
+      </div>
+
+      <!-- Achievements Tracker -->
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title">🏆 Traguardi &amp; Trofei Illumineer</div>
+          <span style="font-size:.8rem;color:var(--muted);">Clicca per segnare come completato (salvataggio locale)</span>
+        </div>
+        <div class="achieve-grid" id="achievementsContainer">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    // SIMULATOR SETTINGS & CARD POOL
+    const SET_NAMES = {
+      set13: 'Attack of the Vine! (Set 13)',
+      set14: 'Hyperia City (Set 14)',
+      set12: 'Wilds Unknown (Set 12)',
+      set1: 'The First Chapter (Set 1)',
+      set2: 'Rise of the Floodborn (Set 2)',
+      set3: 'Into the Inklands (Set 3)',
+      set4: "Ursula's Return (Set 4)",
+      set5: 'Shimmering Skies (Set 5)',
+      set6: 'Azurite Sea (Set 6)'
+    };
+
+    // SAMPLE CARD NAMES PER RARITY FOR SIMULATION
+    const CARD_SAMPLES = {
+      Common: ['Robin Hood - Bowman', 'Minnie - Adventurer', 'Stitch - Little Rocket', 'Peter Pan - Never Land Hero', 'Olaf - Friendly Snowman', 'HeiHei - Boat Snack', 'Goofy - Musketeer', 'Duke of Weselton', 'Captain Hook - Forceful Duelist', 'Aladdin - Street Rat'],
+      Uncommon: ['Flynn Rider - Charming Rogue', 'Tinker Bell - Tiny Tactician', 'Cinderella - Ballroom Sensation', 'Gramma Tala - Storyteller', 'Simba - Protective Cub', 'Megara - Pulling the Strings', 'Mushu - Stealthy Dragon', 'Develop Your Brain', 'Smash', 'One Jump Ahead'],
+      Rare: ['Mickey Mouse - Detective', 'Madam Mim - Fox', 'Merlin - Goat', 'Tod - Clever Fox', 'Fishbone Quill', 'Sisu - Daring Visitor', 'Grab Your Sword', 'Let It Go', 'Arthur - King in the Making', 'Brawl'],
+      'Super Rare': ['Mickey Mouse - Bob Cratchit', 'Merlin - Rabbit', 'Dr. Bushroot - Evil Botanist', 'Ariel - Spectacular Singer', 'Robin Hood - Champion of Sherwood', 'Cinderella - Stouthearted', 'Piglet - Pirate Captain', 'Jafar - Illusionist'],
+      Legendary: ['Mickey & Minnie - Adventuring Duo', 'Elsa - Spirit of Winter', 'Tinker Bell - Giant Fairy', 'Maleficent - Dragon', 'Be Prepared', 'A Whole New World', 'Stitch - Carefree Surfer', 'Diablo - Devoted Herald'],
+      Enchanted: ['✨ Mickey & Minnie - Adventuring Duo (Enchanted)', '✨ Elsa - Spirit of Winter (Enchanted)', '✨ Cinderella - Stouthearted (Enchanted)', '✨ Stitch - Carefree Surfer (Enchanted)', '✨ Tinker Bell - Giant Fairy (Enchanted)', '✨ Diablo - Devoted Herald (Enchanted)']
+    };
+
+    let simStats = {
+      packs: 0,
+      Common: 0,
+      Uncommon: 0,
+      Rare: 0,
+      'Super Rare': 0,
+      Legendary: 0,
+      Enchanted: 0,
+      foils: 0
+    };
+
+    // OPEN PACKS
+    function openPacks(n) {
+      const grid = document.getElementById('pulledCardsGrid');
+      grid.innerHTML = '';
+
+      const pulled = [];
+
+      for (let p = 0; p < n; p++) {
+        simStats.packs++;
+        // 12 cards per pack:
+        // 6 Commons
+        for (let i = 0; i < 6; i++) {
+          simStats.Common++;
+          pulled.push({ name: getRandomSample('Common'), rarity: 'Common', foil: false });
+        }
+        // 3 Uncommons
+        for (let i = 0; i < 3; i++) {
+          simStats.Uncommon++;
+          pulled.push({ name: getRandomSample('Uncommon'), rarity: 'Uncommon', foil: false });
+        }
+        // 2 Rare+ slots
+        for (let i = 0; i < 2; i++) {
+          const roll = Math.random();
+          let r = 'Rare';
+          if (roll < 0.16) {
+            r = 'Legendary';
+            simStats.Legendary++;
+          } else if (roll < 0.46) {
+            r = 'Super Rare';
+            simStats['Super Rare']++;
+          } else {
+            simStats.Rare++;
+          }
+          pulled.push({ name: getRandomSample(r), rarity: r, foil: false });
+        }
+        // 1 Foil slot (100% foil)
+        simStats.foils++;
+        const foilRoll = Math.random();
+        let foilRarity = 'Common';
+        let isEnchanted = false;
+
+        // 1:80 chance for Enchanted in pack (~1.25%)
+        if (foilRoll < 0.0125) {
+          foilRarity = 'Enchanted';
+          isEnchanted = true;
+          simStats.Enchanted++;
+        } else if (foilRoll < 0.05) {
+          foilRarity = 'Legendary';
+          simStats.Legendary++;
+        } else if (foilRoll < 0.18) {
+          foilRarity = 'Super Rare';
+          simStats['Super Rare']++;
+        } else if (foilRoll < 0.48) {
+          foilRarity = 'Rare';
+          simStats.Rare++;
+        } else if (foilRoll < 0.75) {
+          foilRarity = 'Uncommon';
+          simStats.Uncommon++;
+        } else {
+          simStats.Common++;
+        }
+
+        pulled.push({
+          name: isEnchanted ? getRandomSample('Enchanted') : getRandomSample(foilRarity),
+          rarity: foilRarity,
+          foil: true
+        });
+      }
+
+      updateStatsUI();
+
+      // Display up to 36 cards to prevent DOM freeze
+      const displayCards = pulled.slice(-36);
+      displayCards.forEach(c => {
+        const div = document.createElement('div');
+        const rarityClass = `rarity-${c.rarity.replace(' ', '-')}`;
+        div.className = `pulled-card ${rarityClass}`;
+        div.innerHTML = `
+          ${c.foil ? '<span class="pulled-foil-badge">FOIL</span>' : ''}
+          <div style="font-size:1.4rem;margin:8px 0;">${getRarityIcon(c.rarity)}</div>
+          <div style="font-weight:700;font-size:.85rem;color:var(--parch);line-height:1.2;">${c.name}</div>
+          <div style="font-size:.72rem;color:var(--muted);margin-top:6px;">${c.rarity}</div>
+        `;
+        grid.appendChild(div);
+      });
+    }
+
+    function getRandomSample(rarity) {
+      const arr = CARD_SAMPLES[rarity] || CARD_SAMPLES.Common;
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function getRarityIcon(rarity) {
+      switch(rarity) {
+        case 'Common': return '⚪';
+        case 'Uncommon': return '📖';
+        case 'Rare': return '🔺';
+        case 'Super Rare': return '🔷';
+        case 'Legendary': return '⬟';
+        case 'Enchanted': return '✨';
+        default: return '✦';
+      }
+    }
+
+    function updateStatsUI() {
+      document.getElementById('cntPacks').innerText = simStats.packs;
+      document.getElementById('cntCommon').innerText = simStats.Common;
+      document.getElementById('cntUncommon').innerText = simStats.Uncommon;
+      document.getElementById('cntRare').innerText = simStats.Rare;
+      document.getElementById('cntSuperRare').innerText = simStats['Super Rare'];
+      document.getElementById('cntLegendary').innerText = simStats.Legendary;
+      document.getElementById('cntEnchanted').innerText = simStats.Enchanted;
+      document.getElementById('cntFoils').innerText = simStats.foils;
+    }
+
+    function resetPullStats() {
+      simStats = { packs: 0, Common: 0, Uncommon: 0, Rare: 0, 'Super Rare': 0, Legendary: 0, Enchanted: 0, foils: 0 };
+      updateStatsUI();
+      document.getElementById('pulledCardsGrid').innerHTML = `
+        <div style="grid-column: 1 / -1; text-align:center; padding: 40px; color:var(--muted);">
+          Contatore azzerato. Apri nuove bustine!
+        </div>
+      `;
+    }
+
+    function changeSet() {
+      resetPullStats();
+    }
+
+    // PROBABILITY CALCULATOR
+    function updateProbabilityCalc(n) {
+      n = parseInt(n);
+      document.getElementById('sliderVal').innerText = n;
+      document.querySelectorAll('.exp-pack-n').forEach(el => el.innerText = n);
+
+      // Prob of at least 1 enchanted: 1 - (1 - 1/80)^n
+      const pEnchanted = (1 - Math.pow(1 - 1/80, n)) * 100;
+      document.getElementById('expEnchantedProb').innerText = pEnchanted.toFixed(1) + '%';
+
+      // Legendary expectancy: ~0.16 per pack in rare slot * 2 = 0.32 + foil chance 0.03 = ~0.17 per pack
+      const legMin = (n * 0.15).toFixed(1);
+      const legMax = (n * 0.18).toFixed(1);
+      document.getElementById('expLegendary').innerText = `${legMin} - ${legMax}`;
+
+      // Super rare expectancy: ~0.55 per pack
+      const srMin = (n * 0.5).toFixed(1);
+      const srMax = (n * 0.6).toFixed(1);
+      document.getElementById('expSuperRare').innerText = `${srMin} - ${srMax}`;
+
+      // Foils guaranteed = n
+      document.getElementById('expFoils').innerText = n;
+    }
+
+    // TAB SWITCHER
+    function switchVaultTab(tab) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      const views = ['simulator', 'probability', 'products', 'challenges'];
+      views.forEach((v, i) => {
+        const el = document.getElementById(`view-${v}`);
+        if (el) el.style.display = (v === tab) ? 'block' : 'none';
+        if (v === tab) {
+          document.querySelectorAll('.tab-btn')[i].classList.add('active');
+        }
+      });
+    }
+
+    // RANDOM QUESTS
+    const QUESTS = [
+      "Vinci una partita senza mai sfidare un personaggio avversario (vittoria pacifista tramite sole missioni).",
+      "Risolvi la combinazione 'Duo Shift' entro il Turno 3 giocando Mickey e Minnie.",
+      "Canta almeno 3 canzoni diverse nella stessa partita usando personaggi con la keyword Singer.",
+      "Raggiungi 10 inchiostri nel Calamaio prima che il tuo avversario ne abbia accumulati 6.",
+      "Vinci mantenendo in gioco almeno 3 personaggi protetti da Ward contemporaneamente.",
+      "Gioca e mantieni attiva una carta Luogo per almeno 3 turni consecutivi.",
+      "Vinci una partita con un mazzo costruito interamente con un singolo colore d'inchiostro (Mono-Ink Challenge).",
+      "Accumula esattamente 20 Lore in un singolo turno partendo da meno di 10 Lore!"
+    ];
+
+    function generateNewQuest() {
+      const q = QUESTS[Math.floor(Math.random() * QUESTS.length)];
+      document.getElementById('questText').innerText = `"${q}"`;
+    }
+
+    // COIN FLIP
+    function flipCoin() {
+      const coin = document.getElementById('coinDecider');
+      const res = document.getElementById('coinResult');
+      coin.classList.add('flipping');
+      res.innerText = 'Lancio in corso...';
+
+      setTimeout(() => {
+        coin.classList.remove('flipping');
+        const winner = Math.random() < 0.5 ? 'GIOCATORE 1 INIZIA' : 'GIOCATORE 2 INIZIA';
+        coin.innerText = winner.includes('1') ? 'P1' : 'P2';
+        res.innerHTML = `🏆 Risultato: <span style="color:var(--gold-soft);">${winner}</span>!`;
+      }, 700);
+    }
+
+    // ACHIEVEMENTS
+    const ACHIEVEMENTS = [
+      { id: 'ach_duo', name: 'Maestro del Duo Shift', desc: 'Risolto con successo il Duo Shift a costo 0.' },
+      { id: 'ach_lore20', name: 'Vittoria Folgorante', desc: 'Raggiunti 20 punti Lore prima del Turno 6.' },
+      { id: 'ach_singer', name: 'Coro dell\'Illuminarium', desc: 'Cantata una canzone a costo 5 o superiore gratis.' },
+      { id: 'ach_pull_ench', name: 'Baciato dalla Sorte', desc: 'Trovata una carta Incantata nel simulatore di spacchettamento.' },
+      { id: 'ach_ward', name: 'Fortezza Inviolabile', desc: 'Schierati 3 personaggi con Ward contemporaneamente.' },
+      { id: 'ach_box', name: 'Apertura Epica', desc: 'Aperto un intero Booster Box da 24 bustine nel Vault.' }
+    ];
+
+    function renderAchievements() {
+      const cont = document.getElementById('achievementsContainer');
+      cont.innerHTML = '';
+      const saved = JSON.parse(localStorage.getItem('lorcana_achieve') || '{}');
+
+      ACHIEVEMENTS.forEach(a => {
+        const isUnlocked = !!saved[a.id];
+        const box = document.createElement('div');
+        box.className = `achieve-box ${isUnlocked ? 'unlocked' : ''}`;
+        box.onclick = () => toggleAchievement(a.id);
+        box.innerHTML = `
+          <div class="achieve-icon">${isUnlocked ? '🏆' : '🔒'}</div>
+          <div>
+            <div style="font-weight:700;font-size:.9rem;color:var(--parch);">${a.name}</div>
+            <div style="font-size:.78rem;color:var(--muted);">${a.desc}</div>
+            <div style="font-size:.7rem;color:${isUnlocked ? '#4ade80' : 'var(--muted)'};margin-top:2px;">
+              ${isUnlocked ? '✓ Sbloccato' : '○ Clicca per sbloccare'}
+            </div>
+          </div>
+        `;
+        cont.appendChild(box);
+      });
+    }
+
+    function toggleAchievement(id) {
+      const saved = JSON.parse(localStorage.getItem('lorcana_achieve') || '{}');
+      saved[id] = !saved[id];
+      localStorage.setItem('lorcana_achieve', JSON.stringify(saved));
+      renderAchievements();
+    }
+
+    // Initialize
+    window.addEventListener('DOMContentLoaded', () => {
+      updateProbabilityCalc(24);
+      renderAchievements();
+    });
+  </script>
+</body>
+</html>

@@ -9,6 +9,15 @@ Benvenuto nella risorsa open-source più completa e virale per gli Illumineer it
 
 ---
 
+---
+
+## 🚀 Applicazioni Web Interattive & Simulatori
+
+- **[🃏 Deck Lab & Goldfish Playtester (deck-lab.html)](deck-lab.html)**: Costruzione mazzi da 60 carte, analisi della curva d'inchiostro, test della mano iniziale con mulligan, simulatore primi turni e compatibilità export con **duels.ink**, **inktable.net** e **dreamborn.ink**.
+- **[💎 Collector's Vault & Pulls Simulator (collector-vault.html)](collector-vault.html)**: Simulatore realistico di spacchettamento (1 bustina, 10, Trove, Box da 24, Case da 96), calcolo esatto delle probabilità di trovare carte Incantate per ogni set, catalogo prodotti e generatore di sfide con moneta 3D.
+
+---
+
 ## 🚀 Accesso Rapido alle Guide
 
 - **[Portale Centrale Multilingua (index.html)](index.html)**

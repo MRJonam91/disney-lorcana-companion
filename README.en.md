@@ -26,6 +26,18 @@ Welcome to the **most comprehensive, viral open-source companion** for Disney Lo
 
 ---
 
+---
+
+## 🚀 Interactive Community Web Apps
+
+| Application | Features | Direct Link |
+| :--- | :--- | :--- |
+| **🃏 Deck Lab & Playtester** | 60-card builder, live mana curve, goldfish turn-by-turn playtesting, export/import compatible with **duels.ink**, **inktable.net** and **dreamborn.ink** | [Launch Deck Lab](deck-lab.html) |
+| **💎 Collector's Vault** | Realistic booster pack simulator (1 pack, 10, Trove, 24-box, 96-case), binomial pull rate calculator per set, sealed product catalog, random quest generator & coin flip | [Open Collector's Vault](collector-vault.html) |
+| **🌐 Multilingual Hub** | Unified international portal with quick language switch, lore tracker & set timeline | [Open Hub Portal](index.html) |
+
+---
+
 ## ⚡ What Makes This Repository Special?
 
 1. **Standalone Offline Interactive HTML Guides**: Single-file web apps that work directly in any browser with zero installation or build steps.

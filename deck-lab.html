@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disney Lorcana · Deck Lab, Builder &amp; Playtester</title>
+  <meta name="description" content="Laboratorio mazzi Disney Lorcana: creazione mazzo a 60 carte, test della mano iniziale, simulatore goldfish, calcolo curva e export per duels.ink, inktable e dreamborn.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d0a14;
+      --surface: #171224;
+      --surface-2: #211a33;
+      --surface-hover: #2b2242;
+      --line: rgba(229, 185, 92, 0.22);
+      --line-bright: rgba(229, 185, 92, 0.6);
+      --parch: #f5edd6;
+      --muted: #a79cb8;
+      --gold: #e5b95c;
+      --gold-soft: #ffd978;
+      --amber: #e5933a;
+      --amethyst: #9851b5;
+      --emerald: #3fa364;
+      --ruby: #c83d47;
+      --sapphire: #3b7ec2;
+      --steel: #7f8a9a;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: radial-gradient(circle at 50% 0%, #201738 0%, var(--bg) 75%);
+      color: var(--parch);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* Top Bar */
+    .top-bar {
+      background: rgba(14, 11, 20, 0.96);
+      border-bottom: 1px solid var(--line);
+      padding: 10px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+    }
+    .top-brand {
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      letter-spacing: .08em;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.1rem;
+    }
+    .top-links {
+      display: flex;
+      gap: 14px;
+      font-size: .86rem;
+    }
+    .top-links a {
+      color: var(--muted);
+      padding: 5px 12px;
+      border-radius: 8px;
+      transition: all .2s;
+    }
+    .top-links a:hover, .top-links a.active {
+      color: var(--gold);
+      background: rgba(229, 185, 92, .12);
+    }
+
+    /* Container & Layout */
+    .wrap {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 24px 20px 60px;
+    }
+
+    /* Hero Section */
+    .lab-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .lab-badge {
+      display: inline-block;
+      padding: 4px 16px;
+      border-radius: 99px;
+      background: rgba(229, 185, 92, .12);
+      border: 1px solid var(--line);
+      font-size: .8rem;
+      color: var(--gold);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      background: linear-gradient(180deg, #fff7df 0%, #e5b95c 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+    .lab-desc {
+      color: var(--muted);
+      font-size: .95rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* Mode Tabs */
+    .lab-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin: 24px 0 32px;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      color: var(--parch);
+      padding: 10px 24px;
+      border-radius: 12px;
+      font-family: 'Cinzel', serif;
+      font-size: .95rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all .2s;
+    }
+    .tab-btn:hover, .tab-btn.active {
+      background: linear-gradient(135deg, rgba(229, 185, 92, .25), rgba(229, 185, 92, .08));
+      border-color: var(--gold);
+      color: var(--gold-soft);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 18px rgba(229, 185, 92, .18);
+    }
+
+    /* Deck Lab Grid */
+    .lab-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 992px) {
+      .lab-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Cards Panel */
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 22px;
+    }
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 12px;
+    }
+    .panel-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.25rem;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Quick Load Decks */
+    .preset-bar {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      margin-bottom: 16px;
+    }
+    .btn-preset {
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      color: var(--parch);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: .8rem;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all .2s;
+    }
+    .btn-preset:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* Inks Filter Bar */
+    .ink-selector {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .ink-pill {
+      padding: 6px 14px;
+      border-radius: 99px;
+      border: 1.5px solid rgba(255,255,255,0.15);
+      background: rgba(0,0,0,0.3);
+      font-size: .8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .ink-pill.amber.active { border-color: var(--amber); background: rgba(229,147,58,0.25); color: #ffb86c; }
+    .ink-pill.amethyst.active { border-color: var(--amethyst); background: rgba(152,81,181,0.25); color: #d699ff; }
+    .ink-pill.emerald.active { border-color: var(--emerald); background: rgba(63,163,100,0.25); color: #6ee7b7; }
+    .ink-pill.ruby.active { border-color: var(--ruby); background: rgba(200,61,71,0.25); color: #fca5a5; }
+    .ink-pill.sapphire.active { border-color: var(--sapphire); background: rgba(59,126,194,0.25); color: #93c5fd; }
+    .ink-pill.steel.active { border-color: var(--steel); background: rgba(127,138,154,0.25); color: #cbd5e1; }
+
+    /* Card List Catalog */
+    .catalog-search {
+      width: 100%;
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px 14px;
+      color: var(--parch);
+      font-size: .9rem;
+      margin-bottom: 14px;
+      outline: none;
+    }
+    .catalog-search:focus {
+      border-color: var(--gold);
+    }
+    .card-list {
+      max-height: 480px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding-right: 4px;
+    }
+    .card-item {
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all .2s;
+    }
+    .card-item:hover {
+      border-color: var(--gold);
+      background: var(--surface-hover);
+    }
+    .card-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .card-cost {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: .85rem;
+      border: 1.5px solid var(--gold);
+      background: rgba(0,0,0,0.4);
+      color: var(--gold-soft);
+    }
+    .card-cost.non-inkable {
+      border-style: dashed;
+      color: #fca5a5;
+      border-color: #fca5a5;
+    }
+    .card-name-title {
+      font-weight: 600;
+      font-size: .9rem;
+      color: var(--parch);
+    }
+    .card-name-sub {
+      font-size: .78rem;
+      color: var(--muted);
+    }
+    .card-actions {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+    .btn-add {
+      background: rgba(229, 185, 92, .15);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: .8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .15s;
+    }
+    .btn-add:hover {
+      background: var(--gold);
+      color: #0d0a14;
+    }
+
+    /* Active Deck Summary */
+    .deck-stats-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    .stat-box {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 8px 6px;
+    }
+    .stat-val {
+      font-family: 'Cinzel', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--gold-soft);
+    }
+    .stat-val.alert { color: #f87171; }
+    .stat-lbl {
+      font-size: .72rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    /* Curve Chart */
+    .curve-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      height: 120px;
+      margin-bottom: 20px;
+      padding: 0 8px 6px;
+      border-bottom: 1px solid var(--line);
+    }
+    .curve-bar-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      height: 100%;
+    }
+    .curve-fill {
+      width: 100%;
+      max-width: 36px;
+      background: linear-gradient(180deg, var(--gold-soft), var(--gold));
+      border-radius: 4px 4px 0 0;
+      transition: height .3s;
+      min-height: 2px;
+    }
+    .curve-count {
+      font-size: .75rem;
+      margin-bottom: 4px;
+      color: var(--parch);
+    }
+    .curve-cost {
+      font-size: .75rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* Deck List in Builder */
+    .deck-cards-list {
+      max-height: 380px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .deck-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 12px;
+      background: var(--surface-2);
+      border-radius: 8px;
+      font-size: .88rem;
+    }
+    .deck-row-qty {
+      font-weight: 700;
+      color: var(--gold);
+      width: 24px;
+    }
+    .deck-row-name {
+      flex: 1;
+      margin: 0 10px;
+    }
+    .deck-row-ctrls {
+      display: flex;
+      gap: 4px;
+    }
+    .btn-qty {
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,0.3);
+      color: var(--parch);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+    }
+    .btn-qty:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* Export & Actions */
+    .deck-io-bar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn-io {
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      color: var(--parch);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: .82rem;
+      cursor: pointer;
+      transition: all .2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-io:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    .btn-primary {
+      background: var(--gold);
+      color: #0d0a14;
+      font-weight: 700;
+      border-color: var(--gold);
+    }
+    .btn-primary:hover {
+      background: var(--gold-soft);
+      color: #0d0a14;
+    }
+
+    /* Goldfish Playtester Section */
+    .playtester-box {
+      margin-top: 30px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 24px;
+    }
+    .play-board {
+      display: grid;
+      grid-template-columns: 240px 1fr 240px;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    @media (max-width: 900px) {
+      .play-board { grid-template-columns: 1fr; }
+    }
+    .play-col {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .play-col-title {
+      font-family: 'Cinzel', serif;
+      font-size: .95rem;
+      color: var(--gold);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      display: flex;
+      justify-content: space-between;
+    }
+    .hand-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      min-height: 120px;
+    }
+    .hand-card-chip {
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: .8rem;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 110px;
+      transition: all .2s;
+    }
+    .hand-card-chip:hover {
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+    .hand-card-chip.selected {
+      border-color: #f87171;
+      background: rgba(248, 113, 113, 0.15);
+    }
+    .chip-top {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 700;
+      color: var(--gold-soft);
+    }
+
+    /* Modal / Textarea for Import Export */
+    .modal-wrap {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-wrap.show { display: flex; }
+    .modal-content {
+      background: var(--surface);
+      border: 1px solid var(--gold);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 580px;
+      padding: 24px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    }
+    .modal-textarea {
+      width: 100%;
+      height: 220px;
+      background: rgba(0,0,0,0.4);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px;
+      color: var(--parch);
+      font-family: monospace;
+      font-size: .88rem;
+      margin: 14px 0;
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <a href="index.html" class="top-brand">
+      <span>✦ DISNEY LORCANA</span>
+      <span style="color:var(--muted);font-weight:400;font-size:.85rem;">| Deck Lab</span>
+    </a>
+    <div class="top-links">
+      <a href="index.html">🌐 Portale</a>
+      <a href="guide/guida-lorcana-it.html">📖 Guida IT</a>
+      <a href="collector-vault.html">💎 Collezionismo &amp; Pulls</a>
+      <a href="deck-lab.html" class="active">🃏 Deck Lab</a>
+      <a href="https://github.com/MRJonam91/disney-lorcana-companion/discussions" target="_blank">💬 Discussions</a>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <div class="lab-header">
+      <div class="lab-badge">Tournament Deck Builder &amp; Playtester</div>
+      <h1>Disney Lorcana · Deck Lab</h1>
+      <p class="lab-desc">Costruisci il tuo mazzo da 60 carte, analizza la curva d'inchiostro, testa la mano iniziale con mulligan realistico e simula i primi turni. Esporta per <strong>duels.ink</strong>, <strong>inktable</strong> o <strong>dreamborn</strong>.</p>
+    </div>
+
+    <!-- Mode Tabs -->
+    <div class="lab-tabs">
+      <button class="tab-btn active" onclick="switchLabTab('builder')">🛠️ Deck Builder &amp; Curva</button>
+      <button class="tab-btn" onclick="switchLabTab('goldfish')">🎲 Simulatore Mano &amp; Goldfish Playtester</button>
+      <button class="tab-btn" onclick="openSimulatorLinks()">⚡ Gioca Online (Duels.ink &amp; Inktable)</button>
+    </div>
+
+    <!-- BUILDER VIEW -->
+    <div id="view-builder" class="lab-grid">
+
+      <!-- LEFT: CARD CATALOG & FILTERS -->
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title">📚 Catalogo Carte &amp; Sinergie</div>
+          <span style="font-size:.8rem;color:var(--muted);">Filtra per inchiostri attivi</span>
+        </div>
+
+        <!-- Presets -->
+        <div style="font-size:.78rem;color:var(--gold-soft);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;">Carica Deck Meta Competitivo:</div>
+        <div class="preset-bar">
+          <button class="btn-preset" onclick="loadPreset('mickey_minnie')">🐭 Topolino &amp; Minnie Duo (Smeraldo/Zaffiro)</button>
+          <button class="btn-preset" onclick="loadPreset('steelsongs')">🎵 Amber/Steel Steelsongs</button>
+          <button class="btn-preset" onclick="loadPreset('bounce')">🦊 Amethyst/Ruby Bounce Control</button>
+          <button class="btn-preset" onclick="loadPreset('ramp')">🐲 Ruby/Sapphire Ramp</button>
+          <button class="btn-preset" onclick="loadPreset('discard')">🐍 Emerald/Steel Discard</button>
+        </div>
+
+        <!-- Inks Filter -->
+        <div class="ink-selector">
+          <div class="ink-pill amber active" onclick="toggleInkFilter('amber', this)">Amber</div>
+          <div class="ink-pill amethyst active" onclick="toggleInkFilter('amethyst', this)">Amethyst</div>
+          <div class="ink-pill emerald active" onclick="toggleInkFilter('emerald', this)">Emerald</div>
+          <div class="ink-pill ruby active" onclick="toggleInkFilter('ruby', this)">Ruby</div>
+          <div class="ink-pill sapphire active" onclick="toggleInkFilter('sapphire', this)">Sapphire</div>
+          <div class="ink-pill steel active" onclick="toggleInkFilter('steel', this)">Steel</div>
+        </div>
+
+        <input type="text" class="catalog-search" id="catSearch" placeholder="🔍 Cerca per nome, costo o abilità (es. Mickey, Rush, Ward, Song)..." oninput="renderCatalog()">
+
+        <!-- Card List -->
+        <div class="card-list" id="catalogContainer">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- RIGHT: ACTIVE DECK & METRICS -->
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title">🃏 Mazzo Attivo (<span id="deckTotalCount">0</span>/60)</div>
+          <button class="btn-io" onclick="clearDeck()">🗑️ Svuota</button>
+        </div>
+
+        <!-- Deck Stats Bar -->
+        <div class="deck-stats-bar">
+          <div class="stat-box">
+            <div class="stat-val" id="statCards">0</div>
+            <div class="stat-lbl">Carte Totali</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val" id="statInkable">0</div>
+            <div class="stat-lbl">Inchiostrabili</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val" id="statNonInkable">0</div>
+            <div class="stat-lbl">Non-Inkable</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val" id="statAvgCost">0.0</div>
+            <div class="stat-lbl">Costo Medio</div>
+          </div>
+        </div>
+
+        <!-- Curva Mana -->
+        <div style="font-size:.78rem;color:var(--gold-soft);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;">Distribuzione Curva d'Inchiostro:</div>
+        <div class="curve-chart" id="curveBars">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Deck Cards List -->
+        <div class="deck-cards-list" id="deckListContainer">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- IO Controls -->
+        <div class="deck-io-bar">
+          <button class="btn-io btn-primary" onclick="switchLabTab('goldfish')">🎲 Testa Questo Mazzo</button>
+          <button class="btn-io" onclick="openExportModal()">📤 Esporta per Duels.ink / Inktable</button>
+          <button class="btn-io" onclick="openImportModal()">📥 Importa Lista</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- GOLDFISH PLAYTESTER VIEW -->
+    <div id="view-goldfish" class="playtester-box" style="display:none;">
+      <div class="panel-head">
+        <div class="panel-title">🎲 Simulatore Mano Iniziale &amp; Goldfish Playtester</div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn-io" onclick="startPlaytest()">🔄 Nuova Partita / Rimischia</button>
+          <button class="btn-io" onclick="executeMulligan()">🔁 Esegui Mulligan Selezionato</button>
+        </div>
+      </div>
+
+      <div style="font-size:.88rem;color:var(--muted);margin-bottom:14px;">
+        Fase di gioco: <strong>Mulligan</strong> (clicca sulle carte della mano che desideri sostituire prima di iniziare la partita).
+      </div>
+
+      <div class="play-board">
+        <!-- Calamaio & Risorse -->
+        <div class="play-col">
+          <div class="play-col-title">
+            <span>Calamaio (Inkwell)</span>
+            <span id="gameInkCount" style="color:var(--gold);">0 Inchiostri</span>
+          </div>
+          <div style="font-size:.85rem;color:var(--muted);margin-bottom:12px;">Inchiostro disponibile questo turno: <b id="gameInkReady" style="color:var(--parch);">0</b></div>
+          <button class="btn-io" style="width:100%;margin-bottom:8px;" onclick="inkSelectedCard()">📥 Metti carta selezionata nel Calamaio</button>
+          <div id="inkwellList" style="display:flex;flex-direction:column;gap:4px;font-size:.8rem;color:var(--muted);"></div>
+        </div>
+
+        <!-- Tavolo di Gioco / Mano -->
+        <div class="play-col" style="background:rgba(0,0,0,0.45);">
+          <div class="play-col-title">
+            <span>Mano Attuale (<span id="gameHandCount">0</span> carte)</span>
+            <span>Turno <b id="gameTurnNum" style="color:var(--gold-soft);">1</b></span>
+          </div>
+
+          <div class="hand-cards" id="gameHandContainer">
+            <!-- Populated by JS -->
+          </div>
+
+          <div style="margin-top:20px;border-top:1px solid var(--line);padding-top:14px;">
+            <div class="play-col-title">
+              <span>Personaggi in Gioco (Board)</span>
+              <span>Lore accumulato: <b id="gameLoreScore" style="color:#4ade80;font-size:1.2rem;">0</b>/20</span>
+            </div>
+            <div id="gameBoardContainer" style="display:flex;flex-wrap:wrap;gap:8px;min-height:60px;"></div>
+          </div>
+        </div>
+
+        <!-- Azioni Turno -->
+        <div class="play-col">
+          <div class="play-col-title">Azioni di Gioco</div>
+          <button class="btn-io btn-primary" style="width:100%;margin-bottom:10px;" onclick="playSelectedCard()">⚡ Gioca Carta Selezionata</button>
+          <button class="btn-io" style="width:100%;margin-bottom:10px;" onclick="questAllCharacters()">🏆 Vai in Missione (Tutti i pronti)</button>
+          <button class="btn-io" style="width:100%;margin-bottom:10px;" onclick="passTurn()">➡️ Passa Turno (Ready, Set, Draw)</button>
+          
+          <div style="margin-top:16px;padding-top:12px;border-top:1px solid var(--line);font-size:.8rem;color:var(--muted);">
+            <div><b>Mazzo rimasto:</b> <span id="gameDeckCount">53</span> carte</div>
+            <div style="margin-top:6px;"><b>Stima chiusura:</b> <span id="gameEstimate" style="color:var(--gold-soft);">Turno 5-6</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXTERNAL SIMULATORS INFO -->
+    <div class="panel" style="margin-top:30px;">
+      <div class="panel-head">
+        <div class="panel-title">🌐 Piattaforme Esterne per Giocare a Lorcana Online</div>
+      </div>
+      <p style="font-size:.9rem;color:var(--muted);margin-bottom:16px;">
+        Puoi esportare la tua lista dal Deck Lab e caricarla direttamente su queste piattaforme gratuite della community di Lorcana per sfidare altri giocatori o allenarti contro bot con intelligenza artificiale:
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:16px;">
+        <div style="background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:16px;">
+          <h4 style="color:var(--gold);margin-bottom:6px;font-family:'Cinzel',serif;">⚔️ Duels.ink</h4>
+          <p style="font-size:.84rem;color:var(--muted);margin-bottom:12px;">Simulatore browser-based completo per partite PvP multiplayer, test di mulligan e replay dei tornei.</p>
+          <a href="https://duels.ink" target="_blank" class="btn-io" style="color:var(--gold);border-color:var(--gold);">Apri Duels.ink ➔</a>
+        </div>
+        <div style="background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:16px;">
+          <h4 style="color:var(--gold);margin-bottom:6px;font-family:'Cinzel',serif;">🤖 Inktable.net</h4>
+          <p style="font-size:.84rem;color:var(--muted);margin-bottom:12px;">Simulatore in solitaria eccezionale per giocare contro bot AI con qualsiasi mazzo in pochi secondi.</p>
+          <a href="https://inktable.net" target="_blank" class="btn-io" style="color:var(--gold);border-color:var(--gold);">Apri Inktable ➔</a>
+        </div>
+        <div style="background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:16px;">
+          <h4 style="color:var(--gold);margin-bottom:6px;font-family:'Cinzel',serif;">📊 Dreamborn.ink</h4>
+          <p style="font-size:.84rem;color:var(--muted);margin-bottom:12px;">Il database di deckbuilding e tracciamento collezione più usato al mondo con statistiche prezzi e carte.</p>
+          <a href="https://dreamborn.ink" target="_blank" class="btn-io" style="color:var(--gold);border-color:var(--gold);">Apri Dreamborn.ink ➔</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- MODAL EXPORT / IMPORT -->
+  <div class="modal-wrap" id="ioModal">
+    <div class="modal-content">
+      <div class="panel-head">
+        <div class="panel-title" id="modalTitle">Esporta Mazzo</div>
+        <button class="btn-qty" onclick="closeModal()">✕</button>
+      </div>
+      <p style="font-size:.85rem;color:var(--muted);" id="modalDesc">Copia questo formato testo per importarlo su duels.ink, dreamborn o inktable:</p>
+      <textarea class="modal-textarea" id="modalText"></textarea>
+      <div style="display:flex;justify-content:flex-end;gap:8px;">
+        <button class="btn-io" onclick="closeModal()">Chiudi</button>
+        <button class="btn-io btn-primary" id="modalActionBtn" onclick="copyModalText()">📋 Copia negli Appunti</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // CARD DATABASE (Curated selection of staples and Set 13 cards)
+    const CARDS_DB = [
+      // Emerald
+      { id: 'em_minnie_1', name: 'Minnie Mouse', sub: 'Curious Adventurer', ink: 'emerald', cost: 1, inkable: true, type: 'Character', str: 2, will: 2, lore: 1 },
+      { id: 'em_milo_1', name: 'Milo Thatch', sub: 'Clever Cartographer', ink: 'emerald', cost: 1, inkable: true, type: 'Character', str: 2, will: 2, lore: 1 },
+      { id: 'em_flynn_2', name: 'Flynn Rider', sub: 'Charming Rogue', ink: 'emerald', cost: 2, inkable: true, type: 'Character', str: 1, will: 2, lore: 2 },
+      { id: 'em_tod_3', name: 'Tod', sub: 'Clever Fox', ink: 'emerald', cost: 3, inkable: true, type: 'Character', str: 1, will: 2, lore: 1, text: 'Draw card on play' },
+      { id: 'em_mushu_3', name: 'Mushu', sub: 'Stealthy Dragon', ink: 'emerald', cost: 3, inkable: true, type: 'Character', str: 3, will: 2, lore: 1, kw: 'Evasive' },
+      { id: 'em_strike_2', name: 'Strike a Good Match', sub: 'Song', ink: 'emerald', cost: 2, inkable: true, type: 'Action - Song', text: 'Draw 2, discard 1' },
+      { id: 'em_duo_6', name: 'Mickey & Minnie', sub: 'Adventuring Duo', ink: 'emerald', cost: 6, inkable: false, type: 'Character', str: 5, will: 5, lore: 5, kw: 'Duo Shift 0', text: 'Returns to inkwell when banished' },
+      { id: 'em_bushroot_5', name: 'Dr. Bushroot', sub: 'Evil Botanist', ink: 'emerald', cost: 5, inkable: true, type: 'Character', str: 4, will: 3, lore: 3, kw: 'Ward' },
+      { id: 'em_milo_7', name: 'Milo Thatch', sub: 'Getting His Hands Dirty', ink: 'emerald', cost: 7, inkable: false, type: 'Character', str: 5, will: 6, lore: 2, text: 'Mass banish effect' },
+      { id: 'em_diablo_3', name: 'Diablo', sub: 'Devoted Herald', ink: 'emerald', cost: 3, inkable: false, type: 'Character', str: 2, will: 2, lore: 1, kw: 'Shift 1, Evasive', text: 'Draw card on opponent draw' },
+      { id: 'em_ursula_2', name: 'Ursula', sub: 'Deceiver', ink: 'emerald', cost: 2, inkable: true, type: 'Character', str: 1, will: 3, lore: 1, text: 'Look at hand, discard song' },
+
+      // Sapphire
+      { id: 'sa_heihei_1', name: 'HeiHei', sub: 'Boat Snack', ink: 'sapphire', cost: 1, inkable: true, type: 'Character', str: 1, will: 2, lore: 1, kw: 'Support' },
+      { id: 'sa_mickey_2', name: 'Mickey Mouse', sub: 'Bob Cratchit', ink: 'sapphire', cost: 2, inkable: true, type: 'Character', str: 3, will: 2, lore: 1 },
+      { id: 'sa_mickey_3', name: 'Mickey Mouse', sub: 'Detective', ink: 'sapphire', cost: 3, inkable: true, type: 'Character', str: 1, will: 3, lore: 1, text: 'Puts top card into inkwell' },
+      { id: 'sa_scuttle_5', name: 'Scuttle', sub: 'Birdbrained', ink: 'sapphire', cost: 5, inkable: true, type: 'Character', str: 5, will: 5, lore: 2, kw: 'Ward' },
+      { id: 'sa_hades_6', name: 'Hades', sub: 'Meticulous Schemer', ink: 'sapphire', cost: 6, inkable: true, type: 'Character', str: 5, will: 5, lore: 3, kw: 'Ward' },
+      { id: 'sa_brain_1', name: 'Develop Your Brain', sub: 'Action', ink: 'sapphire', cost: 1, inkable: true, type: 'Action', text: 'Look at top 2, take 1' },
+      { id: 'sa_jump_2', name: 'One Jump Ahead', sub: 'Song', ink: 'sapphire', cost: 2, inkable: true, type: 'Action - Song', text: 'Puts top card into inkwell' },
+      { id: 'sa_fishbone_3', name: 'Fishbone Quill', sub: 'Item', ink: 'sapphire', cost: 3, inkable: true, type: 'Item', text: 'Exert to ink any card from hand' },
+      { id: 'sa_tala_1', name: 'Gramma Tala', sub: 'Storyteller', ink: 'sapphire', cost: 2, inkable: true, type: 'Character', str: 1, will: 1, lore: 1, text: 'Goes to inkwell when banished' },
+      { id: 'sa_letitgo_5', name: 'Let It Go', sub: 'Song', ink: 'sapphire', cost: 5, inkable: true, type: 'Action - Song', text: 'Put chosen character into inkwell' },
+
+      // Amber
+      { id: 'am_stitch_1', name: 'Stitch', sub: 'New Dog', ink: 'amber', cost: 1, inkable: true, type: 'Character', str: 2, will: 2, lore: 1 },
+      { id: 'am_cinderella_1', name: 'Cinderella', sub: 'Ballroom Sensation', ink: 'amber', cost: 1, inkable: true, type: 'Character', str: 1, will: 2, lore: 1, kw: 'Singer 3' },
+      { id: 'am_ariel_4', name: 'Ariel', sub: 'Spectacular Singer', ink: 'amber', cost: 4, inkable: true, type: 'Character', str: 2, will: 3, lore: 1, kw: 'Singer 5', text: 'Finds song on play' },
+      { id: 'am_stitch_7', name: 'Stitch', sub: 'Carefree Surfer', ink: 'amber', cost: 7, inkable: true, type: 'Character', str: 4, will: 8, lore: 2, text: 'Draw 2 cards' },
+      { id: 'am_piglet_2', name: 'Piglet', sub: 'Pooh Pirate Captain', ink: 'amber', cost: 2, inkable: true, type: 'Character', str: 2, will: 2, lore: 2 },
+      { id: 'am_pluto_1', name: 'Pluto', sub: 'Friendly Pug', ink: 'amber', cost: 1, inkable: true, type: 'Character', str: 0, will: 2, lore: 1, text: 'Pay 1 less for next character' },
+
+      // Steel
+      { id: 'st_tink_1', name: 'Tinker Bell', sub: 'Tiny Tactician', ink: 'steel', cost: 3, inkable: true, type: 'Character', str: 2, will: 4, lore: 1 },
+      { id: 'st_tink_6', name: 'Tinker Bell', sub: 'Giant Fairy', ink: 'steel', cost: 6, inkable: true, type: 'Character', str: 4, will: 5, lore: 2, kw: 'Shift 4', text: 'Deal 1 to all opponents, 2 on challenge' },
+      { id: 'st_robin_5', name: 'Robin Hood', sub: 'Champion of Sherwood', ink: 'steel', cost: 5, inkable: true, type: 'Character', str: 3, will: 6, lore: 2, kw: 'Shift 3', text: 'Gain 2 lore on challenge' },
+      { id: 'st_grab_5', name: 'Grab Your Sword', sub: 'Song', ink: 'steel', cost: 5, inkable: false, type: 'Action - Song', text: 'Deal 2 damage to all opposing characters' },
+      { id: 'st_whole_5', name: 'A Whole New World', sub: 'Song', ink: 'steel', cost: 5, inkable: false, type: 'Action - Song', text: 'Each player discards hand and draws 7' },
+      { id: 'st_smash_3', name: 'Smash', sub: 'Action', ink: 'steel', cost: 3, inkable: true, type: 'Action', text: 'Deal 3 damage to chosen character' },
+
+      // Amethyst
+      { id: 'ay_mim_3', name: 'Madam Mim', sub: 'Fox', ink: 'amethyst', cost: 3, inkable: true, type: 'Character', str: 4, will: 3, lore: 1, kw: 'Rush', text: 'Return another character to hand' },
+      { id: 'ay_merlin_4', name: 'Merlin', sub: 'Rabbit', ink: 'amethyst', cost: 4, inkable: true, type: 'Character', str: 2, will: 3, lore: 1, text: 'Draw card on play and leaves' },
+      { id: 'ay_merlin_3', name: 'Merlin', sub: 'Goat', ink: 'amethyst', cost: 3, inkable: true, type: 'Character', str: 4, will: 3, lore: 1, text: 'Gain 1 lore on play and leaves' },
+      { id: 'ay_elsa_8', name: 'Elsa', sub: 'Spirit of Winter', ink: 'amethyst', cost: 8, inkable: false, type: 'Character', str: 4, will: 6, lore: 3, text: 'Exert 2 characters, they cannot ready' },
+
+      // Ruby
+      { id: 'ru_prepared_7', name: 'Be Prepared', sub: 'Song', ink: 'ruby', cost: 7, inkable: false, type: 'Action - Song', text: 'Banish all characters' },
+      { id: 'ru_dragon_9', name: 'Maleficent', sub: 'Monstrous Dragon', ink: 'ruby', cost: 9, inkable: true, type: 'Character', str: 7, will: 5, lore: 2, text: 'Banish chosen character on play' },
+      { id: 'ru_sisu_3', name: 'Sisu', sub: 'Daring Visitor', ink: 'ruby', cost: 3, inkable: true, type: 'Character', str: 1, will: 4, lore: 1, text: 'Banish character with 1 strength or less' },
+      { id: 'ru_brawl_3', name: 'Brawl', sub: 'Action', ink: 'ruby', cost: 3, inkable: true, type: 'Action', text: 'Banish character with 2 strength or less' }
+    ];
+
+    // CURRENT DECK STATE (id -> count)
+    let currentDeck = {};
+    let activeInkFilters = new Set(['amber', 'amethyst', 'emerald', 'ruby', 'sapphire', 'steel']);
+
+    // INIT
+    window.addEventListener('DOMContentLoaded', () => {
+      loadPreset('mickey_minnie');
+      renderCatalog();
+    });
+
+    // RENDER CATALOG
+    function renderCatalog() {
+      const cont = document.getElementById('catalogContainer');
+      const q = (document.getElementById('catSearch').value || '').toLowerCase();
+      cont.innerHTML = '';
+
+      const filtered = CARDS_DB.filter(c => {
+        if (!activeInkFilters.has(c.ink)) return false;
+        if (!q) return true;
+        const text = `${c.name} ${c.sub} ${c.type} ${c.kw || ''} ${c.text || ''}`.toLowerCase();
+        return text.includes(q);
+      });
+
+      filtered.forEach(c => {
+        const inDeck = currentDeck[c.id] || 0;
+        const div = document.createElement('div');
+        div.className = 'card-item';
+        div.innerHTML = `
+          <div class="card-info">
+            <div class="card-cost ${!c.inkable ? 'non-inkable' : ''}">${c.cost}</div>
+            <div>
+              <div class="card-name-title">${c.name}</div>
+              <div class="card-name-sub">${c.sub} · <span style="text-transform:capitalize;color:var(--${c.ink});">${c.ink}</span> ${c.kw ? '· <i>' + c.kw + '</i>' : ''}</div>
+            </div>
+          </div>
+          <div class="card-actions">
+            <span style="font-size:.8rem;color:var(--muted);">${inDeck}/4</span>
+            <button class="btn-add" onclick="addCard('${c.id}')" ${inDeck >= 4 ? 'disabled style="opacity:.4;"' : ''}>+ Aggiungi</button>
+          </div>
+        `;
+        cont.appendChild(div);
+      });
+    }
+
+    function toggleInkFilter(ink, el) {
+      if (activeInkFilters.has(ink)) {
+        activeInkFilters.delete(ink);
+        el.classList.remove('active');
+      } else {
+        activeInkFilters.add(ink);
+        el.classList.add('active');
+      }
+      renderCatalog();
+    }
+
+    // DECK MODIFICATIONS
+    function addCard(id) {
+      currentDeck[id] = Math.min(4, (currentDeck[id] || 0) + 1);
+      updateDeckUI();
+      renderCatalog();
+    }
+    function removeCard(id) {
+      if (!currentDeck[id]) return;
+      currentDeck[id]--;
+      if (currentDeck[id] <= 0) delete currentDeck[id];
+      updateDeckUI();
+      renderCatalog();
+    }
+    function clearDeck() {
+      currentDeck = {};
+      updateDeckUI();
+      renderCatalog();
+    }
+
+    // UPDATE DECK STATS & CURVE
+    function updateDeckUI() {
+      const cont = document.getElementById('deckListContainer');
+      cont.innerHTML = '';
+
+      let totalCards = 0;
+      let inkables = 0;
+      let nonInkables = 0;
+      let totalCost = 0;
+      const curve = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, '7+': 0 };
+
+      for (const [id, qty] of Object.entries(currentDeck)) {
+        const card = CARDS_DB.find(c => c.id === id);
+        if (!card) continue;
+        totalCards += qty;
+        totalCost += card.cost * qty;
+        if (card.inkable) inkables += qty;
+        else nonInkables += qty;
+
+        const costKey = card.cost >= 7 ? '7+' : card.cost;
+        curve[costKey] = (curve[costKey] || 0) + qty;
+
+        const row = document.createElement('div');
+        row.className = 'deck-row';
+        row.innerHTML = `
+          <div class="deck-row-qty">${qty}x</div>
+          <div class="deck-row-name">
+            <b>${card.name}</b> <span style="color:var(--muted);font-size:.8rem;">- ${card.sub} (${card.cost})</span>
+          </div>
+          <div class="deck-row-ctrls">
+            <button class="btn-qty" onclick="removeCard('${id}')">-</button>
+            <button class="btn-qty" onclick="addCard('${id}')" ${qty >= 4 ? 'disabled' : ''}>+</button>
+          </div>
+        `;
+        cont.appendChild(row);
+      }
+
+      document.getElementById('deckTotalCount').innerText = totalCards;
+      document.getElementById('statCards').innerText = totalCards;
+      document.getElementById('statInkable').innerText = inkables;
+      document.getElementById('statNonInkable').innerText = nonInkables;
+      document.getElementById('statAvgCost').innerText = totalCards > 0 ? (totalCost / totalCards).toFixed(1) : '0.0';
+
+      // Render Curve
+      const maxCurve = Math.max(1, ...Object.values(curve));
+      const curveCont = document.getElementById('curveBars');
+      curveCont.innerHTML = '';
+      for (const [cost, count] of Object.entries(curve)) {
+        const heightPct = Math.round((count / maxCurve) * 80);
+        const col = document.createElement('div');
+        col.className = 'curve-bar-col';
+        col.innerHTML = `
+          <div class="curve-count">${count}</div>
+          <div class="curve-fill" style="height:${heightPct}px;"></div>
+          <div class="curve-cost">${cost}</div>
+        `;
+        curveCont.appendChild(col);
+      }
+    }
+
+    // PRESET LOADER
+    function loadPreset(key) {
+      currentDeck = {};
+      if (key === 'mickey_minnie') {
+        currentDeck['em_minnie_1'] = 4;
+        currentDeck['em_milo_1'] = 4;
+        currentDeck['sa_heihei_1'] = 4;
+        currentDeck['sa_mickey_2'] = 4;
+        currentDeck['em_flynn_2'] = 4;
+        currentDeck['em_tod_3'] = 3;
+        currentDeck['sa_mickey_3'] = 4;
+        currentDeck['em_mushu_3'] = 4;
+        currentDeck['sa_brain_1'] = 4;
+        currentDeck['em_strike_2'] = 3;
+        currentDeck['em_bushroot_5'] = 4;
+        currentDeck['sa_scuttle_5'] = 3;
+        currentDeck['em_duo_6'] = 4; // Key combo!
+        currentDeck['sa_hades_6'] = 4;
+        currentDeck['em_milo_7'] = 3;
+      } else if (key === 'steelsongs') {
+        currentDeck['am_cinderella_1'] = 4;
+        currentDeck['am_stitch_1'] = 4;
+        currentDeck['am_piglet_2'] = 4;
+        currentDeck['am_ariel_4'] = 4;
+        currentDeck['st_robin_5'] = 4;
+        currentDeck['st_tink_6'] = 4;
+        currentDeck['st_grab_5'] = 4;
+        currentDeck['st_whole_5'] = 4;
+        currentDeck['st_smash_3'] = 4;
+        currentDeck['am_stitch_7'] = 4;
+      } else if (key === 'bounce') {
+        currentDeck['ay_mim_3'] = 4;
+        currentDeck['ay_merlin_4'] = 4;
+        currentDeck['ay_merlin_3'] = 4;
+        currentDeck['ru_brawl_3'] = 4;
+        currentDeck['ru_sisu_3'] = 4;
+        currentDeck['ru_prepared_7'] = 4;
+        currentDeck['ru_dragon_9'] = 3;
+        currentDeck['ay_elsa_8'] = 3;
+      } else if (key === 'ramp') {
+        currentDeck['sa_tala_1'] = 4;
+        currentDeck['sa_jump_2'] = 4;
+        currentDeck['sa_mickey_3'] = 4;
+        currentDeck['sa_fishbone_3'] = 4;
+        currentDeck['sa_letitgo_5'] = 4;
+        currentDeck['ru_prepared_7'] = 4;
+        currentDeck['ru_dragon_9'] = 4;
+      } else if (key === 'discard') {
+        currentDeck['em_ursula_2'] = 4;
+        currentDeck['em_diablo_3'] = 4;
+        currentDeck['st_smash_3'] = 4;
+        currentDeck['st_grab_5'] = 4;
+        currentDeck['st_whole_5'] = 4;
+        currentDeck['em_flynn_2'] = 4;
+      }
+      updateDeckUI();
+      renderCatalog();
+    }
+
+    // EXPORT & IMPORT
+    function openExportModal() {
+      document.getElementById('modalTitle').innerText = 'Esporta Mazzo (Duels.ink / Inktable Format)';
+      document.getElementById('modalDesc').innerText = 'Copia questa lista di testo. È pienamente compatibile con duels.ink, inktable.net e dreamborn.ink:';
+      
+      let out = '';
+      for (const [id, qty] of Object.entries(currentDeck)) {
+        const card = CARDS_DB.find(c => c.id === id);
+        if (card) {
+          out += `${qty} ${card.name} - ${card.sub}\n`;
+        }
+      }
+      document.getElementById('modalText').value = out;
+      document.getElementById('modalActionBtn').innerText = '📋 Copia negli Appunti';
+      document.getElementById('modalActionBtn').onclick = copyModalText;
+      document.getElementById('ioModal').classList.add('show');
+    }
+
+    function openImportModal() {
+      document.getElementById('modalTitle').innerText = 'Importa Lista Mazzo';
+      document.getElementById('modalDesc').innerText = 'Incolla la lista in formato "4 Nome Carta - Sottotitolo" per caricarla nel laboratorio:';
+      document.getElementById('modalText').value = '';
+      document.getElementById('modalActionBtn').innerText = '📥 Carica Mazzo';
+      document.getElementById('modalActionBtn').onclick = executeImport;
+      document.getElementById('ioModal').classList.add('show');
+    }
+
+    function executeImport() {
+      const text = document.getElementById('modalText').value;
+      const lines = text.split('\n');
+      currentDeck = {};
+      lines.forEach(l => {
+        const match = l.match(/^(\d+)\s+(.+?)(?:\s+-\s+(.+))?$/);
+        if (match) {
+          const qty = parseInt(match[1]);
+          const name = match[2].trim().toLowerCase();
+          const card = CARDS_DB.find(c => c.name.toLowerCase().includes(name));
+          if (card) {
+            currentDeck[card.id] = Math.min(4, (currentDeck[card.id] || 0) + qty);
+          }
+        }
+      });
+      updateDeckUI();
+      renderCatalog();
+      closeModal();
+    }
+
+    function copyModalText() {
+      const el = document.getElementById('modalText');
+      el.select();
+      navigator.clipboard.writeText(el.value);
+      alert('Lista copiata negli appunti!');
+    }
+    function closeModal() {
+      document.getElementById('ioModal').classList.remove('show');
+    }
+
+    // TAB SWITCHER
+    function switchLabTab(tab) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      if (tab === 'builder') {
+        document.querySelector('.tab-btn:nth-child(1)').classList.add('active');
+        document.getElementById('view-builder').style.display = 'grid';
+        document.getElementById('view-goldfish').style.display = 'none';
+      } else if (tab === 'goldfish') {
+        document.querySelector('.tab-btn:nth-child(2)').classList.add('active');
+        document.getElementById('view-builder').style.display = 'none';
+        document.getElementById('view-goldfish').style.display = 'block';
+        startPlaytest();
+      }
+    }
+
+    function openSimulatorLinks() {
+      window.open('https://duels.ink', '_blank');
+    }
+
+    // ==========================================
+    // GOLDFISH PLAYTESTER STATE & LOGIC
+    // ==========================================
+    let playDeck = [];
+    let playHand = [];
+    let playInkwell = [];
+    let playBoard = [];
+    let playTurn = 1;
+    let playLore = 0;
+    let playInkReady = 0;
+    let selectedCardIndex = null;
+    let mulliganDone = false;
+
+    function startPlaytest() {
+      // Build flattened deck array
+      playDeck = [];
+      for (const [id, qty] of Object.entries(currentDeck)) {
+        const card = CARDS_DB.find(c => c.id === id);
+        if (card) {
+          for (let i = 0; i < qty; i++) playDeck.push({ ...card, uid: Math.random() });
+        }
+      }
+      // Shuffle
+      playDeck.sort(() => Math.random() - 0.5);
+
+      // Draw 7
+      playHand = playDeck.splice(0, 7);
+      playInkwell = [];
+      playBoard = [];
+      playTurn = 1;
+      playLore = 0;
+      playInkReady = 0;
+      selectedCardIndex = null;
+      mulliganDone = false;
+
+      renderPlaytest();
+    }
+
+    function toggleSelectHandCard(idx) {
+      if (!mulliganDone) {
+        // Toggle mulligan selection
+        playHand[idx].mulligan = !playHand[idx].mulligan;
+      } else {
+        selectedCardIndex = (selectedCardIndex === idx) ? null : idx;
+      }
+      renderPlaytest();
+    }
+
+    function executeMulligan() {
+      if (mulliganDone) return;
+      const keep = [];
+      const replace = [];
+      playHand.forEach(c => {
+        if (c.mulligan) replace.push(c);
+        else keep.push(c);
+      });
+
+      // Draw replacement
+      const newDrawn = playDeck.splice(0, replace.length);
+      // Put back replaced cards and shuffle
+      playDeck.push(...replace);
+      playDeck.sort(() => Math.random() - 0.5);
+
+      playHand = [...keep, ...newDrawn];
+      mulliganDone = true;
+      renderPlaytest();
+    }
+
+    function inkSelectedCard() {
+      if (selectedCardIndex === null || !playHand[selectedCardIndex]) {
+        alert('Seleziona prima una carta dalla mano da inchiostrare!');
+        return;
+      }
+      const card = playHand[selectedCardIndex];
+      if (!card.inkable) {
+        alert('Questa carta è Non-Inchiostrabile (non ha il cerchio d\'oro attorno al costo)!');
+        return;
+      }
+      playHand.splice(selectedCardIndex, 1);
+      playInkwell.push(card);
+      playInkReady++;
+      selectedCardIndex = null;
+      renderPlaytest();
+    }
+
+    function playSelectedCard() {
+      if (selectedCardIndex === null || !playHand[selectedCardIndex]) {
+        alert('Seleziona prima una carta da giocare!');
+        return;
+      }
+      const card = playHand[selectedCardIndex];
+      if (card.cost > playInkReady) {
+        alert(`Inchiostro insufficiente! Hai ${playInkReady} inchiostri disponibili, la carta costa ${card.cost}.`);
+        return;
+      }
+      playInkReady -= card.cost;
+      playHand.splice(selectedCardIndex, 1);
+      selectedCardIndex = null;
+
+      if (card.type.includes('Character')) {
+        playBoard.push({ ...card, dry: false }); // wet first turn
+      } else if (card.type.includes('Action') || card.type.includes('Song')) {
+        alert(`Giocata azione: ${card.name}! Effetto: ${card.text || ''}`);
+      }
+      renderPlaytest();
+    }
+
+    function questAllCharacters() {
+      let loreGain = 0;
+      playBoard.forEach(c => {
+        if (c.dry) {
+          loreGain += (c.lore || 1);
+        }
+      });
+      playLore += loreGain;
+      if (loreGain === 0) {
+        alert('Nessun personaggio pronto per andare in missione! (I personaggi giocati nello stesso turno devono asciugare).');
+      }
+      renderPlaytest();
+    }
+
+    function passTurn() {
+      playTurn++;
+      // Dry all characters
+      playBoard.forEach(c => c.dry = true);
+      // Ready all ink
+      playInkReady = playInkwell.length;
+      // Draw 1 card
+      if (playDeck.length > 0) {
+        playHand.push(playDeck.shift());
+      }
+      mulliganDone = true;
+      renderPlaytest();
+    }
+
+    function renderPlaytest() {
+      document.getElementById('gameTurnNum').innerText = playTurn;
+      document.getElementById('gameLoreScore').innerText = playLore;
+      document.getElementById('gameInkCount').innerText = `${playInkwell.length} Inchiostri`;
+      document.getElementById('gameInkReady').innerText = playInkReady;
+      document.getElementById('gameHandCount').innerText = playHand.length;
+      document.getElementById('gameDeckCount').innerText = playDeck.length;
+
+      // Render Hand
+      const handCont = document.getElementById('gameHandContainer');
+      handCont.innerHTML = '';
+      playHand.forEach((c, idx) => {
+        const chip = document.createElement('div');
+        const isSel = (!mulliganDone && c.mulligan) || (mulliganDone && selectedCardIndex === idx);
+        chip.className = `hand-card-chip ${isSel ? 'selected' : ''}`;
+        chip.onclick = () => toggleSelectHandCard(idx);
+        chip.innerHTML = `
+          <div class="chip-top">
+            <span>Costo ${c.cost}</span>
+            <span>${c.lore ? c.lore + ' ✦' : ''}</span>
+          </div>
+          <div style="font-weight:600;color:var(--parch);">${c.name}</div>
+          <div style="font-size:.72rem;color:var(--muted);">${c.sub}</div>
+          ${!c.inkable ? '<div style="color:#f87171;font-size:.68rem;">Non-Inkable</div>' : ''}
+          ${!mulliganDone && c.mulligan ? '<div style="color:#f87171;font-weight:bold;font-size:.7rem;">✕ Scambia</div>' : ''}
+        `;
+        handCont.appendChild(chip);
+      });
+
+      // Render Board
+      const boardCont = document.getElementById('gameBoardContainer');
+      boardCont.innerHTML = '';
+      playBoard.forEach(c => {
+        const bChip = document.createElement('div');
+        bChip.className = 'hand-card-chip';
+        bChip.style.borderColor = c.dry ? 'var(--emerald)' : 'var(--line)';
+        bChip.innerHTML = `
+          <div class="chip-top">
+            <span>${c.str}/${c.will}</span>
+            <span style="color:#4ade80;">+${c.lore} Lore</span>
+          </div>
+          <div style="font-weight:600;">${c.name}</div>
+          <div style="font-size:.7rem;color:${c.dry ? '#4ade80' : 'var(--muted)'};">
+            ${c.dry ? '✓ Pronto per Quest' : '⏳ Bagnato'}
+          </div>
+        `;
+        boardCont.appendChild(bChip);
+      });
+
+      // Render Inkwell List
+      const inkCont = document.getElementById('inkwellList');
+      inkCont.innerHTML = '';
+      playInkwell.forEach((c, i) => {
+        const item = document.createElement('div');
+        item.innerText = `${i+1}. ${c.name} (${c.sub})`;
+        inkCont.appendChild(item);
+      });
+    }
+  </script>
+</body>
+</html>
