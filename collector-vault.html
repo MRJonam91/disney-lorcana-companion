@@ -734,30 +734,30 @@
           <div class="sim-custom-group">
             <label for="customPackCount" style="font-size:.82rem;color:var(--gold-soft);font-weight:700;" data-i18n="lbl_custom_packs">🔢 Quantità libera:</label>
             <button type="button" class="pack-step-btn" onclick="stepCustomPacks(-10)">-10</button>
-            <input type="number" id="customPackCount" min="1" max="10000" value="36" class="custom-pack-input" style="width:92px;padding:6px 8px;" placeholder="36">
+            <input type="number" id="customPackCount" min="1" max="10000" value="10" class="custom-pack-input" style="width:92px;padding:6px 8px;" placeholder="36">
             <button type="button" class="pack-step-btn" onclick="stepCustomPacks(10)">+10</button>
             <button type="button" class="btn-pack primary" onclick="openCustomPacks()" data-i18n="btn_open_custom" style="padding:8px 14px;font-size:.83rem;">🚀 Apri Bustine</button>
           </div>
         </div>
 
-        <!-- Row 2: 5-Column Product Preset Action Cards -->
+        <!-- Row 2: 5-Column Official Sealed Products Preset Cards -->
         <div class="pack-presets-grid">
           <button type="button" class="pack-action-card" onclick="openPacks(1)">
             <span class="pack-action-icon">✨</span>
-            <span class="pack-action-title" data-i18n="act_1_title">1 Bustina</span>
-            <span class="pack-action-sub" data-i18n="act_1_sub">12 Carte · 1 Foil Garantita</span>
+            <span class="pack-action-title" data-i18n="act_1_title">1 Booster Pack</span>
+            <span class="pack-action-sub" data-i18n="act_1_sub">1 Bustina · 12 Carte (o Starter)</span>
+          </button>
+
+          <button type="button" class="pack-action-card" onclick="openPacks(4)">
+            <span class="pack-action-icon">🌟</span>
+            <span class="pack-action-title" data-i18n="act_4_title">Gift Set</span>
+            <span class="pack-action-sub" data-i18n="act_4_sub">4 Bustine · 48 Carte</span>
           </button>
 
           <button type="button" class="pack-action-card" onclick="openPacks(8)">
             <span class="pack-action-icon">🎁</span>
             <span class="pack-action-title" data-i18n="act_8_title">Illumineer's Trove</span>
             <span class="pack-action-sub" data-i18n="act_8_sub">8 Bustine · 96 Carte</span>
-          </button>
-
-          <button type="button" class="pack-action-card" onclick="openPacks(10)">
-            <span class="pack-action-icon">📦</span>
-            <span class="pack-action-title" data-i18n="act_10_title">Bundle 10 Pack</span>
-            <span class="pack-action-sub" data-i18n="act_10_sub">10 Bustine · 120 Carte</span>
           </button>
 
           <button type="button" class="pack-action-card featured-box foil-shimmer" onclick="openPacks(24)">
