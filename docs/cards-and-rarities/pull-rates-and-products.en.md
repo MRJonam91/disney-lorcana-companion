@@ -68,3 +68,9 @@ Each booster pack contains **12 cards**:
 - **Booster Box (24 Packs):** Factory balanced (guaranteed ~12+ Super Rares, 4-6 Legendaries, 1-2 Epics, ~25% Enchanted chance).
 - **Illumineer's Trove (8 Packs):** Pure luck test; no box balancing applies.
 - **Blister Sleeves (Loose Packs):** Independent random rolls from master shipments.
+
+---
+
+## 6. Official Companion App
+- **Official Companion App:** [Official Disney Lorcana Ravensburger Page](https://www.disneylorcana.com/it-IT/app) · [Download for iOS (App Store)](https://apps.apple.com/us/app/disney-lorcana-tcg-companion/id6444333831) · [Download for Android (Google Play)](https://play.google.com/store/apps/details?id=com.ravensburger.disney.lorcana&hl=en_US)
+

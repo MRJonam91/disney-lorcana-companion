@@ -78,4 +78,4 @@ Grazie al sistema di slot separati di Lorcana, una bustina può regalare combina
 - **Illumineer's Trove:** 8 bustine, 6 dadi contadanni in resina metallizzata, 1 rotella lore e 6 divisori tematici.
 - **Starter Decks:** Mazzi completi da 60 carte con 1 bustina aggiuntiva e segnalini.
 - **Illumineer's Quest (Deep Trouble):** Modalità cooperativa/solitaria con mazzo boss Ursula automatico.
-- **App Ufficiale Companion:** Disponibile su iOS e Android con tracciamento della collezione e scansione.
+- **App Ufficiale Companion:** [Pagina Ufficiale Disney Lorcana (Ravensburger)](https://www.disneylorcana.com/it-IT/app) · [Download iOS (App Store)](https://apps.apple.com/us/app/disney-lorcana-tcg-companion/id6444333831) · [Download Android (Google Play)](https://play.google.com/store/apps/details?id=com.ravensburger.disney.lorcana&hl=en_US)

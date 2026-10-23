@@ -17,7 +17,7 @@ def main():
     if 'disneylorcana.com/en-US/app' not in content:
         content = content.replace(
             '<a href="deck-lab.html" class="active">🃏 Deck Lab</a>',
-            '<a href="deck-lab.html" class="active">🃏 Deck Lab</a>\n      <a href="https://www.disneylorcana.com/en-US/app/" target="_blank" style="color:var(--gold);">📱 App Ufficiale</a>'
+            '<a href="deck-lab.html" class="active">🃏 Deck Lab</a>\n      <a href="https://www.disneylorcana.com/it-IT/app" target="_blank" style="color:var(--gold);">📱 App Ufficiale</a>'
         )
 
     # 3. Add CSS for rarity tags and set filter
