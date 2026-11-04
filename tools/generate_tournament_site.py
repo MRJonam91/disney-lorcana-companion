@@ -8,7 +8,7 @@ from pathlib import Path
 from io import BytesIO
 from zipfile import ZipFile, ZipInfo, ZIP_DEFLATED
 
-from deck_catalog import validate_catalog, deck_text, opening_metrics, swiss_probability
+from deck_catalog import validate_catalog, deck_text, opening_metrics, swiss_probability, validate_deck_archive
 
 ROOT = Path(__file__).resolve().parents[1]
 COPY = {
@@ -66,7 +66,8 @@ def main():
             package.writestr(info,body.encode('utf8'))
     archive_path=ROOT/'decks/tournament-lists.zip'
     if args.check:
-        if not archive_path.exists() or archive_path.read_bytes()!=archive.getvalue():raise ValueError('Deck ZIP is stale')
+        if not archive_path.exists():raise ValueError('Deck ZIP is missing')
+        validate_deck_archive(archive_path.read_bytes(), files)
     else:archive_path.write_bytes(archive.getvalue())
     print(('Checked' if args.check else 'Generated'),len(artifacts),'artifacts for',len(decks),'validated decks')
 

@@ -1,7 +1,9 @@
 import copy
 import unittest
+from io import BytesIO
+from zipfile import ZipFile, ZipInfo
 
-from deck_catalog import validate_catalog, deck_text, opening_metrics
+from deck_catalog import validate_catalog, deck_text, opening_metrics, validate_deck_archive
 
 
 class CatalogTests(unittest.TestCase):
@@ -54,6 +56,23 @@ class CatalogTests(unittest.TestCase):
         self.deck['cards'][0].pop('cost')
         with self.assertRaisesRegex(ValueError, 'metadata'):
             opening_metrics(self.deck, trials=100)
+
+    def test_archive_accepts_equivalent_contents_with_different_metadata(self):
+        for year in (1980, 2026):
+            archive = BytesIO()
+            with ZipFile(archive, 'w') as output:
+                info = ZipInfo('example.txt', date_time=(year, 1, 1, 0, 0, 0))
+                output.writestr(info, b'4 Example\n')
+            validate_deck_archive(archive.getvalue(), {'example.txt': '4 Example\n'})
+
+    def test_archive_rejects_changed_or_extra_contents(self):
+        archive = BytesIO()
+        with ZipFile(archive, 'w') as output:
+            output.writestr('example.txt', b'3 Example\n')
+        with self.assertRaisesRegex(ValueError, 'ZIP'):
+            validate_deck_archive(archive.getvalue(), {'example.txt': '4 Example\n'})
+        with self.assertRaisesRegex(ValueError, 'ZIP'):
+            validate_deck_archive(archive.getvalue(), {})
 
 
 if __name__ == '__main__':

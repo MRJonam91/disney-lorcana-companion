@@ -6,6 +6,22 @@ from collections import Counter
 from math import comb
 import random
 import re
+from io import BytesIO
+from zipfile import ZipFile, BadZipFile
+
+
+def validate_deck_archive(content, files):
+    """Compare unpacked payloads; ZIP metadata/compression varies by runtime."""
+    try:
+        with ZipFile(BytesIO(content)) as archive:
+            if len(archive.namelist()) != len(files) or set(archive.namelist()) != set(files):
+                raise ValueError('Deck ZIP file names are stale')
+            for name, text in files.items():
+                expected = text.encode('utf8')
+                if archive.getinfo(name).file_size != len(expected) or archive.read(name) != expected:
+                    raise ValueError('Deck ZIP contents are stale')
+    except BadZipFile as error:
+        raise ValueError('Invalid deck ZIP') from error
 
 
 def validate_catalog(decks):
