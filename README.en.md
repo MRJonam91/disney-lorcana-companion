@@ -1,97 +1,96 @@
-# ✦ Disney Lorcana · The Ultimate Community Repository & Guide ✦
+# Disney Lorcana · Community Companion
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Disney Lorcana](https://img.shields.io/badge/TCG-Disney%20Lorcana-blueviolet.svg)](https://www.disneylorcana.com/)
-[![GitHub Discussions](https://img.shields.io/badge/Community-GitHub%20Discussions-brightgreen.svg)](https://github.com/MRJonam91/disney-lorcana-companion/discussions)
-[![Sponsor](https://img.shields.io/badge/Sponsor-Ko--fi%20|%20PayPal-ff69b4.svg)](https://ko-fi.com/mrjonam)
-[![Languages](https://img.shields.io/badge/Languages-IT%20|%20EN%20|%20FR%20|%20DE%20|%20ES-gold.svg)](index.html)
-[![Meta: Set 13](https://img.shields.io/badge/Meta-Attack%20of%20the%20Vine!%20(Set%2013)-emerald.svg)](docs/sets/set-history.en.md)
-[![Upcoming: Set 14](https://img.shields.io/badge/Upcoming-Hyperia%20City%20(Oct%202026)-orange.svg)](docs/sets/set-history.en.md)
+[Italiano](README.it.md) · [English](README.en.md) · [Français](README.fr.md) · [Deutsch](README.de.md) · [Español](README.es.md)
 
-Welcome to the **most comprehensive, viral open-source companion** for Disney Lorcana Illumineers worldwide! Whether you are picking up your first starter deck or competing for national championships, this repository provides everything you need.
+An unofficial static companion for learning and playing Disney Lorcana.
+Open **[the web portal](index.html)** for guides, a searchable glossary,
+a two-player lore tracker and a mulligan probability calculator.
 
----
+**Stato / Status:** sito utilizzabile offline; traduzioni e dati storici ancora
+da verificare. / The website works offline; translations are partial and
+historical game data still requires source verification. See
+[source status and calculator assumptions](docs/source-status.md).
 
-## 🌐 Choose Your Language / Scegli la tua Lingua
+## Open and use
 
-| Language | Standalone Web Guide | Markdown Documentation | README |
-| :--- | :--- | :--- | :--- |
-| **🇮🇹 Italiano** | [Apri Guida Web](guide/guida-lorcana-it.html) | [Documentazione](docs/rules/complete-rules.it.md) | [README.it.md](README.it.md) |
-| **🇬🇧 English** | [Open Web Guide](guide/lorcana-guide-en.html) | [Documentation](docs/rules/complete-rules.en.md) | [README.en.md](README.en.md) |
-| **🇫🇷 Français** | [Ouvrir le Guide](guide/lorcana-guide-fr.html) | [Documentation](docs/rules/complete-rules.fr.md) | [README.fr.md](README.fr.md) |
-| **🇩🇪 Deutsch** | [Leitfaden Öffnen](guide/lorcana-guide-de.html) | [Dokumentation](docs/rules/complete-rules.de.md) | [README.de.md](README.de.md) |
-| **🇪🇸 Español** | [Abrir Guía Web](guide/lorcana-guide-es.html) | [Documentación](docs/rules/complete-rules.es.md) | [README.es.md](README.es.md) |
+No installation or build is needed. Open `index.html` in a current desktop
+or mobile browser, or open a guide directly:
 
-👉 **[Launch the Multilingual Web Portal](index.html)** with interactive theme, real-time glossary filter, Lore Tracker, and Mulligan Odds Calculator!
+| Language | Interactive guide | Written rules notes |
+| --- | --- | --- |
+| Italiano | [Guida](guide/guida-lorcana-it.html) | [Regole](docs/rules/complete-rules.it.md) |
+| English | [Guide](guide/lorcana-guide-en.html) | [Rules](docs/rules/complete-rules.en.md) |
+| Français | [Guide](guide/lorcana-guide-fr.html) | [Règles](docs/rules/complete-rules.fr.md) |
+| Deutsch | [Leitfaden](guide/lorcana-guide-de.html) | [Regeln](docs/rules/complete-rules.de.md) |
+| Español | [Guía](guide/lorcana-guide-es.html) | [Reglas](docs/rules/complete-rules.es.md) |
 
----
+Each guide is a single downloadable HTML file. No web fonts, CDN libraries,
+accounts or backend are required. Reading and the native contents menu work
+without JavaScript; search, scores and calculations require JavaScript.
+Scores reset when you reload. External sources and GitHub documentation
+links require a connection.
 
-## ⚡ What Makes This Repository Special?
+The calculator computes the chance of finding **at least one target**,
+keeping targets and accounting for the post-mulligan shuffle. It uses exact
+hypergeometric calculations rounded for display, not simulations and not
+multi-card combo probabilities. Invalid inputs show an error instead of odds.
 
-1. **Standalone Offline Interactive HTML Guides**: Single-file web apps that work directly in any browser with zero installation or build steps.
-2. **Built-in Digital Tabletop Tools**:
-   - 🏆 **2-Player Lore Tracker**: Instant life/lore counter with milestone celebrations.
-   - 🎲 **Mulligan Odds Simulator**: Built on **100,000 Monte Carlo game simulations** to compute exact combo arrival probabilities.
-   - 🔍 **Live Searchable Glossary**: Instant filtering for all official terms and competitive TCG slang.
-3. **Comprehensive Set History (Set 1 to Set 14)**:
-   - Full timeline from *The First Chapter* through *Rise of the Floodborn*, *Into the Inklands*, *Ursula's Return*, *Wilds Unknown*, to current *Attack of the Vine!* (Set 13) and upcoming *Hyperia City* (Set 14).
-4. **Cards & Rarities Field Manual**:
-   - Rarity hierarchy (Common to Enchanted), pull rates per box, Cold Foil vs Rainbow Foil, and grading advice (PSA/BGS/CGC).
-5. **Beginner Starter Deck**:
-   - Emerald/Sapphire *"Mickey & Minnie Duo Shift"* (60 cards, 54 inkables, turn-by-turn lines, and upgrade paths).
-6. **Data-Driven Tournament Meta**:
-   - Analytics from **111 tournaments and 14,240 games** (September 2026).
+## Content boundaries
 
----
+The site is a community learning aid, not the official rulebook or a live
+meta database. Some legacy paragraphs remain in Italian on other language
+pages. Tournament counts, win rates, collecting claims, prices and deck
+examples in older sections are not a verified current dataset. Verify card
+text and format legality before playing or purchasing cards. Official
+rules and updates are on [Disney Lorcana resources](https://disneylorcana.com/en/resources/).
 
-## 📁 Repository Structure
+## Local development and checks
 
-```
-├── index.html                   # Central Multilingual Hub Portal
-├── README.md                    # Primary Global Community Guide
-├── README.it.md (en, fr, de, es)# Localized Readmes
-├── guide/
-│   ├── guida-lorcana-it.html    # Standalone Guide (Italian)
-│   ├── lorcana-guide-en.html    # Standalone Guide (English)
-│   ├── lorcana-guide-fr.html    # Standalone Guide (French)
-│   ├── lorcana-guide-de.html    # Standalone Guide (German)
-│   └── lorcana-guide-es.html    # Standalone Guide (Spanish)
-└── docs/
-    ├── sets/                   # Complete history from Set 1 to Set 14
-    ├── cards-and-rarities/     # Rarities, foils, grading, authentication
-    ├── rules/                  # Official rules & quick reference cheat sheet
-    ├── strategy/               # Monte Carlo math, inking decisions, mana curves
-    ├── decks/                  # Mickey & Minnie starter deck & Tier 1 decklists
-    └── glossary/               # Official 5-language cross-reference dictionary
+For an optional local web server (Python 3):
+
+```sh
+python -m http.server 8765 --bind 127.0.0.1
 ```
 
----
+Open `http://127.0.0.1:8765`. For checks, use Python 3.10+ and Node.js 22+:
 
-## 🎮 Recommended Beginner Deck: Emerald/Sapphire "Mickey & Minnie"
+```sh
+python tools/check_site.py
+node --test tools/odds.test.cjs
+python tools/run_git_workflow.py
+```
 
-- **Deck Archetype**: Synergy Aggro / Midrange
-- **Deck Size**: 60 Cards (54 Inkable / 6 Non-Inkable)
-- **The Core Play**:
-  - **Turn 1**: Play 1-cost *Minnie Mouse - Curious Adventurer*.
-  - **Turn 2**: Play 2-cost *Mickey Mouse - Bob Cratchit*.
-  - **Turn 3**: Cast *Mickey & Minnie - Adventuring Duo* via **Duo Shift 0**!
-  - You now control a 5/5 powerhouse that quests for **5 Lore** each turn and recurs to your inkwell if targeted!
+The last command only inspects the current checkout; it does not initialize
+Git, change identity, create branches, merge or commit. CI runs the static
+and calculator checks. Browser QA should also cover narrow screens,
+keyboard navigation, glossary empty/reset states, score win/reset states,
+invalid inputs, reduced motion and offline/no-JavaScript reading.
 
-See full decklist and matchup guides in [`docs/decks/starter-emerald-sapphire.en.md`](docs/decks/starter-emerald-sapphire.en.md).
+The five guides intentionally embed the same CSS and runtime to preserve
+single-file distribution. Keep runtime fixes synchronized; the checker
+detects script drift. There are no production package dependencies.
 
----
+## Community and maintenance
 
-## 🤝 Community, Discussions & Support
+- [Contribute](CONTRIBUTING.md), [conduct](CODE_OF_CONDUCT.md), [support](SUPPORT.md)
+- [Report a security issue](SECURITY.md), [changelog](CHANGELOG.md)
+- [GitHub Discussions](https://github.com/MRJonam91/disney-lorcana-companion/discussions), when enabled
 
-- 💬 **[Join GitHub Discussions](https://github.com/MRJonam91/disney-lorcana-companion/discussions)**: Share decklists, tournament reports, ask rules questions, and discuss upcoming sets!
-- 💖 **Support the Project**:
-  - [Sponsor on GitHub](https://github.com/sponsors/MRJonam91)
-  - [Ko-fi](https://ko-fi.com/mrjonam)
-  - [Buy Me a Coffee](https://buymeacoffee.com/mrjonam)
-  - [PayPal](https://paypal.me/manorollo)
-- 🌐 **Useful External Resources**:
-  - [Official Disney Lorcana Site](https://www.disneylorcana.com/)
-  - [inkDecks Tournament Database](https://inkdecks.com/)
-  - [Lorcana TCG Subreddit](https://reddit.com/r/Lorcana)
+## License and attribution
 
-*Disclaimer: Disney Lorcana is copyright © Disney and Ravensburger. This project is an unofficial community resource created under fair use for educational and gaming purposes.*
+Original contributions retain the existing [MIT license](LICENSE). See
+[NOTICE](NOTICE), [third-party notices](THIRD_PARTY_NOTICES.md) and
+[asset provenance](ASSETS.md). Disney Lorcana, characters, card names and
+trademarks belong to their respective owners. The software license grants
+no rights to third-party art, card text or trademarks. This project is not
+affiliated with, endorsed by or sponsored by Disney or Ravensburger.
+
+## Support the project / Sostieni il progetto
+
+Support is voluntary and grants no additional license or rights. / Il
+supporto è volontario e non attribuisce licenze o diritti aggiuntivi:
+[GitHub Sponsors](https://github.com/sponsors/MRJonam91),
+[Ko-fi](https://ko-fi.com/mrjonam),
+[Buy Me a Coffee](https://buymeacoffee.com/mrjonam),
+[PayPal](https://paypal.me/manorollo).

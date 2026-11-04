@@ -1,5 +1,7 @@
 # Disney Lorcana Complete Set History & Analysis (ES)
 
+> **Fuentes:** notas históricas no oficiales; los datos actuales no están verificados. [Fuentes y límites](../source-status.md).
+
 Comprehensive guide detailing the evolution of Disney Lorcana from The First Chapter to the current Set 13 and upcoming Set 14.
 
 ---

@@ -1,5 +1,7 @@
 # Disney Lorcana Decks & Meta Guide (EN)
 
+> **Source status:** historical community notes, not an official rulebook or verified current data. [Sources and limitations](../source-status.md).
+
 Complete 60-card starter list and competitive tier breakdown.
 
 ---

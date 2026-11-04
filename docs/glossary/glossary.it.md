@@ -1,5 +1,7 @@
 # Glossario Completo e Termini Multilingua di Disney Lorcana
 
+> **Stato delle fonti:** note storiche della community, non un regolamento ufficiale o dati correnti verificati. [Fonti e limiti](../source-status.md).
+
 Tabella comparativa ufficiale dei termini di gioco in 5 lingue (Italiano, Inglese, Francese, Tedesco, Spagnolo) e dizionario del gergo TCG.
 
 ---

@@ -1,5 +1,7 @@
 # Regolamento Ufficiale e Completo di Disney Lorcana
 
+> **Stato delle fonti:** note storiche della community, non un regolamento ufficiale o dati correnti verificati. [Fonti e limiti](../source-status.md).
+
 Guida alle regole di gioco per tornei competitivi e partite casuali, con procedura turno per turno.
 
 ---

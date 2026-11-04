@@ -1,5 +1,7 @@
 # Mazzo per Novizi e Top Meta Decks: Disney Lorcana
 
+> **Stato delle fonti:** note storiche della community, non un regolamento ufficiale o dati correnti verificati. [Fonti e limiti](../source-status.md).
+
 Lista completa a 60 carte per iniziare a vincere subito, con spiegazione dettagliata delle combo e panoramica dei tier competitivi del Set 13 (*Attack of the Vine!*).
 
 ---

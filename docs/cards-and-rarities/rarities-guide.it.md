@@ -1,5 +1,7 @@
 # Carte e Rarità in Disney Lorcana: Guida al Collezionismo
 
+> **Stato delle fonti:** note storiche della community, non un regolamento ufficiale o dati correnti verificati. [Fonti e limiti](../source-status.md).
+
 Guida ufficiale e completa alla classificazione delle carte, simboli di rarità, probabilità di sbustamento (pull rates), trattamenti foil e grading.
 
 ---

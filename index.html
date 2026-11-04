@@ -4,11 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Disney Lorcana · Complete Community Portal &amp; Strategy Hub</title>
-  <meta name="description" content="The ultimate viral community portal and comprehensive guide for Disney Lorcana TCG. Interactive standalone guides in 5 languages (Italian, English, French, German, Spanish), rules, set analysis, cards & rarities, decklists, and tabletop companion tools.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
+  <meta name="description" content="An unofficial community guide for Disney Lorcana TCG. Interactive standalone guides in 5 languages (Italian, English, French, German, Spanish), rules, set analysis, cards & rarities, decklists, and tabletop companion tools.">
+        <style>
     :root {
       --bg: #0c0a12;
       --bg-card: #151120;
@@ -284,17 +281,45 @@
       color: var(--gold);
       text-decoration: underline;
     }
+
+    :root{color-scheme:dark;}
+    body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;overflow-x:visible;}
+    h1,.section-title,.lang-name,.feat-card h3,.set-name{font-family:Georgia,"Times New Roman",serif;}
+    :focus-visible{outline:3px solid var(--gold);outline-offset:5px;}
+    .skip-link{position:fixed;top:8px;left:12px;z-index:100;padding:12px;background:var(--gold);color:var(--bg);transform:translateY(-160%);}
+    .skip-link:focus{transform:none;}
+    .portal-nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:20px;padding-bottom:20px;border-bottom:1px solid var(--line);font-size:.82rem;}
+    .portal-brand{font-weight:750;letter-spacing:.08em;}.portal-brand span{font-weight:400;color:var(--parch-muted);font-size:.7rem;margin-left:5px;}
+    .portal-nav>div{display:flex;gap:20px;}.portal-nav a{display:inline-flex;align-items:center;min-height:44px;}
+    header{padding:44px 0 0;}.badge{font-size:.72rem;margin-bottom:14px;letter-spacing:.1em;}
+    h1{font-size:clamp(2.6rem,6vw,4.4rem);background:none;color:var(--parch);-webkit-text-fill-color:currentColor;}
+    .subtitle{max-width:700px;font-size:1.05rem;margin-bottom:24px;line-height:1.8;}
+    .hero-links{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;}.hero-links a{padding:12px 20px;min-height:48px;border:1px solid var(--line-strong);border-radius:8px;font-weight:650;font-size:.9rem;}.hero-links .primary-link{background:var(--gold);color:var(--bg);}.hero-links span{margin-left:14px;}
+    .ink-orbs{margin:28px 0 32px;gap:10px;}.orb{width:8px;height:8px;box-shadow:none;}
+    .quick-tools{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin-bottom:48px;border:1px solid var(--line);border-radius:12px;background:var(--bg-card);overflow:hidden;}
+    .quick-tools a{padding:22px 24px;display:flex;flex-direction:column;gap:5px;border-right:1px solid var(--line);}.quick-tools a:last-child{border:0;}.quick-tools a:hover{background:var(--bg-card-hover);}.quick-tools span{font-size:.65rem;letter-spacing:.12em;color:var(--gold);}.quick-tools strong{font-size:1.05rem;font-weight:600;}.quick-tools small{color:var(--parch-muted);font-size:.8rem;}
+    section[id]{scroll-margin-top:24px;}.section-title{text-align:left;font-size:1.7rem;}.section-desc{text-align:left;max-width:750px;margin-bottom:22px;line-height:1.7;}
+    .lang-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;}.lang-card{padding:20px 16px;text-align:left;border-radius:12px;transition:transform .2s,border-color .2s;}.lang-card:hover{transform:translateY(-3px);box-shadow:none;}.lang-flag{font:600 .8rem system-ui,sans-serif;color:var(--gold);margin-bottom:14px;}.lang-name{font-size:1.2rem;}.lang-meta{font-size:.8rem;line-height:1.65;margin-bottom:20px;}.btn-open{padding:9px 10px;font-size:.8rem;text-align:center;border-radius:7px;}.lang-section{margin-bottom:48px;}
+    .features-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,310px),1fr));gap:16px;margin-bottom:48px;}.feat-card{padding:24px;border-radius:12px;}.feat-icon{font-size:1.5rem;margin-bottom:10px;}.feat-card h3{font-size:1.2rem;}.feat-card p{font-size:.86rem;}.feat-tag{min-height:44px;display:inline-flex;align-items:center;}.feat-links{gap:6px;}
+    .timeline-wrap{padding:24px;margin-bottom:48px;}.timeline-wrap a{text-decoration:underline;color:var(--gold);}.sets-scroller:focus-visible{outline-offset:2px;}
+    @media(max-width:1000px){.lang-grid{grid-template-columns:repeat(3,minmax(0,1fr));}}
+    @media(max-width:640px){.wrap{padding-left:20px;padding-right:20px;}.portal-nav{gap:8px;padding-top:10px;padding-bottom:10px;}.portal-nav>div{gap:12px;}.portal-brand span{display:none;}header{padding-top:28px;}h1{font-size:2.5rem;}.subtitle{font-size:.95rem;}.hero-links{gap:8px;}.hero-links a{padding:12px 14px;font-size:.82rem;}.quick-tools{grid-template-columns:1fr;margin-bottom:36px;}.quick-tools a{padding:16px 20px;border-right:0;border-bottom:1px solid var(--line);}.quick-tools small{display:none;}.lang-grid{grid-template-columns:1fr 1fr;}.lang-card{padding:18px 14px;}.lang-meta{font-size:.78rem;}.lang-name{font-size:1.1rem;}.section-title{font-size:1.5rem;}.timeline-wrap{padding:18px;}}
+    @media(max-width:359px){.lang-grid{grid-template-columns:1fr;}.portal-nav>div{gap:8px;}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;}}
   </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to content / Vai al contenuto</a>
+<nav class="portal-nav wrap" aria-label="Main navigation"><a class="portal-brand" href="index.html">LORCANA <span>COMPANION</span></a><div><a href="#languages">Guide</a><a href="#resources">Resources</a><a href="https://github.com/MRJonam91/disney-lorcana-companion">GitHub</a></div></nav>
 
   <header>
     <div class="wrap">
-      <div class="badge">✦ The Ultimate Illumineer Portal ✦</div>
+      <div class="badge">Unofficial community companion</div>
       <h1>Disney Lorcana</h1>
-      <p class="subtitle">Complete community repository, interactive strategy guides in 5 languages, full set history from Chapter 1 to Set 14, card rarities &amp; collecting, tournament meta analytics, and tabletop tools.</p>
-      
-      <div class="ink-orbs">
+      <p class="subtitle">Learn the rules. Find a term. Keep score.<br><span lang="it">Guide e strumenti gratuiti per le tue partite, in un unico posto.</span></p>
+
+      <div class="hero-links"><a class="primary-link" href="guide/guida-lorcana-it.html" lang="it" hreflang="it">Inizia in italiano <span aria-hidden="true">→</span></a><a href="guide/lorcana-guide-en.html" lang="en" hreflang="en">Read in English <span aria-hidden="true">→</span></a></div>
+      <div class="ink-orbs" aria-hidden="true">
         <div class="orb amber" title="Amber"></div>
         <div class="orb amethyst" title="Amethyst"></div>
         <div class="orb emerald" title="Emerald"></div>
@@ -305,60 +330,61 @@
     </div>
   </header>
 
-  <main class="wrap">
+  <main class="wrap" id="main-content" tabindex="-1">
+    <section class="quick-tools" lang="it" aria-label="Accesso rapido"><a href="guide/guida-lorcana-it.html#basi"><span>01 / LEARN</span><strong>Le basi del gioco</strong><small>Regole e primo turno</small></a><a href="guide/guida-lorcana-it.html#glossario"><span>02 / FIND</span><strong>Cerca nel glossario</strong><small>Termini e abilità delle carte</small></a><a href="guide/guida-lorcana-it.html#strumenti"><span>03 / PLAY</span><strong>Strumenti da tavolo</strong><small>Segnapunti e probabilità</small></a></section>
 
     <!-- Language Selector Section -->
-    <section class="lang-section">
-      <h2 class="section-title">Select Your Language / Scegli la tua Lingua</h2>
-      <p class="section-desc">Experience the complete standalone interactive web guide with lore tracker, card breakdown, and mulligan simulator.</p>
-      
+    <section class="lang-section" id="languages" aria-labelledby="language-title">
+      <h2 class="section-title" id="language-title">Scegli la tua guida / Choose your guide</h2>
+      <p class="section-desc">No installation. Read offline, search the glossary, and track your game. Some legacy sections are still awaiting translation and source verification.</p>
+
       <div class="lang-grid">
         <!-- Italian -->
-        <a href="guide/guida-lorcana-it.html" class="lang-card">
+        <a href="guide/guida-lorcana-it.html" class="lang-card" lang="it" hreflang="it">
           <div>
-            <div class="lang-flag">🇮🇹</div>
+            <div class="lang-flag" aria-hidden="true">IT</div>
             <div class="lang-name">Italiano</div>
-            <div class="lang-meta">Guida completa ufficiale per la community italiana: regole, 6 inchiostri, Set 13 &amp; 14, mazzo novizio Topolino &amp; Minnie e glossario.</div>
+            <div class="lang-meta">Regole, inchiostri, glossario ricercabile e strumenti per giocare. Guida non ufficiale della community.</div>
           </div>
           <span class="btn-open">Apri la Guida ➔</span>
         </a>
 
         <!-- English -->
-        <a href="guide/lorcana-guide-en.html" class="lang-card">
+        <a href="guide/lorcana-guide-en.html" class="lang-card" lang="en" hreflang="en">
           <div>
-            <div class="lang-flag">🇬🇧</div>
+            <div class="lang-flag" aria-hidden="true">EN</div>
             <div class="lang-name">English</div>
-            <div class="lang-meta">Complete official English edition: core rules, card anatomy, tournament meta, Mickey &amp; Minnie starter deck, and keyword glossary.</div>
+            <div class="lang-meta">Rules, inks, searchable glossary and tabletop tools. Unofficial community guide; some sections are still in Italian.</div>
           </div>
           <span class="btn-open">Open Guide ➔</span>
         </a>
 
         <!-- French -->
-        <a href="guide/lorcana-guide-fr.html" class="lang-card">
+        <a href="guide/lorcana-guide-fr.html" class="lang-card" lang="fr" hreflang="fr">
           <div>
-            <div class="lang-flag">🇫🇷</div>
+            <div class="lang-flag" aria-hidden="true">FR</div>
             <div class="lang-name">Français</div>
-            <div class="lang-meta">Guide officiel en français : réservoir d'encre, phases de jeu, méta compétitif, deck débutant Mickey &amp; Minnie et dictionnaire.</div>
+            <div class="lang-meta">Règles, encres, glossaire et outils de jeu. Guide non officiel ; certaines sections restent en italien.</div>
           </div>
           <span class="btn-open">Ouvrir le Guide ➔</span>
         </a>
 
         <!-- German -->
-        <a href="guide/lorcana-guide-de.html" class="lang-card">
+        <a href="guide/lorcana-guide-de.html" class="lang-card" lang="de" hreflang="de">
           <div>
-            <div class="lang-flag">🇩🇪</div>
+            <div class="lang-flag" aria-hidden="true">DE</div>
             <div class="lang-name">Deutsch</div>
-            <div class="lang-meta">Offizieller Leitfaden auf Deutsch: Tintenvorrat, Zugphasen, Set 13 Turnier-Meta, Micky &amp; Minnie Einsteigerdeck und Glossar.</div>
+            <div class="lang-meta">Regeln, Tinten, Glossar und Spielhilfen. Inoffizieller Leitfaden; einige Abschnitte sind noch auf Italienisch.</div>
           </div>
           <span class="btn-open">Leitfaden Öffnen ➔</span>
         </a>
 
         <!-- Spanish -->
-        <a href="guide/lorcana-guide-es.html" class="lang-card">
+        <a href="guide/lorcana-guide-es.html" class="lang-card" lang="es" hreflang="es">
           <div>
-            <div class="lang-flag">🇪🇸</div>
+            <div class="lang-flag" aria-hidden="true">ES</div>
             <div class="lang-name">Español</div>
-            <div class="lang-meta">Guía completa en español: gestión del tintero, turnos, metajuego competitivo, mazo novato Mickey y Minnie y glosario oficial.</div>
+            <div class="lang-meta">Reglas, tintas, glosario y herramientas. Guía no oficial; algunas secciones siguen en italiano.</div>
           </div>
           <span class="btn-open">Abrir Guía ➔</span>
         </a>
@@ -366,73 +392,73 @@
     </section>
 
     <!-- Core Features & Documentation -->
-    <section>
-      <h2 class="section-title">Repository Knowledge Base</h2>
-      <p class="section-desc">Comprehensive markdown documentation and data files available in the <code>docs/</code> directory.</p>
+    <section id="resources">
+      <h2 class="section-title">Explore the documentation</h2>
+      <p class="section-desc">Community notes in five languages. Markdown links open the readable source on GitHub.</p>
 
       <div class="features-grid">
         <div class="feat-card">
           <div class="feat-icon">📜</div>
           <h3>Set History &amp; Analysis</h3>
-          <p>Exhaustive breakdown of all 14 sets: release calendar, narrative lore, mechanics introduced (Resist, Locations, Sing Together, Duo Shift), staples, and competitive impact.</p>
+          <p>An archive of set notes and mechanics. Use the official product pages for verified release information.</p>
           <div class="feat-links">
-            <a href="docs/sets/set-history.it.md" class="feat-tag">IT Docs</a>
-            <a href="docs/sets/set-history.en.md" class="feat-tag">EN Docs</a>
-            <a href="docs/sets/set-history.fr.md" class="feat-tag">FR Docs</a>
-            <a href="docs/sets/set-history.de.md" class="feat-tag">DE Docs</a>
-            <a href="docs/sets/set-history.es.md" class="feat-tag">ES Docs</a>
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/sets/set-history.it.md" class="feat-tag">IT Docs</a>
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/sets/set-history.en.md" class="feat-tag">EN Docs</a>
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/sets/set-history.fr.md" class="feat-tag">FR Docs</a>
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/sets/set-history.de.md" class="feat-tag">DE Docs</a>
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/sets/set-history.es.md" class="feat-tag">ES Docs</a>
           </div>
         </div>
 
         <div class="feat-card">
           <div class="feat-icon">💎</div>
           <h3>Cards &amp; Rarities Guide</h3>
-          <p>Detailed guide on card rarity tiers: Common to Enchanted, cold foil vs rainbow foil, pull rates per booster box, D23 promos, and grading/authentication tips.</p>
+          <p>Community notes on rarities, foil treatments and collecting. Pull-rate and price claims in older notes require source verification.</p>
           <div class="feat-links">
-            <a href="docs/cards-and-rarities/rarities-guide.it.md" class="feat-tag">IT Docs</a>
-            <a href="docs/cards-and-rarities/rarities-guide.en.md" class="feat-tag">EN Docs</a>
-            <a href="docs/cards-and-rarities/rarities-guide.fr.md" class="feat-tag">FR Docs</a>
-            <a href="docs/cards-and-rarities/rarities-guide.de.md" class="feat-tag">DE Docs</a>
-            <a href="docs/cards-and-rarities/rarities-guide.es.md" class="feat-tag">ES Docs</a>
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/cards-and-rarities/rarities-guide.it.md" class="feat-tag">IT Docs</a>
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/cards-and-rarities/rarities-guide.en.md" class="feat-tag">EN Docs</a>
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/cards-and-rarities/rarities-guide.fr.md" class="feat-tag">FR Docs</a>
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/cards-and-rarities/rarities-guide.de.md" class="feat-tag">DE Docs</a>
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/cards-and-rarities/rarities-guide.es.md" class="feat-tag">ES Docs</a>
           </div>
         </div>
 
         <div class="feat-card">
           <div class="feat-icon">⚔️</div>
           <h3>Rules &amp; Quick Sheet</h3>
-          <p>Complete tournament and casual rules: Beginning Phase, Main Phase, Inking rules, Quests, Challenges, Locations, simultaneous triggers, and printable cheat-sheet.</p>
+          <p>Learn turn phases, inking, quests and challenges. These community notes are a companion to the official rulebook.</p>
           <div class="feat-links">
-            <a href="docs/rules/complete-rules.it.md" class="feat-tag">IT Rules</a>
-            <a href="docs/rules/complete-rules.en.md" class="feat-tag">EN Rules</a>
-            <a href="docs/rules/complete-rules.fr.md" class="feat-tag">FR Rules</a>
-            <a href="docs/rules/complete-rules.de.md" class="feat-tag">DE Rules</a>
-            <a href="docs/rules/complete-rules.es.md" class="feat-tag">ES Rules</a>
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/rules/complete-rules.it.md" class="feat-tag">IT Rules</a>
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/rules/complete-rules.en.md" class="feat-tag">EN Rules</a>
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/rules/complete-rules.fr.md" class="feat-tag">FR Rules</a>
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/rules/complete-rules.de.md" class="feat-tag">DE Rules</a>
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/rules/complete-rules.es.md" class="feat-tag">ES Rules</a>
           </div>
         </div>
 
         <div class="feat-card">
           <div class="feat-icon">🧠</div>
           <h3>Strategy &amp; Mulligan Math</h3>
-          <p>Advanced competitive theory: 100,000 Monte Carlo simulation results, hypergeometric mulligan tables, non-inkable threshold, mana curve optimization, and tempo.</p>
+          <p>Mulligan probabilities, model assumptions, inking decisions and tempo. The interactive calculator uses deterministic hypergeometric calculations.</p>
           <div class="feat-links">
-            <a href="docs/strategy/mulligan-and-math.it.md" class="feat-tag">IT Strategy</a>
-            <a href="docs/strategy/mulligan-and-math.en.md" class="feat-tag">EN Strategy</a>
-            <a href="docs/strategy/mulligan-and-math.fr.md" class="feat-tag">FR Strategy</a>
-            <a href="docs/strategy/mulligan-and-math.de.md" class="feat-tag">DE Strategy</a>
-            <a href="docs/strategy/mulligan-and-math.es.md" class="feat-tag">ES Strategy</a>
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/strategy/mulligan-and-math.it.md" class="feat-tag">IT Strategy</a>
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/strategy/mulligan-and-math.en.md" class="feat-tag">EN Strategy</a>
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/strategy/mulligan-and-math.fr.md" class="feat-tag">FR Strategy</a>
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/strategy/mulligan-and-math.de.md" class="feat-tag">DE Strategy</a>
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/strategy/mulligan-and-math.es.md" class="feat-tag">ES Strategy</a>
           </div>
         </div>
 
         <div class="feat-card">
           <div class="feat-icon">🃏</div>
           <h3>Starter &amp; Meta Decks</h3>
-          <p>Full 60-card lists: Emerald/Sapphire Mickey &amp; Minnie Duo Shift starter deck with turn-by-turn lines, plus Tier 1 tournament decklists (Set 13 data: 14,240 games).</p>
+          <p>Archived deck examples and turn-by-turn notes. Verify card text and format legality before building or purchasing a deck.</p>
           <div class="feat-links">
-            <a href="docs/decks/starter-emerald-sapphire.it.md" class="feat-tag">IT Decks</a>
-            <a href="docs/decks/starter-emerald-sapphire.en.md" class="feat-tag">EN Decks</a>
-            <a href="docs/decks/starter-emerald-sapphire.fr.md" class="feat-tag">FR Decks</a>
-            <a href="docs/decks/starter-emerald-sapphire.de.md" class="feat-tag">DE Decks</a>
-            <a href="docs/decks/starter-emerald-sapphire.es.md" class="feat-tag">ES Decks</a>
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/decks/starter-emerald-sapphire.it.md" class="feat-tag">IT Decks</a>
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/decks/starter-emerald-sapphire.en.md" class="feat-tag">EN Decks</a>
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/decks/starter-emerald-sapphire.fr.md" class="feat-tag">FR Decks</a>
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/decks/starter-emerald-sapphire.de.md" class="feat-tag">DE Decks</a>
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/decks/starter-emerald-sapphire.es.md" class="feat-tag">ES Decks</a>
           </div>
         </div>
 
@@ -441,11 +467,11 @@
           <h3>Multi-lingual Glossary</h3>
           <p>Exhaustive dictionary mapping official card game terminology across Italian, English, French, German, and Spanish alongside competitive TCG slang.</p>
           <div class="feat-links">
-            <a href="docs/glossary/glossary.it.md" class="feat-tag">IT Dictionary</a>
-            <a href="docs/glossary/glossary.en.md" class="feat-tag">EN Dictionary</a>
-            <a href="docs/glossary/glossary.fr.md" class="feat-tag">FR Dictionary</a>
-            <a href="docs/glossary/glossary.de.md" class="feat-tag">DE Dictionary</a>
-            <a href="docs/glossary/glossary.es.md" class="feat-tag">ES Dictionary</a>
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/glossary/glossary.it.md" class="feat-tag">IT Dictionary</a>
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/glossary/glossary.en.md" class="feat-tag">EN Dictionary</a>
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/glossary/glossary.fr.md" class="feat-tag">FR Dictionary</a>
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/glossary/glossary.de.md" class="feat-tag">DE Dictionary</a>
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/glossary/glossary.es.md" class="feat-tag">ES Dictionary</a>
           </div>
         </div>
       </div>
@@ -454,9 +480,9 @@
     <!-- Sets Timeline Carousel -->
     <section class="timeline-wrap">
       <h2 style="font-family:'Cinzel',serif;font-size:1.4rem;color:var(--gold);margin-bottom:6px;">Lorcana Release Timeline</h2>
-      <p style="color:var(--parch-muted);font-size:0.88rem;margin-bottom:20px;">Scroll through the complete history from Chapter 1 to upcoming Hyperia City.</p>
-      
-      <div class="sets-scroller">
+      <p style="color:var(--parch-muted);font-size:0.88rem;margin-bottom:20px;">Set names and release months · <a href="https://disneylorcana.com/en/resources/">Official set notes</a>. Snapshot: 4 November 2026.</p>
+
+      <div class="sets-scroller" tabindex="0" role="region" aria-label="Set release timeline, scroll horizontally">
         <div class="set-pill">
           <div class="set-num">Set 1</div>
           <div class="set-name">The First Chapter</div>
@@ -490,26 +516,26 @@
         <div class="set-pill">
           <div class="set-num">Set 7</div>
           <div class="set-name">Archazia's Island</div>
-          <div class="set-date">Feb 2025</div>
+          <div class="set-date">Mar 2025</div>
         </div>
         <div class="set-pill">
           <div class="set-num">Set 8</div>
-          <div class="set-name">Reign of Chaos</div>
+          <div class="set-name">Reign of Jafar</div>
           <div class="set-date">May 2025</div>
         </div>
         <div class="set-pill">
           <div class="set-num">Set 9</div>
-          <div class="set-name">Fables of Light</div>
+          <div class="set-name">Fabled</div>
           <div class="set-date">Aug 2025</div>
         </div>
         <div class="set-pill">
           <div class="set-num">Set 10</div>
-          <div class="set-name">Whispers of Deep</div>
+          <div class="set-name">Whispers in the Well</div>
           <div class="set-date">Nov 2025</div>
         </div>
         <div class="set-pill">
           <div class="set-num">Set 11</div>
-          <div class="set-name">Sunken Realms</div>
+          <div class="set-name">Winterspell</div>
           <div class="set-date">Feb 2026</div>
         </div>
         <div class="set-pill">
@@ -518,12 +544,12 @@
           <div class="set-date">May 2026</div>
         </div>
         <div class="set-pill" style="border-color:var(--emerald);background:rgba(63,163,100,0.1);">
-          <div class="set-num" style="color:#4ade80;">Set 13 · Current</div>
+          <div class="set-num" style="color:#4ade80;">Set 13</div>
           <div class="set-name">Attack of the Vine!</div>
           <div class="set-date">July 2026</div>
         </div>
         <div class="set-pill" style="border-color:var(--gold);background:rgba(229,185,92,0.1);">
-          <div class="set-num" style="color:var(--gold);">Set 14 · Upcoming</div>
+          <div class="set-num" style="color:var(--gold);">Set 14</div>
           <div class="set-name">Hyperia City</div>
           <div class="set-date">Oct 2026</div>
         </div>
@@ -534,8 +560,8 @@
 
   <footer>
     <div class="wrap">
-      <p>Disney Lorcana is &copy; Disney / Ravensburger. This project is an open-source community companion created for players, collectors, and competitive Illumineers worldwide.</p>
-      <p style="margin-top:8px;">Made with ❤️ for the Lorcana Community · Available on GitHub</p>
+      <p>Disney Lorcana is &copy; Disney / Ravensburger. This unofficial project is not affiliated with or endorsed by Disney or Ravensburger. It is a community companion created for players, collectors, and competitive Illumineers worldwide.</p>
+      <p style="margin-top:8px;"><a href="https://github.com/MRJonam91/disney-lorcana-companion">Contribute on GitHub</a> · <a href="https://ko-fi.com/mrjonam">Support the project</a></p>
     </div>
   </footer>
 

@@ -1,37 +1,17 @@
-# Strategia Avanzata e Matematica del Mulligan in Disney Lorcana
+# Strategia e matematica del mulligan
 
-Analisi strategica approfondita basata sui dati e su simulazioni Monte Carlo su 100.000 partite estratti dalla community e dai grandi tornei competitivi.
+Questo calcolatore usa probabilità ipergeometriche, non simulazioni Monte Carlo. Le percentuali indicano almeno una carta utile da un gruppo di bersagli equivalenti: non la probabilità di completare una combo.
 
----
+Modello: mazzo da 60 carte, mano iniziale di 7. Conservi ogni bersaglio; se non ne hai, cambi 4 carte. Le carte cambiate vengono rimescolate nel mazzo prima delle pescate dei turni 2 e 3, giocando per primo. Nessun effetto di pescata aggiuntivo.
 
-## 1. La Matematica del Mulligan (Simulazione Monte Carlo su 100.000 Mani)
+| Bersagli | Mano iniziale | Dopo mulligan di 4 | Entro turno 3 |
+| --- | --- | --- | --- |
+| 4 | 39.9% | 56.6% | 62.9% |
+| 8 | 65.4% | 82.4% | 87.3% |
+| 12 | 80.9% | 93.4% | 96.1% |
 
-In Disney Lorcana il mulligan è "soft": puoi selezionare esattamente quali carte rimettere in fondo al mazzo e pescarne altrettante, prima di rimescolare.
+[Model, sources and limitations / Modello, fonti e limiti](../source-status.md).
 
-### Probabilità di trovare la tua combo chiave (es. Topolino + Minnie entro il Turno 3):
-- **Tieni carte alte e non fai mulligan**: ~39.9% di probabilità.
-- **Mulligan aggressivo (rimetti indietro tutte le carte da costo 5+)**: **78.4%** di probabilità di avere entrambi i pezzi pronti per il turno 3!
+## Scelte al tavolo
 
-### Tabella delle Probabilità (Mazzo da 60 carte):
-| Carte bersaglio nel mazzo | Nella mano iniziale (7) | Con Mulligan di 4 carte | Al Turno 3 (giocando 1°) |
-| :---: | :---: | :---: | :---: |
-| **4 copie** (es. *Mickey & Minnie Duo*) | 39.9% | 57.6% | 66.2% |
-| **8 copie** (es. 4 Mickey + 4 Minnie) | 65.3% | 83.1% | 89.2% |
-| **12 copie** (es. reparto carte costo 1) | 81.2% | 94.1% | 97.0% |
-
----
-
-## 2. Il Bilanciamento delle Carte Non-Inchiostrabili (Non-Inkables)
-- Le carte non-inchiostrabili sono spesso le più potenti del gioco (es. *Grab Your Sword*, *Be Prepared*, *Dragon Fire*), ma averne troppe in mano causa il **blocco delle risorse (Ink-Screw)**.
-- **Regola d'oro del deckbuilding**: Mantieni tra **6 e massimo 12 carte non-inchiostrabili** in un mazzo da 60 carte.
-- Superare le 14 carte non-inkable porta la probabilità di avere mani morte al 34% entro il turno 4.
-
----
-
-## 3. Gestione del Calamaio: Cosa Inchiostrare?
-1. **Turno 1**: Inchiostra la carta con il costo più alto che non sia fondamentale per il tuo piano a medio termine.
-2. **Turno 2-4**: Non inchiostrare mai la tua unica giocata per il turno successivo. Mantieni sempre una curva fluida (giocata al turno 2, 3 e 4).
-3. **Quando fermarsi con l'inchiostro?**:
-   - I mazzi **Aggro** si fermano a 4 o 5 inchiostri per tenere carte da giocare in mano.
-   - I mazzi **Midrange** puntano a 6 o 7 inchiostri.
-   - I mazzi **Ramp & Control** salgono fino a 9-11 inchiostri per concatenare doppie giocate pesanti nello stesso turno.
+Bilancia le carte non inchiostrabili con la curva dei costi e il piano del mazzo. Non esiste una soglia universale certificata da questi calcoli. Conserva le giocate dei prossimi turni e valuta quali carte puoi usare come inchiostro. Il calcolatore non misura mani morte, matchup o qualità delle decisioni.

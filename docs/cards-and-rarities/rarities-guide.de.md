@@ -1,5 +1,7 @@
 # Disney Lorcana Cards & Rarities Guide (DE)
 
+> **Quellenstatus:** historische Community-Notizen, keine offiziellen Regeln oder geprüften aktuellen Daten. [Quellen und Grenzen](../source-status.md).
+
 Complete guide to card rarity tiers, pull rates, foil variations, and collecting standards.
 
 ---

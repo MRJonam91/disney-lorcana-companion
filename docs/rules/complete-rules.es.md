@@ -1,5 +1,7 @@
 # Disney Lorcana Official Rules & Tournament Guide (ES)
 
+> **Fuentes:** notas históricas no oficiales; los datos actuales no están verificados. [Fuentes y límites](../source-status.md).
+
 Comprehensive rulebook covering turn structure, timing, inking mechanics, and combat.
 
 ---

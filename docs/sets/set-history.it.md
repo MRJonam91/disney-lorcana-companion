@@ -1,5 +1,7 @@
 # Storico e Analisi Completa dei Set di Disney Lorcana
 
+> **Stato delle fonti:** note storiche della community, non un regolamento ufficiale o dati correnti verificati. [Fonti e limiti](../source-status.md).
+
 Panoramica dettagliata dell'evoluzione del gioco dal debutto storico del Capitolo 1 fino al metagame attuale e alle espansioni future.
 
 ---

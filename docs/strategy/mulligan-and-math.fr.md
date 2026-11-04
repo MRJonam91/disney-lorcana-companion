@@ -1,29 +1,17 @@
-# Disney Lorcana Advanced Strategy & Mulligan Math (FR)
+# Stratégie et probabilités du mulligan
 
-Data-driven competitive analysis based on 100,000 Monte Carlo game simulations.
+Le calculateur utilise des probabilités hypergéométriques, pas des simulations Monte Carlo. Les résultats indiquent au moins une carte utile parmi des cibles interchangeables, pas une combinaison complète.
 
----
+Modèle : deck de 60 cartes, main initiale de 7. Gardez chaque cible ; sans cible, remplacez 4 cartes. Les cartes retournées sont remélangées avant les pioches des tours 2 et 3, en commençant. Aucun effet de pioche supplémentaire.
 
-## 1. Mulligan Theory & Odds Table (60-Card Deck)
+| Cibles | Main initiale | Après mulligan de 4 | Au tour 3 |
+| --- | --- | --- | --- |
+| 4 | 39.9% | 56.6% | 62.9% |
+| 8 | 65.4% | 82.4% | 87.3% |
+| 12 | 80.9% | 93.4% | 96.1% |
 
-Disney Lorcana features a modified mulligan: you can put any number of cards on the bottom of your deck and draw that many replacements before shuffling.
+[Model, sources and limitations / Modello, fonti e limiti](../source-status.md).
 
-| Target Cards in Deck | Opening Hand (7 cards) | After 4-Card Mulligan | By Turn 3 (On the Play) |
-| :---: | :---: | :---: | :---: |
-| **4 copies** (Playset) | 39.9% | 57.6% | 66.2% |
-| **8 copies** (e.g. 2 key playsets) | 65.3% | 83.1% | 89.2% |
-| **12 copies** (e.g. 1-drop engine) | 81.2% | 94.1% | 97.0% |
+## Décisions de jeu
 
----
-
-## 2. The Non-Inkable Threshold
-- Non-inkable cards provide devastating effects, but drawing multiple non-inkables causes an unrecoverable **resource choke**.
-- **Golden Ratio**: Aim for **8 to 12 non-inkables maximum** in a 60-card list.
-- Running 16+ non-inkables increases dead opening hands to over 35%.
-
----
-
-## 3. Inking Decision Hierarchy
-1. Ink redundant late-game cards first.
-2. Preserve your curve plays for Turns 2, 3, and 4.
-3. Stop inking once your deck's maximum top-end cost is reached (Turn 4-5 for Aggro, Turn 7 for Control).
+Équilibrez les cartes non encrables avec la courbe des coûts et le plan du deck. Ces calculs ne fixent aucun seuil universel. Gardez vos prochaines actions et évaluez les cartes à encrer. Le calculateur ne mesure ni les mains mortes, ni les matchups, ni la qualité des décisions.

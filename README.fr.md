@@ -1,5 +1,7 @@
 # ✦ Disney Lorcana · Guide & Hub Communautaire (Français) ✦
 
+> **Sources :** notes historiques non officielles, données actuelles non vérifiées. [Sources et limites](docs/source-status.md).
+
 Bienvenue dans le dépôt communautaire complet pour Disney Lorcana TCG.
 
 - **[Portail d'Accueil Multilingue](index.html)**

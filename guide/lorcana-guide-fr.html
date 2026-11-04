@@ -3,10 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Outils de jeu : compteur de Lore et probabilités calculées avec un modèle hypergéométrique.">
 <title>Disney Lorcana · Guide Interactif Complet : Règles, Stratégies & Métagame</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
     --ink-night:#0B0A1A;
@@ -496,16 +494,96 @@
     color: var(--gold);
     background: rgba(227, 178, 60, .12);
   }
+
+  /* Accessible, offline-first layout. All navigation stays available without JS. */
+  :root{--ui:system-ui,-apple-system,"Segoe UI",sans-serif;--display:Georgia,"Times New Roman",serif;--body:Georgia,"Times New Roman",serif;--muted-2:#aaa3bf;color-scheme:dark;}
+  [hidden]{display:none!important;}
+  :focus-visible{outline:3px solid var(--gold-soft);outline-offset:4px;}
+  .skip-link{position:fixed;top:8px;left:12px;z-index:2000;padding:10px 18px;background:var(--parch);color:var(--ink-night);transform:translateY(-160%);font-family:var(--ui);}
+  .skip-link:focus{transform:none;}
+  .lang-bar{position:relative;flex-wrap:wrap;gap:8px;padding:8px 24px;}
+  .lang-links{flex-wrap:wrap;gap:4px;}
+  .lang-links a{min-height:44px;padding:8px;}
+  nav{position:relative;background:rgba(11,10,26,.97);backdrop-filter:none;}
+  .tools-ready nav{position:sticky;}
+  .nav-inner{gap:16px;padding:10px 24px;align-items:flex-start;}
+  .brand{padding:8px 0;}
+  .guide-menu{flex:1;min-width:0;}
+  .guide-menu summary{font:600 .85rem var(--ui);color:var(--gold-soft);padding:12px 4px;cursor:pointer;}
+  .guide-menu summary::marker{color:var(--gold);}
+  .nav-links{display:flex;flex-wrap:wrap;margin:0;max-height:42vh;overflow:auto;gap:4px;}
+  .nav-links a{min-height:44px;display:flex;align-items:center;}
+  .nav-links a.active{background:rgba(227,178,60,.12);}
+  section[id],header[id]{scroll-margin-top:78px;}
+  .hero{min-height:auto;padding:64px 28px 56px;}
+  .hero h1{font-size:clamp(3rem,11vw,7rem);}
+  .hero .eyebrow{letter-spacing:.18em;margin-bottom:20px;}
+  .hero .lede{margin-bottom:26px;}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px;font:600 .85rem var(--ui);}
+  .hero-actions a{padding:12px 16px;min-height:44px;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--gold-soft);background:var(--surface);}
+  .editorial-note{font:400 .85rem/1.6 var(--ui);padding:18px 22px;border:1px solid var(--line);border-radius:12px;background:var(--surface);margin-bottom:32px;}
+  .editorial-note a{color:var(--gold-soft);}
+  .ambient{position:absolute;max-height:1000px;}
+  .blob{animation:none!important;filter:blur(55px);opacity:.2;}
+  .reveal{opacity:1;transform:none;transition:none;}
+  .section{padding:56px 0;}
+  .tools-grid,.dl-wrap,.gloss-grid,.actions,.kw-grid,.tips,.ink-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));}
+  .tools-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));}
+  .ink-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));}
+  .tool-card,.lore-box,.gloss-search-box input,.calc-field>*{min-width:0;}
+  .lore-ctrls{display:grid;grid-template-columns:repeat(2,minmax(44px,1fr));}
+  .btn-lore{min-height:44px;padding:8px;touch-action:manipulation;}
+  .lore-title{overflow-wrap:anywhere;}
+  .lore-status{min-height:1.6em;color:#4ade80;font:600 .8rem var(--ui);}
+  .calc-field{gap:12px;flex-wrap:wrap;}
+  .calc-field label{flex:1 1 140px;}
+  .calc-field select,.calc-field input{width:100%;flex:1 1 160px;min-height:44px;font-size:1rem;}
+  .calc-res-item{gap:14px;align-items:baseline;}
+  .calc-res-val{white-space:nowrap;font-variant-numeric:tabular-nums;}
+  .calc-error{color:#ffb7b7;font:.85rem var(--ui);}
+  .tool-card .calc-model{font-size:.82rem;line-height:1.6;margin:16px 0 0;}
+  .search-status{font:.85rem var(--ui);color:var(--muted);margin:0 0 20px;}
+  .gloss-search-box{flex-direction:column;gap:8px;margin-bottom:12px;}
+  .gloss-search-box label{font:600 .85rem var(--ui);color:var(--gold-soft);}
+  @media(max-width:640px){
+    .container{padding-left:20px;padding-right:20px;}
+    .lang-bar{padding:8px 16px;}.lang-bar>span{display:none;}
+    .nav-inner{padding:6px 20px;}.brand{font-size:1rem;}
+    .guide-menu summary{text-align:right;}.nav-links{justify-content:flex-end;}
+    .hero{padding-top:40px;}.hero .lede{font-size:1.1rem;}
+    .fact{min-width:0;flex:1 1 40%;padding:14px;}.fact .l{letter-spacing:.04em;}
+    .tool-card{padding:18px;}.lore-tracker-wrap{gap:10px;}.lore-box{padding:14px 8px;}
+    .sec-head h2{overflow-wrap:anywhere;}.phase-top{flex-wrap:wrap;}
+  }
+  @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;}html{scroll-behavior:auto;}}
+
+  /* Full deck cards have a vertical structure; the compact .deck grid does not apply. */
+  .deck-full{display:flex;flex-direction:column;align-items:stretch;gap:16px;min-width:0;}
+  .deck-full .head{display:flex;align-items:center;flex-wrap:wrap;gap:12px;}
+  .deck-full h4{flex:1;min-width:0;overflow-wrap:anywhere;font-size:1.25rem;}
+  .deck-full .tierflag{margin-left:0;}
+  .deck-full>p{margin:0;font-size:1rem;color:var(--muted);}
+  .deck-full .inks{display:flex;gap:6px;}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(84px,1fr));gap:16px;padding:16px 0;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);}
+  .stats .v{font:1.3rem var(--display);color:var(--gold-soft);}
+  .stats .k{font:.72rem/1.5 var(--ui);color:var(--muted);margin-top:5px;}
+  .swot{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:20px;font-size:.95rem;}
+  .swot .lbl{display:block;font:600 .75rem var(--ui);margin-bottom:8px;color:var(--gold-soft);}
+  .mu{display:flex;flex-wrap:wrap;gap:8px;font:.72rem/1.6 var(--ui);}
+  .mu span{padding:6px 9px;border:1px solid var(--line-soft);border-radius:6px;}
+  @media print{nav,.lang-bar,.ambient,.hero-actions,.skip-link{display:none;}body{background:white;color:black;}.reveal{opacity:1;transform:none;}}
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Aller au contenu</a>
+<noscript><p class="editorial-note">JavaScript désactivé : la lecture reste possible, mais les outils nécessitent JavaScript.</p></noscript>
 <div class="lang-bar">
   <span>Disney Lorcana · Guide Interactif Complet</span>
-  <div class="lang-links">
+  <div class="lang-links" role="navigation" aria-label="Language">
     <a href="../index.html">🌐 Hub</a>
     <a href="guida-lorcana-it.html" >🇮🇹 Italiano</a>
     <a href="lorcana-guide-en.html">🇬🇧 English</a>
-    <a href="lorcana-guide-fr.html" class="active">🇫🇷 Français</a>
+    <a href="lorcana-guide-fr.html" class="active" aria-current="page">🇫🇷 Français</a>
     <a href="lorcana-guide-de.html">🇩🇪 Deutsch</a>
     <a href="lorcana-guide-es.html">🇪🇸 Español</a>
   </div>
@@ -520,10 +598,10 @@
 
 <div class="wrap">
 
-  <nav>
+  <nav aria-label="Sommaire du guide">
     <div class="nav-inner">
       <a href="#top" class="brand">LOR<span>·</span>CANA</a>
-      <div class="nav-links">
+      <details class="guide-menu"><summary>Sommaire du guide</summary><div class="nav-links">
         <a href="#basi">Bases</a>
         <a href="#inchiostri">Encres</a>
         <a href="#carta">La carte</a>
@@ -537,10 +615,11 @@
         <a href="#primo-mazzo">Premier deck</a>
         <a href="#glossario">Glossaire</a>
         <a href="#strumenti">Outils</a>
-      </div>
+      </div></details>
     </div>
   </nav>
 
+  <main id="main-content" tabindex="-1">
   <header class="hero container" id="top">
     <div class="eyebrow">La Guida dell'Illumineer</div>
     <h1>LORCANA</h1>
@@ -551,8 +630,10 @@
       <div class="fact"><div class="n">60</div><div class="l">Carte nel mazzo</div></div>
       <div class="fact"><div class="n">6</div><div class="l">Encres</div></div>
     </div>
-    <div class="scrollcue">Scorri per imparare</div>
+    <div class="hero-actions"><a href="#basi">Les bases</a><a href="#glossario">Glossaire</a><a href="#strumenti">Compteur de Lore</a></div>
   </header>
+
+  <aside class="container"><p class="editorial-note">Guide communautaire non officiel. Les sections decks, méta et collection sont des archives à vérifier ; certaines traductions sont incomplètes. Consultez les sources officielles pour les règles et cartes actuelles. <a href="https://disneylorcana.com/en/resources/">Ressources officielles</a>.</p></aside>
 
   <!-- 1 · BASI -->
   <section class="section" id="basi">
@@ -1104,9 +1185,11 @@
       </div>
 
       <div class="gloss-search-box reveal">
-        <input type="search" id="glossSearch" placeholder="🔍 Rechercher un terme (ex. Shift, Réservoir d'encre, Bodyguard, Evasive, Mulligan)... (es. Shift, Inkwell, Bodyguard, Bounce, Mulligan, Ramp)..." oninput="filterGlossary()">
+        <label for="glossSearch">Rechercher dans le glossaire</label>
+        <input type="search" id="glossSearch" placeholder="🔍 Rechercher un terme (ex. Shift, Réservoir d'encre, Bodyguard, Evasive, Mulligan)... (es. Shift, Inkwell, Bodyguard, Bounce, Mulligan, Ramp)...">
       </div>
 
+      <p class="search-status" id="glossStatus" role="status" aria-live="polite"></p>
       <div class="gloss-group reveal">
         <h3>1. Termini Base di Gioco</h3>
         <div class="gloss-grid">
@@ -1279,7 +1362,7 @@
       <div class="sec-head reveal">
         <span class="sec-num">14 · Outils Interactifs</span>
         <h2>Compagnon de Table Indispensable</h2>
-        <p>Compteur de Lore à 2 joueurs et Calculateur de probabilités de Mulligan (100 000 simulations réelles).</p>
+        <p>Outils de jeu : compteur de Lore et probabilités calculées avec un modèle hypergéométrique.</p>
       </div>
 
       <div class="tools-grid reveal">
@@ -1290,22 +1373,22 @@
           <div class="lore-tracker-wrap">
             <div class="lore-box">
               <div class="lore-title">Joueur 1</div>
-              <div class="lore-score" id="p1Score">0</div>
+              <div class="lore-score" id="p1Score" role="status" aria-live="polite" aria-label="Joueur 1">0</div><div class="lore-status" id="p1Status" role="status"></div>
               <div class="lore-ctrls">
-                <button class="btn-lore" onclick="modLore(1, -2)">-2</button>
-                <button class="btn-lore" onclick="modLore(1, -1)">-1</button>
-                <button class="btn-lore" onclick="modLore(1, 1)">+1</button>
-                <button class="btn-lore" onclick="modLore(1, 2)">+2</button>
+                <button class="btn-lore" type="button" aria-label="Joueur 1: -2 lore" onclick="modLore(1, -2)">-2</button>
+                <button class="btn-lore" type="button" aria-label="Joueur 1: -1 lore" onclick="modLore(1, -1)">-1</button>
+                <button class="btn-lore" type="button" aria-label="Joueur 1: +1 lore" onclick="modLore(1, 1)">+1</button>
+                <button class="btn-lore" type="button" aria-label="Joueur 1: +2 lore" onclick="modLore(1, 2)">+2</button>
               </div>
             </div>
             <div class="lore-box">
               <div class="lore-title">Joueur 2</div>
-              <div class="lore-score" id="p2Score">0</div>
+              <div class="lore-score" id="p2Score" role="status" aria-live="polite" aria-label="Joueur 2">0</div><div class="lore-status" id="p2Status" role="status"></div>
               <div class="lore-ctrls">
-                <button class="btn-lore" onclick="modLore(2, -2)">-2</button>
-                <button class="btn-lore" onclick="modLore(2, -1)">-1</button>
-                <button class="btn-lore" onclick="modLore(2, 1)">+1</button>
-                <button class="btn-lore" onclick="modLore(2, 2)">+2</button>
+                <button class="btn-lore" type="button" aria-label="Joueur 2: -2 lore" onclick="modLore(2, -2)">-2</button>
+                <button class="btn-lore" type="button" aria-label="Joueur 2: -1 lore" onclick="modLore(2, -1)">-1</button>
+                <button class="btn-lore" type="button" aria-label="Joueur 2: +1 lore" onclick="modLore(2, 1)">+1</button>
+                <button class="btn-lore" type="button" aria-label="Joueur 2: +2 lore" onclick="modLore(2, 2)">+2</button>
               </div>
             </div>
           </div>
@@ -1317,14 +1400,15 @@
         <!-- Mulligan Calculator -->
         <div class="tool-card">
           <h3>🎲 Calculateur de Mulligan &amp; Cotes</h3>
-          <p>Analyse hypergéométrique & Monte Carlo : calculez vos chances d'avoir vos cartes clés.</p>
+          <p>Probabilité de trouver au moins une carte du groupe choisi. Les copies sont des cibles interchangeables, pas une combinaison.</p>
+          <p class="calc-model" id="calcModel">Modèle : gardez chaque cible ; sans cible, remplacez le nombre choisi de cartes. Les cartes remplacées sont remélangées avant les pioches des tours 2 et 3. Aucun effet de pioche supplémentaire. 40–100 cartes pour les scénarios ; au moins 60 en construit.</p>
           <div class="mulligan-calc-box">
             <div class="calc-field">
-              <label>Taille du deck :</label>
-              <input type="number" id="calcDeckSize" value="60" min="40" max="100">
+              <label for="calcDeckSize">Taille du deck :</label>
+              <input type="number" id="calcDeckSize" value="60" min="40" max="100" step="1" required aria-describedby="calcError calcModel">
             </div>
             <div class="calc-field">
-              <label>Exemplaires dans le deck :</label>
+              <label for="calcCopies">Exemplaires dans le deck :</label>
               <select id="calcCopies">
                 <option value="4" selected>4 exemplaires (Playset complet)</option>
                 <option value="8">8 exemplaires (ex. 4 Mickey + 4 Minnie)</option>
@@ -1334,7 +1418,7 @@
               </select>
             </div>
             <div class="calc-field">
-              <label>Cartes échangées au Mulligan :</label>
+              <label for="calcMulligan">Cartes échangées au Mulligan :</label>
               <select id="calcMulligan">
                 <option value="0">0 (Pas de mulligan)</option>
                 <option value="3">3 cartes remplacées</option>
@@ -1342,18 +1426,19 @@
                 <option value="7">7 cartes (Mulligan total)</option>
               </select>
             </div>
-            <div class="calc-results">
+            <p id="calcError" class="calc-error" role="status"></p>
+            <div class="calc-results" aria-live="polite" aria-atomic="true">
               <div class="calc-res-item">
                 <span>En main de départ (7 cartes) :</span>
-                <span class="calc-res-val" id="resOpening">39.9%</span>
+                <span class="calc-res-val" id="resOpening">—</span>
               </div>
               <div class="calc-res-item">
                 <span>Après le Mulligan choisi :</span>
-                <span class="calc-res-val" id="resMulligan">57.6%</span>
+                <span class="calc-res-val" id="resMulligan">—</span>
               </div>
               <div class="calc-res-item">
                 <span>Au Tour 3 (en jouant premier) :</span>
-                <span class="calc-res-val" id="resTurn3">66.2%</span>
+                <span class="calc-res-val" id="resTurn3">—</span>
               </div>
             </div>
           </div>
@@ -1372,106 +1457,90 @@
     </div>
   </section>
 
+  </main>
   <footer>
     Guide communautaire non officiel à visée pédagogique · Disney Lorcana TCG
   </footer>
 
 </div>
 
+<script type="application/json" id="guide-ui">{"empty": "Aucun terme trouvé. Essayez un autre mot.", "count": "termes trouvés", "invalid": "Saisissez un entier de 40 à 100.", "win": "Victoire"}</script>
 <script>
-  // Filter Glossary terms
+
+  document.documentElement.classList.add('tools-ready');
+  const ui = JSON.parse(document.getElementById('guide-ui').textContent);
+  const normalize = value => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+  const glossaryItems = [...document.querySelectorAll('.gloss-item')].map(el => ({el, text:normalize((el.dataset.term || '') + ' ' + el.textContent)}));
   function filterGlossary() {
-    const q = document.getElementById('glossSearch').value.toLowerCase().trim();
-    const items = document.querySelectorAll('.gloss-item');
-    items.forEach(el => {
-      const term = (el.getAttribute('data-term') || '') + ' ' + el.innerText.toLowerCase();
-      if(!q || term.includes(q)) {
-        el.style.display = '';
-      } else {
-        el.style.display = 'none';
-      }
-    });
-    document.querySelectorAll('.gloss-group').forEach(grp => {
-      const visible = grp.querySelectorAll('.gloss-item:not([style*="display: none"])').length;
-      grp.style.display = visible > 0 ? '' : 'none';
-    });
+    const query = normalize(document.getElementById('glossSearch').value);
+    let visible = 0;
+    glossaryItems.forEach(item => { item.el.hidden = !item.text.includes(query); if (!item.el.hidden) visible++; });
+    document.querySelectorAll('.gloss-group').forEach(group => { group.hidden = ![...group.querySelectorAll('.gloss-item')].some(el => !el.hidden); });
+    document.getElementById('glossStatus').textContent = visible ? `${visible} ${ui.count}` : ui.empty;
   }
 
-  // Lore Tracker
-  let p1 = 0, p2 = 0;
+  const scores = [0, 0];
   function modLore(player, delta) {
-    if(player === 1) {
-      p1 = Math.max(0, Math.min(25, p1 + delta));
-      const el = document.getElementById('p1Score');
-      el.innerText = p1;
-      el.classList.toggle('winner', p1 >= 20);
-    } else {
-      p2 = Math.max(0, Math.min(25, p2 + delta));
-      const el = document.getElementById('p2Score');
-      el.innerText = p2;
-      el.classList.toggle('winner', p2 >= 20);
-    }
+    const index = player - 1;
+    scores[index] = Math.max(0, scores[index] + delta);
+    const el = document.getElementById(`p${player}Score`);
+    el.textContent = scores[index];
+    el.classList.toggle('winner', scores[index] >= 20);
+    document.getElementById(`p${player}Status`).textContent = scores[index] >= 20 ? ui.win : '';
   }
-  function resetLore() {
-    p1 = 0; p2 = 0;
-    const el1 = document.getElementById('p1Score');
-    const el2 = document.getElementById('p2Score');
-    el1.innerText = 0; el1.classList.remove('winner');
-    el2.innerText = 0; el2.classList.remove('winner');
-  }
+  function resetLore() { scores.fill(0); modLore(1, 0); modLore(2, 0); }
 
-  // Mulligan Calculator
+  // Probability of at least one target in n draws without replacement.
   function hypergeom(N, K, n) {
-    if (K <= 0) return 0;
-    let prob0 = 1.0;
-    for(let i=0; i<n; i++) {
-      prob0 *= (N - K - i) / (N - i);
-    }
-    return Math.max(0, Math.min(1, 1 - prob0));
+    if (![N, K, n].every(Number.isInteger) || N < 0 || K < 0 || K > N || n < 0 || n > N) throw new RangeError('Invalid probability inputs');
+    if (K === 0 || n === 0) return 0;
+    if (n > N - K) return 1;
+    let miss = 1;
+    for (let i = 0; i < n; i++) miss *= (N - K - i) / (N - i);
+    return 1 - miss;
+  }
+  function calculateOdds(N, K, m) {
+    if (![N, K, m].every(Number.isInteger) || N < 40 || N > 100 || K < 0 || K > N || m < 0 || m > 7) throw new RangeError('Invalid calculator inputs');
+    const openingMiss = 1 - hypergeom(N, K, 7);
+    // A miss means all K targets remain among N-7 cards. Returned cards
+    // are excluded from replacements, then shuffled into that N-7 deck.
+    const replacementMiss = openingMiss === 0 ? 0 : 1 - hypergeom(N - 7, K, m);
+    const turnMiss = openingMiss === 0 ? 0 : 1 - hypergeom(N - 7, K, 2);
+    return { opening:1 - openingMiss, mulligan:1 - openingMiss * replacementMiss, turn3:1 - openingMiss * replacementMiss * turnMiss };
   }
   function updateCalc() {
-    const N = parseInt(document.getElementById('calcDeckSize').value) || 60;
-    const K = parseInt(document.getElementById('calcCopies').value) || 4;
-    const m = parseInt(document.getElementById('calcMulligan').value) || 0;
-
-    const pOpen = hypergeom(N, K, 7);
-    const pMull = hypergeom(N, K, 7 + m);
-    const pT3 = hypergeom(N, K, 7 + m + 2);
-
-    document.getElementById('resOpening').innerText = (pOpen * 100).toFixed(1) + '%';
-    document.getElementById('resMulligan').innerText = (pMull * 100).toFixed(1) + '%';
-    document.getElementById('resTurn3').innerText = (pT3 * 100).toFixed(1) + '%';
+    const input = document.getElementById('calcDeckSize');
+    const outputs = ['resOpening', 'resMulligan', 'resTurn3'].map(id => document.getElementById(id));
+    const valid = input.value !== '' && input.validity.valid;
+    input.setAttribute('aria-invalid', String(!valid));
+    document.getElementById('calcError').textContent = valid ? '' : ui.invalid;
+    if (!valid) { outputs.forEach(el => el.textContent = '—'); return; }
+    const result = calculateOdds(Number(input.value), Number(document.getElementById('calcCopies').value), Number(document.getElementById('calcMulligan').value));
+    [result.opening, result.mulligan, result.turn3].forEach((value, i) => { outputs[i].textContent = new Intl.NumberFormat(document.documentElement.lang, { style:'percent', minimumFractionDigits:1, maximumFractionDigits:1 }).format(value); });
   }
-  document.getElementById('calcDeckSize').addEventListener('input', updateCalc);
-  document.getElementById('calcCopies').addEventListener('change', updateCalc);
-  document.getElementById('calcMulligan').addEventListener('change', updateCalc);
+  document.getElementById('glossSearch').addEventListener('input', filterGlossary);
+  ['calcDeckSize','calcCopies','calcMulligan'].forEach(id => document.getElementById(id).addEventListener('input', updateCalc));
+  filterGlossary();
   updateCalc();
 
-  // active nav on scroll
+  const menu = document.querySelector('.guide-menu');
   const links = [...document.querySelectorAll('.nav-links a')];
-  const map = {};
-  links.forEach(l=>{const id=l.getAttribute('href').slice(1);const el=document.getElementById(id);if(el)map[id]=l;});
-  const ids = Object.keys(map);
-  const spy = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        links.forEach(l=>l.classList.remove('active'));
-        if(map[e.target.id]) map[e.target.id].classList.add('active');
-      }
-    });
-  },{rootMargin:'-45% 0px -50% 0px'});
-  ids.forEach(id=>{const el=document.getElementById(id);if(el)spy.observe(el);});
-
-  // reveal on scroll
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(!reduce){
-    const rv = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); rv.unobserve(e.target);} });
-    },{rootMargin:'0px 0px -8% 0px',threshold:0.08});
-    document.querySelectorAll('.reveal').forEach(el=>rv.observe(el));
-  } else {
-    document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
+  links.forEach(link => link.addEventListener('click', () => { menu.open = false; }));
+  // Optional enhancement: content and navigation do not depend on observers.
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        links.forEach(link => {
+          const active = link.hash === '#' + entry.target.id;
+          link.classList.toggle('active', active);
+          if (active) link.setAttribute('aria-current', 'location'); else link.removeAttribute('aria-current');
+        });
+      });
+    }, {rootMargin:'-15% 0px -60% 0px', threshold:0});
+    links.forEach(link => { const section = document.querySelector(link.hash); if (section) observer.observe(section); });
   }
+
 </script>
 </body>
 </html>

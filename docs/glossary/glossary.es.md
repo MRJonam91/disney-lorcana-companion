@@ -1,5 +1,7 @@
 # Disney Lorcana Multilingual Glossary (ES)
 
+> **Fuentes:** notas históricas no oficiales; los datos actuales no están verificados. [Fuentes y límites](../source-status.md).
+
 Official 5-language cross-reference table of Lorcana game terms and competitive TCG dictionary.
 
 ---
