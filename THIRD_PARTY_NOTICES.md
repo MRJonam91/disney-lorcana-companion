@@ -1,7 +1,8 @@
 # Third-party notices / Avvisi di terze parti
 
 The shipped website uses HTML, CSS and browser JavaScript only. It has no
-production package dependencies and no downloaded fonts. System fonts are
+production package dependencies. The standalone guides and new tournament
+  catalog do not download fonts. System fonts are
 provided by the reader's operating system and are not redistributed.
 
 Il sito distribuito usa solo HTML, CSS e JavaScript del browser. Non include
@@ -22,3 +23,15 @@ all'installazione del lettore e non vengono ridistribuiti.
 - **Development checks**: Python and Node.js standard libraries; CI invokes
   GitHub's checkout, setup-python and setup-node actions. Playwright may be
   used separately for browser QA and is not shipped with the website.
+
+## Upstream database and assets / Database e asset preesistenti
+
+`data/lorcana-database.json`, portable JSON/CSV/SQLite variants, and
+`data/lorcana-cards.js` were added by upstream commits, sourced through
+Lorcast. Their “official” description is an upstream label, not proof of an
+officially licensed dataset. Card-image links point to Lorcast; card text,
+art and marks retain their owners' rights. See [ASSETS.md](ASSETS.md).
+New tournament metadata is derived from that snapshot, with list quantities
+independently compared to the cited original deck pages. It is not a live
+price feed. / I metadati usano quella fotografia; quantità e fonti delle
+liste sono state confrontate separatamente. Non è un listino in tempo reale.

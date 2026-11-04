@@ -34,6 +34,92 @@
     }
     a { color: inherit; text-decoration: none; }
 
+    
+    /* Sticky Top Bar */
+    .top-bar {
+      background: rgba(14, 11, 20, 0.96);
+      border-bottom: 1px solid var(--line);
+      padding: 10px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+    }
+    .top-brand {
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      letter-spacing: .08em;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.1rem;
+    }
+    .top-links {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      font-size: .86rem;
+      flex-wrap: wrap;
+    }
+    .top-links a {
+      color: var(--parch-muted);
+      padding: 6px 14px;
+      border-radius: 8px;
+      transition: all .2s;
+      font-weight: 600;
+    }
+    .top-links a:hover, .top-links a.active {
+      color: var(--gold);
+      background: rgba(229, 185, 92, .14);
+    }
+    .top-links a.highlight {
+      background: linear-gradient(135deg, rgba(229, 185, 92, .25), rgba(229, 185, 92, .08));
+      border: 1px solid var(--gold);
+      color: var(--gold);
+    }
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 24px 0 36px;
+    }
+    .btn-hero {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: .95rem;
+      transition: all .25s;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+    .btn-hero:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(229, 185, 92, 0.3);
+    }
+    .btn-hero.gold {
+      background: linear-gradient(135deg, #ffd700, #b2862d);
+      color: #0c0a12;
+      border: 1px solid #ffd700;
+    }
+    .btn-hero.pink {
+      background: linear-gradient(135deg, rgba(244,114,182,0.3), rgba(168,85,247,0.2));
+      border: 1.5px solid #f472b6;
+      color: #ffd9f0;
+    }
+    .btn-hero.dark {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      color: var(--parch);
+    }
+
     /* Container */
     .wrap {
       max-width: 1200px;
@@ -307,10 +393,27 @@
     @media(max-width:359px){.lang-grid{grid-template-columns:1fr;}.portal-nav>div{gap:8px;}}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;}}
   </style>
+  <link rel="stylesheet" href="assets/css/lorcana-foil-ui.css">
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to content / Vai al contenuto</a>
-<nav class="portal-nav wrap" aria-label="Main navigation"><a class="portal-brand" href="index.html">LORCANA <span>COMPANION</span></a><div><a href="#languages">Guide</a><a href="#resources">Resources</a><a href="https://github.com/MRJonam91/disney-lorcana-companion">GitHub</a></div></nav>
+
+  <!-- Top Sticky Navigation -->
+  <div class="top-bar">
+    <a href="index.html" class="top-brand">
+      <span>✦ DISNEY LORCANA</span>
+      <span style="color:var(--parch-muted);font-weight:400;font-size:.85rem;">| Community Portal</span>
+    </a>
+    <div class="top-links">
+      <a href="index.html" class="active" data-i18n="nav_hub">🌐 Hub</a>
+      <a href="tournament-decks.html">Mazzi / Decks</a><a href="deck-lab.html" class="highlight" data-i18n="nav_decklab">🃏 Deck Lab</a>
+      <a href="collector-vault.html" class="highlight" style="border-color:#f472b6;color:#ff80bf;" data-i18n="nav_vault">💎 Collezionismo &amp; Pulls</a>
+      <a href="guide/guida-lorcana-it.html" data-i18n="nav_guide" data-i18n-guide-link="1">📖 Guida</a>
+      <a href="#official-app" data-i18n="nav_app">📱 App Ufficiale</a>
+      <a href="https://github.com/MRJonam91/disney-lorcana-companion/discussions" target="_blank" data-i18n="nav_forum">💬 Forum</a>
+    </div>
+  </div>
+
 
   <header>
     <div class="wrap">
@@ -318,7 +421,7 @@
       <h1>Disney Lorcana</h1>
       <p class="subtitle">Learn the rules. Find a term. Keep score.<br><span lang="it">Guide e strumenti gratuiti per le tue partite, in un unico posto.</span></p>
 
-      <div class="hero-links"><a class="primary-link" href="guide/guida-lorcana-it.html" lang="it" hreflang="it">Inizia in italiano <span aria-hidden="true">→</span></a><a href="guide/lorcana-guide-en.html" lang="en" hreflang="en">Read in English <span aria-hidden="true">→</span></a></div>
+      <div class="hero-links"><a class="primary-link" href="tournament-decks.html">Mazzi da torneo / Tournament decks</a><a href="deck-lab.html">Deck Lab</a><a href="collector-vault.html">Collector Vault</a><a class="primary-link" href="guide/guida-lorcana-it.html" lang="it" hreflang="it">Inizia in italiano <span aria-hidden="true">→</span></a><a href="guide/lorcana-guide-en.html" lang="en" hreflang="en">Read in English <span aria-hidden="true">→</span></a></div>
       <div class="ink-orbs" aria-hidden="true">
         <div class="orb amber" title="Amber"></div>
         <div class="orb amethyst" title="Amethyst"></div>
@@ -391,13 +494,58 @@
       </div>
     </section>
 
+    <!-- NEW: Interactive Apps Showcase (Deck Lab & Collector's Vault) -->
+    <section style="margin-bottom:70px;">
+      <h2 class="section-title" data-i18n="idx_apps_title">✨ Web App Interattive &amp; Simulatori da Tavolo</h2>
+      <p class="section-desc" data-i18n="idx_apps_desc">Strumenti avanzati con effetti Foil olografici CSS per creazione mazzi, goldfish playtesting e calcolo pull rate.</p>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(min(100%,360px), 1fr));gap:24px;">
+        <!-- Deck Lab Card -->
+        <div style="background:linear-gradient(145deg, rgba(229,185,92,0.12), var(--bg-card));border:1.5px solid var(--gold);border-radius:18px;padding:30px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 10px 30px rgba(0,0,0,0.4);">
+          <div>
+            <div style="font-size:2.6rem;margin-bottom:12px;">🃏</div>
+            <h3 style="font-family:'Cinzel',serif;font-size:1.6rem;color:var(--gold);margin-bottom:10px;" data-i18n="idx_deck_title">Deck Lab &amp; Playtester</h3>
+            <p style="color:var(--parch-muted);font-size:0.95rem;margin-bottom:18px;">
+              Costruisci e perfeziona il tuo mazzo da 60 carte con catalogo carte integrato, visualizzatore della curva d'inchiostro, test della mano iniziale con mulligan realistico e simulatore goldfish dei primi turni. Esporta con 1 click per <strong>duels.ink</strong>, <strong>inktable.net</strong> e <strong>dreamborn.ink</strong>!
+            </p>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;">
+              <span class="feat-tag">🛠️ 60-Card Builder</span>
+              <span class="feat-tag">📊 Curva d'Inchiostro Live</span>
+              <span class="feat-tag">🎲 Goldfish Playtester</span>
+              <span class="feat-tag">📤 Export Duels.ink</span>
+            </div>
+          </div>
+          <a href="deck-lab.html" class="btn-open" style="text-align:center;font-size:1.05rem;padding:12px 20px;" data-i18n="idx_deck_btn">Lancia Deck Lab &amp; Playtester ➔</a>
+        </div>
+
+        <!-- Collector's Vault Card -->
+        <div style="background:linear-gradient(145deg, rgba(244,114,182,0.12), var(--bg-card));border:1.5px solid #f472b6;border-radius:18px;padding:30px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 10px 30px rgba(0,0,0,0.4);">
+          <div>
+            <div style="font-size:2.6rem;margin-bottom:12px;">💎</div>
+            <h3 style="font-family:'Cinzel',serif;font-size:1.6rem;color:var(--gold);margin-bottom:10px;" data-i18n="idx_vault_title">Collector's Vault &amp; Pulls</h3>
+            <p style="color:var(--parch-muted);font-size:0.95rem;margin-bottom:18px;">
+              Simula l'apertura realistica con qualsiasi quantità di bustine a scelta (1, 8, 10, Box da 24, Case da 96 o numero personalizzato). Include le rarità Epiche e Iconiche, la guida ai simboli ufficiali e all'evoluzione delle 3 Ere, calcolatore binomiale e collegamento a r/Lorcana Educational.
+            </p>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;">
+              <span class="feat-tag">🎴 Pack Simulator</span>
+              <span class="feat-tag">🔢 Input Libero Quantità</span>
+              <span class="feat-tag">🟣 Epiche &amp; 👑 Iconiche</span>
+              <span class="feat-tag">⏳ Confronto 3 Ere</span>
+              <span class="feat-tag">🤖 Reddit Educational</span>
+            </div>
+          </div>
+          <a href="collector-vault.html" class="btn-open" style="text-align:center;font-size:1.05rem;padding:12px 20px;border-color:#f472b6;color:#ff80bf;" data-i18n="idx_vault_btn">Apri Collector's Vault ➔</a>
+        </div>
+      </div>
+    </section>
+
     <!-- Core Features & Documentation -->
     <section id="resources">
       <h2 class="section-title">Explore the documentation</h2>
       <p class="section-desc">Community notes in five languages. Markdown links open the readable source on GitHub.</p>
 
       <div class="features-grid">
-        <div class="feat-card">
+        <div class="feat-card foil-card-fx">
           <div class="feat-icon">📜</div>
           <h3>Set History &amp; Analysis</h3>
           <p>An archive of set notes and mechanics. Use the official product pages for verified release information.</p>
@@ -410,7 +558,7 @@
           </div>
         </div>
 
-        <div class="feat-card">
+        <div class="feat-card foil-card-fx">
           <div class="feat-icon">💎</div>
           <h3>Cards &amp; Rarities Guide</h3>
           <p>Community notes on rarities, foil treatments and collecting. Pull-rate and price claims in older notes require source verification.</p>
@@ -423,7 +571,7 @@
           </div>
         </div>
 
-        <div class="feat-card">
+        <div class="feat-card foil-card-fx">
           <div class="feat-icon">⚔️</div>
           <h3>Rules &amp; Quick Sheet</h3>
           <p>Learn turn phases, inking, quests and challenges. These community notes are a companion to the official rulebook.</p>
@@ -436,7 +584,7 @@
           </div>
         </div>
 
-        <div class="feat-card">
+        <div class="feat-card foil-card-fx">
           <div class="feat-icon">🧠</div>
           <h3>Strategy &amp; Mulligan Math</h3>
           <p>Mulligan probabilities, model assumptions, inking decisions and tempo. The interactive calculator uses deterministic hypergeometric calculations.</p>
@@ -449,7 +597,7 @@
           </div>
         </div>
 
-        <div class="feat-card">
+        <div class="feat-card foil-card-fx">
           <div class="feat-icon">🃏</div>
           <h3>Starter &amp; Meta Decks</h3>
           <p>Archived deck examples and turn-by-turn notes. Verify card text and format legality before building or purchasing a deck.</p>
@@ -462,7 +610,7 @@
           </div>
         </div>
 
-        <div class="feat-card">
+        <div class="feat-card foil-card-fx">
           <div class="feat-icon">📖</div>
           <h3>Multi-lingual Glossary</h3>
           <p>Exhaustive dictionary mapping official card game terminology across Italian, English, French, German, and Spanish alongside competitive TCG slang.</p>
@@ -474,6 +622,44 @@
             <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/glossary/glossary.es.md" class="feat-tag">ES Dictionary</a>
           </div>
         </div>
+
+        <div class="feat-card foil-card-fx">
+          <div class="feat-icon">📊</div>
+          <h3>Pull Rates, 3 Eras &amp; Products</h3>
+          <p>Experimental community pull rates (Classic, Expansion &amp; Modern Eras), Epic &amp; Iconic odds, God Pack hierarchy, and sealed product guide across all 5 languages.</p>
+          <div class="feat-links">
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/cards-and-rarities/pull-rates-and-products.it.md" class="feat-tag">IT Pulls</a>
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/cards-and-rarities/pull-rates-and-products.en.md" class="feat-tag">EN Pulls</a>
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/cards-and-rarities/pull-rates-and-products.fr.md" class="feat-tag">FR Pulls</a>
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/cards-and-rarities/pull-rates-and-products.de.md" class="feat-tag">DE Pulls</a>
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/cards-and-rarities/pull-rates-and-products.es.md" class="feat-tag">ES Pulls</a>
+          </div>
+        </div>
+
+        <div class="feat-card foil-card-fx">
+          <div class="feat-icon">🛠️</div>
+          <h3>Deck Building &amp; Simulators</h3>
+          <p>60-card construction rules, uninkable count thresholds, ink curve geometry, goldfish playtesting methodology, and export guides for duels.ink &amp; inktable.</p>
+          <div class="feat-links">
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/decks/deck-building-and-testing.it.md" class="feat-tag">IT Builder</a>
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/decks/deck-building-and-testing.en.md" class="feat-tag">EN Builder</a>
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/decks/deck-building-and-testing.fr.md" class="feat-tag">FR Builder</a>
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/decks/deck-building-and-testing.de.md" class="feat-tag">DE Builder</a>
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/decks/deck-building-and-testing.es.md" class="feat-tag">ES Builder</a>
+          </div>
+        </div>
+
+        <div class="feat-card foil-card-fx" style="border-color:var(--gold);">
+          <div class="feat-icon">🗄️</div>
+          <h3>14-Set Card Databases (3,242 Cards)</h3>
+          <p>Complete portable datasets for all 14 sets (Set 1 to Set 14 Hyperia City) in JSON, SQLite (.db), CSV, and Markdown with collector numbers, rarities, Iconic/Enchanted chase lists, and market prices.</p>
+          <div class="feat-links">
+            <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/sets/cards/README.md" class="feat-tag">📚 All 14 Sets Index</a>
+            <a href="data/lorcana-database.json" class="feat-tag">📦 Master JSON</a>
+            <a href="data/lorcana-all-cards.csv" class="feat-tag">📊 Master CSV</a>
+            <a href="data/lorcana-all-sets.db" class="feat-tag">🗄️ Master SQLite DB</a>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -483,75 +669,103 @@
       <p style="color:var(--parch-muted);font-size:0.88rem;margin-bottom:20px;">Set names and release months · <a href="https://disneylorcana.com/en/resources/">Official set notes</a>. Snapshot: 4 November 2026.</p>
 
       <div class="sets-scroller" tabindex="0" role="region" aria-label="Set release timeline, scroll horizontally">
-        <div class="set-pill">
-          <div class="set-num">Set 1</div>
+        <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/sets/cards/set-01-the-first-chapter.md" class="set-pill foil-card-fx">
+          <div class="set-num">Set 1 · 216 Cards</div>
           <div class="set-name">The First Chapter</div>
-          <div class="set-date">Aug 2023</div>
-        </div>
-        <div class="set-pill">
-          <div class="set-num">Set 2</div>
+          <div class="set-date">2023-08-18 · ✨ 12 Enchanted</div>
+        </a>
+        <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/sets/cards/set-02-rise-of-the-floodborn.md" class="set-pill foil-card-fx">
+          <div class="set-num">Set 2 · 216 Cards</div>
           <div class="set-name">Rise of the Floodborn</div>
-          <div class="set-date">Nov 2023</div>
-        </div>
-        <div class="set-pill">
-          <div class="set-num">Set 3</div>
+          <div class="set-date">2023-11-17 · ✨ 12 Enchanted</div>
+        </a>
+        <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/sets/cards/set-03-into-the-inklands.md" class="set-pill foil-card-fx">
+          <div class="set-num">Set 3 · 227 Cards</div>
           <div class="set-name">Into the Inklands</div>
-          <div class="set-date">Feb 2024</div>
-        </div>
-        <div class="set-pill">
-          <div class="set-num">Set 4</div>
+          <div class="set-date">2024-02-23 · ✨ 18 Enchanted</div>
+        </a>
+        <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/sets/cards/set-04-ursula-s-return.md" class="set-pill foil-card-fx">
+          <div class="set-num">Set 4 · 225 Cards</div>
           <div class="set-name">Ursula's Return</div>
-          <div class="set-date">May 2024</div>
-        </div>
-        <div class="set-pill">
-          <div class="set-num">Set 5</div>
+          <div class="set-date">2024-05-17 · ✨ 18 Enchanted</div>
+        </a>
+        <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/sets/cards/set-05-shimmering-skies.md" class="set-pill foil-card-fx">
+          <div class="set-num">Set 5 · 223 Cards</div>
           <div class="set-name">Shimmering Skies</div>
-          <div class="set-date">Aug 2024</div>
-        </div>
-        <div class="set-pill">
-          <div class="set-num">Set 6</div>
+          <div class="set-date">2024-08-09 · ✨ 18 Enchanted</div>
+        </a>
+        <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/sets/cards/set-06-azurite-sea.md" class="set-pill foil-card-fx">
+          <div class="set-num">Set 6 · 222 Cards</div>
           <div class="set-name">Azurite Sea</div>
-          <div class="set-date">Nov 2024</div>
-        </div>
-        <div class="set-pill">
-          <div class="set-num">Set 7</div>
+          <div class="set-date">2024-11-15 · ✨ 18 Enchanted</div>
+        </a>
+        <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/sets/cards/set-07-archazia-s-island.md" class="set-pill foil-card-fx">
+          <div class="set-num">Set 7 · 224 Cards</div>
           <div class="set-name">Archazia's Island</div>
-          <div class="set-date">Mar 2025</div>
-        </div>
-        <div class="set-pill">
-          <div class="set-num">Set 8</div>
+          <div class="set-date">2025-03-07 · ✨ 18 Enchanted</div>
+        </a>
+        <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/sets/cards/set-08-reign-of-jafar.md" class="set-pill foil-card-fx">
+          <div class="set-num">Set 8 · 229 Cards</div>
           <div class="set-name">Reign of Jafar</div>
-          <div class="set-date">May 2025</div>
-        </div>
-        <div class="set-pill">
-          <div class="set-num">Set 9</div>
+          <div class="set-date">2025-05-30 · ✨ 18 Enchanted</div>
+        </a>
+        <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/sets/cards/set-09-fabled.md" class="set-pill foil-card-fx">
+          <div class="set-num">Set 9 · 243 Cards</div>
           <div class="set-name">Fabled</div>
-          <div class="set-date">Aug 2025</div>
-        </div>
-        <div class="set-pill">
-          <div class="set-num">Set 10</div>
+          <div class="set-date">2025-08-29 · 🟣 18 Epic · 👑 2 Iconic</div>
+        </a>
+        <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/sets/cards/set-10-whispers-in-the-well.md" class="set-pill foil-card-fx">
+          <div class="set-num">Set 10 · 242 Cards</div>
           <div class="set-name">Whispers in the Well</div>
-          <div class="set-date">Nov 2025</div>
-        </div>
-        <div class="set-pill">
-          <div class="set-num">Set 11</div>
+          <div class="set-date">2025-11-07 · 🟣 18 Epic · 👑 2 Iconic</div>
+        </a>
+        <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/sets/cards/set-11-winterspell.md" class="set-pill foil-card-fx">
+          <div class="set-num">Set 11 · 243 Cards</div>
           <div class="set-name">Winterspell</div>
-          <div class="set-date">Feb 2026</div>
-        </div>
-        <div class="set-pill">
-          <div class="set-num">Set 12</div>
+          <div class="set-date">2026-02-13 · 🟣 18 Epic · 👑 2 Iconic</div>
+        </a>
+        <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/sets/cards/set-12-wilds-unknown.md" class="set-pill foil-card-fx">
+          <div class="set-num">Set 12 · 243 Cards</div>
           <div class="set-name">Wilds Unknown</div>
-          <div class="set-date">May 2026</div>
-        </div>
-        <div class="set-pill" style="border-color:var(--emerald);background:rgba(63,163,100,0.1);">
-          <div class="set-num" style="color:#4ade80;">Set 13</div>
+          <div class="set-date">2026-05-08 · 🟣 18 Epic · 👑 2 Iconic</div>
+        </a>
+        <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/sets/cards/set-13-attack-of-the-vine.md" class="set-pill foil-card-fx" style="border-color:var(--emerald);background:rgba(63,163,100,0.12);">
+          <div class="set-num" style="color:#4ade80;">Set 13 · 247 Cards</div>
           <div class="set-name">Attack of the Vine!</div>
-          <div class="set-date">July 2026</div>
-        </div>
-        <div class="set-pill" style="border-color:var(--gold);background:rgba(229,185,92,0.1);">
-          <div class="set-num" style="color:var(--gold);">Set 14</div>
+          <div class="set-date">2026-07-17 · 👑 Lilo &amp; Stitch / Belle &amp; Beast</div>
+        </a>
+        <a href="https://github.com/MRJonam91/disney-lorcana-companion/blob/master/docs/sets/cards/set-14-hyperia-city.md" class="set-pill foil-card-fx" style="border-color:var(--gold);background:rgba(229,185,92,0.14);">
+          <div class="set-num" style="color:var(--gold);">Set 14 · 242 Cards</div>
           <div class="set-name">Hyperia City</div>
-          <div class="set-date">Oct 2026</div>
+          <div class="set-date">2026-10-16 · 👑 Mickey / Cinderella</div>
+        </a>
+      </div>
+    </section>
+
+
+    <!-- Official Disney Lorcana Companion App Banner -->
+    <section id="official-app" style="margin-bottom:70px;background:linear-gradient(145deg, rgba(59,126,194,0.15), var(--bg-card));border:1.5px solid var(--sapphire);border-radius:18px;padding:36px;box-shadow:0 12px 40px rgba(0,0,0,0.5);">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;">
+        <div style="max-width:700px;">
+          <div style="font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;color:#93c5fd;font-weight:700;margin-bottom:8px;" data-i18n="idx_app_badge">App Ufficiale Ravensburger per il Collezionismo</div>
+          <h2 style="font-family:'Cinzel',serif;font-size:1.8rem;color:var(--gold);margin-bottom:12px;">Disney Lorcana TCG Companion App</h2>
+          <p style="color:var(--parch-muted);font-size:0.95rem;line-height:1.6;margin-bottom:18px;">
+            L'applicazione ufficiale gratuita per iOS e Android sviluppata da Ravensburger: catalogo completo di tutte le carte da sfogliare in 3D con effetto foil reattivo al giroscopio dello smartphone, gestione del raccoglitore personale (carte possedute e wishlist), segnapunti Lore ufficiale e avvisi sulle nuove espansioni.
+          </p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <a href="https://apps.apple.com/us/app/disney-lorcana-tcg-companion/id6444333831" target="_blank" class="btn-hero dark" style="border-color:#93c5fd;color:#93c5fd;font-size:.85rem;padding:10px 18px;">
+              🍎 Scarica su Apple App Store ➔
+            </a>
+            <a href="https://play.google.com/store/apps/details?id=com.ravensburger.disney.lorcana&hl=en_US" target="_blank" class="btn-hero dark" style="border-color:#4ade80;color:#4ade80;font-size:.85rem;padding:10px 18px;">
+              🤖 Scarica su Google Play Store ➔
+            </a>
+            <a href="https://www.disneylorcana.com/it-IT/app" target="_blank" class="btn-hero dark" style="font-size:.85rem;padding:10px 18px;border-color:var(--gold);color:var(--gold);">
+              🌐 Pagina Ufficiale Companion App ➔
+            </a>
+          </div>
+        </div>
+        <div style="font-size:5rem;text-align:center;padding:10px 20px;">
+          📱✨
         </div>
       </div>
     </section>
@@ -565,5 +779,6 @@
     </div>
   </footer>
 
+  <script src="data/lorcana-i18n.js"></script>
 </body>
 </html>

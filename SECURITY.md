@@ -16,3 +16,9 @@ guarantee or bug bounty is offered.
 Per una vulnerabilità usa la segnalazione privata GitHub, se disponibile.
 Altrimenti chiedi un contatto privato tramite issue, senza pubblicare dettagli
 di sfruttamento o dati riservati. Nessuna scadenza di risposta è garantita.
+
+The upstream apps store a language preference in browser localStorage and
+may request third-party card images when displaying cards. Tournament pages
+do not submit data; copy actions use the browser clipboard. / Le app
+preesistenti salvano la lingua nel browser e possono richiedere immagini di
+carte esterne. Le pagine dei mazzi non inviano dati; Copia usa gli appunti.

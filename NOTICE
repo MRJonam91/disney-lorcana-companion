@@ -5,6 +5,8 @@ Original project code and documentation retain the existing MIT license.
 Disney Lorcana, Disney characters, card names and Ravensburger marks belong
 to their respective owners and are not licensed by this repository.
 This project is not affiliated with, endorsed by or sponsored by Disney or
-Ravensburger. No third-party card artwork, logos or font binaries are bundled.
+Ravensburger. Existing upstream assets and card data retain their owners'
+rights; see the provenance inventory. No new card artwork or font binaries
+were added by this integration.
 
 See THIRD_PARTY_NOTICES.md and ASSETS.md for provenance and scope.

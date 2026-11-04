@@ -1,0 +1,1100 @@
+[
+  {
+    "id": "evasive-casj",
+    "name": "Evasive Tempo · CASJ",
+    "inks": "Emerald / Steel",
+    "source": "https://inkdecks.com/lorcana-metagame/deck-green-steel-529171",
+    "author": "CASJ",
+    "result": "16 / 78 · Randolph Rosemont 5K · 2026-11-01",
+    "status": "tournament",
+    "checked_at": "2026-11-04",
+    "cards": [
+      {
+        "quantity": 3,
+        "name": "Darkwing Duck - Crime Fighter",
+        "card_id": "s11_174",
+        "cost": 1,
+        "inkable": true,
+        "type": "character",
+        "ink": "steel",
+        "set": 11,
+        "rarity": "Common"
+      },
+      {
+        "quantity": 4,
+        "name": "Pegasus - Gift for Hercules",
+        "card_id": "s9_84",
+        "cost": 1,
+        "inkable": true,
+        "type": "character",
+        "ink": "emerald",
+        "set": 9,
+        "rarity": "Common"
+      },
+      {
+        "quantity": 4,
+        "name": "Tod - All Alone",
+        "card_id": "s11_87",
+        "cost": 1,
+        "inkable": true,
+        "type": "character",
+        "ink": "emerald",
+        "set": 11,
+        "rarity": "Common"
+      },
+      {
+        "quantity": 3,
+        "name": "Flash - Efficient Clerk",
+        "card_id": "s14_171",
+        "cost": 2,
+        "inkable": false,
+        "type": "character",
+        "ink": "steel",
+        "set": 14,
+        "rarity": "Rare"
+      },
+      {
+        "quantity": 3,
+        "name": "Toulouse - Rough and Tumble",
+        "card_id": "s14_182",
+        "cost": 2,
+        "inkable": true,
+        "type": "character",
+        "ink": "steel",
+        "set": 14,
+        "rarity": "Uncommon"
+      },
+      {
+        "quantity": 4,
+        "name": "Ursula - Deceiver",
+        "card_id": "s9_90",
+        "cost": 2,
+        "inkable": true,
+        "type": "character",
+        "ink": "emerald",
+        "set": 9,
+        "rarity": "Uncommon"
+      },
+      {
+        "quantity": 4,
+        "name": "White Rabbit - Late Again",
+        "card_id": "s11_89",
+        "cost": 2,
+        "inkable": true,
+        "type": "character",
+        "ink": "emerald",
+        "set": 11,
+        "rarity": "Uncommon"
+      },
+      {
+        "quantity": 4,
+        "name": "Angela - Night Warrior",
+        "card_id": "s11_187",
+        "cost": 3,
+        "inkable": true,
+        "type": "character",
+        "ink": "steel",
+        "set": 11,
+        "rarity": "Super Rare"
+      },
+      {
+        "quantity": 3,
+        "name": "Francine - Eyeing the Evidence",
+        "card_id": "s10_176",
+        "cost": 3,
+        "inkable": true,
+        "type": "character",
+        "ink": "steel",
+        "set": 10,
+        "rarity": "Common"
+      },
+      {
+        "quantity": 1,
+        "name": "Lenny - Toy Binoculars",
+        "card_id": "s12_79",
+        "cost": 3,
+        "inkable": true,
+        "type": "character",
+        "ink": "emerald",
+        "set": 12,
+        "rarity": "Rare"
+      },
+      {
+        "quantity": 3,
+        "name": "Max Goof - Rebellious Teen",
+        "card_id": "s9_75",
+        "cost": 3,
+        "inkable": true,
+        "type": "character",
+        "ink": "emerald",
+        "set": 9,
+        "rarity": "Rare"
+      },
+      {
+        "quantity": 4,
+        "name": "Mushu - Stealthy Dragon",
+        "card_id": "s13_97",
+        "cost": 3,
+        "inkable": true,
+        "type": "character",
+        "ink": "emerald",
+        "set": 13,
+        "rarity": "Legendary"
+      },
+      {
+        "quantity": 4,
+        "name": "Vixey - Forest Friend",
+        "card_id": "s11_86",
+        "cost": 3,
+        "inkable": true,
+        "type": "character",
+        "ink": "emerald",
+        "set": 11,
+        "rarity": "Uncommon"
+      },
+      {
+        "quantity": 2,
+        "name": "Angel - Experiment 624",
+        "card_id": "s11_191",
+        "cost": 4,
+        "inkable": true,
+        "type": "character",
+        "ink": "steel",
+        "set": 11,
+        "rarity": "Legendary"
+      },
+      {
+        "quantity": 4,
+        "name": "Elinor - Renowned Diplomat",
+        "card_id": "s12_86",
+        "cost": 4,
+        "inkable": false,
+        "type": "character",
+        "ink": "emerald",
+        "set": 12,
+        "rarity": "Super Rare"
+      },
+      {
+        "quantity": 3,
+        "name": "Gaetan Moliere - Clever Burrower",
+        "card_id": "s12_80",
+        "cost": 4,
+        "inkable": true,
+        "type": "character",
+        "ink": "emerald",
+        "set": 12,
+        "rarity": "Uncommon"
+      },
+      {
+        "quantity": 3,
+        "name": "Broadway - Sturdy and Strong",
+        "card_id": "s10_190",
+        "cost": 5,
+        "inkable": true,
+        "type": "character",
+        "ink": "steel",
+        "set": 10,
+        "rarity": "Uncommon"
+      },
+      {
+        "quantity": 4,
+        "name": "Strength of a Raging Fire",
+        "card_id": "s9_201",
+        "cost": 3,
+        "inkable": true,
+        "type": "action - song",
+        "ink": "steel",
+        "set": 9,
+        "rarity": "Rare"
+      }
+    ],
+    "plan": {
+      "it": [
+        "Produci leggenda con gli Sfuggenti, usando rimozioni e blocchi temporanei per proteggere la corsa. È la prima delle tre liste proposte nella chat.",
+        "Cerca un personaggio da costo 1 e uno da costo 2; conserva Vixey insieme a Tod quando la mano ha già inchiostro sufficiente. Rimanda i pezzi costosi se impediscono di partire.",
+        "Sviluppa Tod/Pegasus, poi Vixey o un altro costo 2. Nei turni 3–4 alterna missioni e controllo: non esaurire automaticamente ogni personaggio. Elinor premia un campo con almeno tre personaggi esauriti.",
+        "Se perdi il campo, usa Angel e Strength per contenere i produttori di leggenda avversari e ricostruisci con personaggi economici. Contro Circle e Songs scegli con cura il turno di Toulouse: il blocco delle azioni dura fino all’inizio del tuo turno seguente."
+      ],
+      "en": [
+        "Quest with Evasive characters and use removal and temporary disruption to protect the race. This is the first of the three lists proposed in the shared analysis.",
+        "Look for a one-cost and a two-cost character; keep Vixey with Tod when the hand already has enough ink. Return expensive pieces if they stop early development.",
+        "Develop Tod/Pegasus, then Vixey or another two-drop. Alternate quests and control on turns 3–4. Elinor rewards a board with at least three exerted characters; do not exert everyone automatically.",
+        "If you lose the board, contain opposing lore threats with Angel and Strength, then rebuild cheaply. Time Toulouse against Circle and Songs: its action restriction lasts until the start of your next turn."
+      ]
+    }
+  },
+  {
+    "id": "detectives-aube",
+    "name": "Detectives Hyperia · Claude Aubé",
+    "inks": "Amber / Sapphire",
+    "source": "https://inkdecks.com/lorcana-metagame/deck-i-m-on-the-case-529165",
+    "author": "Claude Aubé",
+    "result": "8 / 78 · Randolph Rosemont 5K · 2026-11-01",
+    "status": "tournament",
+    "checked_at": "2026-11-04",
+    "cards": [
+      {
+        "quantity": 2,
+        "name": "Fauna - Good-Natured Fairy",
+        "card_id": "s12_140",
+        "cost": 1,
+        "inkable": true,
+        "type": "character",
+        "ink": "sapphire",
+        "set": 12,
+        "rarity": "Common"
+      },
+      {
+        "quantity": 4,
+        "name": "Higgins - Undercover Officer",
+        "card_id": "s10_5",
+        "cost": 1,
+        "inkable": true,
+        "type": "character",
+        "ink": "amber",
+        "set": 10,
+        "rarity": "Common"
+      },
+      {
+        "quantity": 4,
+        "name": "Judy Hopps - Helpful Officer",
+        "card_id": "s14_9",
+        "cost": 1,
+        "inkable": true,
+        "type": "character",
+        "ink": "amber",
+        "set": 14,
+        "rarity": "Common"
+      },
+      {
+        "quantity": 2,
+        "name": "Daisy Duck - Ghost Finder",
+        "card_id": "s10_141",
+        "cost": 2,
+        "inkable": true,
+        "type": "character",
+        "ink": "sapphire",
+        "set": 10,
+        "rarity": "Common"
+      },
+      {
+        "quantity": 1,
+        "name": "Grandmother Willow - Ancient Advisor",
+        "card_id": "s11_13",
+        "cost": 2,
+        "inkable": false,
+        "type": "character",
+        "ink": "amber",
+        "set": 11,
+        "rarity": "Uncommon"
+      },
+      {
+        "quantity": 2,
+        "name": "Hamm - Piggy Bank",
+        "card_id": "s12_11",
+        "cost": 2,
+        "inkable": true,
+        "type": "character",
+        "ink": "amber",
+        "set": 12,
+        "rarity": "Uncommon"
+      },
+      {
+        "quantity": 4,
+        "name": "Judy Hopps - Day Camp Instructor",
+        "card_id": "s14_154",
+        "cost": 2,
+        "inkable": false,
+        "type": "character",
+        "ink": "sapphire",
+        "set": 14,
+        "rarity": "Rare"
+      },
+      {
+        "quantity": 2,
+        "name": "Mowgli - Man Cub",
+        "card_id": "s10_19",
+        "cost": 2,
+        "inkable": true,
+        "type": "character",
+        "ink": "amber",
+        "set": 10,
+        "rarity": "Super Rare"
+      },
+      {
+        "quantity": 4,
+        "name": "Nick Wilde - Providing Backup",
+        "card_id": "s14_25",
+        "cost": 2,
+        "inkable": true,
+        "type": "character",
+        "ink": "amber",
+        "set": 14,
+        "rarity": "Uncommon"
+      },
+      {
+        "quantity": 4,
+        "name": "Judy Hopps - On the Case",
+        "card_id": "s10_137",
+        "cost": 3,
+        "inkable": true,
+        "type": "character",
+        "ink": "sapphire",
+        "set": 10,
+        "rarity": "Uncommon"
+      },
+      {
+        "quantity": 4,
+        "name": "Elisa Maza - Hardworking Detective",
+        "card_id": "s14_16",
+        "cost": 4,
+        "inkable": true,
+        "type": "character",
+        "ink": "amber",
+        "set": 14,
+        "rarity": "Uncommon"
+      },
+      {
+        "quantity": 4,
+        "name": "Judy Hopps - Always Vigilant",
+        "card_id": "s14_24",
+        "cost": 4,
+        "inkable": true,
+        "type": "character",
+        "ink": "amber",
+        "set": 14,
+        "rarity": "Rare"
+      },
+      {
+        "quantity": 4,
+        "name": "Judy Hopps - Uncovering Clues",
+        "card_id": "s10_156",
+        "cost": 4,
+        "inkable": true,
+        "type": "character",
+        "ink": "sapphire",
+        "set": 10,
+        "rarity": "Super Rare"
+      },
+      {
+        "quantity": 4,
+        "name": "Nick Wilde - Toy Drive Officer",
+        "card_id": "s14_14",
+        "cost": 4,
+        "inkable": false,
+        "type": "character",
+        "ink": "amber",
+        "set": 14,
+        "rarity": "Super Rare"
+      },
+      {
+        "quantity": 4,
+        "name": "Fangmeyer - Icy Officer",
+        "card_id": "s11_10",
+        "cost": 5,
+        "inkable": false,
+        "type": "character",
+        "ink": "amber",
+        "set": 11,
+        "rarity": "Common"
+      },
+      {
+        "quantity": 4,
+        "name": "Gaston - Superior Archer",
+        "card_id": "s13_15",
+        "cost": 5,
+        "inkable": true,
+        "type": "character",
+        "ink": "amber",
+        "set": 13,
+        "rarity": "Uncommon"
+      },
+      {
+        "quantity": 4,
+        "name": "Judy Hopps - Lead Detective",
+        "card_id": "s10_150",
+        "cost": 6,
+        "inkable": true,
+        "type": "character",
+        "ink": "sapphire",
+        "set": 10,
+        "rarity": "Rare"
+      },
+      {
+        "quantity": 3,
+        "name": "Besties, Assemble!",
+        "card_id": "s13_34",
+        "cost": 1,
+        "inkable": true,
+        "type": "action",
+        "ink": "amber",
+        "set": 13,
+        "rarity": "Common"
+      }
+    ],
+    "plan": {
+      "it": [
+        "Sviluppa più personaggi nello stesso turno per attivare le sinergie dei Detective. È la proposta da confrontare per prima se possiedi molte carte di Hyperia.",
+        "Cerca Higgins o Judy – Helpful Officer, Judy – Day Camp Instructor, un secondo personaggio economico e inchiostro per i turni successivi.",
+        "Con tre inchiostri puoi giocare un costo 1 e poi Day Camp Instructor. Pianifica l’ordine: il secondo personaggio può attivare l’accelerazione e preparare i turni con Nick. Leggi le condizioni di ogni carta, non basta che siano tutti Detective.",
+        "Se la sequenza si interrompe, ricostruisci la mano con Judy – Uncovering Clues e usa le rimozioni condizionate per riprendere il campo. Verifica bersagli e soglie di forza prima di investire il turno."
+      ],
+      "en": [
+        "Play multiple characters in a turn to trigger Detective synergies. Try this candidate early if your collection contains many Hyperia cards.",
+        "Look for Higgins or Judy – Helpful Officer, Judy – Day Camp Instructor, a second cheap character and ink for later turns.",
+        "At three ink you can play a one-drop followed by Day Camp Instructor. Order matters: your second character can trigger ramp and prepare Nick turns. Read each condition; sharing a classification is not sufficient.",
+        "If sequencing fails, rebuild resources with Judy – Uncovering Clues and use conditional removal to recover the board. Check target and strength requirements before committing."
+      ]
+    }
+  },
+  {
+    "id": "olaf-claybyte",
+    "name": "Olaf Actions · ClayByte",
+    "inks": "Amber / Ruby",
+    "source": "https://inkdecks.com/lorcana-metagame/deck-look-at-this-photograph-529099",
+    "author": "ClayByte",
+    "result": "16 / 49 · Top Choice Gaming Triple Case · 2026-11-01",
+    "status": "tournament",
+    "checked_at": "2026-11-04",
+    "cards": [
+      {
+        "quantity": 2,
+        "name": "Hercules - Young Rescuer",
+        "card_id": "s12_123",
+        "cost": 2,
+        "inkable": false,
+        "type": "character",
+        "ink": "ruby",
+        "set": 12,
+        "rarity": "Super Rare"
+      },
+      {
+        "quantity": 3,
+        "name": "Jebidiah Farnsworth - Cookie",
+        "card_id": "s12_117",
+        "cost": 2,
+        "inkable": true,
+        "type": "character",
+        "ink": "ruby",
+        "set": 12,
+        "rarity": "Uncommon"
+      },
+      {
+        "quantity": 4,
+        "name": "Liquidator - Iced Over",
+        "card_id": "s11_111",
+        "cost": 2,
+        "inkable": true,
+        "type": "character",
+        "ink": "ruby",
+        "set": 11,
+        "rarity": "Uncommon"
+      },
+      {
+        "quantity": 3,
+        "name": "Roller Bob - Sid's Toy",
+        "card_id": "s12_113",
+        "cost": 3,
+        "inkable": true,
+        "type": "character",
+        "ink": "ruby",
+        "set": 12,
+        "rarity": "Uncommon"
+      },
+      {
+        "quantity": 4,
+        "name": "Olaf - Snowman of Action",
+        "card_id": "s11_122",
+        "cost": 9,
+        "inkable": true,
+        "type": "character",
+        "ink": "ruby",
+        "set": 11,
+        "rarity": "Rare"
+      },
+      {
+        "quantity": 4,
+        "name": "Rivera Family Photo",
+        "card_id": "s14_132",
+        "cost": 1,
+        "inkable": true,
+        "type": "item",
+        "ink": "ruby",
+        "set": 14,
+        "rarity": "Common"
+      },
+      {
+        "quantity": 4,
+        "name": "The Torn Corner",
+        "card_id": "s14_133",
+        "cost": 3,
+        "inkable": true,
+        "type": "item",
+        "ink": "ruby",
+        "set": 14,
+        "rarity": "Rare"
+      },
+      {
+        "quantity": 4,
+        "name": "Dangerous Plan",
+        "card_id": "s12_133",
+        "cost": 1,
+        "inkable": true,
+        "type": "action",
+        "ink": "ruby",
+        "set": 12,
+        "rarity": "Common"
+      },
+      {
+        "quantity": 4,
+        "name": "Inner Strength",
+        "card_id": "s12_129",
+        "cost": 1,
+        "inkable": true,
+        "type": "action",
+        "ink": "ruby",
+        "set": 12,
+        "rarity": "Common"
+      },
+      {
+        "quantity": 3,
+        "name": "Intimidation Tactics",
+        "card_id": "s14_128",
+        "cost": 2,
+        "inkable": false,
+        "type": "action",
+        "ink": "ruby",
+        "set": 14,
+        "rarity": "Uncommon"
+      },
+      {
+        "quantity": 4,
+        "name": "Firefly Swarm",
+        "card_id": "s12_130",
+        "cost": 3,
+        "inkable": false,
+        "type": "action",
+        "ink": "ruby",
+        "set": 12,
+        "rarity": "Uncommon"
+      },
+      {
+        "quantity": 3,
+        "name": "The Horseman Strikes!",
+        "card_id": "s10_29",
+        "cost": 3,
+        "inkable": true,
+        "type": "action",
+        "ink": "amber",
+        "set": 10,
+        "rarity": "Rare"
+      },
+      {
+        "quantity": 4,
+        "name": "Red Alert",
+        "card_id": "s13_135",
+        "cost": 4,
+        "inkable": true,
+        "type": "action",
+        "ink": "ruby",
+        "set": 13,
+        "rarity": "Uncommon"
+      },
+      {
+        "quantity": 4,
+        "name": "Raging Storm",
+        "card_id": "s11_28",
+        "cost": 8,
+        "inkable": false,
+        "type": "action",
+        "ink": "amber",
+        "set": 11,
+        "rarity": "Super Rare"
+      },
+      {
+        "quantity": 4,
+        "name": "Della's Moon Lullaby",
+        "card_id": "s10_28",
+        "cost": 2,
+        "inkable": true,
+        "type": "action - song",
+        "ink": "amber",
+        "set": 10,
+        "rarity": "Common"
+      },
+      {
+        "quantity": 2,
+        "name": "Or Rewrite History!",
+        "card_id": "s10_27",
+        "cost": 3,
+        "inkable": true,
+        "type": "action - song",
+        "ink": "amber",
+        "set": 10,
+        "rarity": "Uncommon"
+      },
+      {
+        "quantity": 4,
+        "name": "Land of the Dead - Marigold Bridge",
+        "card_id": "s14_135",
+        "cost": 4,
+        "inkable": true,
+        "type": "location",
+        "ink": "ruby",
+        "set": 14,
+        "rarity": "Uncommon"
+      }
+    ],
+    "plan": {
+      "it": [
+        "Usa azioni e oggetti per sviluppare gli scarti e ridurre il costo di Olaf. È un piano più tecnico, con appena 16 personaggi: non confondere controllo del campo e vittoria.",
+        "Cerca Rivera Family Photo, un’azione economica e Liquidator o Jebidiah. Non conservare Olaf a tutti i costi senza una partenza funzionante.",
+        "Nei primi turni prepara risorse e sopravvivi. Conta le Azioni negli scarti prima di pagare Olaf; le Canzoni sono Azioni. Con sei Azioni scartate il costo stampato 9 diventa 3, salvo altri modificatori.",
+        "Contro Aggro usa il piano difensivo prima di cercare il motore completo. Nei turni lunghi, Olaf rallenta la leggenda avversaria, ma devi comunque produrre i tuoi punti. Studia anche la gestione del luogo Land of the Dead."
+      ],
+      "en": [
+        "Use actions and items to develop the discard pile and reduce Olaf’s cost. This is a more technical plan with only 16 characters: controlling the board does not itself win the game.",
+        "Look for Rivera Family Photo, a cheap action and Liquidator or Jebidiah. Do not keep Olaf at any cost without a functional early hand.",
+        "Develop resources and survive first. Count action cards in the discard before paying for Olaf; songs are actions. Six discarded actions reduce the printed cost of 9 to 3, before other modifiers.",
+        "Defend first against fast aggro. Olaf can slow opposing lore in longer games, but you still need to generate your own points. Learn how to use the Land of the Dead location."
+      ]
+    }
+  },
+  {
+    "id": "evasive-bangkok",
+    "name": "Evasive · ThiagoSantana",
+    "inks": "Emerald / Steel",
+    "source": "https://inkdecks.com/lorcana-metagame/deck-gs-528029",
+    "author": "ThiagoSantana",
+    "result": "4 / 778 · Disney Lorcana Challenge Bangkok · 2026-10-31",
+    "status": "tournament",
+    "checked_at": "2026-11-04",
+    "cards": [
+      {
+        "quantity": 3,
+        "name": "Darkwing Duck - Crime Fighter",
+        "card_id": "s11_174",
+        "cost": 1,
+        "inkable": true,
+        "type": "character",
+        "ink": "steel",
+        "set": 11,
+        "rarity": "Common"
+      },
+      {
+        "quantity": 4,
+        "name": "Pegasus - Gift for Hercules",
+        "card_id": "s9_84",
+        "cost": 1,
+        "inkable": true,
+        "type": "character",
+        "ink": "emerald",
+        "set": 9,
+        "rarity": "Common"
+      },
+      {
+        "quantity": 4,
+        "name": "Tod - All Alone",
+        "card_id": "s11_87",
+        "cost": 1,
+        "inkable": true,
+        "type": "character",
+        "ink": "emerald",
+        "set": 11,
+        "rarity": "Common"
+      },
+      {
+        "quantity": 3,
+        "name": "Flash - Efficient Clerk",
+        "card_id": "s14_171",
+        "cost": 2,
+        "inkable": false,
+        "type": "character",
+        "ink": "steel",
+        "set": 14,
+        "rarity": "Rare"
+      },
+      {
+        "quantity": 3,
+        "name": "Toulouse - Rough and Tumble",
+        "card_id": "s14_182",
+        "cost": 2,
+        "inkable": true,
+        "type": "character",
+        "ink": "steel",
+        "set": 14,
+        "rarity": "Uncommon"
+      },
+      {
+        "quantity": 4,
+        "name": "Ursula - Deceiver",
+        "card_id": "s9_90",
+        "cost": 2,
+        "inkable": true,
+        "type": "character",
+        "ink": "emerald",
+        "set": 9,
+        "rarity": "Uncommon"
+      },
+      {
+        "quantity": 4,
+        "name": "White Rabbit - Late Again",
+        "card_id": "s11_89",
+        "cost": 2,
+        "inkable": true,
+        "type": "character",
+        "ink": "emerald",
+        "set": 11,
+        "rarity": "Uncommon"
+      },
+      {
+        "quantity": 4,
+        "name": "Angela - Night Warrior",
+        "card_id": "s11_187",
+        "cost": 3,
+        "inkable": true,
+        "type": "character",
+        "ink": "steel",
+        "set": 11,
+        "rarity": "Super Rare"
+      },
+      {
+        "quantity": 3,
+        "name": "Francine - Eyeing the Evidence",
+        "card_id": "s10_176",
+        "cost": 3,
+        "inkable": true,
+        "type": "character",
+        "ink": "steel",
+        "set": 10,
+        "rarity": "Common"
+      },
+      {
+        "quantity": 3,
+        "name": "Max Goof - Rebellious Teen",
+        "card_id": "s9_75",
+        "cost": 3,
+        "inkable": true,
+        "type": "character",
+        "ink": "emerald",
+        "set": 9,
+        "rarity": "Rare"
+      },
+      {
+        "quantity": 4,
+        "name": "Mushu - Stealthy Dragon",
+        "card_id": "s13_97",
+        "cost": 3,
+        "inkable": true,
+        "type": "character",
+        "ink": "emerald",
+        "set": 13,
+        "rarity": "Legendary"
+      },
+      {
+        "quantity": 4,
+        "name": "Vixey - Forest Friend",
+        "card_id": "s11_86",
+        "cost": 3,
+        "inkable": true,
+        "type": "character",
+        "ink": "emerald",
+        "set": 11,
+        "rarity": "Uncommon"
+      },
+      {
+        "quantity": 4,
+        "name": "Strength of a Raging Fire",
+        "card_id": "s9_201",
+        "cost": 3,
+        "inkable": true,
+        "type": "action - song",
+        "ink": "steel",
+        "set": 9,
+        "rarity": "Rare"
+      },
+      {
+        "quantity": 2,
+        "name": "Angel - Experiment 624",
+        "card_id": "s11_191",
+        "cost": 4,
+        "inkable": true,
+        "type": "character",
+        "ink": "steel",
+        "set": 11,
+        "rarity": "Legendary"
+      },
+      {
+        "quantity": 4,
+        "name": "Elinor - Renowned Diplomat",
+        "card_id": "s12_86",
+        "cost": 4,
+        "inkable": false,
+        "type": "character",
+        "ink": "emerald",
+        "set": 12,
+        "rarity": "Super Rare"
+      },
+      {
+        "quantity": 4,
+        "name": "Gaetan Moliere - Clever Burrower",
+        "card_id": "s12_80",
+        "cost": 4,
+        "inkable": true,
+        "type": "character",
+        "ink": "emerald",
+        "set": 12,
+        "rarity": "Uncommon"
+      },
+      {
+        "quantity": 3,
+        "name": "Broadway - Sturdy and Strong",
+        "card_id": "s10_190",
+        "cost": 5,
+        "inkable": true,
+        "type": "character",
+        "ink": "steel",
+        "set": 10,
+        "rarity": "Uncommon"
+      }
+    ],
+    "plan": {
+      "it": [
+        "Produci leggenda con gli Sfuggenti, usando rimozioni e blocchi temporanei per proteggere la corsa. È la prima delle tre liste proposte nella chat.",
+        "Cerca un personaggio da costo 1 e uno da costo 2; conserva Vixey insieme a Tod quando la mano ha già inchiostro sufficiente. Rimanda i pezzi costosi se impediscono di partire.",
+        "Sviluppa Tod/Pegasus, poi Vixey o un altro costo 2. Nei turni 3–4 alterna missioni e controllo: non esaurire automaticamente ogni personaggio. Elinor premia un campo con almeno tre personaggi esauriti.",
+        "Se perdi il campo, usa Angel e Strength per contenere i produttori di leggenda avversari e ricostruisci con personaggi economici. Contro Circle e Songs scegli con cura il turno di Toulouse: il blocco delle azioni dura fino all’inizio del tuo turno seguente."
+      ],
+      "en": [
+        "Quest with Evasive characters and use removal and temporary disruption to protect the race. This is the first of the three lists proposed in the shared analysis.",
+        "Look for a one-cost and a two-cost character; keep Vixey with Tod when the hand already has enough ink. Return expensive pieces if they stop early development.",
+        "Develop Tod/Pegasus, then Vixey or another two-drop. Alternate quests and control on turns 3–4. Elinor rewards a board with at least three exerted characters; do not exert everyone automatically.",
+        "If you lose the board, contain opposing lore threats with Angel and Strength, then rebuild cheaply. Time Toulouse against Circle and Songs: its action restriction lasts until the start of your next turn."
+      ]
+    }
+  },
+  {
+    "id": "coco-official",
+    "name": "Coco Songs · Hyperia",
+    "inks": "Amber / Ruby",
+    "source": "https://disneylorcana.com/en/news/2026/10/hyperia-city-coco-themed-deck/",
+    "author": "Brennan DeCandio / Ravensburger",
+    "result": "Proposta tematica / Themed proposal · 2026-10-15",
+    "status": "themed",
+    "checked_at": "2026-11-04",
+    "cards": [
+      {
+        "quantity": 4,
+        "name": "Héctor Rivera - Street Musician",
+        "card_id": "s14_117",
+        "cost": 1,
+        "inkable": true,
+        "type": "character",
+        "ink": "ruby",
+        "set": 14,
+        "rarity": "Uncommon"
+      },
+      {
+        "quantity": 4,
+        "name": "Miguel Rivera - Street Musician",
+        "card_id": "s14_21",
+        "cost": 1,
+        "inkable": true,
+        "type": "character",
+        "ink": "amber",
+        "set": 14,
+        "rarity": "Rare"
+      },
+      {
+        "quantity": 4,
+        "name": "Pepita - Sweet Kitty",
+        "card_id": "s14_109",
+        "cost": 1,
+        "inkable": true,
+        "type": "character",
+        "ink": "ruby",
+        "set": 14,
+        "rarity": "Common"
+      },
+      {
+        "quantity": 3,
+        "name": "Héctor Rivera - Gone to Pieces",
+        "card_id": "s14_121",
+        "cost": 4,
+        "inkable": true,
+        "type": "character",
+        "ink": "ruby",
+        "set": 14,
+        "rarity": "Rare"
+      },
+      {
+        "quantity": 2,
+        "name": "Miguel Rivera - Accomplished Musician",
+        "card_id": "s14_26",
+        "cost": 5,
+        "inkable": false,
+        "type": "character",
+        "ink": "amber",
+        "set": 14,
+        "rarity": "Uncommon"
+      },
+      {
+        "quantity": 4,
+        "name": "Pepita - Imelda's Right Hand",
+        "card_id": "s14_119",
+        "cost": 5,
+        "inkable": true,
+        "type": "character",
+        "ink": "ruby",
+        "set": 14,
+        "rarity": "Super Rare"
+      },
+      {
+        "quantity": 3,
+        "name": "Ernesto de la Cruz - Ruthless Musician",
+        "card_id": "s14_120",
+        "cost": 6,
+        "inkable": true,
+        "type": "character",
+        "ink": "ruby",
+        "set": 14,
+        "rarity": "Rare"
+      },
+      {
+        "quantity": 4,
+        "name": "Héctor Rivera - Worldwide Sensation",
+        "card_id": "s14_106",
+        "cost": 6,
+        "inkable": true,
+        "type": "character",
+        "ink": "ruby",
+        "set": 14,
+        "rarity": "Legendary"
+      },
+      {
+        "quantity": 2,
+        "name": "Remember Me",
+        "card_id": "s14_29",
+        "cost": 6,
+        "inkable": true,
+        "type": "action - song",
+        "ink": "amber",
+        "set": 14,
+        "rarity": "Super Rare"
+      },
+      {
+        "quantity": 3,
+        "name": "Ancestral Guitar",
+        "card_id": "s14_31",
+        "cost": 2,
+        "inkable": true,
+        "type": "item",
+        "ink": "amber",
+        "set": 14,
+        "rarity": "Common"
+      },
+      {
+        "quantity": 4,
+        "name": "Meilin Lee - Losing Control",
+        "card_id": "s13_16",
+        "cost": 3,
+        "inkable": true,
+        "type": "character",
+        "ink": "amber",
+        "set": 13,
+        "rarity": "Rare"
+      },
+      {
+        "quantity": 3,
+        "name": "Red Moon Ritual",
+        "card_id": "s13_134",
+        "cost": 7,
+        "inkable": false,
+        "type": "action - song",
+        "ink": "ruby",
+        "set": 13,
+        "rarity": "Uncommon"
+      },
+      {
+        "quantity": 1,
+        "name": "Hercules - Young Rescuer",
+        "card_id": "s12_123",
+        "cost": 2,
+        "inkable": false,
+        "type": "character",
+        "ink": "ruby",
+        "set": 12,
+        "rarity": "Super Rare"
+      },
+      {
+        "quantity": 4,
+        "name": "Angel - Siren Singer",
+        "card_id": "s11_25",
+        "cost": 2,
+        "inkable": true,
+        "type": "character",
+        "ink": "amber",
+        "set": 11,
+        "rarity": "Uncommon"
+      },
+      {
+        "quantity": 4,
+        "name": "Akood et Emuti",
+        "card_id": "s11_29",
+        "cost": 3,
+        "inkable": false,
+        "type": "action - song",
+        "ink": "amber",
+        "set": 11,
+        "rarity": "Rare"
+      },
+      {
+        "quantity": 4,
+        "name": "Grab Your Bow",
+        "card_id": "s11_131",
+        "cost": 5,
+        "inkable": false,
+        "type": "action - song",
+        "ink": "ruby",
+        "set": 11,
+        "rarity": "Uncommon"
+      },
+      {
+        "quantity": 3,
+        "name": "Ariel - Ethereal Voice",
+        "card_id": "s10_17",
+        "cost": 4,
+        "inkable": true,
+        "type": "character",
+        "ink": "amber",
+        "set": 10,
+        "rarity": "Rare"
+      },
+      {
+        "quantity": 4,
+        "name": "Della's Moon Lullaby",
+        "card_id": "s10_28",
+        "cost": 2,
+        "inkable": true,
+        "type": "action - song",
+        "ink": "amber",
+        "set": 10,
+        "rarity": "Common"
+      }
+    ],
+    "plan": {
+      "it": [
+        "Base tematica pubblicata da Ravensburger: 33 carte di Hyperia su 60. È un progetto da testare; non viene presentato come lista vincitrice o con un win rate misurato.",
+        "Cerca una base economica Héctor/Miguel/Pepita, Angel o Chitarra e carte inchiostrabili. Una mano piena di trasformazioni senza basi è rischiosa.",
+        "Prepara Cantanti, poi usa Akood o Meilin per svilupparti. Trasforma Héctor su una base valida per alimentare canzoni e scarti. Valuta Pepita grande e recupero nel medio gioco.",
+        "La Chitarra può rendere un personaggio avversario idoneo a Ernesto; Ward impedisce di scegliere il bersaglio avversario protetto. Se perdi i Cantanti, paga le canzoni normalmente quando serve e ricostruisci; non aspettare una combinazione perfetta."
+      ],
+      "en": [
+        "Ravensburger’s themed starting point, with 33 Hyperia cards out of 60. Treat it as a testing project, not a proven tournament winner or a measured win rate.",
+        "Look for a cheap Héctor/Miguel/Pepita base, Angel or Guitar and inkable cards. A hand full of Shift characters without bases is risky.",
+        "Develop Singers, then use Akood or Meilin for resources. Shift Héctor onto a legal base to develop songs and discard synergies. Evaluate larger Pepita and recursion in the midgame.",
+        "Guitar can make an opposing character eligible for Ernesto; Ward prevents choosing a protected opposing target. If Singers are removed, hard-cast songs when needed and rebuild instead of waiting for a perfect combo."
+      ]
+    }
+  }
+]

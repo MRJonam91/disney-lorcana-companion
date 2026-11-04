@@ -94,3 +94,46 @@ supporto è volontario e non attribuisce licenze o diritti aggiuntivi:
 [Ko-fi](https://ko-fi.com/mrjonam),
 [Buy Me a Coffee](https://buymeacoffee.com/mrjonam),
 [PayPal](https://paypal.me/manorollo).
+
+## Web apps / Applicazioni web
+
+- [Tournament decks / Mazzi da torneo](tournament-decks.html)
+- [Deck Lab](deck-lab.html): builder and opening-hand sandbox / costruzione e test mano.
+- [Collector Vault](collector-vault.html): illustrative pack simulations / simulazioni illustrative di bustine.
+- [Portable card database / Database carte](docs/sets/cards/README.md)
+
+The database and external artwork links were added upstream; verify source licenses and current prices before reuse or purchase. / Database e link alle immagini sono aggiunte del remoto: verificare licenze e prezzi prima di riusi o acquisti.
+
+## Tournament catalog / Catalogo da torneo
+
+[Open IT](tournament-decks.html) · [Open EN](tournament-decks.en.html) ·
+[Download 5 decklists ZIP](decks/tournament-lists.zip)
+
+Five sourced 60-card lists: CASJ Evasive, Claude Aubé Detectives, ClayByte
+Olaf Actions, ThiagoSantana Evasive and Ravensburger Coco Songs. The last
+is a themed proposal, not a tournament result. / Cinque liste da 60 carte
+con fonti; Coco è una proposta tematica, non un risultato di torneo.
+The Steelsong primer preserves the shared strategy and proposed changes;
+the original screenshot was unavailable, so no full list is invented.
+
+The new catalog includes game plans, mulligans, matchups, training and a
+Torino preparation note. Event registration and the €50-per-card criterion
+are not represented as currently verified. / Il catalogo include strategie,
+mulligan, allenamento e contesto Torino; iscrizione e prezzi restano da
+riconfermare. [Research notes](docs/research/hyperia-card-verification.md).
+
+Reproduce 200,000 opening-hand trials per deck with seed 20261104:
+
+```sh
+python tools/generate_tournament_site.py --simulate
+python tools/generate_tournament_site.py --check
+python -m unittest discover -s tools -p "test_*.py"
+node --test tools/*.test.cjs
+```
+
+The heuristic keeps the first character at costs 1, 2 and 3 and enough
+inkables to retain three, then replaces the rest. No full games or opponent
+are simulated. / La politica conserva i primi personaggi da 1, 2 e 3 e
+almeno tre carte inchiostrabili; non simula partite complete o un avversario.
+The browser importer preserves full names/subtitles, validates every line
+and keeps the previous deck if import fails. Base printings are used.

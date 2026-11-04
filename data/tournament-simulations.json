@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "catalog_sha256": "ac74de0295e0174ea60a3bb53db0f01d79aef67709591edeb94d76bb04b29691",
+  "model": "opening-hand-only",
+  "seed": 20261104,
+  "trials_per_deck": 200000,
+  "results": {
+    "evasive-casj": {
+      "opening": {
+        "one_drop": 0.777355,
+        "two_drop": 0.8627,
+        "one_and_two": 0.65731,
+        "three_inkable": 0.99993
+      },
+      "mulligan": {
+        "one_drop": 0.91019,
+        "two_drop": 0.961655,
+        "one_and_two": 0.87305,
+        "three_inkable": 1.0
+      },
+      "trials": 200000,
+      "seed": 20261104
+    },
+    "detectives-aube": {
+      "opening": {
+        "one_drop": 0.741685,
+        "two_drop": 0.883635,
+        "one_and_two": 0.642375,
+        "three_inkable": 0.99615
+      },
+      "mulligan": {
+        "one_drop": 0.88268,
+        "two_drop": 0.97097,
+        "one_and_two": 0.8548,
+        "three_inkable": 0.99999
+      },
+      "trials": 200000,
+      "seed": 20261104
+    },
+    "olaf-claybyte": {
+      "opening": {
+        "one_drop": 0.0,
+        "two_drop": 0.699895,
+        "one_and_two": 0.0,
+        "three_inkable": 0.996215
+      },
+      "mulligan": {
+        "one_drop": 0.0,
+        "two_drop": 0.86077,
+        "one_and_two": 0.0,
+        "three_inkable": 1.0
+      },
+      "trials": 200000,
+      "seed": 20261104
+    },
+    "evasive-bangkok": {
+      "opening": {
+        "one_drop": 0.777375,
+        "two_drop": 0.862725,
+        "one_and_two": 0.657355,
+        "three_inkable": 0.999905
+      },
+      "mulligan": {
+        "one_drop": 0.910165,
+        "two_drop": 0.961665,
+        "one_and_two": 0.873035,
+        "three_inkable": 1.0
+      },
+      "trials": 200000,
+      "seed": 20261104
+    },
+    "coco-official": {
+      "opening": {
+        "one_drop": 0.80939,
+        "two_drop": 0.474845,
+        "one_and_two": 0.368365,
+        "three_inkable": 0.99447
+      },
+      "mulligan": {
+        "one_drop": 0.932135,
+        "two_drop": 0.6511,
+        "one_and_two": 0.59999,
+        "three_inkable": 1.0
+      },
+      "trials": 200000,
+      "seed": 20261104
+    }
+  }
+}

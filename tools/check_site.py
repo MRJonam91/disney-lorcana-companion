@@ -18,9 +18,12 @@ class Page(HTMLParser):
         self.labels = set()
         self.fields = []
         self.mains = 0
+        self.balance = {'div': 0, 'a': 0, 'main': 0}
 
     def handle_starttag(self, tag, attributes):
         attrs = dict(attributes)
+        if tag in self.balance:
+            self.balance[tag] += 1
         if id_ := attrs.get('id'):
             if id_ in self.ids:
                 self.errors.append(f'duplicate id: {id_}')
@@ -38,9 +41,15 @@ class Page(HTMLParser):
             if url.startswith(('http:', 'https:', '//')):
                 self.errors.append(f'external runtime dependency: {url}')
 
+    def handle_endtag(self, tag):
+        if tag in self.balance:
+            self.balance[tag] -= 1
+            if self.balance[tag] < 0:
+                self.errors.append(f'unexpected closing tag: {tag}')
+
 
 def main():
-    paths = [ROOT / 'index.html', *sorted((ROOT / 'guide').glob('*.html'))]
+    paths = [ROOT / 'index.html', ROOT / 'tournament-decks.html', ROOT / 'tournament-decks.en.html', *sorted((ROOT / 'guide').glob('*.html'))]
     pages = {}
     errors = []
     scripts = []
@@ -48,6 +57,9 @@ def main():
         page = Page(path)
         source = path.read_text(encoding='utf-8')
         page.feed(source)
+        for tag, count in page.balance.items():
+            if count:
+                page.errors.append(f'unbalanced {tag} tags: {count}')
         pages[path] = page
         if page.mains != 1:
             page.errors.append('expected exactly one main landmark')

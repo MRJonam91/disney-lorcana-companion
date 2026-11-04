@@ -16,4 +16,7 @@ jobs:
         with:
           node-version: '22'
       - run: python tools/check_site.py
-      - run: node --test tools/odds.test.cjs
+      - run: node --test tools/*.test.cjs
+      - run: python -m unittest discover -s tools -p "test_*.py"
+      - run: python tools/generate_tournament_site.py --check
+      - run: node tools/test_js_syntax.js

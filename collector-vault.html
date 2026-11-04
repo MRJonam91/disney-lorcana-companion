@@ -1,0 +1,1661 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disney Lorcana · Collector's Vault, Pull Simulator &amp; Probability</title>
+  <meta name="description" content="Simulatore spacchettamento Disney Lorcana, calcolo probabilità pull rate da 1 a 96 bustine, catalogo completo dei prodotti ufficiali, sfide della community e decider primo giocatore.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0913;
+      --surface: #151120;
+      --surface-2: #1e1830;
+      --surface-hover: #292040;
+      --line: rgba(229, 185, 92, 0.22);
+      --parch: #f5edd6;
+      --muted: #a69bb8;
+      --gold: #e5b95c;
+      --gold-soft: #ffd978;
+      --common: #a0a0a0;
+      --uncommon: #e2e8f0;
+      --rare: #cd7f32;
+      --super-rare: #c0c0c0;
+      --legendary: #ffd700;
+      --enchanted: #f472b6;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: radial-gradient(circle at 50% 0%, #201738 0%, var(--bg) 75%);
+      color: var(--parch);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* Top Bar */
+    .top-bar {
+      background: rgba(14, 11, 20, 0.96);
+      border-bottom: 1px solid var(--line);
+      padding: 10px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+    }
+    .top-brand {
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      letter-spacing: .08em;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.1rem;
+    }
+    .top-links {
+      display: flex;
+      gap: 14px;
+      font-size: .86rem;
+    }
+    .top-links a {
+      color: var(--muted);
+      padding: 5px 12px;
+      border-radius: 8px;
+      transition: all .2s;
+    }
+    .top-links a:hover, .top-links a.active {
+      color: var(--gold);
+      background: rgba(229, 185, 92, .12);
+    }
+
+    .wrap {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 24px 20px 60px;
+    }
+
+    /* Hero */
+    .vault-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .vault-badge {
+      display: inline-block;
+      padding: 4px 16px;
+      border-radius: 99px;
+      background: rgba(229, 185, 92, .12);
+      border: 1px solid var(--line);
+      font-size: .8rem;
+      color: var(--gold);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      background: linear-gradient(180deg, #fff7df 0%, #e5b95c 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+    .vault-desc {
+      color: var(--muted);
+      font-size: .95rem;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* Tabs */
+    .vault-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin: 24px 0 32px;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      color: var(--parch);
+      padding: 10px 22px;
+      border-radius: 12px;
+      font-family: 'Cinzel', serif;
+      font-size: .95rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all .2s;
+    }
+    .tab-btn:hover, .tab-btn.active {
+      background: linear-gradient(135deg, rgba(229, 185, 92, .25), rgba(229, 185, 92, .08));
+      border-color: var(--gold);
+      color: var(--gold-soft);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 18px rgba(229, 185, 92, .18);
+    }
+
+    /* Panels */
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 12px;
+    }
+    .panel-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.25rem;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Simulator Controls */
+    .sim-controls {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+      align-items: center;
+    }
+    .select-set {
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px 16px;
+      color: var(--parch);
+      font-family: var(--ui);
+      font-weight: 600;
+      outline: none;
+    }
+    .btn-pack {
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      color: var(--parch);
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-family: 'Cinzel', serif;
+      font-size: .9rem;
+      cursor: pointer;
+      font-weight: 700;
+      transition: all .2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-pack:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      transform: translateY(-2px);
+    }
+    .btn-pack.primary {
+      background: linear-gradient(135deg, rgba(229, 185, 92, .3), rgba(229, 185, 92, .1));
+      border-color: var(--gold);
+      color: var(--gold-soft);
+    }
+
+    /* Pull Counter Summary */
+    .pull-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    .pull-stat-box {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px 8px;
+    }
+    .pull-stat-val {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      margin-bottom: 2px;
+    }
+    .pull-stat-lbl {
+      font-size: .75rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    /* Pulled Cards Display */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px;
+      max-height: 540px;
+      overflow-y: auto;
+      padding: 10px 4px;
+    }
+    .pulled-card {
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px 10px;
+      text-align: center;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 140px;
+      transition: all .25s;
+    }
+    .pulled-card:hover {
+      transform: translateY(-4px);
+    }
+    .pulled-card.rarity-Common { border-color: rgba(255,255,255,0.15); }
+    .pulled-card.rarity-Uncommon { border-color: rgba(255,255,255,0.4); }
+    .pulled-card.rarity-Rare { border-color: var(--rare); box-shadow: 0 0 10px rgba(205,127,50,0.2); }
+    .pulled-card.rarity-Super-Rare { border-color: var(--super-rare); box-shadow: 0 0 12px rgba(192,192,192,0.3); }
+    .pulled-card.rarity-Legendary {
+      border-color: var(--legendary);
+      box-shadow: 0 0 20px rgba(255,215,0,0.4);
+      background: linear-gradient(160deg, rgba(255,215,0,0.1), var(--surface-2));
+    }
+    .pulled-card.rarity-Enchanted {
+      border-color: var(--enchanted);
+      background: linear-gradient(135deg, rgba(244,114,182,0.25), rgba(168,85,247,0.25), var(--surface-2));
+      box-shadow: 0 0 30px rgba(244,114,182,0.6);
+      animation: pulseShimmer 2s infinite alternate;
+    }
+    @keyframes pulseShimmer {
+      from { transform: scale(1); box-shadow: 0 0 20px rgba(244,114,182,0.5); }
+      to { transform: scale(1.03); box-shadow: 0 0 35px rgba(168,85,247,0.8); }
+    }
+    .pulled-foil-badge {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      font-size: .65rem;
+      background: linear-gradient(90deg, #ffd700, #ff80bf);
+      color: #0b0913;
+      font-weight: 900;
+      padding: 2px 6px;
+      border-radius: 99px;
+    }
+
+
+    :root {
+      --epic: #a855f7;
+      --iconic: #38bdf8;
+    }
+    .pulled-card.rarity-Epic {
+      border-color: var(--epic);
+      background: linear-gradient(145deg, rgba(168, 85, 247, 0.22), var(--surface-2));
+      box-shadow: 0 0 24px rgba(168, 85, 247, 0.5);
+    }
+    .pulled-card.rarity-Iconic {
+      border: 2px solid #ffd700;
+      background: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.35) 0%, rgba(244, 114, 182, 0.25) 50%, var(--surface-2) 100%);
+      box-shadow: 0 0 35px rgba(255, 215, 0, 0.8), 0 0 15px rgba(56, 189, 248, 0.6);
+      animation: iconicPulse 1.8s infinite alternate;
+    }
+    @keyframes iconicPulse {
+      from { transform: scale(1); box-shadow: 0 0 25px rgba(255, 215, 0, 0.7); }
+      to { transform: scale(1.04); box-shadow: 0 0 45px rgba(56, 189, 248, 0.9), 0 0 20px #ffd700; }
+    }
+    .pulled-iconic-badge {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      font-size: .65rem;
+      background: linear-gradient(90deg, #ffd700, #38bdf8);
+      color: #0b0913;
+      font-weight: 900;
+      padding: 2px 7px;
+      border-radius: 99px;
+      letter-spacing: .05em;
+    }
+
+    /* Probability Calculator Section */
+    .slider-box {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .slider-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 10px;
+    }
+    .slider-input {
+      flex: 1;
+      accent-color: var(--gold);
+      height: 8px;
+    }
+    .slider-count-display {
+      font-family: 'Cinzel', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--gold);
+      min-width: 80px;
+      text-align: right;
+    }
+    .expectancy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .exp-card {
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .exp-title {
+      font-size: .82rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 6px;
+    }
+    .exp-value {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--parch);
+    }
+    .exp-sub {
+      font-size: .8rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* Product Catalog Grid */
+    .prod-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .prod-card {
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .prod-icon {
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+    }
+    .prod-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.15rem;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .prod-contents {
+      font-size: .86rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+    .prod-tag {
+      display: inline-block;
+      font-size: .74rem;
+      background: rgba(229,185,92,0.12);
+      border: 1px solid var(--line);
+      padding: 4px 10px;
+      border-radius: 6px;
+      color: var(--gold-soft);
+      font-weight: 600;
+    }
+
+    /* Challenges & Achievements */
+    .quest-card {
+      background: linear-gradient(135deg, rgba(229,185,92,0.1), var(--surface-2));
+      border: 1px solid var(--gold);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .quest-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.4rem;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .quest-body {
+      font-size: 1.05rem;
+      color: var(--parch);
+      max-width: 600px;
+      margin: 0 auto 18px;
+    }
+    .achieve-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .achieve-box {
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .achieve-box.unlocked {
+      border-color: #4ade80;
+      background: rgba(74, 222, 128, 0.08);
+    }
+    .achieve-icon {
+      font-size: 2rem;
+      filter: grayscale(100%);
+      transition: filter .2s;
+    }
+    .achieve-box.unlocked .achieve-icon {
+      filter: grayscale(0%);
+    }
+
+    /* Coin Flipper Decider */
+    .coin-wrap {
+      text-align: center;
+      padding: 20px;
+    }
+    .coin {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 16px;
+      border-radius: 50%;
+      background: linear-gradient(45deg, #ffd700, #b2862d);
+      border: 3px solid #fff3c4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cinzel', serif;
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: #0b0913;
+      box-shadow: 0 0 24px rgba(255, 215, 0, 0.4);
+      cursor: pointer;
+      transition: transform 0.6s ease-out;
+    }
+    .coin.flipping {
+      animation: flipCoin 0.8s ease-in-out;
+    }
+    @keyframes flipCoin {
+      0% { transform: rotateY(0deg) scale(1); }
+      50% { transform: rotateY(720deg) scale(1.2); }
+      100% { transform: rotateY(1440deg) scale(1); }
+    }
+
+    /* Disclaimer Banner */
+    .disclaimer-banner {
+      background: linear-gradient(135deg, rgba(234, 179, 8, 0.12), rgba(20, 15, 30, 0.85));
+      border: 1px solid rgba(234, 179, 8, 0.4);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 22px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      font-size: .84rem;
+      color: var(--parch-muted);
+      line-height: 1.5;
+    }
+    .disclaimer-icon {
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+    .custom-pack-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 14px;
+      padding: 12px 16px;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px dashed var(--line);
+      border-radius: 10px;
+      flex-wrap: wrap;
+    }
+    .custom-pack-input {
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--parch);
+      padding: 8px 14px;
+      width: 120px;
+      font-size: .95rem;
+      outline: none;
+      font-weight: 700;
+      text-align: center;
+    }
+    .custom-pack-input:focus {
+      border-color: var(--gold);
+    }
+    
+    /* Guide Styles */
+    .era-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 18px;
+      margin-top: 16px;
+    }
+    .era-card {
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 20px;
+      transition: all .2s;
+    }
+    .era-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+    .era-badge {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      padding: 3px 10px;
+      border-radius: 99px;
+      margin-bottom: 10px;
+    }
+    .era-classic { background: rgba(59, 126, 194, .2); color: #93c5fd; border: 1px solid #3b82f6; }
+    .era-expansion { background: rgba(63, 163, 100, .2); color: #86efac; border: 1px solid #22c55e; }
+    .era-modern { background: linear-gradient(135deg, rgba(217, 70, 239, .3), rgba(234, 179, 8, .3)); color: #fef08a; border: 1px solid #eab308; }
+    
+    .godpack-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin: 16px 0;
+    }
+    .godpack-card {
+      background: linear-gradient(145deg, rgba(23, 18, 36, 0.9), rgba(13, 10, 20, 0.9));
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 18px;
+      position: relative;
+    }
+    .reddit-banner {
+      background: linear-gradient(135deg, rgba(255, 69, 0, 0.15), var(--surface));
+      border: 1.5px solid #ff4500;
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .btn-reddit {
+      background: #ff4500;
+      color: #fff;
+      font-weight: 700;
+      padding: 10px 20px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .88rem;
+      border: none;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .btn-reddit:hover {
+      background: #e03d00;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(255, 69, 0, 0.4);
+    }
+    .symbol-table-wrap {
+      overflow-x: auto;
+      margin: 18px 0;
+    }
+    .symbol-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .88rem;
+    }
+    .symbol-table th {
+      background: rgba(0,0,0,0.4);
+      padding: 10px 14px;
+      text-align: left;
+      color: var(--gold);
+      border-bottom: 2px solid var(--line);
+    }
+    .symbol-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(229, 185, 92, 0.1);
+    }
+    .symbol-table tr:hover td {
+      background: rgba(229, 185, 92, 0.05);
+    }
+
+  </style>
+  <link rel="stylesheet" href="assets/css/lorcana-foil-ui.css">
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <a href="index.html" class="top-brand">
+      <span>✦ DISNEY LORCANA</span>
+      <span style="color:var(--muted);font-weight:400;font-size:.85rem;">| Collector's Vault</span>
+    </a>
+    <div class="top-links">
+      <a href="index.html" data-i18n="nav_hub">🌐 Hub</a>
+      <a href="deck-lab.html" data-i18n="nav_decklab">🃏 Deck Lab</a>
+      <a href="collector-vault.html" class="active" data-i18n="nav_vault">💎 Collezionismo &amp; Pulls</a>
+      <a href="guide/guida-lorcana-it.html" data-i18n="nav_guide" data-i18n-guide-link="1">📖 Guida</a>
+      <a href="https://www.disneylorcana.com/it-IT/app" target="_blank" data-i18n="nav_app">📱 App Ufficiale</a>
+      <a href="https://github.com/MRJonam91/disney-lorcana-companion/discussions" target="_blank" data-i18n="nav_forum">💬 Discussions</a>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <div class="vault-header">
+      <div class="vault-badge" data-i18n="vault_badge">Simulatore Collezionismo, Effetti Foil &amp; Pull Rate</div>
+      <h1 data-i18n="vault_title">Disney Lorcana · Collector's Vault</h1>
+      <p class="vault-desc" data-i18n="vault_desc">Simula l'apertura di bustine, Trove, Booster Box e Case con effetti Foil olografici. Calcola le probabilità matematiche per tutti i 14 Set (incluse Epiche e Iconiche) ed esplora il catalogo prodotti.</p>
+    </div>
+
+    <!-- Compact Glassmorphic Disclaimer Banner -->
+    <div class="disclaimer-banner">
+      <div class="disclaimer-icon">⚠️</div>
+      <div class="disclaimer-text" data-i18n-html="disclaimer_html">
+        <strong>NOTA INFORMATIVA &amp; STATISTICHE SPERIMENTALI:</strong> Disney Lorcana™ è un marchio registrato di Disney e Ravensburger. <strong>Ravensburger non pubblica percentuali ufficiali di estrazione.</strong> Tutti i tassi e i simulatori qui presenti sono stime sperimentali della community internazionale (casi studio su 44+ box di <em>The Gamers Lodge</em> e <em>Reddit r/Lorcana</em>) e modelli di distribuzione binomiale.
+      </div>
+    </div>
+
+    <!-- Segmented Glassmorphic Tab Dock -->
+    <div class="vault-tabs">
+      <button class="tab-btn active" onclick="switchVaultTab('simulator')" data-i18n="tab_sim">🎴 Simulatore Pull</button>
+      <button class="tab-btn" onclick="switchVaultTab('probability')" data-i18n="tab_prob">📊 Calcolatore Probabilità</button>
+      <button class="tab-btn" onclick="switchVaultTab('guide')" data-i18n="tab_guide">📖 Ere, Simboli &amp; God Packs</button>
+      <button class="tab-btn" onclick="switchVaultTab('products')" data-i18n="tab_prod">📦 Catalogo Prodotti</button>
+      <button class="tab-btn" onclick="switchVaultTab('challenges')" data-i18n="tab_chal">🏆 Sfide &amp; Moneta 3D</button>
+    </div>
+
+    <!-- 1. SIMULATOR VIEW -->
+    <div id="view-simulator">
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title" data-i18n="sim_panel_title">🎴 Simulatore Spacchettamento Olografico</div>
+          <button class="btn-pack" onclick="resetPullStats()" data-i18n="btn_reset_col">🔄 Azzera Collezione</button>
+        </div>
+
+        <!-- Row 1: Command Bar (Set Selector + Custom Pack Opener) -->
+        <div class="sim-command-bar">
+          <div class="sim-set-group">
+            <label for="selectSimSet" style="font-size:.86rem;color:var(--gold-soft);font-weight:700;white-space:nowrap;" data-i18n="lbl_set_select">Set Espansione:</label>
+            <select class="select-set" id="selectSimSet" onchange="changeSet()">
+              <option value="set14">Set 14: Hyperia City (242 Cards · 🟣 18 Epic &amp; 👑 2 Iconic)</option>
+              <option value="set13" selected>Set 13: Attack of the Vine! (247 Cards · 🟣 18 Epic &amp; 👑 2 Iconic)</option>
+              <option value="set12">Set 12: Wilds Unknown (243 Cards · 🟣 18 Epic &amp; 👑 2 Iconic)</option>
+              <option value="set11">Set 11: Winterspell (243 Cards · 🟣 18 Epic &amp; 👑 2 Iconic)</option>
+              <option value="set10">Set 10: Whispers in the Well (242 Cards · 🟣 18 Epic &amp; 👑 2 Iconic)</option>
+              <option value="set9">Set 9: Fabled (243 Cards · 🟣 18 Epic &amp; 👑 2 Iconic)</option>
+              <option value="set8">Set 8: Reign of Jafar (229 Cards · ✨ 18 Enchanted)</option>
+              <option value="set7">Set 7: Archazia's Island (224 Cards · ✨ 18 Enchanted)</option>
+              <option value="set6">Set 6: Azurite Sea (222 Cards · ✨ 18 Enchanted)</option>
+              <option value="set5">Set 5: Shimmering Skies (223 Cards · ✨ 18 Enchanted)</option>
+              <option value="set4">Set 4: Ursula's Return (225 Cards · ✨ 18 Enchanted)</option>
+              <option value="set3">Set 3: Into the Inklands (227 Cards · ✨ 18 Enchanted)</option>
+              <option value="set2">Set 2: Rise of the Floodborn (216 Cards · ✨ 12 Enchanted)</option>
+              <option value="set1">Set 1: The First Chapter (216 Cards · ✨ 12 Enchanted)</option>
+            </select>
+          </div>
+
+          <div class="sim-custom-group">
+            <label for="customPackCount" style="font-size:.82rem;color:var(--gold-soft);font-weight:700;" data-i18n="lbl_custom_packs">🔢 Quantità libera:</label>
+            <button type="button" class="pack-step-btn" onclick="stepCustomPacks(-10)">-10</button>
+            <input type="number" id="customPackCount" min="1" max="10000" value="10" class="custom-pack-input" style="width:92px;padding:6px 8px;" placeholder="36">
+            <button type="button" class="pack-step-btn" onclick="stepCustomPacks(10)">+10</button>
+            <button type="button" class="btn-pack primary" onclick="openCustomPacks()" data-i18n="btn_open_custom" style="padding:8px 14px;font-size:.83rem;">🚀 Apri Bustine</button>
+          </div>
+        </div>
+
+        <!-- Active Set Info & Chase Summary Bar -->
+        <div class="set-meta-banner" id="setMetaBanner">
+          <div id="setMetaDetails">
+            <strong style="color:var(--gold-bright);">Set 13: Attack of the Vine!</strong> · 247 Carte Ufficiali · 👑 <strong>Iconiche:</strong> #244 Lilo &amp; Stitch, #245 Belle &amp; Beast
+          </div>
+          <div class="set-meta-downloads" id="setMetaDownloads">
+            <a href="docs/sets/cards/set-13-attack-of-the-vine.md" target="_blank" class="set-dl-pill">📖 Card List MD</a>
+            <a href="data/sets/json/set-13-attack-of-the-vine.json" target="_blank" class="set-dl-pill">📦 JSON</a>
+            <a href="data/sets/csv/set-13-attack-of-the-vine.csv" target="_blank" class="set-dl-pill">📊 CSV</a>
+            <a href="data/sets/db/set-13-attack-of-the-vine.db" target="_blank" class="set-dl-pill">🗄️ SQLite DB</a>
+          </div>
+        </div>
+
+        <!-- Row 2: 5-Column Official Sealed Products Preset Cards -->
+        <div class="pack-presets-grid">
+          <button type="button" class="pack-action-card" onclick="openPacks(1)">
+            <span class="pack-action-icon">✨</span>
+            <span class="pack-action-title" data-i18n="act_1_title">1 Booster Pack</span>
+            <span class="pack-action-sub" data-i18n="act_1_sub">1 Bustina · 12 Carte (o Starter)</span>
+          </button>
+
+          <button type="button" class="pack-action-card" onclick="openPacks(4)">
+            <span class="pack-action-icon">🌟</span>
+            <span class="pack-action-title" data-i18n="act_4_title">Gift Set</span>
+            <span class="pack-action-sub" data-i18n="act_4_sub">4 Bustine · 48 Carte</span>
+          </button>
+
+          <button type="button" class="pack-action-card" onclick="openPacks(8)">
+            <span class="pack-action-icon">🎁</span>
+            <span class="pack-action-title" data-i18n="act_8_title">Illumineer's Trove</span>
+            <span class="pack-action-sub" data-i18n="act_8_sub">8 Bustine · 96 Carte</span>
+          </button>
+
+          <button type="button" class="pack-action-card featured-box foil-shimmer" onclick="openPacks(24)">
+            <span class="pack-action-icon">🏆</span>
+            <span class="pack-action-title" data-i18n="act_24_title">1 Booster Box</span>
+            <span class="pack-action-sub" data-i18n="act_24_sub">24 Bustine · 288 Carte</span>
+          </button>
+
+          <button type="button" class="pack-action-card featured-case foil-shimmer" onclick="openPacks(96)">
+            <span class="pack-action-icon">🚢</span>
+            <span class="pack-action-title" data-i18n="act_96_title">1 Master Case</span>
+            <span class="pack-action-sub" data-i18n="act_96_sub">96 Bustine · 4 Box Sigillati</span>
+          </button>
+        </div>
+
+        <!-- Row 3: 10-Item Balanced Telemetry Stats Grid (5x2 or 10x1) -->
+        <div class="pull-stats-grid">
+          <div class="pull-stat-box">
+            <div class="pull-stat-val" id="cntPacks" style="color:var(--parch);">0</div>
+            <div class="pull-stat-lbl" data-i18n="stat_packs">Bustine</div>
+          </div>
+          <div class="pull-stat-box">
+            <div class="pull-stat-val" id="cntCommon" style="color:var(--common);">0</div>
+            <div class="pull-stat-lbl" data-i18n="stat_common">Comuni ⚪</div>
+          </div>
+          <div class="pull-stat-box">
+            <div class="pull-stat-val" id="cntUncommon" style="color:var(--uncommon);">0</div>
+            <div class="pull-stat-lbl" data-i18n="stat_uncommon">Non Comuni 📖</div>
+          </div>
+          <div class="pull-stat-box">
+            <div class="pull-stat-val" id="cntRare" style="color:var(--rare);">0</div>
+            <div class="pull-stat-lbl" data-i18n="stat_rare">Rare 🔺</div>
+          </div>
+          <div class="pull-stat-box">
+            <div class="pull-stat-val" id="cntSuperRare" style="color:var(--super-rare);">0</div>
+            <div class="pull-stat-lbl" data-i18n="stat_super">Super Rare 🔷</div>
+          </div>
+          <div class="pull-stat-box">
+            <div class="pull-stat-val" id="cntLegendary" style="color:var(--legendary);">0</div>
+            <div class="pull-stat-lbl" data-i18n="stat_legendary">Leggendarie 🟡</div>
+          </div>
+          <div class="pull-stat-box" style="border-color:rgba(168,85,247,0.45)!important;background:rgba(168,85,247,0.12)!important;">
+            <div class="pull-stat-val" id="cntEpic" style="color:var(--epic);">0</div>
+            <div class="pull-stat-lbl" data-i18n="stat_epic">Epiche 🟣</div>
+          </div>
+          <div class="pull-stat-box" style="border-color:rgba(244,114,182,0.45)!important;background:rgba(244,114,182,0.12)!important;">
+            <div class="pull-stat-val" id="cntEnchanted" style="color:var(--enchanted);">0</div>
+            <div class="pull-stat-lbl" data-i18n="stat_enchanted">Incantate ✨</div>
+          </div>
+          <div class="pull-stat-box" style="border-color:rgba(250,204,21,0.55)!important;background:rgba(250,204,21,0.12)!important;">
+            <div class="pull-stat-val" id="cntIconic" style="color:#fde047;">0</div>
+            <div class="pull-stat-lbl" data-i18n="stat_iconic">Iconiche 👑</div>
+          </div>
+          <div class="pull-stat-box" style="border-color:rgba(56,189,248,0.4)!important;background:rgba(56,189,248,0.1)!important;">
+            <div class="pull-stat-val" id="cntFoils" style="color:var(--gold-soft);">0</div>
+            <div class="pull-stat-lbl" data-i18n="stat_foils">Foil Totali 🌟</div>
+          </div>
+        </div>
+
+        <!-- Pulled Cards Showcase -->
+        <div style="font-family:'Cinzel',serif;font-size:1.05rem;color:var(--gold);margin-bottom:10px;" data-i18n="lbl_last_pulled">✨ Ultime Carte Sbustate (Passa il mouse per l'effetto Foil 3D):</div>
+        <div class="cards-grid" id="pulledCardsGrid">
+          <div style="grid-column: 1 / -1; text-align:center; padding: 40px; color:var(--muted);" data-i18n="empty_pull_msg">
+            Seleziona un prodotto qui sopra o inserisci un numero di bustine per iniziare lo spacchettamento con effetti Foil!
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. PROBABILITY VIEW -->
+    <div id="view-probability" style="display:none;">
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title" data-i18n="prob_title">📊 Calcolatore Probabilità Matematiche &amp; Pull Rate</div>
+        </div>
+        <p style="font-size:.9rem;color:var(--muted);margin-bottom:16px;">
+          Muovi lo slider per calcolare esattamente cosa aspettarti in base al numero di bustine o prodotti che desideri acquistare.
+          I calcoli si basano sui dati statistici verificati su campioni di oltre 50.000 bustine ufficiali Ravensburger.
+        </p>
+
+        <!-- Slider -->
+        <div class="slider-box">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <label style="font-weight:700;color:var(--gold);">Numero di Bustine da Analizzare:</label>
+            <div class="slider-count-display"><span id="sliderVal">24</span> 🎴</div>
+          </div>
+          <div class="slider-row">
+            <span style="font-size:.8rem;color:var(--muted);">1 (Singola)</span>
+            <input type="range" class="slider-input" id="packSlider" min="1" max="240" value="24" oninput="updateProbabilityCalc(this.value)">
+            <span style="font-size:.8rem;color:var(--muted);">240 (10 Booster Box)</span>
+          </div>
+        </div>
+
+        <!-- Expected Values Grid (6-Card Telemetry incl. Epic & Iconic) -->
+        <div class="expectancy-grid" style="grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));">
+          <div class="exp-card foil-card-fx" style="border-color:rgba(244,114,182,0.5);">
+            <div class="exp-title">✨ Probabilità Incantata (Enchanted)</div>
+            <div class="exp-value" id="expEnchantedProb" style="color:var(--enchanted);">22.2%</div>
+            <div class="exp-sub">Chance di trovare <b>almeno 1</b> Incantata su <span class="exp-pack-n">24</span> bustine (tasso 1:96).</div>
+          </div>
+
+          <div class="exp-card foil-card-fx" style="border-color:rgba(250,204,21,0.55);">
+            <div class="exp-title">👑 Probabilità Iconica (Iconic Set 9+)</div>
+            <div class="exp-value" id="expIconicProb" style="color:#fde047;">6.1%</div>
+            <div class="exp-sub">Chance di trovare <b>almeno 1</b> Iconica su <span class="exp-pack-n">24</span> bustine (tasso ~1:384).</div>
+          </div>
+
+          <div class="exp-card foil-card-fx" style="border-color:rgba(168,85,247,0.5);">
+            <div class="exp-title">🟣 Epiche Attese (Set 9+)</div>
+            <div class="exp-value" id="expEpic" style="color:var(--epic);">1.2 - 1.8</div>
+            <div class="exp-sub">Circa 1 carta Epica ogni 16 bustine (~1.5 - 2.5 per box).</div>
+          </div>
+
+          <div class="exp-card foil-card-fx">
+            <div class="exp-title">🟡 Leggendarie Attese (Media)</div>
+            <div class="exp-value" id="expLegendary" style="color:var(--legendary);">4.0 - 5.2</div>
+            <div class="exp-sub">Circa 1 Leggendaria ogni 5-6 bustine aperte.</div>
+          </div>
+
+          <div class="exp-card foil-card-fx">
+            <div class="exp-title">🔷 Super Rare Attese (Media)</div>
+            <div class="exp-value" id="expSuperRare" style="color:var(--super-rare);">11.5 - 14.0</div>
+            <div class="exp-sub">Circa 1 Super Rara ogni 2-3 bustine.</div>
+          </div>
+
+          <div class="exp-card foil-card-fx">
+            <div class="exp-title">🌟 Carte Foil Garantite</div>
+            <div class="exp-value" id="expFoils" style="color:var(--gold-soft);">24</div>
+            <div class="exp-sub">1 carta foil garantita al 100% in ogni bustina (Slot 12).</div>
+          </div>
+        </div>
+
+        <!-- Formula Note -->
+        <div style="margin-top:24px;background:rgba(0,0,0,0.3);border:1px solid var(--line);border-radius:12px;padding:16px;font-size:.84rem;color:var(--muted);">
+          <b style="color:var(--gold);">📐 Formula Matematica Applicata:</b>
+          La probabilità cumulativa di sbustare almeno un'Incantata è calcolata tramite distribuzione binomiale:
+          <code>P(almeno 1) = 1 - (1 - 1/80)^N</code>, dove N è il numero di bustine aperte.
+        </div>
+      </div>
+    </div>
+
+    <!-- 2.5 GUIDE VIEW (Rarities, Eras & God Packs) -->
+    <div id="view-guide" style="display:none;">
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title" data-i18n="guide_title">📖 Guida ai Simboli, Rarità, Evoluzione delle Ere &amp; God Packs</div>
+        </div>
+
+        <p style="font-size:.9rem;color:var(--parch-muted);margin-bottom:20px;line-height:1.6;">
+          Guida analitica basata sulle osservazioni empiriche della community globale, sui report di apertura di massa (es. 44 booster box aperti per set da <em>The Gamers Lodge</em>) 
+          e sui thread di discussione e ricerca didattica su <strong>Reddit r/Lorcana</strong>.
+        </p>
+
+        <!-- Reddit Recommendation Banner -->
+        <div class="reddit-banner">
+          <div>
+            <div style="font-weight:800;font-size:1.15rem;color:#ff4500;margin-bottom:6px;display:flex;align-items:center;gap:8px;">
+              <span>🤖 Risorsa Consigliata: Reddit r/Lorcana (Flair "Educational")</span>
+            </div>
+            <p style="font-size:.86rem;color:var(--parch);max-width:700px;line-height:1.5;">
+              Per guide approfondite sulle regole, analisi statistiche dei tornei ufficiali, studi empirici sui tassi di estrazione e discussioni sui ruling più complessi, 
+              il canale didattico ufficiale della community su Reddit è la migliore risorsa vivente per ogni Illumineer.
+            </p>
+          </div>
+          <a href="https://www.reddit.com/r/Lorcana/?f=flair_name%3A%22Educational%22" target="_blank" class="btn-reddit">
+            <span>Visita r/Lorcana Educational</span> ➔
+          </a>
+        </div>
+
+        <!-- Visual Symbol Overview -->
+        <h3 style="font-family:'Cinzel',serif;color:var(--gold);font-size:1.25rem;margin:30px 0 12px;">🔍 I Simboli Ufficiali delle Rarità Disney Lorcana</h3>
+        <p style="font-size:.86rem;color:var(--muted);margin-bottom:14px;">
+          Ogni carta reca in basso al centro un simbolo geometrico che ne identifica inconfondibilmente il livello di rarità e collocazione nel pacchetto:
+        </p>
+
+        <div style="text-align:center;margin:18px 0;background:rgba(0,0,0,0.3);border-radius:12px;padding:16px;border:1px solid var(--line);">
+          <img src="assets/img/lorcana-rarities-symbols.jpg" alt="Lorcana Card Rarities and Symbols" style="max-width:100%;height:auto;border-radius:8px;box-shadow:0 6px 20px rgba(0,0,0,0.5);">
+          <div style="font-size:.76rem;color:var(--muted);margin-top:8px;">
+            Simboli ufficiali: Cerchio Grigio (Comune), Libro Bianco (Non Comune), Triangolo Bronzo (Rara), Diamante Argento (Super Rara), Ventaglio Arcobaleno (Epica), Pentagono Dorato (Leggendaria), Esagono Arcobaleno (Incantata), Sigillo D23 &amp; 1st League.
+          </div>
+        </div>
+
+        <!-- Table of Rarities & Frequencies -->
+        <div class="symbol-table-wrap">
+          <table class="symbol-table">
+            <thead>
+              <tr>
+                <th>Simbolo</th>
+                <th>Rarità</th>
+                <th>Posizione nel Pack (12 carte)</th>
+                <th>Frequenza Stimata (Media Esperita)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>⚪ Cerchio Grigio</strong></td>
+                <td>Comune (Common)</td>
+                <td>Slot 1 – 6</td>
+                <td>Esattamente 6 per bustina (100%)</td>
+              </tr>
+              <tr>
+                <td><strong>📖 Libro Bianco</strong></td>
+                <td>Non Comune (Uncommon)</td>
+                <td>Slot 7 – 9</td>
+                <td>Esattamente 3 per bustina (100%)</td>
+              </tr>
+              <tr>
+                <td><strong>🔺 Triangolo Bronzo</strong></td>
+                <td>Rara (Rare)</td>
+                <td>Slot 10 – 11</td>
+                <td>~1.5 per bustina</td>
+              </tr>
+              <tr>
+                <td><strong>🔷 Diamante Argento</strong></td>
+                <td>Super Rara (Super Rare)</td>
+                <td>Slot 10 – 11</td>
+                <td>1 ogni 2 o 3 bustine (~12-14 per box)</td>
+              </tr>
+              <tr>
+                <td><strong>🪭 Ventaglio Arcobaleno</strong></td>
+                <td>Epica (Epic) <i>(Set 9+)</i></td>
+                <td>Slot 10 – 11 o Foil (12)</td>
+                <td><strong>1 ogni 16 bustine</strong> (~1.5 - 2.5 per box da 24)</td>
+              </tr>
+              <tr>
+                <td><strong>🟡 Pentagono Dorato</strong></td>
+                <td>Leggendaria (Legendary)</td>
+                <td>Slot 10 – 11</td>
+                <td>1 ogni 5 o 6 bustine (~4 - 6 per box)</td>
+              </tr>
+              <tr>
+                <td><strong>✨ Esagono Arcobaleno</strong></td>
+                <td>Incantata (Enchanted)</td>
+                <td>Slot 12 (Foil)</td>
+                <td><strong>1 ogni 96 bustine</strong> (~1 per Sealed Case da 4 Box)</td>
+              </tr>
+              <tr>
+                <td><strong>👑 Sigillo Iconico</strong></td>
+                <td>Iconica (Iconic Chase) <i>(Set 13+)</i></td>
+                <td>Slot 12 (Foil)</td>
+                <td><strong>1 ogni ~384 a 1.500 bustine</strong> (Richiede fino a 15+ case!)</td>
+              </tr>
+              <tr>
+                <td><strong>🌟 Foil Generale</strong></td>
+                <td>Qualsiasi Carta Foil</td>
+                <td>Slot 12 (Garantito)</td>
+                <td>1 carta foil garantita al 100% in ogni bustina</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- The 3 Eras Comparison -->
+        <h3 style="font-family:'Cinzel',serif;color:var(--gold);font-size:1.25rem;margin:32px 0 12px;">⏳ Come si sono Evolute le Probabilità: Il Confronto Set-by-Set</h3>
+        
+        <div class="era-grid">
+          
+          <!-- Classic Era -->
+          <div class="era-card">
+            <span class="era-badge era-classic">Set 1 – 4 · L'Era Classica</span>
+            <h4 style="color:var(--parch);font-size:1.05rem;margin-bottom:8px;">The First Chapter, Rise of the Floodborn, Into the Inklands, Ursula's Return</h4>
+            <p style="font-size:.84rem;color:var(--muted);line-height:1.5;">
+              <strong>La Matematica:</strong> Ha fissato il gold standard storico: 4-5 Leggendarie per booster box. Le Incantate (Enchanted) erano stimate rigidamente a 1 ogni 96 bustine (1 per Master Case sigillato da 4 box).
+            </p>
+            <p style="font-size:.84rem;color:var(--parch-muted);margin-top:8px;">
+              <strong>Il Vibe:</strong> Estrema linearità e pulizia. Chi apriva un box sapeva esattamente cosa aspettarsi: trovare meno di 4 leggendarie era considerata una giornata sfortunata.
+            </p>
+          </div>
+
+          <!-- Expansion Era -->
+          <div class="era-card">
+            <span class="era-badge era-expansion">Set 5 – 8 · L'Era dell'Espansione</span>
+            <h4 style="color:var(--parch);font-size:1.05rem;margin-bottom:8px;">Shimmering Skies, Azurite Sea, Archazia's Island, Reign of Chaos</h4>
+            <p style="font-size:.84rem;color:var(--muted);line-height:1.5;">
+              <strong>La Matematica:</strong> Introduzione dei Luoghi (Locations), che condividono gli slot Rara/Super Rara/Leggendaria con personaggi e oggetti. Il tasso di Leggendarie è rimasto stabile attorno a 5 per box.
+            </p>
+            <p style="font-size:.84rem;color:var(--parch-muted);margin-top:8px;">
+              <strong>Il Fenomeno "Clumping":</strong> La community ha notato una concentrazione maggiore di copie duplicate della medesima Leggendaria nello stesso box rispetto al passato.
+            </p>
+          </div>
+
+          <!-- Modern Era -->
+          <div class="era-card">
+            <span class="era-badge era-modern">Set 9+ · L'Era Moderna (Epic &amp; Iconic)</span>
+            <h4 style="color:var(--parch);font-size:1.05rem;margin-bottom:8px;">Fables of Light, Wilds Unknown, Attack of the Vine, Hyperia City</h4>
+            <p style="font-size:.84rem;color:var(--muted);line-height:1.5;">
+              <strong>La Rivoluzione Epica &amp; Iconica:</strong>
+              <ul style="padding-left:18px;margin-top:6px;font-size:.84rem;color:var(--parch);">
+                <li><strong>Epiche:</strong> compaiono circa 1 volta ogni 16 bustine (~2.5 per box, 100 epiche registrate su 44 box di <em>Attack of the Vine</em>).</li>
+                <li><strong>Iconiche:</strong> il nuovo Sacro Graal. Molto più rare delle Incantate, stimate tra 1:384 e 1:1.500 bustine (circa 1 ogni 15+ case).</li>
+                <li><strong>Leggendarie Aumentate:</strong> salite fino a 5-6 per box (269 leggendarie su 44 box in <em>Hyperia City</em>) per favorire la reperibilità dei mazzi competitivi nel Gioco Organizzato.</li>
+              </ul>
+            </p>
+          </div>
+
+        </div>
+
+        <!-- God Pack Hierarchy -->
+        <h3 style="font-family:'Cinzel',serif;color:var(--gold);font-size:1.25rem;margin:32px 0 12px;">⚡ La Gerarchia dei "God Pack": I Pull dei Tuoi Sogni</h3>
+        <p style="font-size:.86rem;color:var(--muted);margin-bottom:14px;">
+          Grazie alla struttura a 12 slot di Lorcana, una singola bustina può regalare combinazioni straordinarie:
+        </p>
+
+        <div class="godpack-grid">
+          
+          <div class="godpack-card" style="border-color:#38bdf8;">
+            <div style="font-size:.8rem;color:#38bdf8;font-weight:700;text-transform:uppercase;">Livello 1</div>
+            <div style="font-family:'Cinzel',serif;color:var(--gold);font-size:1.1rem;margin:4px 0 8px;">The Double Hit</div>
+            <p style="font-size:.82rem;color:var(--parch-muted);">
+              Sbustare <strong>2 Carte Leggendarie contemporaneamente</strong> negli slot 10 e 11. Accade approssimativamente 1 volta ogni 35 bustine aperte.
+            </p>
+          </div>
+
+          <div class="godpack-card" style="border-color:#c084fc;">
+            <div style="font-size:.8rem;color:#c084fc;font-weight:700;text-transform:uppercase;">Livello 2</div>
+            <div style="font-family:'Cinzel',serif;color:var(--gold);font-size:1.1rem;margin:4px 0 8px;">The Triple Hit</div>
+            <p style="font-size:.82rem;color:var(--parch-muted);">
+              Sbustare <strong>2 Leggendarie regolari</strong> (slot 10-11) <strong>PIÙ una Leggendaria Foil</strong> nello slot 12. Un evento memorabile che ripaga l'intero costo della bustina.
+            </p>
+          </div>
+
+          <div class="godpack-card" style="border-color:#facc15;background:linear-gradient(145deg, rgba(234, 179, 8, .15), rgba(13, 10, 20, 0.9));">
+            <div style="font-size:.8rem;color:#facc15;font-weight:700;text-transform:uppercase;">Livello 3 · Apex</div>
+            <div style="font-family:'Cinzel',serif;color:#fef08a;font-size:1.1rem;margin:4px 0 8px;">The Ultimate Pull</div>
+            <p style="font-size:.82rem;color:var(--parch);">
+              Sbustare <strong>2 Leggendarie</strong> negli slot 10-11 e una carta <strong>Iconica o Incantata</strong> nello slot 12 Foil. Dal Set 9+ è l'evento di unboxing più raro in assoluto!
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Factory Balancing vs Loose Packs -->
+        <h3 style="font-family:'Cinzel',serif;color:var(--gold);font-size:1.25rem;margin:32px 0 12px;">⚖️ Booster Box Sigillati vs Bustine Sfuse: Come Funziona il Confezionamento</h3>
+        <div style="background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:20px;font-size:.86rem;color:var(--parch-muted);line-height:1.6;">
+          <ul style="padding-left:20px;display:flex;flex-direction:column;gap:10px;">
+            <li>
+              <strong style="color:var(--gold);">1. Booster Box Sigillato (24 Bustine):</strong>
+              È il metodo d'acquisto più sicuro e controllato. I box sono bilanciati in fase di imbustamento industriale: troverai quasi certamente <strong>almeno 12 Super Rare</strong>, <strong>tra 4 e 6 Leggendarie</strong> e <strong>1-2 Epiche</strong> nei set moderni. La probabilità di trovare una carta Incantata in un singolo box è di circa il <strong>25%</strong> (1 su 4 box).
+            </li>
+            <li>
+              <strong style="color:var(--gold);">2. Illumineer's Trove (8 Bustine):</strong>
+              Rappresenta il test supremo della sorte. Con sole 8 bustine, il bilanciamento di fabbrica non interviene: puoi imbatterti in un <em>"God Trove"</em> con 2 Leggendarie e un'Incantata, oppure aprire 8 bustine con solo Rare.
+            </li>
+            <li>
+              <strong style="color:var(--gold);">3. Blister Sleeved (Bustine Singole):</strong>
+              Sono bustine con involucro esterno protettivo, distribuite in modo indipendente. Non sono legate alla sequenza di un singolo box: per questo il rischio è alto, ma è anche l'unico modo con cui un acquirente casuale può sbustare 2 Incantate con soli 3 o 4 pacchetti.
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 3. PRODUCTS CATALOG VIEW -->
+    <div id="view-products" style="display:none;">
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title" data-i18n="prod_title">📦 Catalogo Completo dei Prodotti Disney Lorcana</div>
+        </div>
+        <p style="font-size:.9rem;color:var(--muted);margin-bottom:20px;">
+          Tutti i tipi di prodotto ufficiali pubblicati da Ravensburger, con il contenuto esatto e consigli per gli acquisti.
+        </p>
+
+        <div class="prod-grid">
+          <div class="prod-card">
+            <div>
+              <div class="prod-icon">🎴</div>
+              <div class="prod-title">Booster Pack (Bustina Singola)</div>
+              <div class="prod-contents">
+                Contiene 12 carte: 6 Comuni, 3 Non Comuni, 2 carte Rare, Super Rare o Leggendarie, e 1 carta Foil garantita (qualsiasi rarità inclusa Incantata).
+              </div>
+            </div>
+            <span class="prod-tag">Prezzo cons: ~5.99€ · Ideale per draft</span>
+          </div>
+
+          <div class="prod-card">
+            <div>
+              <div class="prod-icon">🏆</div>
+              <div class="prod-title">Booster Display Box (24 Bustine)</div>
+              <div class="prod-contents">
+                Il prodotto re del collezionismo: 24 bustine (288 carte totali). Garantisce mediamente 4-5 Leggendarie, 12-14 Super Rare e circa il 26-28% di probabilità di contenere una rara carta Incantata!
+              </div>
+            </div>
+            <span class="prod-tag">24 Pack · Miglior rapporto qualità/prezzo</span>
+          </div>
+
+          <div class="prod-card">
+            <div>
+              <div class="prod-icon">🎁</div>
+              <div class="prod-title">Illumineer's Trove</div>
+              <div class="prod-contents">
+                Scatola deluxe per riporre le carte con 6 divisori tematici, 8 bustine booster, 6 dadi metallizzati contatore danno ad alta precisione e 1 contatore lore a rotella girevole.
+              </div>
+            </div>
+            <span class="prod-tag">8 Pack + Accessori · Must-have per iniziare</span>
+          </div>
+
+          <div class="prod-card">
+            <div>
+              <div class="prod-icon">⚔️</div>
+              <div class="prod-title">Starter Decks (Mazzo Base)</div>
+              <div class="prod-contents">
+                Mazzo precostruito completo a 60 carte pronto per giocare subito con 2 combinazioni di inchiostro, include 1 bustina booster per espanderlo, segnalini danno e libretto regole.
+              </div>
+            </div>
+            <span class="prod-tag">60 Carte + 1 Pack · Perfetto per novizi</span>
+          </div>
+
+          <div class="prod-card">
+            <div>
+              <div class="prod-icon">🌟</div>
+              <div class="prod-title">Gift Sets &amp; Collector's Edition</div>
+              <div class="prod-contents">
+                Scatole speciali con 4 bustine booster, 2 carte promozionali foil esclusive e 2 carte promozionali giganti oversize da collezione con arte olografica alternativa.
+              </div>
+            </div>
+            <span class="prod-tag">Promo esclusive + 4 Pack</span>
+          </div>
+
+          <div class="prod-card">
+            <div>
+              <div class="prod-icon">🐙</div>
+              <div class="prod-title">Illumineer's Quest: Deep Trouble</div>
+              <div class="prod-contents">
+                La prima espansione cooperativa e solitaria: affronta il boss Ursula e il suo mazzo automatico potenziato. Include 2 mazzi giocatore precostruiti da 60 carte e tappetini gioco.
+              </div>
+            </div>
+            <span class="prod-tag">Modalità Co-op / Solitario · 1-4 Giocatori</span>
+          </div>
+        </div>
+
+      <!-- Official App Banner in Products Tab -->
+      <div style="margin-top:24px;background:linear-gradient(145deg, rgba(59,126,194,0.15), var(--surface));border:1.5px solid var(--sapphire);border-radius:14px;padding:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;">
+        <div style="max-width:720px;">
+          <h3 style="font-family:'Cinzel',serif;color:var(--gold);font-size:1.3rem;margin-bottom:8px;">📱 App Ufficiale per Collezionisti: Disney Lorcana TCG Companion</h3>
+          <p style="font-size:.88rem;color:var(--parch-muted);margin-bottom:14px;">
+            Sviluppata direttamente da Ravensburger per iOS e Android. Permette di tenere traccia dell'intera collezione, catalogare le varianti foil, visualizzare le carte in 3D con effetto olografico sensibile al movimento, creare la tua wishlist e consultare il ruling ufficiale.
+          </p>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <a href="https://apps.apple.com/us/app/disney-lorcana-tcg-companion/id6444333831" target="_blank" class="btn-pack" style="border-color:#93c5fd;color:#93c5fd;font-size:.82rem;">
+              🍎 Scarica su App Store ➔
+            </a>
+            <a href="https://play.google.com/store/apps/details?id=com.ravensburger.disney.lorcana&hl=en_US" target="_blank" class="btn-pack" style="border-color:#4ade80;color:#4ade80;font-size:.82rem;">
+              🤖 Scarica su Google Play Store ➔
+            </a>
+            <a href="https://www.disneylorcana.com/it-IT/app" target="_blank" class="btn-pack" style="border-color:var(--gold);color:var(--gold);font-size:.82rem;">
+              🌐 Pagina Ufficiale Ravensburger App ➔
+            </a>
+          </div>
+        </div>
+        <div style="font-size:3.5rem;">📲✨</div>
+      </div>
+      </div>
+    </div>
+
+    <!-- 4. CHALLENGES & DECIDER VIEW -->
+    <div id="view-challenges" style="display:none;">
+      
+      <!-- Random Challenge Generator -->
+      <div class="quest-card">
+        <div class="quest-title" data-i18n="chal_quest_title">🎲 Sfida della Serata (Community Quest Generator)</div>
+        <div class="quest-body" id="questText">
+          "Vinci una partita senza mai sfidare un personaggio avversario (vittoria puramente pacifista)."
+        </div>
+        <button class="btn-pack primary" onclick="generateNewQuest()">⚡ Genera Nuova Sfida per la Partita</button>
+      </div>
+
+      <!-- Coin Flipper -->
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title" data-i18n="chal_coin_title">🪙 Chi Inizia il Turno 1? (Illumineer Coin Flip)</div>
+        </div>
+        <div class="coin-wrap">
+          <div class="coin" id="coinDecider" onclick="flipCoin()">✦</div>
+          <div style="font-size:1.1rem;font-weight:700;color:var(--gold);" id="coinResult">Clicca sulla moneta d'oro per lanciare!</div>
+        </div>
+      </div>
+
+      <!-- Achievements Tracker -->
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title">🏆 Traguardi &amp; Trofei Illumineer</div>
+          <span style="font-size:.8rem;color:var(--muted);">Clicca per segnare come completato (salvataggio locale)</span>
+        </div>
+        <div class="achieve-grid" id="achievementsContainer">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="data/lorcana-cards.js"></script>
+  <script src="data/lorcana-i18n.js"></script>
+  <script>
+    // SIMULATOR SETTINGS & CARD POOL
+    const SET_NAMES = {
+      set13: 'Attack of the Vine! (Set 13)',
+      set14: 'Hyperia City (Set 14)',
+      set12: 'Wilds Unknown (Set 12)',
+      set1: 'The First Chapter (Set 1)',
+      set2: 'Rise of the Floodborn (Set 2)',
+      set3: 'Into the Inklands (Set 3)',
+      set4: "Ursula's Return (Set 4)",
+      set5: 'Shimmering Skies (Set 5)',
+      set6: 'Azurite Sea (Set 6)'
+    };
+
+    // SAMPLE CARD NAMES PER RARITY FOR SIMULATION
+    const CARD_SAMPLES = {
+      Common: ['Robin Hood - Bowman', 'Minnie - Adventurer', 'Stitch - Little Rocket', 'Peter Pan - Never Land Hero', 'Olaf - Friendly Snowman', 'HeiHei - Boat Snack', 'Goofy - Musketeer', 'Duke of Weselton', 'Captain Hook - Forceful Duelist', 'Aladdin - Street Rat'],
+      Uncommon: ['Flynn Rider - Charming Rogue', 'Tinker Bell - Tiny Tactician', 'Cinderella - Ballroom Sensation', 'Gramma Tala - Storyteller', 'Simba - Protective Cub', 'Megara - Pulling the Strings', 'Mushu - Stealthy Dragon', 'Develop Your Brain', 'Smash', 'One Jump Ahead'],
+      Rare: ['Mickey Mouse - Detective', 'Madam Mim - Fox', 'Merlin - Goat', 'Tod - Clever Fox', 'Fishbone Quill', 'Sisu - Daring Visitor', 'Grab Your Sword', 'Let It Go', 'Arthur - King in the Making', 'Brawl'],
+      'Super Rare': ['Mickey Mouse - Bob Cratchit', 'Merlin - Rabbit', 'Dr. Bushroot - Evil Botanist', 'Ariel - Spectacular Singer', 'Robin Hood - Champion of Sherwood', 'Cinderella - Stouthearted', 'Piglet - Pirate Captain', 'Jafar - Illusionist'],
+      Legendary: ['Mickey & Minnie - Adventuring Duo', 'Elsa - Spirit of Winter', 'Tinker Bell - Giant Fairy', 'Maleficent - Dragon', 'Be Prepared', 'A Whole New World', 'Stitch - Carefree Surfer', 'Diablo - Devoted Herald'],
+      Enchanted: ['✨ Mickey & Minnie - Adventuring Duo (Enchanted)', '✨ Elsa - Spirit of Winter (Enchanted)', '✨ Cinderella - Stouthearted (Enchanted)', '✨ Stitch - Carefree Surfer (Enchanted)', '✨ Tinker Bell - Giant Fairy (Enchanted)', '✨ Diablo - Devoted Herald (Enchanted)']
+    };
+
+    let simStats = {
+      packs: 0,
+      Common: 0,
+      Uncommon: 0,
+      Rare: 0,
+      'Super Rare': 0,
+      Legendary: 0,
+      Epic: 0,
+      Enchanted: 0,
+      Iconic: 0,
+      foils: 0
+    };
+
+    function stepCustomPacks(delta) {
+      const inp = document.getElementById('customPackCount');
+      let v = parseInt(inp.value, 10) || 1;
+      v = Math.max(1, Math.min(10000, v + delta));
+      inp.value = v;
+    }
+
+    function openCustomPacks() {
+      const inp = document.getElementById('customPackCount');
+      let count = parseInt(inp.value, 10);
+      if (isNaN(count) || count < 1) count = 1;
+      if (count > 10000) count = 10000;
+      inp.value = count;
+      openPacks(count);
+    }
+
+    function openPacks(n) {
+      const grid = document.getElementById('pulledCardsGrid');
+      grid.innerHTML = '';
+      const pulled = [];
+
+      const currentSetId = document.getElementById('selectSimSet').value;
+      const setMeta = (window.LORCANA_SETS_DB || []).find(s => s.id === currentSetId) || { has_epic: true, has_iconic: true, cards: [] };
+
+      for (let p = 0; p < n; p++) {
+        simStats.packs++;
+
+        // 6 Commons
+        for (let i = 0; i < 6; i++) {
+          simStats.Common++;
+          pulled.push(getSampleCard('Common', setMeta, false));
+        }
+
+        // 3 Uncommons
+        for (let i = 0; i < 3; i++) {
+          simStats.Uncommon++;
+          pulled.push(getSampleCard('Uncommon', setMeta, false));
+        }
+
+        // 2 Rare+ Slots
+        for (let i = 0; i < 2; i++) {
+          const roll = Math.random();
+          let r = 'Rare';
+          if (setMeta.has_epic && roll < 0.04) {
+            r = 'Epic';
+            simStats.Epic++;
+          } else if (roll < 0.16) {
+            r = 'Legendary';
+            simStats.Legendary++;
+          } else if (roll < 0.46) {
+            r = 'Super Rare';
+            simStats['Super Rare']++;
+          } else {
+            simStats.Rare++;
+          }
+          pulled.push(getSampleCard(r, setMeta, false));
+        }
+
+        // 1 Foil Slot (100% Guaranteed Foil)
+        simStats.foils++;
+        const foilRoll = Math.random();
+        let foilRarity = 'Common';
+
+        // Iconic (1:240 packs in sets that feature them)
+        if (setMeta.has_iconic && foilRoll < 0.0042) {
+          foilRarity = 'Iconic';
+          simStats.Iconic++;
+        }
+        // Enchanted (1:80 packs)
+        else if (foilRoll < 0.0125) {
+          foilRarity = 'Enchanted';
+          simStats.Enchanted++;
+        }
+        // Epic (1:48 packs in modern sets)
+        else if (setMeta.has_epic && foilRoll < 0.033) {
+          foilRarity = 'Epic';
+          simStats.Epic++;
+        }
+        else if (foilRoll < 0.08) {
+          foilRarity = 'Legendary';
+          simStats.Legendary++;
+        }
+        else if (foilRoll < 0.22) {
+          foilRarity = 'Super Rare';
+          simStats['Super Rare']++;
+        }
+        else if (foilRoll < 0.52) {
+          foilRarity = 'Rare';
+          simStats.Rare++;
+        }
+        else if (foilRoll < 0.78) {
+          foilRarity = 'Uncommon';
+          simStats.Uncommon++;
+        }
+        else {
+          simStats.Common++;
+        }
+
+        pulled.push(getSampleCard(foilRarity, setMeta, true));
+      }
+
+      updateStatsUI();
+
+      // Sort hits to the front when opening multiple packs so Iconic/Enchanted/Epic/Legendary/Foil are showcased first!
+      const rarityRank = { 'Iconic': 8, 'Enchanted': 7, 'Epic': 6, 'Legendary': 5, 'Super Rare': 4, 'Rare': 3, 'Uncommon': 2, 'Common': 1 };
+      const sortedPulled = (n > 2)
+        ? [...pulled].sort((a, b) => ((rarityRank[b.rarity] || 0) + (b.foil ? 0.5 : 0)) - ((rarityRank[a.rarity] || 0) + (a.foil ? 0.5 : 0)))
+        : pulled;
+      const displayCards = sortedPulled.slice(0, 48);
+      displayCards.forEach(c => {
+        const div = document.createElement('div');
+        const rarityClass = `rarity-${c.rarity.replace(/\s+/g, '-')}`;
+        const foilClass = (c.foil || ['Epic', 'Enchanted', 'Iconic'].includes(c.rarity)) ? 'is-foil' : '';
+        div.className = `pulled-card ${rarityClass} ${foilClass}`;
+        div.innerHTML = `
+          <div class="pulled-card-inner">
+            <div class="pulled-badge-row">
+              ${c.num ? `<span style="font-size:.64rem;color:var(--muted);font-weight:700;">#${c.num}</span>` : ''}
+              ${c.rarity === 'Iconic' ? '<span class="pulled-iconic-badge">👑 ICONIC</span>' : ''}
+              ${c.foil ? '<span class="pulled-foil-badge">✨ FOIL</span>' : ''}
+            </div>
+            <div style="font-size:1.5rem;margin:4px 0;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.45));">${getRarityIcon(c.rarity)}</div>
+            <div style="font-weight:700;font-size:.84rem;color:var(--parch);line-height:1.25;">${c.name}</div>
+            <div style="display:flex;justify-content:center;align-items:center;gap:6px;margin-top:4px;flex-wrap:wrap;">
+              <span style="font-size:.69rem;color:var(--gold-soft);font-weight:700;letter-spacing:.04em;text-transform:uppercase;">${c.rarity}</span>
+              ${c.price ? `<span style="font-size:.68rem;background:rgba(34,197,94,0.18);color:#86efac;border:1px solid rgba(34,197,94,0.4);padding:1px 5px;border-radius:4px;font-weight:700;">$${Number(c.price).toFixed(2)}</span>` : ''}
+            </div>
+          </div>
+        `;
+        grid.appendChild(div);
+      });
+    }
+
+    function getSampleCard(rarity, setMeta, isFoil) {
+      const inSet = (setMeta.cards || []).filter(c => c.rarity === rarity);
+      if (inSet.length > 0) {
+        const picked = inSet[Math.floor(Math.random() * inSet.length)];
+        const fullName = picked.sub ? `${picked.name} - ${picked.sub}` : picked.name;
+        const price = isFoil ? (picked.foil_usd || picked.usd || null) : (picked.usd || picked.foil_usd || null);
+        return {
+          num: picked.num || '',
+          name: fullName,
+          rarity: rarity,
+          foil: isFoil,
+          ink: picked.ink || '',
+          cost: picked.cost || 0,
+          price: price
+        };
+      }
+      const generic = (CARD_SAMPLES[rarity] || CARD_SAMPLES.Common);
+      return { num: '', name: generic[Math.floor(Math.random() * generic.length)], rarity: rarity, foil: isFoil, price: null };
+    }
+
+    function getRarityIcon(rarity) {
+      switch(rarity) {
+        case 'Common': return '⚪';
+        case 'Uncommon': return '📖';
+        case 'Rare': return '🔺';
+        case 'Super Rare': return '🔷';
+        case 'Legendary': return '⬟';
+        case 'Epic': return '🟣';
+        case 'Enchanted': return '✨';
+        case 'Iconic': return '👑';
+        default: return '✦';
+      }
+    }
+
+    function updateStatsUI() {
+      document.getElementById('cntPacks').innerText = simStats.packs;
+      document.getElementById('cntCommon').innerText = simStats.Common;
+      document.getElementById('cntUncommon').innerText = simStats.Uncommon;
+      document.getElementById('cntRare').innerText = simStats.Rare;
+      document.getElementById('cntSuperRare').innerText = simStats['Super Rare'];
+      document.getElementById('cntLegendary').innerText = simStats.Legendary;
+      if (document.getElementById('cntEpic')) document.getElementById('cntEpic').innerText = simStats.Epic;
+      if (document.getElementById('cntEnchanted')) document.getElementById('cntEnchanted').innerText = simStats.Enchanted;
+      if (document.getElementById('cntIconic')) document.getElementById('cntIconic').innerText = simStats.Iconic;
+      document.getElementById('cntFoils').innerText = simStats.foils;
+    }
+
+    function resetPullStats() {
+      simStats = { packs: 0, Common: 0, Uncommon: 0, Rare: 0, 'Super Rare': 0, Legendary: 0, Epic: 0, Enchanted: 0, Iconic: 0, foils: 0 };
+      updateStatsUI();
+      document.getElementById('pulledCardsGrid').innerHTML = `
+        <div style="grid-column: 1 / -1; text-align:center; padding: 40px; color:var(--muted);">
+          Contatore azzerato. Apri nuove bustine!
+        </div>
+      `;
+    }
+
+    const SET_SLUGS = {
+      set1: 'set-01-the-first-chapter',
+      set2: 'set-02-rise-of-the-floodborn',
+      set3: 'set-03-into-the-inklands',
+      set4: 'set-04-ursula-s-return',
+      set5: 'set-05-shimmering-skies',
+      set6: 'set-06-azurite-sea',
+      set7: 'set-07-archazia-s-island',
+      set8: 'set-08-reign-of-jafar',
+      set9: 'set-09-fabled',
+      set10: 'set-10-whispers-in-the-well',
+      set11: 'set-11-winterspell',
+      set12: 'set-12-wilds-unknown',
+      set13: 'set-13-attack-of-the-vine',
+      set14: 'set-14-hyperia-city'
+    };
+
+    function updateSetMetaBanner() {
+      const currentSetId = document.getElementById('selectSimSet').value;
+      const setMeta = (window.LORCANA_SETS_DB || []).find(s => s.id === currentSetId);
+      if (!setMeta) return;
+      const slug = SET_SLUGS[currentSetId] || 'set-13-attack-of-the-vine';
+      const detailsEl = document.getElementById('setMetaDetails');
+      const dlEl = document.getElementById('setMetaDownloads');
+      if (detailsEl) {
+        const iconicInfo = (setMeta.iconic_cards && setMeta.iconic_cards.length > 0)
+          ? ` · 👑 <strong>Iconiche (2):</strong> ${setMeta.iconic_cards.join(' &amp; ')}`
+          : ` · ✨ <strong>Enchanted:</strong> ${(setMeta.rarity_counts && setMeta.rarity_counts.Enchanted) || 18} Carte`;
+        detailsEl.innerHTML = `<strong style="color:var(--gold-bright);">Set ${setMeta.num}: ${setMeta.name}</strong> (${setMeta.date}) · <strong>${setMeta.total} Carte Ufficiali</strong>${iconicInfo}`;
+      }
+      if (dlEl) {
+        dlEl.innerHTML = `
+          <a href="docs/sets/cards/${slug}.md" target="_blank" class="set-dl-pill">📖 Card List MD</a>
+          <a href="data/sets/json/${slug}.json" target="_blank" class="set-dl-pill">📦 JSON</a>
+          <a href="data/sets/csv/${slug}.csv" target="_blank" class="set-dl-pill">📊 CSV</a>
+          <a href="data/sets/db/${slug}.db" target="_blank" class="set-dl-pill">🗄️ SQLite DB</a>
+        `;
+      }
+    }
+
+    function changeSet() {
+      updateSetMetaBanner();
+      resetPullStats();
+    }
+    window.addEventListener('DOMContentLoaded', updateSetMetaBanner);
+
+    // PROBABILITY CALCULATOR
+    function updateProbabilityCalc(n) {
+      n = parseInt(n);
+      document.getElementById('sliderVal').innerText = n;
+      document.querySelectorAll('.exp-pack-n').forEach(el => el.innerText = n);
+
+      // Prob of at least 1 enchanted: 1 - (1 - 1/80)^n
+      const pEnchanted = (1 - Math.pow(1 - 1/80, n)) * 100;
+      document.getElementById('expEnchantedProb').innerText = pEnchanted.toFixed(1) + '%';
+
+      // Legendary expectancy: ~0.16 per pack in rare slot * 2 = 0.32 + foil chance 0.03 = ~0.17 per pack
+      const legMin = (n * 0.15).toFixed(1);
+      const legMax = (n * 0.18).toFixed(1);
+      document.getElementById('expLegendary').innerText = `${legMin} - ${legMax}`;
+
+      // Super rare expectancy: ~0.55 per pack
+      const srMin = (n * 0.5).toFixed(1);
+      const srMax = (n * 0.6).toFixed(1);
+      document.getElementById('expSuperRare').innerText = `${srMin} - ${srMax}`;
+
+      // Foils guaranteed = n
+      document.getElementById('expFoils').innerText = n;
+    }
+
+    // TAB SWITCHER
+    function switchVaultTab(tab) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      const views = ['simulator', 'probability', 'guide', 'products', 'challenges'];
+      views.forEach((v, i) => {
+        const el = document.getElementById(`view-${v}`);
+        if (el) el.style.display = (v === tab) ? 'block' : 'none';
+        if (v === tab) {
+          document.querySelectorAll('.tab-btn')[i].classList.add('active');
+        }
+      });
+    }
+
+    // RANDOM QUESTS
+    const QUESTS = [
+      "Vinci una partita senza mai sfidare un personaggio avversario (vittoria pacifista tramite sole missioni).",
+      "Risolvi la combinazione 'Duo Shift' entro il Turno 3 giocando Mickey e Minnie.",
+      "Canta almeno 3 canzoni diverse nella stessa partita usando personaggi con la keyword Singer.",
+      "Raggiungi 10 inchiostri nel Calamaio prima che il tuo avversario ne abbia accumulati 6.",
+      "Vinci mantenendo in gioco almeno 3 personaggi protetti da Ward contemporaneamente.",
+      "Gioca e mantieni attiva una carta Luogo per almeno 3 turni consecutivi.",
+      "Vinci una partita con un mazzo costruito interamente con un singolo colore d'inchiostro (Mono-Ink Challenge).",
+      "Accumula esattamente 20 Lore in un singolo turno partendo da meno di 10 Lore!"
+    ];
+
+    function generateNewQuest() {
+      const lang = window.currentLorcanaLang || 'it';
+      const pool = (window.LORCANA_QUESTS_I18N && window.LORCANA_QUESTS_I18N[lang]) ? window.LORCANA_QUESTS_I18N[lang] : QUESTS;
+      const q = pool[Math.floor(Math.random() * pool.length)];
+      document.getElementById('questText').innerText = `"${q}"`;
+    }
+
+    // COIN FLIP
+    function flipCoin() {
+      const coin = document.getElementById('coinDecider');
+      const res = document.getElementById('coinResult');
+      coin.classList.add('flipping');
+      res.innerText = 'Lancio in corso...';
+
+      setTimeout(() => {
+        coin.classList.remove('flipping');
+        const winner = Math.random() < 0.5 ? 'GIOCATORE 1 INIZIA' : 'GIOCATORE 2 INIZIA';
+        coin.innerText = winner.includes('1') ? 'P1' : 'P2';
+        res.innerHTML = `🏆 Risultato: <span style="color:var(--gold-soft);">${winner}</span>!`;
+      }, 700);
+    }
+
+    // ACHIEVEMENTS
+    const ACHIEVEMENTS = [
+      { id: 'ach_duo', name: 'Maestro del Duo Shift', desc: 'Risolto con successo il Duo Shift a costo 0.' },
+      { id: 'ach_lore20', name: 'Vittoria Folgorante', desc: 'Raggiunti 20 punti Lore prima del Turno 6.' },
+      { id: 'ach_singer', name: 'Coro dell\'Illuminarium', desc: 'Cantata una canzone a costo 5 o superiore gratis.' },
+      { id: 'ach_pull_ench', name: 'Baciato dalla Sorte', desc: 'Trovata una carta Incantata nel simulatore di spacchettamento.' },
+      { id: 'ach_ward', name: 'Fortezza Inviolabile', desc: 'Schierati 3 personaggi con Ward contemporaneamente.' },
+      { id: 'ach_box', name: 'Apertura Epica', desc: 'Aperto un intero Booster Box da 24 bustine nel Vault.' }
+    ];
+
+    function renderAchievements() {
+      const cont = document.getElementById('achievementsContainer');
+      cont.innerHTML = '';
+      const saved = JSON.parse(localStorage.getItem('lorcana_achieve') || '{}');
+
+      ACHIEVEMENTS.forEach(a => {
+        const isUnlocked = !!saved[a.id];
+        const box = document.createElement('div');
+        box.className = `achieve-box ${isUnlocked ? 'unlocked' : ''}`;
+        box.onclick = () => toggleAchievement(a.id);
+        box.innerHTML = `
+          <div class="achieve-icon">${isUnlocked ? '🏆' : '🔒'}</div>
+          <div>
+            <div style="font-weight:700;font-size:.9rem;color:var(--parch);">${a.name}</div>
+            <div style="font-size:.78rem;color:var(--muted);">${a.desc}</div>
+            <div style="font-size:.7rem;color:${isUnlocked ? '#4ade80' : 'var(--muted)'};margin-top:2px;">
+              ${isUnlocked ? '✓ Sbloccato' : '○ Clicca per sbloccare'}
+            </div>
+          </div>
+        `;
+        cont.appendChild(box);
+      });
+    }
+
+    function toggleAchievement(id) {
+      const saved = JSON.parse(localStorage.getItem('lorcana_achieve') || '{}');
+      saved[id] = !saved[id];
+      localStorage.setItem('lorcana_achieve', JSON.stringify(saved));
+      renderAchievements();
+    }
+
+    // Initialize
+    window.addEventListener('DOMContentLoaded', () => {
+      updateProbabilityCalc(24);
+      renderAchievements();
+    });
+  </script>
+</body>
+</html>

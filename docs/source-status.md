@@ -19,14 +19,14 @@ Review date / Data della revisione: **2026-11-04**.
 
 Legacy guide and Markdown sections contain unverified tournament counts,
 win rates, prices, rarity/pull-rate claims, deck lists and card abilities.
-There is no underlying tournament dataset or reproducible Monte Carlo
-program in this repository. These claims are **not validated by this UI
+The legacy claims do not include their underlying tournament dataset or
+a program reproducing the claimed historical Monte Carlo results. These claims are **not validated by this UI
 maintenance work**. Some non-Italian pages still contain Italian paragraphs.
 The hub, guide notices and READMEs now disclose these limitations.
 
 Le sezioni preesistenti su meta, prezzi, rarità, mazzi e abilità delle carte
-richiedono una revisione delle fonti. Non esistono nel repository il dataset
-dei tornei né un programma che riproduca le dichiarate 100.000 simulazioni.
+richiedono una revisione delle fonti. Le vecchie affermazioni non forniscono il dataset dei tornei né un programma
+che riproduca le dichiarate 100.000 simulazioni.
 Le traduzioni sono parziali. Questi limiti restano espliciti: i controlli del
 software non certificano i contenuti di gioco né le traduzioni.
 
@@ -77,3 +77,20 @@ in all five guides. The tests include independently derived cases for no
 mulligan, full mulligan and invalid inputs. `python tools/check_site.py`
 checks the six pages, links, anchors, labels, offline dependencies and
 runtime consistency. Neither check substitutes for content fact-checking.
+
+## Shared analysis integration / Integrazione analisi condivisa
+
+The new [IT](../tournament-decks.html) and [EN](../tournament-decks.en.html)
+catalog separates four reported tournament lists from the officially
+published Coco themed proposal. Each source was opened and compared on
+2026-11-04. Card metadata and base-printing IDs use the upstream Lorcast
+snapshot; the original list sources own the quantity/placement claims.
+See [Hyperia verification](research/hyperia-card-verification.md) and
+[Torino context](research/torino-tournament-context.md).
+
+New simulations are reproducible in `tools/deck_catalog.py`, unlike the
+unprovided legacy 100,000-trial claims. Results and seed are stored in
+`data/tournament-simulations.json`; the catalog digest prevents silently
+mixing results with a changed list. These are opening-hand experiments,
+not simulated match wins. / I nuovi esperimenti sulle mani iniziali hanno
+codice, seed e risultati salvati; non simulano vittorie o partite complete.
